@@ -3,457 +3,98 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verão ULisboa ✨ Aprende HTML & CSS na FCUL!</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
+    <title>Verão ULisboa - Laboratório de Programação</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
     <link rel="stylesheet" href="assets/style.css">
   </head>
   <body>
-    <header>
+    <header class="topbar">
       <img src="https://ciencias.ulisboa.pt/sites/default/files/Ciencias_Logo_Azul-02.png" alt="Logo FCUL">
       <div>
-        <h1>Verão ULisboa - Aprende a Criar Páginas Web!</h1>
-        <p>Plataforma de iniciação ao HTML & CSS ✨</p>
+        <h1>Verão ULisboa - Laboratório de Programação</h1>
+        <p>Exercícios de TypeScript inspirados nos temas do tutorial da FCUL.</p>
       </div>
-      <div>
-        <div id="score-container">Pontuação: <span id="score">0</span> 🧠</div>
-        <div id="timer-container">⏱️ Tempo: <span id="timer">00:00</span></div>
+      <div class="status-panel" aria-label="Progresso">
+        <div>Pontuação: <span id="score">0</span></div>
+        <div>Concluídos: <span id="completedCount">0</span>/<span id="totalCount">0</span></div>
+        <div>Tempo: <span id="timer">00:00</span></div>
       </div>
     </header>
-    <main>
-      <div id="sidebar">
-        <h2>Tutorial</h2>
-        <div class="step active" id="step-0">
-          <p><strong>👀 Antes de começares: conhece o ambiente da plataforma!</strong></p>
-          <ul>
-            <li><strong>📖 Lado esquerdo (onde estás a ler):</strong> é o <em>Tutorial</em>. Aqui encontras os passos a seguir, exemplos e dicas.</li>
-            <li><strong>⌨️ Parte de cima do lado direito (a preto):</strong> é o <em>Editor</em>. Aqui escreves o teu código HTML e CSS.</li>
-            <li><strong>🧪 Parte de baixo do lado direito (a branco):</strong> está o <em>Resultado</em>, onde vês o teu site a ser construído em tempo real.</li>
-          </ul>
-          <p>📝 Para cada passo, lê o que é pedido no tutorial e escreve o código no editor.</p>
-          <p>Depois clica em <strong>“Atualizar Preview”</strong> para ver como ficou!</p>
-          <p><strong>🚦 Só podes avançar quando completares corretamente cada passo!</strong> O botão “Passo seguinte” só ativa quando estiver tudo certo 😉</p>
 
-          <hr>
-
-          <p><strong>👋 Olá e bem-vindo ao teu primeiro mergulho na Web!</strong></p>
-          <p>Este tutorial foi criado especialmente para ti, participante do <strong>Verão ULisboa na FCUL</strong> 🌞</p>
-          <p>Aqui vais aprender a criar o teu próprio site com HTML e CSS, mesmo que nunca tenhas programado antes!</p>
-          <p>💡 <strong>HTML</strong> é a linguagem usada para estruturar páginas na internet.</p>
-          <p>🎨 <strong>CSS</strong> é o que usamos para dar estilo e tornar a página bonita.</p>
-          <p>Neste tutorial vais:</p>
-          <ul>
-            <li>👨‍💻 Escrever código HTML e CSS</li>
-            <li>🧪 Ver resultados em tempo real</li>
-            <li>🎯 Receber pontos por cada passo concluído</li>
-            <li>🏅 Obter um certificado final com o teu nome</li>
-          </ul>
-          <p><strong>⚙️ Vamos começar por escrever o nosso primeiro título com HTML!</strong></p>
-          <button onclick="showHint(0)">Queres uma dica?</button>
-          <div class="hint" id="hint-0">
-            <p>Pensa no título como o cabeçalho de um jornal — importante e destacado!</p>
-          </div>
-          <div class="curiosity">💡 Sabias que todos os sites, incluindo Google, YouTube e FCUL, usam HTML?</div>
+    <main class="workspace">
+      <aside class="exercise-nav" aria-label="Lista de exercícios">
+        <div class="nav-heading">
+          <h2>Exercícios</h2>
+          <p>O progresso fica guardado neste browser.</p>
         </div>
-        <div class="step" id="step-1">
-          <p><strong>Passo 1: Cria um título com <code>&lt;h1&gt;</code></strong></p>
-          <p>O HTML usa "tags" para dizer ao navegador o que mostrar. Um título é escrito assim:</p>
-          <pre><code>&lt;h1&gt;A minha primeira página&lt;/h1&gt;</code></pre>
-          <p>📝 Escreve esse código no editor abaixo. Depois clica em "Atualizar Preview" para ver o resultado.</p>
-          <p>🔁 <strong>Importante:</strong> Altera o texto dentro do <code>&lt;h1&gt;</code> para algo pessoal, como o nome da tua receita favorita, o teu animal preferido, ou outra ideia criativa!</p>
-          <p>🏅 Vais ganhar pontos por cada passo concluído corretamente.</p>
-          <p>⏱️ O tempo também está a ser contado — será mostrado no teu certificado final!</p>
-          <button onclick="showHint(1)">Dica</button>
-          <div class="hint" id="hint-1">
-            <p>Experimenta mudar o texto entre as tags <code>&lt;h1&gt;</code> e <code>&lt;/h1&gt;</code>. Ex: <code>&lt;h1&gt;Pizza Margherita&lt;/h1&gt;</code></p>
-          </div>
-        </div>
-        <div class="step" id="step-2">
-          <p><strong>Passo 2: Adiciona um parágrafo com &lt;p&gt;</strong></p>
-          <p>Os parágrafos em HTML são criados com a tag <code>&lt;p&gt;</code>. São ótimos para escrever texto normal, como este que estás a ler!</p>
-          <p>Exemplo:</p>
-          <pre><code>&lt;p&gt;Este é o meu primeiro parágrafo!&lt;/p&gt;</code></pre>
-          <p>📝 Escreve um parágrafo no editor e vê o resultado clicando em "Atualizar Preview".</p>
-          <button onclick="showHint(2)">Dica</button>
-          <div class="hint" id="hint-2">
-            <p>Certifica-te de que escreveste o parágrafo entre as tags <code>&lt;body&gt;</code> e <code>&lt;/body&gt;</code>.</p>
-          </div>
-        </div>
-        <div class="step" id="step-3">
-          <p><strong>Passo 3:</strong> Muda a cor de fundo do site usando CSS com <code>background-color</code>.</p>
-          <p>Podes escolher uma cor clicando abaixo e copiar o código gerado para usares no editor.</p>
-
-          <label for="hex-color">🎨 Escolhe uma cor:</label>
-          <input type="color" id="hex-color" onchange="updateHexValue()">
-          
-          <p id="hex-value" style="margin-top:10px;font-family:monospace;color:#0056b3;"></p>
-
-          <button onclick="showHint(3)">Dica</button>
-          <div class="hint" id="hint-3">
-            Usa a cor dentro da tag <code>&lt;style&gt;</code> no <code>&lt;head&gt;</code>:
-            <br>
-            <code>
-            &lt;style&gt;<br>
-            &nbsp;&nbsp;body { background-color: #xxxxxx; }<br>
-            &lt;/style&gt;
-            </code>
-          </div>
-
-          <div class="curiosity">
-            💡 Sabias que também podes usar nomes como <code>lightblue</code>, <code>lavender</code> ou <code>beige</code>?
-          </div>
-        </div>
-
-        <!-- Passo 4: Adiciona uma imagem -->
-        <div class="step" id="step-4">
-          <p><strong>Passo 4: Insere uma imagem com &lt;img&gt;</strong></p>
-          <p>Usa a tag <code>&lt;img&gt;</code> com os atributos <code>src</code> e <code>alt</code> para adicionar uma imagem à tua página.</p>
-          <pre><code>&lt;img src="https://ciencias.ulisboa.pt/sites/default/files/Ciencias_Logo_Azul-02.png" alt="FCUL Logo"&gt;</code></pre>
-          <p>📝 Copia o exemplo (alterando a URL e o texto do alt) para o editor e vê no preview.
-          <p>🔁 Podes usar qualquer imagem da internet — só precisas do link direto para a imagem! (Procura a imagem da tua refeição preferida)</p>
-          </p>
-          <button onclick="showHint(4)">Dica</button>
-          <div class="hint" id="hint-4">
-            <p>Verifica se o atributo <code>alt</code> descreve bem a imagem — é importante para acessibilidade!</p>
-          </div>
-        </div>
-
-        <!-- Passo 5: Cria um link -->
-        <div class="step" id="step-5">
-          <p><strong>Passo 5: Adiciona um hiperligação com &lt;a&gt;</strong></p>
-          <p>Para criar links, utiliza a tag <code>&lt;a&gt;</code> com o atributo <code>href</code>:</p>
-          <pre><code>&lt;a href="https://www.ulisboa.pt" target="_blank"&gt;Visita a ULisboa&lt;/a&gt;</code></pre>
-          <p>Procura o site da <strong>FCUL</strong> na net e adiciona essa hiperligação.</p>
-          <button onclick="showHint(5)">Dica</button>
-          <div class="hint" id="hint-5">
-            <p>O atributo <code>target="_blank"</code> faz o link abrir numa nova aba.</p>
-          </div>
-        </div>
-
-        <!-- Passo 6: Listas ordenadas e não ordenadas -->
-        <div class="step" id="step-6">
-          <p><strong>Passo 6: Cria listas com &lt;ul&gt; e &lt;ol&gt;</strong></p>
-          <p>As listas não ordenadas usam <code>&lt;ul&gt;</code>, e as ordenadas usam <code>&lt;ol&gt;</code>:</p>
-          <p>Introduz uma lista sobre as coisas que já fizeste hoje.</p>
-          <pre><code>&lt;ul&gt;
-          &lt;li&gt;{Item A}&lt;/li&gt;
-          &lt;li&gt;Item B&lt;/li&gt;
-        &lt;/ul&gt;</code></pre>
-          <button onclick="showHint(6)">Dica</button>
-          <div class="hint" id="hint-6">
-            <p>Podes aninhar listas dentro de outras para sub-itens.</p>
-          </div>
-        </div>
-
-        <!-- Passo 7: Ênfase de texto -->
-        <div class="step" id="step-7">
-          <p><strong>Passo 7: Usa &lt;strong&gt; e &lt;em&gt;</strong></p>
-          <p>Aprende a enfatizar texto com tags semânticas:</p>
-          <pre><code>&lt;p&gt;Este texto é &lt;strong&gt;importante&lt;/strong&gt; e este é &lt;em&gt;itálico&lt;/em&gt;.&lt;/p&gt;</code></pre>
-          <button onclick="showHint(7)">Dica</button>
-          <div class="hint" id="hint-7">
-            <p><code>&lt;strong&gt;</code> indica ênfase forte; <code>&lt;em&gt;</code> indica ênfase normal.</p>
-          </div>
-        </div>
-
-        <!-- Passo 8: Define uma classe em CSS -->
-        <div class="step" id="step-8">
-          <p><strong>Passo 8: Cria e aplica uma classe CSS</strong></p>
-          <p>No teu <code>&lt;style&gt;</style></code>, define uma classe:</p>
-          <pre><code>.highlight {
-          background-color: yellow;
-          padding: 4px;
-        }</code></pre>
-          <p>Depois, no HTML:</p>
-          <pre><code>&lt;p class="highlight"&gt;Este texto fica realçado.&lt;/p&gt;</code></pre>
-          <button onclick="showHint(8)">Dica</button>
-          <div class="hint" id="hint-8">
-            <p>Classes permitem reutilizar estilos em vários elementos.</p>
-          </div>
-        </div>
-
-        <!-- Passo 9: Seletores de ID -->
-        <div class="step" id="step-9">
-          <p><strong>Passo 9: Estiliza um elemento por ID</strong></p>
-          <p>Em <code>style.css</code>:</p>
-          <pre><code>#meu-titulo {
-          color: darkblue;
-          font-size: 32px;
-        }</code></pre>
-          <p>No HTML:</p>
-          <pre><code>&lt;h2 id="meu-titulo"&gt;Título Especial&lt;/h2&gt;</code></pre>
-          <button onclick="showHint(9)">Dica</button>
-          <div class="hint" id="hint-9">
-            <p>IDs são únicos — só podes usar uma vez por página.</p>
-          </div>
-        </div>
-
-        <!-- Passo 10: Layout com Flexbox -->
-        <div class="step" id="step-10">
-          <p><strong>Passo 10: Organiza conteúdo com Flexbox</strong></p>
-          <p>Cria um container flexível:</p>
-          <pre><code>.container {
-          display: flex;
-          gap: 16px;
-        }</code></pre>
-          <p>No HTML:</p>
-          <pre><code>&lt;div class="container"&gt;
-          &lt;div&gt;Box 1&lt;/div&gt;
-          &lt;div&gt;Box 2&lt;/div&gt;
-        &lt;/div&gt;</code></pre>
-          <button onclick="showHint(10)">Dica</button>
-          <div class="hint" id="hint-10">
-            <p>Experimenta <code>justify-content</code> e <code>align-items</code>.</p>
-          </div>
-        </div>
-
-        <!-- Passo 11: Tabelas básicas -->
-        <div class="step" id="step-11">
-          <p><strong>Passo 11: Cria uma tabela com &lt;table&gt;</strong></p>
-          <pre><code>&lt;table&gt;
-          &lt;tr&gt;&lt;th&gt;Nome&lt;/th&gt;&lt;th&gt;Idade&lt;/th&gt;&lt;/tr&gt;
-          &lt;tr&gt;&lt;td&gt;{O teu nome}&lt;/td&gt;&lt;td&gt;{A tua idade}&lt;/td&gt;&lt;/tr&gt;
-        &lt;/table&gt;</code></pre>
-          <button onclick="showHint(11)">Dica</button>
-          <div class="hint" id="hint-11">
-            <p>Usa <code>border</code> em CSS para linhas visíveis.</p>
-          </div>
-        </div>
-
-        <!-- Passo 12: Formulário simples -->
-        <div class="step" id="step-12">
-          <p><strong>Passo 12: Adiciona um formulário</strong></p>
-          <pre><code>&lt;form&gt;
-          &lt;label&gt;Nome: &lt;input type="text"&gt;&lt;/label&gt;
-          &lt;button type="submit"&gt;Enviar&lt;/button&gt;
-        &lt;/form&gt;</code></pre>
-          <button onclick="showHint(12)">Dica</button>
-          <div class="hint" id="hint-12">
-            <p>Lembra-te de usar <code>for</code> no <code>&lt;label&gt;</code> para acessibilidade.</p>
-          </div>
-        </div>
-
-        <!-- Passo 13: Pseudo-classes :hover -->
-        <div class="step" id="step-13">
-          <p><strong>Passo 13: Estiliza links ao passar o rato</strong></p>
-          <pre><code>a:hover {
-          color: red;
-          text-decoration: underline;
-        }</code></pre>
-          <p>📝 Adiciona um link e testa o efeito no hover.</p>
-          <button onclick="showHint(13)">Dica</button>
-          <div class="hint" id="hint-13">
-            <p>Podes usar pseudo-classes também em botões e divs.</p>
-          </div>
-        </div>
-
-        <!-- Passo 14: Box model – margin e padding -->
-        <div class="step" id="step-14">
-          <p><strong>Passo 14: Ajusta espaçamentos</strong></p>
-          <pre><code>.caixa {
-          margin: 20px;
-          padding: 10px;
-          border: 1px solid #333;
-        }</code></pre>
-          <button onclick="showHint(14)">Dica</button>
-          <div class="hint" id="hint-14">
-            <p>Margin é fora da caixa; padding é por dentro.</p>
-          </div>
-        </div>
-
-        <!-- Passo 15: Tipografia – tamanho e família -->
-        <div class="step" id="step-15">
-          <p><strong>Passo 15: Define fonte e tamanho</strong></p>
-          <pre><code>p {
-          font-family: 'Inter', sans-serif;
-          font-size: 18px;
-          line-height: 1.5;
-        }</code></pre>
-          <button onclick="showHint(15)">Dica</button>
-          <div class="hint" id="hint-15">
-            <p>Line-height melhora a leitura em blocos de texto.</p>
-          </div>
-        </div>
-
-        <!-- Passo 16: Imagens responsivas -->
-        <div class="step" id="step-16">
-          <p><strong>Passo 16: Faz as imagens ajustarem-se</strong></p>
-          <pre><code>img {
-          max-width: 100%;
-          height: auto;
-        }</code></pre>
-          <button onclick="showHint(16)">Dica</button>
-          <div class="hint" id="hint-16">
-            <p>Isto impede que a imagem “escape” do container.</p>
-          </div>
-        </div>
-
-        <!-- VERIFICAR ESTE PASSO -->
-        <!-- Passo 17: Media Queries -->
-        <div class="step" id="step-17">
-          <p><strong>Passo 17: Responsividade com @media</strong></p>
-          <pre><code>@media (max-width: 600px) {
-          body {
-            background-color: lightgray;
-          }
-        }</code></pre>
-          <button onclick="showHint(17)">Dica</button>
-          <div class="hint" id="hint-17">
-            <p>Testa redimensionando a janela do browser.</p>
-          </div>
-        </div>
-
-        <!-- Passo 18: CSS Grid -->
-        <div class="step" id="step-18">
-          <p><strong>Passo 18: Organiza com CSS Grid</strong></p>
-          <pre><code>.grid {
-          display: grid;
-          grid-template-columns: repeat(3, 1fr);
-          gap: 10px;
-        }</code></pre>
-          <button onclick="showHint(18)">Dica</button>
-          <div class="hint" id="hint-18">
-            <p>O <code>1fr</code> divide o espaço igualmente.</p>
-          </div>
-        </div>
-
-        <!-- Passo 19: Variáveis CSS -->
-        <div class="step" id="step-19">
-          <p><strong>Passo 19: Usa custom properties</strong></p>
-          <pre><code>:root {
-          --main-color: teal;
-        }
-        h1 {
-          color: var(--main-color);
-        }</code></pre>
-          <button onclick="showHint(19)">Dica</button>
-          <div class="hint" id="hint-19">
-            <p>Variáveis facilitam manter um tema consistente.</p>
-          </div>
-        </div>
-
-        <!-- Passo 20: Transições e animações -->
-        <div class="step" id="step-20">
-          <p><strong>Passo 20: Adiciona uma transição</strong></p>
-          <pre><code>button {
-          background-color: blue;
-          transition: background-color 0.3s;
-        }
-        button:hover {
-          background-color: darkblue;
-        }</code></pre>
-          <button onclick="showHint(20)">Dica</button>
-          <div class="hint" id="hint-20">
-            <p>Podes também criar animações com <code>@keyframes</code>.</p>
-          </div>
-        </div>
-
-        <!-- Passo 21: Recria um site completo -->
-        <div class="step" id="step-21">
-          <p><strong>Passo 21: Constrói um site igual ao exemplo base</strong></p>
-          <p>Agora que sabes todos os elementos, tenta replicar exatamente o site abaixo:</p>
-          <iframe src="assets/exemplo-site.html" style="width:100%;height:300px;border:1px solid #ccc;"></iframe>
-          <p>📝 Usa o editor para replicar o layout, cores, textos e estrutura do site apresentado.</p>
-          <button onclick="showHint(21)">Dica</button>
-          <div class="hint" id="hint-21">
-            <p>Analisa o HTML e CSS que precisas para criar algo igual ao exemplo — podes usar títulos, imagens, classes CSS, listas e muito mais!</p>
-          </div>
-        </div>
-
-        <!-- Passo 22: Sobre Mim -->
-        <div class="step" id="step-22">
-          <p><strong>Passo 22: Cria uma secção “Sobre Mim”</strong></p>
-          
-          <p>Agora é a tua vez de te apresentares ao mundo! ✨</p>
-          
-          <p>📝 Cria uma secção no teu site onde falas um pouco sobre ti. Podes escrever o que quiseres — este espaço é teu!</p>
-          
-          <p>Algumas ideias para começares:</p>
-          <ul>
-            <li>O teu nome, idade ou cidade</li>
-            <li>O que gostas de fazer nos tempos livres</li>
-            <li>O teu animal, comida ou jogo favorito</li>
-            <li>Algo engraçado ou único sobre ti</li>
-          </ul>
-
-          <p>💡 Usa tudo o que aprendeste até agora: títulos, parágrafos, listas, imagens, estilos com CSS… até emojis se quiseres!</p>
-
-          <p>🌟 Este é o momento em que podes personalizar o teu site à tua maneira. Podes alterar, apagar ou reorganizar o que quiseres no código — o importante é que o resultado final seja <strong>a tua cara</strong>! 🎨</p>
-
-          <p>🙋‍♀️ Se tiveres dúvidas ou precisares de inspiração, chama um monitor — eles estão aqui para te ajudar.</p>
-          
-          <button onclick="showHint(22)">Dica</button>
-          <div class="hint" id="hint-22">
-            <p>Experimenta usar tags como <code>&lt;h2&gt;</code>, <code>&lt;p&gt;</code>, <code>&lt;ul&gt;</code> e <code>&lt;img&gt;</code> com uma imagem tua ou de algo que gostes.</p>
-          </div>
-        </div>
-
-        <!-- Passo 23 é o final, pode diminuir para outro número se necessário
-            Falta adicionar os restantes passos do tutorial e verificar o passo 21
-        -->
-        <div class="step" id="step-23">
-          <p><strong>🎓 Certificado Final</strong></p>
-          <p>Parabéns! Escreve o teu nome abaixo e vê o teu certificado de conclusão:</p>
-          <input type="text" id="studentName" placeholder="O teu nome completo">
-          <button onclick="generateCertificate()">Gerar Certificado</button>
-          <div id="certificate"></div>
-        </div>
-
-        <div class="step" id="step-24">
-          <p><strong>Passo 24: Conclusão e Agradecimentos 🙌</strong></p>
-          
-          <p>Chegaste ao fim do tutorial! 🎉 Esperamos que tenhas aprendido muito e que continues a explorar o mundo do HTML, CSS e programação!</p>
-
-          <p>Este projeto foi desenvolvido no âmbito do <strong>Verão ULisboa @ FCUL</strong>, com o objetivo de ensinar de forma divertida os primeiros passos na construção de sites.</p>
-
-          <hr>
-
-          <h3>🔗 Ligações úteis</h3>
-          <ul>
-            <li><a href="https://ciencias.ulisboa.pt" target="_blank">Faculdade de Ciências da Universidade de Lisboa (FCUL)</a></li>
-            <li><a href="https://ciencias.ulisboa.pt/ensino/licenciaturas" target="_blank">Cursos de Licenciatura da FCUL</a></li>
-            <li><a href="https://drdigsp.com" target="_blank">Site do criador: Diogo Pereira (drdigsp.com)</a></li>
-          </ul>
-
-          <hr>
-
-          <h3>👨‍💻 Contribuições</h3>
-          <ul>
-            <li><strong>Diogo Pereira</strong> — Desenvolvimento do tutorial, conteúdos e interface</li>
-            <li><strong>Wellington Oliveira</strong> — Coordenação geral do desafio Verão ULisboa</li>
-          </ul>
-
-          <p style="margin-top: 15px;">Este é apenas o começo. Continua a explorar, criar e aprender!</p>
-        </div>
-
-        <div class="step" id="step-25">
-          <p><strong>Passo 25: Feedback e Melhorias</strong></p>
-          <p>Gostaste do tutorial? Tens sugestões ou encontraste algum erro? Deixa o teu feedback para melhorarmos!</p>
-          <textarea id="feedback" placeholder="Escreve aqui o teu feedback..."></textarea>
-          <button onclick="submitFeedback()">Enviar Feedback</button>
-          <div id="feedbackResponse"></div>
-        </div>
-        <div class="nav-buttons">
-          <button onclick="prevStep()" id="prevBtn">⬅️ Passo anterior</button>
-          <button onclick="nextStep()" id="nextBtn" disabled>➡️ Passo seguinte</button>
-        </div>
+        <div id="exerciseList" class="exercise-list"></div>
         <div class="restart-button">
-          <button onclick="restartTutorial()" id="restartBtn">🔄 Recomeçar</button>
+          <button type="button" onclick="restartTutorial()">Recomeçar tudo</button>
         </div>
-      </div>
+      </aside>
 
-      <div id="editor-preview-container">
-        <textarea id="editor"></textarea>
-        <button onclick="updatePreview(); checkCurrentStep();">Atualizar Preview</button>
-        <iframe id="preview"></iframe>
-      </div>
+      <section class="lesson">
+        <article class="briefing">
+          <div class="briefing-header">
+            <div>
+              <p id="exerciseTopic" class="eyebrow"></p>
+              <h2 id="exerciseTitle"></h2>
+            </div>
+            <span id="exerciseStatus" class="status-badge"></span>
+          </div>
+          <div id="exerciseBody"></div>
+          <div class="hint-box" id="hintBox"></div>
+        </article>
+
+        <section id="editor-preview-container" class="lab">
+          <div class="editor-shell">
+            <div class="panel-title">
+              <span>Código TypeScript</span>
+              <span class="file-pill">main.ts</span>
+            </div>
+            <textarea id="editor" spellcheck="false" aria-label="Editor de TypeScript"></textarea>
+            <div class="actions">
+              <button type="button" onclick="runStudentCode()">Executar</button>
+              <button type="button" class="secondary-button" id="solutionBtn" onclick="showSolution()">Mostrar resposta</button>
+              <button type="button" class="secondary-button" onclick="openInCodePen()">Abrir este exercício no CodePen</button>
+            </div>
+          </div>
+
+          <div class="preview-shell">
+            <div class="panel-title">
+              <span>Resultado</span>
+              <span class="file-pill">interface</span>
+            </div>
+            <iframe id="preview" title="Resultado do código"></iframe>
+            <div id="console" class="console-area" hidden>
+              <div class="console-header">
+                <span>Terminal</span>
+                <span class="console-status" id="consoleStatus"></span>
+              </div>
+              <div id="consoleOutput" class="console-output"></div>
+              <form id="consoleForm" class="console-input-row" hidden autocomplete="off">
+                <span class="console-chevron">▸</span>
+                <input id="consoleInput" type="text" class="console-input" placeholder="Escreve aqui e carrega Enter…" aria-label="Input do terminal">
+                <button type="submit" class="console-submit">Enviar</button>
+              </form>
+            </div>
+            <div id="feedback" class="feedback neutral" role="status" aria-live="polite">Pronto para executar.</div>
+          </div>
+        </section>
+      </section>
     </main>
 
-    <div id="confetti"></div>
-
     <div class="footer">
-      &copy; 2025 Verão ULisboa @ FCUL. Criado para ensinar HTML & CSS a futuros talentos!
+      &copy; 2026 Verão ULisboa @ FCUL. Exercícios em TypeScript para aprender programação.
     </div>
 
+    <script src="assets/exercises/01-fundamentos.js"></script>
+    <script src="assets/exercises/02-numeros.js"></script>
+    <script src="assets/exercises/03-ciclos.js"></script>
+    <script src="assets/exercises/04-donatello.js"></script>
+    <script src="assets/exercises/05-cifras-matematica.js"></script>
+    <script src="assets/exercises/06-estruturas.js"></script>
+    <script src="assets/exercises/07-interativo.js"></script>
     <script src="assets/main.js"></script>
   </body>
 </html>

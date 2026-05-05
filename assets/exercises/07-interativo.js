@@ -1,0 +1,168 @@
+window.exerciseTopics = window.exerciseTopics || [];
+
+window.exerciseTopics.push({
+  id: 'interativo',
+  title: 'Programas Interativos',
+  exercises: [
+    {
+      id: 'adivinhar-numero',
+      title: 'Adivinhar o número',
+      points: 25,
+      interactive: true,
+      explanation: [
+        'Este exercício é um jogo. O computador escolhe um número secreto e tu tens de adivinhar. Em cada tentativa, recebes uma dica: "muito alto" ou "muito baixo".',
+        'No terminal original, este tipo de jogo usava o teclado diretamente. Aqui, a função lerInput faz o mesmo: o programa pára e espera que escrevas algo no terminal abaixo do painel.',
+        'A palavra await antes de lerInput significa "espera pela resposta". Sem ela, o programa continuaria sem esperar. Com ela, o ciclo while repete e espera em cada volta.',
+      ],
+      instructions: [
+        'O número secreto já está na variável segredo (entre 1 e 50).',
+        'Dentro do while, usa await lerInput("...") para pedir um palpite.',
+        'Converte o texto para número com Number().',
+        'Se o palpite for menor, escreve "Muito baixo!". Se for maior, escreve "Muito alto!".',
+        'Se acertar, escreve uma mensagem de vitória e muda acertou para true.',
+      ],
+      observation: 'Usa o terminal abaixo do painel visual para interagir com o programa. O jogo termina quando acertares.',
+      hint: 'Dentro do while, pede um número, compara com o segredo usando if / else if / else, e atualiza acertou quando o palpite estiver certo.',
+      starter: 'const segredo: number = numeroSecreto(1, 50);\nlet acertou: boolean = false;\nlet tentativas: number = 0;\n\nescrever("Pensei num número entre 1 e 50. Tenta adivinhar!");\n\nwhile (!acertou) {\n  const texto = await lerInput("Qual é o teu palpite?");\n  const palpite: number = Number(texto);\n  tentativas = tentativas + 1;\n\n  // compara o palpite com o segredo aqui\n  // usa escrever() para dar dicas\n}\n\nescrever("Precisaste de " + tentativas + " tentativas.");',
+      solution: 'const segredo: number = numeroSecreto(1, 50);\nlet acertou: boolean = false;\nlet tentativas: number = 0;\n\nescrever("Pensei num número entre 1 e 50. Tenta adivinhar!");\n\nwhile (!acertou) {\n  const texto = await lerInput("Qual é o teu palpite?");\n  const palpite: number = Number(texto);\n  tentativas = tentativas + 1;\n\n  if (palpite < segredo) {\n    escrever("Muito baixo! Tenta um número maior.");\n  } else if (palpite > segredo) {\n    escrever("Muito alto! Tenta um número menor.");\n  } else {\n    escrever("Acertaste! O número era " + segredo + "!");\n    acertou = true;\n  }\n}\n\nescrever("Precisaste de " + tentativas + " tentativas.");',
+      html: `
+        <main class="stage">
+          <section class="panel dark">
+            <h1>🎯 Adivinhar o número</h1>
+            <p id="status">A pensar num número…</p>
+            <div class="big-value" id="attempts">0</div>
+            <p>tentativas</p>
+          </section>
+        </main>
+      `,
+      api: `
+        function numeroSecreto(min, max) {
+          const low = Math.ceil(Number(min));
+          const high = Math.floor(Number(max));
+          const secret = Math.floor(Math.random() * (high - low + 1)) + low;
+          window.exerciseState.secret = secret;
+          window.exerciseState.guessed = false;
+          window.exerciseState.attempts = 0;
+          return secret;
+        }
+        const _origEscrever = escrever;
+        const _origLerInput = lerInput;
+        escrever = function() {
+          _origEscrever.apply(null, arguments);
+          var text = Array.prototype.slice.call(arguments).join(' ');
+          if (/acertas/i.test(text)) {
+            window.exerciseState.guessed = true;
+            setText('status', 'Acertaste!');
+          }
+        };
+        lerInput = async function(msg) {
+          var val = await _origLerInput(msg);
+          var num = Number(val);
+          if (!isNaN(num) && val.trim() !== '') {
+            window.exerciseState.attempts++;
+            setText('attempts', window.exerciseState.attempts);
+          }
+          return val;
+        };
+      `,
+      validate: (code, state) =>
+        /while\s*\(/.test(code) &&
+        /lerInput/.test(code) &&
+        /if\s*\(/.test(code) &&
+        state.guessed === true,
+    },
+    {
+      id: 'calculadora-interativa',
+      title: 'Calculadora com input',
+      points: 15,
+      interactive: true,
+      explanation: [
+        'Até agora, os números estavam escritos diretamente no código. Mas um programa de verdade recebe dados de quem o usa.',
+        'A função lerInput devolve sempre texto. Para fazer contas, precisamos de converter esse texto num número com Number().',
+        'Este padrão — pedir, converter, calcular — é muito comum em qualquer linguagem de programação.',
+      ],
+      instructions: [
+        'Pede dois números ao utilizador com await lerInput.',
+        'Converte os textos para números com Number().',
+        'Calcula a soma e mostra com mostrarResultado.',
+        'Usa escrever() para mostrar uma mensagem com o resultado.',
+      ],
+      observation: 'Escreve os números no terminal abaixo do painel. O resultado aparece no painel visual e no terminal.',
+      hint: 'lerInput devolve texto. Usa Number() para converter antes de somar.',
+      starter: 'const textoA = await lerInput("Escreve o primeiro número:");\nconst textoB = await lerInput("Escreve o segundo número:");\n\nconst a: number = Number(textoA);\nconst b: number = Number(textoB);\n\n// calcula e mostra o resultado',
+      solution: 'const textoA = await lerInput("Escreve o primeiro número:");\nconst textoB = await lerInput("Escreve o segundo número:");\n\nconst a: number = Number(textoA);\nconst b: number = Number(textoB);\n\nconst soma: number = a + b;\nescrever("A soma de " + a + " + " + b + " = " + soma);\nmostrarResultado(soma);',
+      html: `
+        <main class="stage">
+          <section class="panel">
+            <h1>Calculadora</h1>
+            <p>Resultado:</p>
+            <div class="big-value" id="result">?</div>
+          </section>
+        </main>
+      `,
+      api: `
+        function mostrarResultado(valor) {
+          const result = Number(valor);
+          setText('result', Number.isFinite(result) ? result : 'Erro');
+          window.exerciseState.result = result;
+        }
+      `,
+      validate: (code, state) =>
+        /lerInput/.test(code) &&
+        /Number\s*\(/.test(code) &&
+        typeof state.result === 'number' &&
+        !isNaN(state.result),
+    },
+    {
+      id: 'cifra-interativa',
+      title: 'Cifra a tua mensagem',
+      points: 20,
+      interactive: true,
+      explanation: [
+        'No exercício da cifra de César, o texto a cifrar estava fixo no código. Agora vais pedir ao utilizador que escreva a sua própria mensagem.',
+        'A função cifrar percorre cada letra e avança-a 13 posições na tabela de caracteres. Desta vez, a função já está pronta — o desafio é ligar a interação ao código.',
+        'Este exercício mostra como combinar input do utilizador com uma função que transforma dados.',
+      ],
+      instructions: [
+        'Pede uma mensagem ao utilizador com await lerInput.',
+        'Chama cifrar(mensagem) para obter o texto cifrado.',
+        'Mostra o resultado com escrever() e mostrarCifra().',
+      ],
+      observation: 'Escreve qualquer texto no terminal. O painel mostra a versão cifrada.',
+      hint: 'Guarda o resultado de lerInput numa variável. Passa essa variável para cifrar.',
+      starter: 'function cifrar(texto: string): string {\n  let resultado: string = "";\n  for (const letra of texto) {\n    resultado += String.fromCharCode(letra.charCodeAt(0) + 13);\n  }\n  return resultado;\n}\n\n// pede a mensagem e mostra a cifra',
+      solution: 'function cifrar(texto: string): string {\n  let resultado: string = "";\n  for (const letra of texto) {\n    resultado += String.fromCharCode(letra.charCodeAt(0) + 13);\n  }\n  return resultado;\n}\n\nconst mensagem = await lerInput("Escreve a tua mensagem secreta:");\nconst cifrada: string = cifrar(mensagem);\nescrever("Cifrada: " + cifrada);\nmostrarCifra(cifrada);',
+      html: `
+        <main class="stage">
+          <section class="panel dark">
+            <h1>🔐 Cifra de César</h1>
+            <p>Mensagem original:</p>
+            <p id="original" style="font-size:18px;font-weight:700;color:#60a5fa;">…</p>
+            <p>Mensagem cifrada:</p>
+            <div class="big-value" id="cipher" style="font-size:clamp(24px,6vw,42px);word-break:break-all;">?</div>
+          </section>
+        </main>
+      `,
+      api: `
+        function mostrarCifra(texto) {
+          const cipher = String(texto);
+          setText('cipher', cipher);
+          window.exerciseState.cipher = cipher;
+        }
+        const _origLerInputCifra = lerInput;
+        lerInput = async function(msg) {
+          var val = await _origLerInputCifra(msg);
+          setText('original', val);
+          window.exerciseState.original = val;
+          return val;
+        };
+      `,
+      validate: (code, state) =>
+        /lerInput/.test(code) &&
+        state.cipher &&
+        state.cipher.length >= 1 &&
+        state.original &&
+        state.cipher !== state.original,
+    },
+  ],
+});
