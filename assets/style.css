@@ -1,0 +1,219 @@
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      background-color: #002b45;
+      color: white;
+      padding: 20px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header img { height: 60px; }
+    header h1 { font-size: 24px; margin: 0; }
+    #score-container, #timer-container {
+      font-size: 18px;
+      margin-left: 20px;
+    }
+    main {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      flex: 1;
+      overflow: hidden;
+    }
+    #sidebar {
+      background: #f0f0f0;
+      padding: 30px;
+      overflow-y: auto;
+      border-right: 1px solid #ddd;
+    }
+    .step { display: none; margin-bottom: 30px; }
+    .step.active { display: block; }
+    .hint, .curiosity {
+      background-color: #e6f7ff;
+      border-left: 4px solid #007bff;
+      padding: 10px;
+      margin-top: 10px;
+      display: none;
+    }
+    .nav-buttons { margin-top: 20px; display: flex; gap: 10px; }
+    button {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 6px;
+      background: linear-gradient(145deg, #007bff, #0056b3);
+      color: white;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    button:hover:enabled {
+      background: linear-gradient(145deg, #0056b3, #00449e);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+    }
+    button:disabled {
+      background: #999;
+      cursor: not-allowed;
+    }
+
+    #editor-preview-container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+    #editor {
+      background-color: #1e1e1e;
+      color: #dcdcdc;
+      border: 1px solid #555;
+      border-radius: 6px;
+      font-family: 'Fira Code', monospace;
+      font-size: 15px;
+      line-height: 1.4;
+      padding: 12px;
+      height: 300px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.1);
+      outline: none;
+    }
+    #editor:focus {
+      box-shadow: 0 0 8px rgba(0, 123, 255, 0.6);
+    }
+    iframe {
+      flex: 1;
+      border: 1px solid #ddd;
+      margin-top: 10px;
+      background: white;
+    }
+    .footer {
+      padding: 10px;
+      text-align: center;
+      background: #002b45;
+      color: white;
+    }
+    .badge {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #d4edda;
+      border-left: 4px solid #28a745;
+    }
+    #certificate {
+      background: #fff;
+      padding: 20px;
+      border: 2px dashed #007bff;
+      margin-top: 20px;
+    }
+    #certificate h2 {
+      color: #007bff;
+      text-align: center;
+    }
+    #confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 9999;
+    }
+    .nav-buttons {
+      margin-top: 30px;
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .nav-buttons button {
+      min-width: 160px;
+      padding: 10px 20px;
+      text-align: center;
+    }
+
+    .restart-button {
+      margin-top: 25px;
+      display: flex;
+      justify-content: center;
+    }
+
+    .restart-button button {
+      background-color: #6c757d;
+      border-radius: 6px;
+      min-width: 160px;
+    }
+
+    button {
+      padding: 10px 18px;
+      border: none;
+      border-radius: 6px;
+      background: linear-gradient(145deg, #007bff, #0056b3);
+      color: white;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    button:hover:enabled {
+      background: linear-gradient(145deg, #0056b3, #00449e);
+      transform: translateY(-1px);
+      box-shadow: 0 6px 10px rgba(0,0,0,0.15);
+    }
+    button:disabled {
+      background: #999;
+      cursor: not-allowed;
+    }
+
+  /* Passo 8: destaque animado */
+  .highlight {
+    background-color: yellow;
+    animation: pulse 1.5s infinite alternate;
+  }
+
+  @keyframes pulse {
+    from { box-shadow: 0 0 4px yellow; }
+    to   { box-shadow: 0 0 12px orange; }
+  }
+
+  /* Passo 10: grid responsivo */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 12px;
+  }
+  .grid div {
+    background: #e6f7ff;
+    padding: 10px;
+    border-radius: 6px;
+  }
+
+  /* Passo 14: caixa com sombra de jogo */
+  .game-box {
+    width: 150px;
+    height: 150px;
+    margin: 12px auto;
+    background: #fffbe6;
+    border: 2px dashed orange;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+  }
+
+  /* Passo 16: responsividade divertida */
+  @media (max-width: 600px) {
+    body { background-color: #f9f9f9; }
+    .game-box { width: 100px; height: 100px; }
+  }
+
+  /* Passo 20: confetti final (simulado) */
+  #confetti {
+    position: fixed; top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+  }
