@@ -1,15 +1,14 @@
 const firebaseConfig = {
-  // ATENÇÃO: Tem de substituir estes valores pelos do seu projeto Firebase!
-  // Vá à consola do Firebase -> Configurações do Projeto -> Adicionar app Web
-  apiKey: "COLOQUE_AQUI_A_SUA_API_KEY",
-  authDomain: "seu-projeto-firebase.firebaseapp.com",
-  projectId: "seu-projeto-firebase",
-  storageBucket: "seu-projeto-firebase.appspot.com",
-  messagingSenderId: "123456789",
-  appId: "1:123456789:web:abcdef123"
+  apiKey: "AIzaSyD7JF7mPt1XnIlEskPjkJ6PwRVpqECvKss",
+  authDomain: "aprenderaprogramar-fcul.firebaseapp.com",
+  projectId: "aprenderaprogramar-fcul",
+  storageBucket: "aprenderaprogramar-fcul.firebasestorage.app",
+  messagingSenderId: "452942904088",
+  appId: "1:452942904088:web:a446e5addff9f745d63c6d",
+  measurementId: "G-RYLEC24G7F"
 };
 
-// Inicializar o Firebase caso ainda não esteja
+// Inicializar o Firebase usando o formato compat
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 }
