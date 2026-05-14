@@ -410,21 +410,15 @@
   wdojunior at ciencias.ulisboa.pt
 </footer>
 
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+<script src="assets/app/firebase-db.js"></script>
+
 <script>
-  const LEADERBOARD_KEY = 'veraoProgramacaoLeaderboard:v1';
   const APP_KEY = 'veraoProgramacaoLab:v4';
-
   const MEDALS = ['🥇', '🥈', '🥉'];
-
-  function loadEntries() {
-    try { return JSON.parse(localStorage.getItem(LEADERBOARD_KEY)) || []; }
-    catch { return []; }
-  }
-
-  function saveEntries(entries) {
-    entries.sort((a, b) => b.score - a.score);
-    localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(entries));
-  }
+  let currentEntries = [];
 
   function loadAppState() {
     try { return JSON.parse(localStorage.getItem(APP_KEY)) || {}; }
@@ -437,8 +431,15 @@
     return `${m}:${s}`;
   }
 
-  function renderLeaderboard() {
-    const entries = loadEntries();
+  function escHtml(str) {
+    return String(str || '')
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;');
+  }
+
+  function renderLeaderboard(entries) {
     const table  = document.getElementById('lbTable');
     const body   = document.getElementById('lbBody');
     const empty  = document.getElementById('emptyState');
@@ -463,12 +464,13 @@
     table.hidden = false;
     body.innerHTML = entries.map((e, i) => {
       const medal = MEDALS[i] || (i + 1);
-      const dateStr = e.submittedAt
-        ? new Date(e.submittedAt).toLocaleDateString('pt-PT', { day: '2-digit', month: 'short' })
-        : '';
-      const email = e.email
-        ? e.email.replace(/(.{2}).*(@.*)/, '$1…$2')
-        : '';
+      let dateStr = '';
+      if (e.submittedAt) {
+        // Handle Firebase Timestamp
+        const dateObj = e.submittedAt.toDate ? e.submittedAt.toDate() : new Date(e.submittedAt);
+        dateStr = dateObj.toLocaleDateString('pt-PT', { day: '2-digit', month: 'short' });
+      }
+      const email = e.email ? e.email.replace(/(.{2}).*(@.*)/, '$1…$2') : '';
       return `<tr>
         <td class="rank-cell">${medal}</td>
         <td class="name-cell">
@@ -482,14 +484,6 @@
     }).join('');
   }
 
-  function escHtml(str) {
-    return String(str || '')
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
-  }
-
   function prefillForm() {
     const app = loadAppState();
     const score     = app.score ?? 0;
@@ -498,11 +492,15 @@
     document.getElementById('sbCompleted').value = completed + ' exercícios';
   }
 
-  function handleFormSubmit(event) {
+  async function handleFormSubmit(event) {
     event.preventDefault();
     const name  = document.getElementById('sbName').value.trim();
     const email = document.getElementById('sbEmail').value.trim();
     if (!name || !email) return;
+
+    const btn = document.querySelector('.submit-btn');
+    btn.disabled = true;
+    btn.textContent = 'A guardar na nuvem...';
 
     const app = loadAppState();
     const entry = {
@@ -510,34 +508,56 @@
       email,
       score: app.score ?? 0,
       completed: app.completed ? Object.keys(app.completed).length : 0,
-      total: app.completed ? Object.keys(app.completed).length : 0,
+      total: exercises?.length || 32, // placeholder if exercises array not loaded
       timeSpent: app.timeSpent ?? 0,
-      submittedAt: new Date().toISOString(),
+      submittedAt: firebase.firestore.FieldValue.serverTimestamp(),
     };
 
-    const entries = loadEntries();
-    const existing = entries.findIndex(e => e.email === email);
-    if (existing >= 0) {
-      if (entry.score >= entries[existing].score) {
-        entries[existing] = entry;
-        document.getElementById('formFeedback').textContent = '✓ Pontuação atualizada!';
-      } else {
-        document.getElementById('formFeedback').textContent =
-          '⚠ A tua pontuação anterior era maior (' + entries[existing].score + ' pts). Mantida.';
-      }
-    } else {
-      entries.push(entry);
-      document.getElementById('formFeedback').textContent = '✓ Pontuação guardada!';
-    }
+    try {
+      const docId = email.toLowerCase();
+      const docRef = db.collection("leaderboard").doc(docId);
+      const docSnap = await docRef.get();
 
-    saveEntries(entries);
-    renderLeaderboard();
-    document.getElementById('sbName').value = '';
-    document.getElementById('sbEmail').value = '';
+      if (docSnap.exists) {
+        if (entry.score >= docSnap.data().score) {
+          await docRef.update(entry);
+          document.getElementById('formFeedback').textContent = '✓ Pontuação atualizada!';
+        } else {
+          document.getElementById('formFeedback').textContent = 
+            '⚠ A tua pontuação anterior era maior (' + docSnap.data().score + ' pts). Mantida.';
+        }
+      } else {
+        await docRef.set(entry);
+        document.getElementById('formFeedback').textContent = '✓ Pontuação guardada!';
+      }
+      
+      document.getElementById('sbName').value = '';
+      document.getElementById('sbEmail').value = '';
+    } catch (err) {
+      console.error(err);
+      document.getElementById('formFeedback').style.color = '#b42318';
+      document.getElementById('formFeedback').textContent = 'Erro ao guardar: ' + err.message;
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Guardar no leaderboard';
+    }
   }
 
-  // Init
-  renderLeaderboard();
+  // Init real-time listener
+  db.collection("leaderboard").orderBy("score", "desc")
+    .onSnapshot((snapshot) => {
+      const entries = [];
+      snapshot.forEach(doc => {
+        entries.push(doc.data());
+      });
+      currentEntries = entries;
+      renderLeaderboard(entries);
+    }, (error) => {
+      console.error("Erro ao ler leaderboard: ", error);
+      document.getElementById('emptyState').innerHTML = 
+        '<p style="color:#b42318">Erro ao carregar a classificação. Verificou o firebase-db.js?</p>';
+    });
+
   prefillForm();
 </script>
 </body>

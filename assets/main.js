@@ -280,17 +280,7 @@ function restartTutorial() {
   location.reload();
 }
 
-// ─── Leaderboard ───────────────────────────────────────────────────────────
-const LEADERBOARD_KEY = 'veraoProgramacaoLeaderboard:v1';
-
-function loadLeaderboard() {
-  try {
-    return JSON.parse(localStorage.getItem(LEADERBOARD_KEY)) || [];
-  } catch {
-    return [];
-  }
-}
-
+// ─── Leaderboard (Firebase) ────────────────────────────────────────────────
 function openLeaderboardModal() {
   const modal = document.getElementById('leaderboardModal');
   document.getElementById('modalScore').textContent = appState.score;
@@ -310,11 +300,15 @@ function closeLeaderboardModal() {
   document.getElementById('leaderboardModal').hidden = true;
 }
 
-function submitToLeaderboard(event) {
+async function submitToLeaderboard(event) {
   event.preventDefault();
   const name = document.getElementById('lbName').value.trim();
   const email = document.getElementById('lbEmail').value.trim();
   if (!name || !email) return;
+
+  const btn = document.querySelector('.modal-submit');
+  btn.disabled = true;
+  btn.textContent = 'A guardar na nuvem...';
 
   const entry = {
     name,
@@ -323,24 +317,42 @@ function submitToLeaderboard(event) {
     completed: Object.keys(appState.completed).length,
     total: exercises.length,
     timeSpent: appState.timeSpent,
-    submittedAt: new Date().toISOString(),
+    submittedAt: firebase.firestore.FieldValue.serverTimestamp(),
   };
 
-  const entries = loadLeaderboard();
-  const existing = entries.findIndex((e) => e.email === email);
-  if (existing >= 0) {
-    if (entry.score >= entries[existing].score) entries[existing] = entry;
-  } else {
-    entries.push(entry);
-  }
-  entries.sort((a, b) => b.score - a.score);
-  localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(entries));
+  try {
+    // Usamos o email (convertido em minúsculas) como ID único
+    const docId = email.toLowerCase();
+    const docRef = db.collection("leaderboard").doc(docId);
+    const docSnap = await docRef.get();
+    
+    if (docSnap.exists) {
+      const data = docSnap.data();
+      // Só atualiza se a pontuação atual for melhor
+      if (entry.score >= data.score) {
+        await docRef.update(entry);
+      }
+    } else {
+      await docRef.set(entry);
+    }
 
-  document.getElementById('lbFeedback').textContent = '✓ Pontuação guardada!';
-  setTimeout(() => {
-    closeLeaderboardModal();
-    window.open('leaderboard.html', '_blank');
-  }, 900);
+    document.getElementById('lbFeedback').style.color = '#157347';
+    document.getElementById('lbFeedback').textContent = '✓ Pontuação guardada com sucesso!';
+    
+    setTimeout(() => {
+      closeLeaderboardModal();
+      window.open('leaderboard.html', '_blank');
+      btn.disabled = false;
+      btn.textContent = 'Submeter pontuação';
+    }, 1200);
+    
+  } catch (err) {
+    console.error('Erro ao guardar no Firebase:', err);
+    document.getElementById('lbFeedback').style.color = '#b42318';
+    document.getElementById('lbFeedback').textContent = 'Erro ao ligar à base de dados. Verificou o firebase-db.js?';
+    btn.disabled = false;
+    btn.textContent = 'Submeter pontuação';
+  }
 }
 
 function handlePreviewMessage(event) {
