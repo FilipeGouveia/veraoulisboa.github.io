@@ -17,7 +17,7 @@ window.exerciseTopics.push({
         'Preparados? Vamos programar! 👨‍💻👩‍💻'
       ],
       instructions: [
-        'Faça modificações ao campo de "Exploração Visual" e veja o que acontece.'
+        'Faça modificações ao campo de "Configurações Visuais" e veja o que acontece.'
       ],
       observation: 'Veja se consegue colocar a caixa vermelha e o texto grande ao mesmo tempo!',
       hint: 'Não há dicas 🤖',
@@ -26,7 +26,7 @@ window.exerciseTopics.push({
       html: `
        <main class="stage">
           <section class="panel dark">
-            <h1 id="message">Este painel muda quando o teu programa corre.</h1>
+            <h2 id="message">Este painel muda quando o teu programa corre.</h2>
           </section>
         </main>
       `,
@@ -73,23 +73,23 @@ window.exerciseTopics.push({
       points: 10,
       explanation: [
         'Um programa é uma lista de instruções. O computador lê essas instruções pela ordem em que aparecem e tenta executá-las uma a uma. Nesta primeira atividade, a instrução principal é chamar uma função.',
-        'Uma função é como um comando com nome. Quando escreves mostrarMensagem("Olá, FCUL!"), estás a pedir ao programa para pegar no texto entre aspas e colocá-lo no painel de resultado.',
-        'Repara que o texto fica entre aspas. Em TypeScript, texto chama-se string. Sempre que quiseres escrever uma palavra, uma frase ou uma mensagem para aparecer no ecrã, vais quase sempre usar uma string.',
+        'Uma função é como um comando com nome. Quando escreves [mostrarMensagem("Olá, FCUL!")], estás a pedir ao programa para pegar no texto entre aspas e colocá-lo no painel de resultado.',
+        'Repara que o texto fica entre aspas. Em TypeScript, texto chama-se [string]. Sempre que quiseres escrever uma palavra, uma frase ou uma mensagem para aparecer no ecrã, vais quase sempre usar uma [string].',
       ],
       instructions: [
-        'Chama a função mostrarMensagem com uma frase tua.',
+        'Chama a função [mostrarMensagem] com uma frase tua.',
         'A mensagem tem de ter pelo menos 8 caracteres (letras, números ou caracteres especiais).',
         'Carrega em Executar e confirma que o painel muda.',
         'Usa a exploração visual para mudar a cor do painel e o tamanho da mensagem.',
       ],
       observation: 'Se mudares apenas o texto dentro das aspas e executares outra vez, o resultado também muda.',
-      hint: 'Texto fica entre aspas. Escreve uma frase tua dentro da função mostrarMensagem.',
+      hint: 'Texto fica entre aspas. Escreve uma frase tua dentro da função [mostrarMensagem].',
       starter: 'mostrarMensagem("");\nmudarCorPainel("#102033");\nmudarTamanhoMensagem(44);',
       solution: 'mostrarMensagem("Olá, FCUL!");\nmudarCorPainel("#102033");\nmudarTamanhoMensagem(44);',
       html: `
         <main class="stage">
           <section class="panel dark">
-            <h1 id="message">...</h1>
+            <h2 id="message">...</h2>
             <p>Este painel muda quando o teu programa corre.</p>
           </section>
         </main>
@@ -146,11 +146,10 @@ window.exerciseTopics.push({
       instructions: [
         'Cria uma variável nome com tipo string.',
         'Cria uma variável detalhe com tipo string.',
-        'Usa criarCartao(nome, detalhe) para preencher o cartão.',
+        'Usa [criarCartao(nome, detalhe)] para preencher o cartão.',
         'Experimenta mudar a cor do cartão e o tamanho do nome.',
       ],
-      observation: 'O cartão deve mostrar o nome e uma frase descritiva. O importante é perceber que a função recebe valores que preparaste antes.' +
-        'Podes experimentar criar mais variáveis e concatená-las para criar mensagens mais complexas. Experimenta fazer const fraseCompleta = nome + " " + detalhe; e depois mostrar essa frase completa no cartão.',
+      observation: 'O cartão deve mostrar o nome e uma frase descritiva. O importante é perceber que a função recebe valores que preparaste antes.',
       hint: 'Observa os exemplos fornecidos para perceber como criar e usar variáveis.',
       starter: '//cria a variável nome aqui\n//cria a variável detalhe aqui;\ncriarCartao(nome, detalhe);\n\nmudarCorCartao("#ffffff");\nmudarTamanhoNome(48);',
       solution: 'const nome: string = "Ana";\nconst detalhe: string = "gosta de astronomia";\ncriarCartao(nome, detalhe);\n\nmudarCorCartao("#ffffff");\nmudarTamanhoNome(48);',
@@ -158,7 +157,7 @@ window.exerciseTopics.push({
         <main class="stage">
           <section class="panel">
             <p>Cartão</p>
-            <h1 id="name">Nome</h1>
+            <h2 id="name">Nome</h2>
             <p id="detail">Detalhe</p>
           </section>
         </main>

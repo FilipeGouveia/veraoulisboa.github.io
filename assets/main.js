@@ -24,7 +24,9 @@ function loadState() {
   };
 
   try {
-    return { ...fallback, ...JSON.parse(localStorage.getItem(STORAGE_KEY)) };
+    const loaded = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    if (loaded && !loaded.failed) loaded.failed = {};
+    return { ...fallback, ...loaded };
   } catch {
     return fallback;
   }
@@ -54,6 +56,10 @@ function getEditor() {
   return document.getElementById('editor');
 }
 
+function getEditorHighlight() {
+  return document.getElementById('editorHighlight');
+}
+
 function terminalEnabledForActiveExercise() {
   return getActiveExercise().terminal === true;
 }
@@ -67,6 +73,56 @@ function setFeedback(message, status = 'neutral') {
   const feedback = document.getElementById('feedback');
   feedback.textContent = message;
   feedback.className = `feedback ${status}`;
+}
+
+function highlightTypeScript(code) {
+  const tokenPattern = /(\/\/[^\n]*|\/\*[\s\S]*?\*\/|"(?:\\.|[^"\\])*"|'(?:\\.|[^'\\])*'|`(?:\\.|[^`\\])*`|\b(?:async|await|break|case|catch|class|const|continue|default|do|else|false|finally|for|function|if|in|Infinity|let|new|null|return|switch|true|try|var|while)\b|\b(?:any|boolean|number|string|unknown|void)\b|\b\d+(?:\.\d+)?\b|\b[A-Za-z_$][\w$]*(?=\s*\()|[+\-*/%=<>!&|?:]+)/g;
+  let html = '';
+  let cursor = 0;
+  let match;
+
+  while ((match = tokenPattern.exec(code)) !== null) {
+    const token = match[0];
+    html += AppUtils.escapeHtml(code.slice(cursor, match.index));
+
+    let className = 'syntax-operator';
+    if (/^\/\//.test(token) || /^\/\*/.test(token)) className = 'syntax-comment';
+    else if (/^["'`]/.test(token)) className = 'syntax-string';
+    else if (/^\d/.test(token)) className = 'syntax-number';
+    else if (/^(any|boolean|number|string|unknown|void)$/.test(token)) className = 'syntax-type';
+    else if (/^[A-Za-z_$]/.test(token) && !/^(async|await|break|case|catch|class|const|continue|default|do|else|false|finally|for|function|if|in|Infinity|let|new|null|return|switch|true|try|var|while)$/.test(token)) className = 'syntax-function';
+    else if (/^[A-Za-z_$]/.test(token)) className = 'syntax-keyword';
+
+    html += `<span class="${className}">${AppUtils.escapeHtml(token)}</span>`;
+    cursor = match.index + token.length;
+  }
+
+  html += AppUtils.escapeHtml(code.slice(cursor));
+  return html.endsWith('\n') ? `${html} ` : html;
+}
+
+function updateEditorHighlight() {
+  const editor = getEditor();
+  const highlight = getEditorHighlight();
+  if (!editor || !highlight) return;
+
+  highlight.innerHTML = highlightTypeScript(editor.value);
+  highlight.scrollTop = editor.scrollTop;
+  highlight.scrollLeft = editor.scrollLeft;
+}
+
+function syncEditorHighlightScroll() {
+  const editor = getEditor();
+  const highlight = getEditorHighlight();
+  if (!editor || !highlight) return;
+
+  highlight.scrollTop = editor.scrollTop;
+  highlight.scrollLeft = editor.scrollLeft;
+}
+
+function handleEditorInput() {
+  saveCurrentCode();
+  updateEditorHighlight();
 }
 
 function renderExerciseList() {
@@ -97,17 +153,28 @@ function renderExerciseList() {
 
   function renderExerciseButton(topicId, exercise, number) {
     const completed = Boolean(appState.completed[exercise.id]);
+    const failed = Boolean(appState.failed && appState.failed[exercise.id]);
     const active = exercise.id === activeExerciseId;
+
+    let metaContent = '';
+    let statusClass = '';
+    if (completed) {
+      statusClass = 'done';
+      metaContent = '✓';
+    } else if (failed) {
+      statusClass = 'failed';
+      metaContent = '✗';
+    }
 
     return `
       <button
         type="button"
-        class="exercise-item ${active ? 'active' : ''} ${completed ? 'done' : ''}"
+        class="exercise-item ${active ? 'active' : ''} ${statusClass}"
         onclick="selectExercise('${topicId}', '${exercise.id}')"
       >
         <span>${String(number).padStart(2, '0')}</span>
         <strong>${AppUtils.escapeHtml(exercise.title)}</strong>
-        <small>${completed ? 'concluído' : exercise.points + ' pts'}</small>
+        <small>${metaContent}</small>
       </button>
     `;
   }
@@ -121,6 +188,7 @@ function renderActiveExercise() {
   renderBriefing(exercise, completed);
 
   editor.value = VisualTools.annotateCode(exercise, appState.codes[exercise.id] || exercise.starter);
+  updateEditorHighlight();
   appState.codes[exercise.id] = editor.value;
   saveState();
 
@@ -138,13 +206,13 @@ function renderBriefing(exercise, completed) {
   document.getElementById('exerciseStatus').textContent = completed ? 'Concluído' : `${exercise.points} pontos`;
   document.getElementById('exerciseStatus').className = `status-badge ${completed ? 'done' : ''}`;
   document.getElementById('exerciseBody').innerHTML = `
-    ${(exercise.explanation || []).map((paragraph) => `<p>${AppUtils.escapeHtml(paragraph)}</p>`).join('')}
+    ${(exercise.explanation || []).map((paragraph) => `<p>${AppUtils.formatText(paragraph)}</p>`).join('')}
     <p><strong>Objetivo:</strong></p>
-    <ul>${exercise.instructions.map((instruction) => `<li>${AppUtils.escapeHtml(instruction)}</li>`).join('')}</ul>
-    <p><strong>O que deves observar:</strong> ${AppUtils.escapeHtml(exercise.observation || 'Executa o programa e compara o resultado visual com o objetivo.')}</p>
+    <ul>${exercise.instructions.map((instruction) => `<li>${AppUtils.formatText(instruction)}</li>`).join('')}</ul>
+    <p><strong>O que deves observar:</strong> ${AppUtils.formatText(exercise.observation || 'Executa o programa e compara o resultado visual com o objetivo.')}</p>
     <button type="button" class="hint-toggle" onclick="toggleHint()">Mostrar dica</button>
   `;
-  document.getElementById('hintBox').textContent = exercise.hint;
+  document.getElementById('hintBox').innerHTML = AppUtils.formatText(exercise.hint);
   document.getElementById('hintBox').hidden = true;
 }
 
@@ -183,6 +251,7 @@ function saveCurrentCode() {
 function applyVisualControl(index, value) {
   const changed = VisualTools.apply(getActiveExercise(), getEditor(), index, value);
   if (!changed) return;
+  updateEditorHighlight();
   saveCurrentCode();
   runStudentCode(false);
 }
@@ -205,6 +274,7 @@ function completeExercise(exercise) {
   if (appState.completed[exercise.id]) return;
 
   appState.completed[exercise.id] = true;
+  if (appState.failed) delete appState.failed[exercise.id];
   appState.score += exercise.points;
   saveState();
   updateHeader();
@@ -231,6 +301,7 @@ function showSolution() {
   if (!exercise?.solution) return;
 
   getEditor().value = VisualTools.annotateCode(exercise, exercise.solution);
+  updateEditorHighlight();
   saveCurrentCode();
   setFeedback('Resposta colocada no editor para teste.', 'neutral');
 }
@@ -242,6 +313,21 @@ function toggleHint() {
 
   const button = document.querySelector('.hint-toggle');
   if (button) button.textContent = isHidden ? 'Esconder dica' : 'Mostrar dica';
+}
+
+function toggleBriefing() {
+  const briefing = document.getElementById('briefingArticle');
+  const btn = document.getElementById('briefingToggleBtn');
+  
+  if (briefing.classList.contains('minimized')) {
+    briefing.classList.remove('minimized');
+    btn.textContent = '−';
+    btn.title = 'Minimizar';
+  } else {
+    briefing.classList.add('minimized');
+    btn.textContent = '+';
+    btn.title = 'Maximizar';
+  }
 }
 
 function openInCodePen() {
@@ -389,6 +475,10 @@ function handleStudentCodeResult(data) {
 
   if (data.type === 'student-code-error') {
     setFeedback(`Erro: ${data.message}`, 'wrong');
+    if (!appState.failed) appState.failed = {};
+    appState.failed[exercise.id] = true;
+    saveState();
+    renderExerciseList();
     return;
   }
 
@@ -399,6 +489,10 @@ function handleStudentCodeResult(data) {
   }
 
   setFeedback('O código correu, mas ainda não cumpre o objetivo.', 'wrong');
+  if (!appState.failed) appState.failed = {};
+  appState.failed[exercise.id] = true;
+  saveState();
+  renderExerciseList();
 }
 
 function handleEditorIndent(event) {
@@ -409,6 +503,7 @@ function handleEditorIndent(event) {
     const value = event.currentTarget.value;
     event.currentTarget.value = value.substring(0, start) + '  ' + value.substring(end);
     event.currentTarget.selectionStart = event.currentTarget.selectionEnd = start + 2;
+    updateEditorHighlight();
     saveCurrentCode();
     return;
   }
@@ -426,6 +521,7 @@ function handleEditorIndent(event) {
 
   event.currentTarget.value = `${before}\n${indent}${after}`;
   event.currentTarget.selectionStart = event.currentTarget.selectionEnd = start + 1 + indent.length;
+  updateEditorHighlight();
   saveCurrentCode();
 }
 
@@ -439,7 +535,8 @@ function startTimer() {
 
 function initApp() {
   document.getElementById('solutionBtn').hidden = !ENABLE_SOLUTIONS;
-  getEditor().addEventListener('input', saveCurrentCode);
+  getEditor().addEventListener('input', handleEditorInput);
+  getEditor().addEventListener('scroll', syncEditorHighlightScroll);
   getEditor().addEventListener('keydown', handleEditorIndent);
   document.getElementById('consoleForm').addEventListener('submit', (event) => {
     event.preventDefault();

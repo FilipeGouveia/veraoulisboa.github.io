@@ -10,24 +10,24 @@ window.exerciseTopics.push({
       points: 25,
       explanation: [
         'Uma cifra é uma forma de esconder uma mensagem. A ideia da cifra de César é trocar cada letra por outra letra mais à frente no alfabeto.',
-        'No computador, cada letra tem um código numérico. Podemos ler esse código com charCodeAt e criar uma nova letra com String.fromCharCode.',
-        'Aqui usamos um deslocamento de 13. A letra F passa a S, C passa a P, U passa a H e L passa a Y. Por isso FCUL fica SPHY.',
+        'No computador, cada letra tem um código numérico. Podemos ler esse código com [charCodeAt] e criar uma nova letra com [String.fromCharCode].',
+        'Aqui usamos um deslocamento de 13. A letra F passa a S, C passa a P, U passa a H e L passa a Y. Por isso FCUL fica SPbY.',
       ],
       instructions: [
-        'Completa a função cifrar.',
+        'Completa a função [cifrar].',
         'Percorre todas as letras do texto.',
         'Avança cada letra 13 posições.',
-        'Usa mostrarCifra(cifrar("FCUL")).',
+        'Usa [mostrarCifra(cifrar("FCUL"))].',
         'Muda a cor da mensagem cifrada para separar conteúdo e apresentação.',
       ],
-      observation: 'O painel deve mostrar SPHY.',
+      observation: 'O painel deve mostrar SPbY.',
       hint: 'Dentro do ciclo, transforma cada letra num código numérico, soma 13, e volta a transformar esse número numa letra.',
       starter: 'function cifrar(texto: string): string {\n  let resultado = "";\n\n  // percorre as letras aqui\n\n  return resultado;\n}\n\nmostrarCifra(cifrar("FCUL"));\nmudarCorCifra("#ffffff");',
       solution: 'function cifrar(texto: string): string {\n  let resultado = "";\n\n  for (const letra of texto) {\n    resultado += String.fromCharCode(letra.charCodeAt(0) + 13);\n  }\n\n  return resultado;\n}\n\nmostrarCifra(cifrar("FCUL"));\nmudarCorCifra("#ffffff");',
       html: `
         <main class="stage">
           <section class="panel dark">
-            <h1>Cifra</h1>
+            <h2>Cifra</h2>
             <div class="big-value" id="cipher">?</div>
           </section>
         </main>
@@ -52,7 +52,7 @@ window.exerciseTopics.push({
           template: (value) => `mudarCorCifra("${value}");`,
         },
       ],
-      validate: (code, state) => state.cipher === 'SPHY',
+      validate: (code, state) => state.cipher === 'SPbY',
     },
     {
       id: 'cesar-desencriptar',
@@ -64,19 +64,19 @@ window.exerciseTopics.push({
         'A mensagem SPHY foi obtida a partir de FCUL. O teu objetivo é voltar a FCUL.',
       ],
       instructions: [
-        'Completa a função decifrar.',
+        'Completa a função [decifrar].',
         'Percorre todas as letras do texto.',
         'Recua cada letra 13 posições.',
         'Mostra o resultado com mostrarTexto.',
       ],
       observation: 'O painel deve voltar a mostrar FCUL.',
       hint: 'Pensa na operação inversa da cifra anterior: se avançar escondia a mensagem, recuar recupera a mensagem.',
-      starter: 'function decifrar(texto: string): string {\n  let resultado = "";\n\n  // percorre as letras aqui\n\n  return resultado;\n}\n\nmostrarTexto(decifrar("SPHY"));',
-      solution: 'function decifrar(texto: string): string {\n  let resultado = "";\n\n  for (const letra of texto) {\n    resultado += String.fromCharCode(letra.charCodeAt(0) - 13);\n  }\n\n  return resultado;\n}\n\nmostrarTexto(decifrar("SPHY"));',
+      starter: 'function decifrar(texto: string): string {\n  let resultado = "";\n\n  // percorre as letras aqui\n\n  return resultado;\n}\n\nmostrarTexto(decifrar("SPbY"));',
+      solution: 'function decifrar(texto: string): string {\n  let resultado = "";\n\n  for (const letra of texto) {\n    resultado += String.fromCharCode(letra.charCodeAt(0) - 13);\n  }\n\n  return resultado;\n}\n\nmostrarTexto(decifrar("SPbY"));',
       html: `
         <main class="stage">
           <section class="panel dark">
-            <h1>Mensagem</h1>
+            <h2>Mensagem</h2>
             <div class="big-value" id="plain">?</div>
           </section>
         </main>
@@ -96,14 +96,14 @@ window.exerciseTopics.push({
       points: 25,
       explanation: [
         'Algumas fórmulas parecem grandes, mas um programa pode dividi-las em passos pequenos. A fórmula resolvente encontra as soluções de uma equação do segundo grau.',
-        'Para x² - 5x + 6 = 0, temos a = 1, b = -5 e c = 6. Primeiro calculamos delta. Depois usamos Math.sqrt(delta) para obter a raiz quadrada.',
+        'Para x² - 5x + 6 = 0, temos a = 1, b = -5 e c = 6. Primeiro calculamos delta. Depois usamos [Math.sqrt(delta)] para obter a raiz quadrada.',
         'O objetivo não é decorar a fórmula toda de uma vez. É perceber como transformar uma receita matemática numa sequência de variáveis.',
       ],
       instructions: [
-        'Calcula delta usando b * b - 4 * a * c.',
+        'Calcula [delta] usando b * b - 4 * a * c.',
         'Calcula as duas raízes.',
-        'Usa mostrarEquacao(a, b, c) para atualizar o título.',
-        'Usa mostrarRaizes(raiz1, raiz2).',
+        'Usa [mostrarEquacao(a, b, c)] para atualizar o título.',
+        'Usa [mostrarRaizes(raiz1, raiz2)].',
       ],
       observation: 'As raízes esperadas são 2 e 3.',
       hint: 'Calcula uma variável de cada vez: primeiro delta, depois a raiz quadrada de delta, e só no fim as duas raízes.',
@@ -112,7 +112,7 @@ window.exerciseTopics.push({
       html: `
         <main class="stage">
           <section class="panel">
-            <h1 id="equation">x² - 5x + 6 = 0</h1>
+            <h2 id="equation">x² - 5x + 6 = 0</h2>
             <p>Raízes:</p>
             <div class="big-value" id="roots">?</div>
           </section>
@@ -153,23 +153,23 @@ window.exerciseTopics.push({
       points: 15,
       explanation: [
         'Para aproximar pi com dardos, começamos por imaginar um quadrado. Cada dardo cai numa posição dentro desse quadrado.',
-        'A posição é descrita por duas coordenadas: x na horizontal e y na vertical. Math.random() dá um número entre 0 e 1, perfeito para escolher posições dentro de um quadrado de lado 1.',
-        'Antes de contar muitos dardos, vamos desenhar pontos para perceber o que x e y significam. A função criarPonto cria um novo ponto de cada vez.',
+        'A posição é descrita por duas coordenadas: x na horizontal e y na vertical. [Math.random()] dá um número entre 0 e 1, perfeito para escolher posições dentro de um quadrado de lado 1.',
+        'Antes de contar muitos dardos, vamos desenhar pontos para perceber o que x e y significam. A função [criarPonto] cria um novo ponto de cada vez.',
       ],
       instructions: [
-        'Cria x e y usando Math.random().',
-        'Chama criarPonto(x, y).',
-        'Se quiseres, chama criarPonto várias vezes para desenhar vários pontos.',
+        'Cria x e y usando [Math.random()].',
+        'Chama [criarPonto(x, y)].',
+        'Se quiseres, chama [criarPonto] várias vezes para desenhar vários pontos.',
         'Experimenta mudar a cor e o raio dos pontos.',
       ],
-      observation: 'Cada chamada a criarPonto desenha mais um ponto dentro do quadrado.',
-      hint: 'Math.random() cria um número entre 0 e 1. Usa essa ideia uma vez para x e outra para y, depois passa os dois valores a criarPonto.',
-      starter: '// cria x e y com Math.random\n\n// cria o ponto aqui\n\nmudarCorPonto("#d97706");\nmudarRaioPonto(7);',
+      observation: 'Cada chamada a [criarPonto] desenha mais um ponto dentro do quadrado.',
+      hint: '[Math.random()] cria um número entre 0 e 1. Usa essa ideia uma vez para x e outra para y, depois passa os dois valores a [criarPonto].',
+      starter: '// cria x e y com [Math.random]\n\n// cria o ponto aqui\n\nmudarCorPonto("#d97706");\nmudarRaioPonto(7);',
       solution: 'const x: number = Math.random();\nconst y: number = Math.random();\ncriarPonto(x, y);\nmudarCorPonto("#d97706");\nmudarRaioPonto(7);',
       html: `
         <main class="stage">
           <section class="panel">
-            <h1>Ponto aleatório</h1>
+            <h2>Ponto aleatório</h2>
             <canvas id="canvas" width="520" height="360"></canvas>
           </section>
         </main>
@@ -255,11 +255,11 @@ window.exerciseTopics.push({
       instructions: [
         'Cria total com pelo menos 1000 dardos.',
         'Cria uma variável dentro que começa em 0.',
-        'Usa um ciclo for para gerar x e y com Math.random().',
-        'Dentro do ciclo, chama criarPonto(x, y).',
-        'Se pontoDentro(x, y) for true, aumenta dentro.',
+        'Usa um ciclo for para gerar x e y com [Math.random()].',
+        'Dentro do ciclo, chama [criarPonto(x, y)].',
+        'Se [pontoDentro(x, y)] for [true], aumenta dentro.',
         'Calcula pi com 4 * dentro / total.',
-        'Mostra o valor com mostrarPi(pi).',
+        'Mostra o valor com [mostrarPi(pi)].',
         'Altera a cor da barra para veres um detalhe gráfico controlado por código.',
       ],
       observation: 'Deves ver muitos pontos no quadrado. O valor não será sempre igual, mas deve ficar perto de 3.14.',
@@ -269,7 +269,7 @@ window.exerciseTopics.push({
       html: `
         <main class="stage">
           <section class="panel">
-            <h1>Pi aproximado</h1>
+            <h2>Pi aproximado</h2>
             <canvas id="canvas" width="520" height="260"></canvas>
             <div class="big-value" id="pi">?</div>
             <div class="meter"><span id="pi-meter"></span></div>

@@ -14,24 +14,23 @@ window.exerciseTopics.push({
       explanation: [
         'Neste desafio és um arquiteto urbanista. Tens vários pontos de interesse numa cidade (hospitais, escolas, estações de metro) e precisas de analisar as distâncias entre eles.',
         'O programa pede o número de pontos e as coordenadas (x, y) de cada um. Depois calcula a distância entre todos os pares possíveis e encontra a menor e a maior distância.',
-        'A distância entre dois pontos usa a fórmula de Pitágoras: Math.hypot(x2 - x1, y2 - y1). Para todos os pares usa dois ciclos for aninhados com j > i para não repetir pares.',
-        'Problema original: https://aprenderaprogramar.di.fc.ul.pt/2025/11-desafio.html',
+        'A distância entre dois pontos usa a fórmula de Pitágoras: [Math.hypot(x2 - x1, y2 - y1)]. Para todos os pares usa dois ciclos [for] aninhados com [j > i] para não repetir pares.',
       ],
       instructions: [
-        'Usa await lerInput para pedir o número de pontos n.',
-        'Dentro de um ciclo for, pede x e y de cada ponto com lerInput e chama adicionarPonto(x, y).',
-        'Usa dois ciclos for aninhados (i e j, com j > i) para calcular Math.hypot entre cada par.',
-        'Guarda o mínimo (começa em Infinity) e o máximo (começa em 0).',
-        'No fim chama mostrarDistancias(minDist, maxDist) e usa escrever() para os resultados.',
+        'Usa [await lerInput] para pedir o número de pontos [n].',
+        'Dentro de um ciclo [for], pede x e y de cada ponto com [lerInput] e chama [adicionarPonto(x, y)].',
+        'Usa dois ciclos [for] aninhados ([i] e [j], com [j > i]) para calcular [Math.hypot] entre cada par.',
+        'Guarda o mínimo (começa em [Infinity]) e o máximo (começa em [0]).',
+        'No fim chama [mostrarDistancias(minDist, maxDist)] e usa [escrever()] para os resultados.',
       ],
       observation: 'Para 3 pontos (0,0), (3,4) e (10,10): menor distância = 5, maior distância ≈ 14.14.',
-      hint: 'Dois ciclos aninhados: for i de 0 a n, for j de i+1 a n. Calcula Math.hypot e compara com min/max.',
+      hint: 'Dois ciclos aninhados: for i de 0 a n, for j de i+1 a n. Calcula [Math.hypot] e compara com min/max.',
       starter: 'const n: number = Number(await lerInput("Número de pontos:"));\nconst pontos: number[][] = [];\n\nfor (let i = 0; i < n; i++) {\n  const x: number = Number(await lerInput("Ponto " + (i+1) + " - x:"));\n  const y: number = Number(await lerInput("Ponto " + (i+1) + " - y:"));\n  pontos.push([x, y]);\n  adicionarPonto(x, y);\n}\n\nlet minDist: number = Infinity;\nlet maxDist: number = 0;\n\n// usa dois ciclos for aninhados aqui\n\nescrever("Maior distância: " + maxDist);\nescrever("Menor distância: " + minDist);\nmostrarDistancias(minDist, maxDist);',
       solution: 'const n: number = Number(await lerInput("Número de pontos:"));\nconst pontos: number[][] = [];\n\nfor (let i = 0; i < n; i++) {\n  const x: number = Number(await lerInput("Ponto " + (i+1) + " - x:"));\n  const y: number = Number(await lerInput("Ponto " + (i+1) + " - y:"));\n  pontos.push([x, y]);\n  adicionarPonto(x, y);\n}\n\nlet minDist: number = Infinity;\nlet maxDist: number = 0;\n\nfor (let i = 0; i < pontos.length; i++) {\n  for (let j = i + 1; j < pontos.length; j++) {\n    const dist: number = Math.hypot(pontos[j][0] - pontos[i][0], pontos[j][1] - pontos[i][1]);\n    if (dist < minDist) minDist = dist;\n    if (dist > maxDist) maxDist = dist;\n  }\n}\n\nescrever("Maior distância: " + maxDist);\nescrever("Menor distância: " + minDist);\nmostrarDistancias(minDist, maxDist);',
       html: `
         <main class="stage">
           <section class="panel">
-            <h1>🏙️ Mapa da Cidade</h1>
+            <h2>🏙️ Mapa da Cidade</h2>
             <canvas id="canvas" width="520" height="240"></canvas>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;font-weight:700;font-size:14px;">
               <div>🔵 Menor: <span id="min-dist" style="color:#0077b6">—</span></div>
@@ -50,11 +49,12 @@ window.exerciseTopics.push({
 
         function drawMap() {
           ctx.clearRect(0, 0, canvas.width, canvas.height);
-          if (rawPoints.length === 0) return;
           const xs = rawPoints.map((p) => p[0]);
           const ys = rawPoints.map((p) => p[1]);
-          const minX = Math.min(...xs), maxX = Math.max(...xs);
-          const minY = Math.min(...ys), maxY = Math.max(...ys);
+          const minX = rawPoints.length ? Math.min(...xs) : 0;
+          const maxX = rawPoints.length ? Math.max(...xs) : 10;
+          const minY = rawPoints.length ? Math.min(...ys) : 0;
+          const maxY = rawPoints.length ? Math.max(...ys) : 10;
           const pad = 36;
           const rangeX = maxX - minX || 1;
           const rangeY = maxY - minY || 1;
@@ -71,6 +71,7 @@ window.exerciseTopics.push({
             const gy = pad + i * (canvas.height - pad*2) / 4;
             ctx.beginPath(); ctx.moveTo(pad, gy); ctx.lineTo(canvas.width - pad, gy); ctx.stroke();
           }
+          if (rawPoints.length === 0) return;
           ctx.strokeStyle = '#cbd5e1'; ctx.lineWidth = 1;
           for (let i = 0; i < rawPoints.length; i++) {
             for (let j = i + 1; j < rawPoints.length; j++) {
@@ -89,6 +90,7 @@ window.exerciseTopics.push({
             ctx.fillText(idx + 1, cx, cy);
           });
         }
+        drawMap();
 
         function adicionarPonto(x, y) {
           rawPoints.push([Number(x), Number(y)]);
@@ -139,24 +141,23 @@ window.exerciseTopics.push({
         'Neste desafio és um olheiro de elite. O teu trabalho é analisar as estatísticas de vários jogadores e encontrar o MVP (Most Valuable Player) da temporada.',
         'Cada jogador tem um score calculado por uma fórmula: golos × 5 + assistências × 3 + desarmes × 1 + faltas × (−2).',
         'O programa pede os dados de n jogadores e no final anuncia quem tem o score mais alto.',
-        'Problema original: https://aprenderaprogramar.di.fc.ul.pt/2025/12-desafio2.html',
       ],
       instructions: [
-        'Usa await lerInput para pedir o número de jogadores n.',
-        'Dentro de um ciclo for, pede nome, golos, assistências, desarmes e faltas de cada jogador.',
+        'Usa [await lerInput] para pedir o número de jogadores [n].',
+        'Dentro de um ciclo [for], pede nome, golos, assistências, desarmes e faltas de cada jogador.',
         'Calcula o score: golos * 5 + assistencias * 3 + desarmes * 1 + faltas * (-2).',
-        'Chama adicionarJogador(nome, golos, assistencias, desarmes, faltas, score).',
+        'Chama [adicionarJogador(nome, golos, assistencias, desarmes, faltas, score)].',
         'Guarda o melhor nome e pontuação comparando com o máximo até agora (começa em -Infinity).',
-        'No fim chama anunciarVencedor(melhorNome, melhorPontos) e usa escrever() para o resultado.',
+        'No fim chama [anunciarVencedor(melhorNome, melhorPontos)] e usa [escrever()] para o resultado.',
       ],
-      observation: 'Cristiano (13 golos, 4 ast, 5 des, 2 faltas): 13×5+4×3+5−4 = 78 pts. Confere com o exemplo do site.',
+      observation: 'Cristiano (13 golos, 4 ast, 5 des, 2 faltas): 13×5+4×3+5−4 = 78 pts.',
       hint: 'Começa melhorPontos = -Infinity. Dentro do ciclo, se score > melhorPontos, actualiza melhorPontos e melhorNome.',
       starter: 'const n: number = Number(await lerInput("Número de jogadores:"));\n\nlet melhorNome: string = "";\nlet melhorPontos: number = -Infinity;\n\nfor (let i = 0; i < n; i++) {\n  const nome: string = await lerInput("Nome do jogador " + (i+1) + ":");\n  const golos: number = Number(await lerInput("Golos:"));\n  const assistencias: number = Number(await lerInput("Assistências:"));\n  const desarmes: number = Number(await lerInput("Desarmes:"));\n  const faltas: number = Number(await lerInput("Faltas:"));\n\n  const score: number = 0; // calcula aqui\n\n  adicionarJogador(nome, golos, assistencias, desarmes, faltas, score);\n  escrever(nome + ": " + score + " pontos");\n\n  // actualiza o melhor aqui\n}\n\nescrever("Melhor jogador: " + melhorNome + " com " + melhorPontos + " pontos");\nanunciarVencedor(melhorNome, melhorPontos);',
       solution: 'const n: number = Number(await lerInput("Número de jogadores:"));\n\nlet melhorNome: string = "";\nlet melhorPontos: number = -Infinity;\n\nfor (let i = 0; i < n; i++) {\n  const nome: string = await lerInput("Nome do jogador " + (i+1) + ":");\n  const golos: number = Number(await lerInput("Golos:"));\n  const assistencias: number = Number(await lerInput("Assistências:"));\n  const desarmes: number = Number(await lerInput("Desarmes:"));\n  const faltas: number = Number(await lerInput("Faltas:"));\n\n  const score: number = golos * 5 + assistencias * 3 + desarmes * 1 + faltas * (-2);\n\n  adicionarJogador(nome, golos, assistencias, desarmes, faltas, score);\n  escrever(nome + ": " + score + " pontos");\n\n  if (score > melhorPontos) {\n    melhorPontos = score;\n    melhorNome = nome;\n  }\n}\n\nescrever("Melhor jogador: " + melhorNome + " com " + melhorPontos + " pontos");\nanunciarVencedor(melhorNome, melhorPontos);',
       html: `
         <main class="stage">
           <section class="panel dark">
-            <h1>⚽ Análise MVP</h1>
+            <h2>⚽ Análise MVP</h2>
             <ul class="grid-list" id="player-list" style="flex-direction:column;gap:6px;"></ul>
             <p id="vencedor" style="margin-top:16px;font-size:18px;font-weight:800;color:#fbbf24;min-height:1.4em;">Ainda não calculado.</p>
           </section>

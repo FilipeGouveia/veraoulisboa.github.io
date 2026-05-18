@@ -1,156 +1,172 @@
 <!DOCTYPE html>
 <html lang="pt">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verão ULisboa - Laboratório de Programação</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
-    <link rel="stylesheet" href="assets/style.css">
-  </head>
-  <body>
-    <header class="topbar">
-      <img src="https://ciencias.ulisboa.pt/sites/default/files/Ciencias_Logo_Azul-02.png" alt="Logo FCUL">
-      <div>
-        <h1>Verão ULisboa - Laboratório de Programação</h1>
-        <p>Guião desenvolvido pela Faculdade de Ciências da Universidade de Lisboa.</p>
-      </div>
-      <div class="status-panel" aria-label="Progresso">
-        <div>Pontuação: <span id="score">0</span></div>
-        <div>Concluídos: <span id="completedCount">0</span>/<span id="totalCount">0</span></div>
-        <div>Tempo: <span id="timer">00:00</span></div>
-        <button type="button" class="lb-open-btn" onclick="openLeaderboardModal()">🏆 Leaderboard</button>
-      </div>
-    </header>
 
-    <main class="workspace">
-      <aside class="exercise-nav" aria-label="Lista de exercícios">
-        <div class="nav-heading">
-          <h2>Exercícios</h2>
-          <p>O progresso fica guardado neste browser.</p>
-        </div>
-        <div id="exerciseList" class="exercise-list"></div>
-        <div class="restart-button">
-          <button type="button" onclick="restartTutorial()">Recomeçar tudo</button>
-        </div>
-      </aside>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verão ULisboa - Laboratório de Programação</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="assets/style.css">
+</head>
 
-      <section class="lesson">
-        <article class="briefing">
-          <div class="briefing-header">
-            <div>
-              <p id="exerciseTopic" class="eyebrow"></p>
-              <h2 id="exerciseTitle"></h2>
-            </div>
-            <span id="exerciseStatus" class="status-badge"></span>
+<body>
+  <header class="topbar">
+    <img src="logo.svg" alt="Website Logo">
+
+    <div>
+      <h1>Verão ULisboa - Laboratório de Programação</h1>
+      <p>Guião desenvolvido pela Faculdade de Ciências da Universidade de Lisboa.</p>
+    </div>
+    <div class="status-panel" aria-label="Progresso">
+      <div>Pontuação: <span id="score">0</span></div>
+      <div>Concluídos: <span id="completedCount">0</span>/<span id="totalCount">0</span></div>
+      <div>Tempo: <span id="timer">00:00</span></div>
+      <button type="button" class="lb-open-btn" onclick="openLeaderboardModal()">🏆 Leaderboard</button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <aside class="exercise-nav" aria-label="Lista de exercícios">
+      <div class="nav-heading">
+        <h2>Exercícios</h2>
+        <p>O progresso fica guardado neste browser.</p>
+      </div>
+      <div id="exerciseList" class="exercise-list"></div>
+      <div class="restart-button">
+        <button type="button" onclick="restartTutorial()">Recomeçar tudo</button>
+      </div>
+    </aside>
+
+    <section class="lesson">
+      <article class="briefing" id="briefingArticle">
+        <div class="briefing-header">
+          <div>
+            <p id="exerciseTopic" class="eyebrow"></p>
+            <h2 id="exerciseTitle"></h2>
           </div>
+          <div class="briefing-actions">
+            <span id="exerciseStatus" class="status-badge"></span>
+            <button type="button" id="briefingToggleBtn" class="briefing-toggle" onclick="toggleBriefing()"
+              aria-label="Minimizar" title="Minimizar">−</button>
+          </div>
+        </div>
+        <div id="briefingContent">
           <div id="exerciseBody"></div>
           <div class="hint-box" id="hintBox"></div>
-        </article>
+        </div>
+      </article>
 
-        <section id="editor-preview-container" class="lab">
-          <div class="editor-shell">
-            <div class="panel-title">
-              <span>Código TypeScript</span>
-              <span class="file-pill">main.ts</span>
-            </div>
+      <section id="editor-preview-container" class="lab">
+        <div class="editor-shell">
+          <div class="panel-title">
+            <span>Código TypeScript</span>
+            <span class="file-pill">main.ts</span>
+          </div>
+          <div class="code-editor">
+            <pre id="editorHighlight" class="editor-highlight" aria-hidden="true"></pre>
             <textarea id="editor" spellcheck="false" aria-label="Editor de TypeScript"></textarea>
-            <div id="visualTools" class="visual-tools" hidden></div>
-            <div class="actions">
-              <button type="button" onclick="runStudentCode()">Executar</button>
-              <button type="button" class="secondary-button" id="solutionBtn" onclick="showSolution()">Mostrar resposta</button>
-              <button type="button" class="secondary-button" onclick="openInCodePen()">Abrir este exercício no CodePen</button>
-            </div>
           </div>
+          <div class="actions">
+            <button type="button" onclick="runStudentCode()">Executar</button>
+            <button type="button" class="secondary-button" id="solutionBtn" onclick="showSolution()">Mostrar
+              resposta</button>
+            <button type="button" class="secondary-button" onclick="openInCodePen()">Abrir este exercício no
+              CodePen</button>
+          </div>
+        </div>
 
-          <div class="preview-shell">
-            <div class="panel-title">
-              <span>Resultado</span>
-              <span class="file-pill">interface</span>
-            </div>
-            <iframe id="preview" title="Resultado do código"></iframe>
-            <div id="console" class="console-area" hidden>
-              <div class="console-header">
-                <span>Terminal</span>
-                <span class="console-status" id="consoleStatus"></span>
-              </div>
-              <div id="consoleOutput" class="console-output"></div>
-              <form id="consoleForm" class="console-input-row" hidden autocomplete="off">
-                <span class="console-chevron">▸</span>
-                <input id="consoleInput" type="text" class="console-input" placeholder="Escreve aqui e carrega Enter…" aria-label="Input do terminal">
-                <button type="submit" class="console-submit">Enviar</button>
-              </form>
-            </div>
-            <div id="feedback" class="feedback neutral" role="status" aria-live="polite">Pronto para executar.</div>
+        <div class="preview-shell">
+          <div class="panel-title">
+            <span>Resultado</span>
+            <span class="file-pill">interface</span>
           </div>
-        </section>
+          <iframe id="preview" title="Resultado do código"></iframe>
+          <div id="visualTools" class="visual-tools" hidden></div>
+          <div id="console" class="console-area" hidden>
+            <div class="console-header">
+              <span>Terminal</span>
+              <span class="console-status" id="consoleStatus"></span>
+            </div>
+            <div id="consoleOutput" class="console-output"></div>
+            <form id="consoleForm" class="console-input-row" hidden autocomplete="off">
+              <span class="console-chevron">▸</span>
+              <input id="consoleInput" type="text" class="console-input" placeholder="Escreve aqui e carrega Enter…"
+                aria-label="Input do terminal">
+              <button type="submit" class="console-submit">Enviar</button>
+            </form>
+          </div>
+          <div id="feedback" class="feedback neutral" role="status" aria-live="polite">Pronto para executar.</div>
+        </div>
       </section>
-    </main>
+    </section>
+  </main>
 
-    <div class="footer">
-      &copy; 2026 Verão ULisboa @ FCUL. Exercícios em TypeScript para aprender programação.
-      wdojunior at ciencias.ulisboa.pt
-    </div>
+  <div class="footer">
+    &copy; 2026 Verão ULisboa @ FCUL. Exercícios em TypeScript para aprender programação.
+    wdojunior at ciencias.ulisboa.pt
+  </div>
 
-    <!-- Leaderboard Modal -->
-    <div id="leaderboardModal" class="modal-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="modalTitle">
-      <div class="modal-box">
-        <div class="modal-header">
-          <h2 id="modalTitle">🏆 Submeter Pontuação</h2>
-          <button type="button" class="modal-close" onclick="closeLeaderboardModal()" aria-label="Fechar">×</button>
-        </div>
-        <div class="modal-body">
-          <p class="modal-intro">Guarda o teu resultado no leaderboard da turma!</p>
-          <div class="modal-stats">
-            <div class="modal-stat">
-              <span class="modal-stat-value" id="modalScore">0</span>
-              <span class="modal-stat-label">pontos</span>
-            </div>
-            <div class="modal-stat">
-              <span class="modal-stat-value" id="modalCompleted">0</span>
-              <span class="modal-stat-label">concluídos</span>
-            </div>
-            <div class="modal-stat">
-              <span class="modal-stat-value" id="modalTime">00:00</span>
-              <span class="modal-stat-label">tempo</span>
-            </div>
+  <!-- Leaderboard Modal -->
+  <div id="leaderboardModal" class="modal-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2 id="modalTitle">🏆 Submeter Pontuação</h2>
+        <button type="button" class="modal-close" onclick="closeLeaderboardModal()" aria-label="Fechar">×</button>
+      </div>
+      <div class="modal-body">
+        <p class="modal-intro">Guarda o teu resultado no leaderboard da turma!</p>
+        <div class="modal-stats">
+          <div class="modal-stat">
+            <span class="modal-stat-value" id="modalScore">0</span>
+            <span class="modal-stat-label">pontos</span>
           </div>
-          <form id="leaderboardForm" onsubmit="submitToLeaderboard(event)">
-            <div class="form-group">
-              <label for="lbName">Nome</label>
-              <input id="lbName" type="text" placeholder="O teu nome" required autocomplete="name">
-            </div>
-            <div class="form-group">
-              <label for="lbEmail">E-mail</label>
-              <input id="lbEmail" type="email" placeholder="o-teu-email@exemplo.com" required autocomplete="email">
-            </div>
-            <p id="lbFeedback" class="lb-feedback"></p>
-            <div class="modal-actions">
-              <button type="submit" class="modal-submit">Submeter pontuação</button>
-              <a href="leaderboard.html" target="_blank" class="modal-link-btn">Ver leaderboard</a>
-            </div>
-          </form>
+          <div class="modal-stat">
+            <span class="modal-stat-value" id="modalCompleted">0</span>
+            <span class="modal-stat-label">concluídos</span>
+          </div>
+          <div class="modal-stat">
+            <span class="modal-stat-value" id="modalTime">00:00</span>
+            <span class="modal-stat-label">tempo</span>
+          </div>
         </div>
+        <form id="leaderboardForm" onsubmit="submitToLeaderboard(event)">
+          <div class="form-group">
+            <label for="lbName">Nome</label>
+            <input id="lbName" type="text" placeholder="O teu nome" required autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label for="lbEmail">E-mail</label>
+            <input id="lbEmail" type="email" placeholder="o-teu-email@exemplo.com" required autocomplete="email">
+          </div>
+          <p id="lbFeedback" class="lb-feedback"></p>
+          <div class="modal-actions">
+            <button type="submit" class="modal-submit">Submeter pontuação</button>
+            <a href="leaderboard.html" target="_blank" class="modal-link-btn">Ver leaderboard</a>
+          </div>
+        </form>
       </div>
     </div>
+  </div>
 
-    <!-- Firebase SDK (Compat version to keep scripts simple) -->
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-    <script src="assets/app/firebase-db.js"></script>
+  <!-- Firebase SDK (Compat version to keep scripts simple) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="assets/app/firebase-db.js"></script>
 
-    <script src="assets/exercises/01-fundamentos.js"></script>
-    <script src="assets/exercises/02-numeros.js"></script>
-    <script src="assets/exercises/03-ciclos.js"></script>
-    <script src="assets/exercises/04-donatello.js"></script>
-    <script src="assets/exercises/05-cifras-matematica.js"></script>
-    <script src="assets/exercises/06-estruturas.js"></script>
-    <script src="assets/exercises/07-interativo.js"></script>
-    <script src="assets/exercises/08-desafios.js"></script>
-    <script src="assets/app/utils.js"></script>
-    <script src="assets/app/curriculum.js"></script>
-    <script src="assets/app/preview.js"></script>
-    <script src="assets/app/visual-tools.js"></script>
-    <script src="assets/app/terminal.js"></script>
-    <script src="assets/main.js"></script>
-  </body>
+  <script src="assets/exercises/01-fundamentos.js"></script>
+  <script src="assets/exercises/02-numeros.js"></script>
+  <script src="assets/exercises/03-ciclos.js"></script>
+  <script src="assets/exercises/04-donatello.js"></script>
+  <script src="assets/exercises/05-cifras-matematica.js"></script>
+  <script src="assets/exercises/06-estruturas.js"></script>
+  <script src="assets/exercises/07-interativo.js"></script>
+  <script src="assets/exercises/08-desafios.js"></script>
+  <script src="assets/app/utils.js"></script>
+  <script src="assets/app/curriculum.js"></script>
+  <script src="assets/app/preview.js"></script>
+  <script src="assets/app/visual-tools.js"></script>
+  <script src="assets/app/terminal.js"></script>
+  <script src="assets/main.js"></script>
+</body>
+
 </html>

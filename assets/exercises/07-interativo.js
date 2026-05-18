@@ -12,24 +12,24 @@ window.exerciseTopics.push({
       terminal: true,
       explanation: [
         'Este exercício é um jogo. O computador escolhe um número secreto e tu tens de adivinhar. Em cada tentativa, recebes uma dica: "muito alto" ou "muito baixo".',
-        'No terminal original, este tipo de jogo usava o teclado diretamente. Aqui, a função lerInput faz o mesmo: o programa pára e espera que escrevas algo no terminal abaixo do painel.',
-        'A palavra await antes de lerInput significa "espera pela resposta". Sem ela, o programa continuaria sem esperar. Com ela, o ciclo while repete e espera em cada volta.',
+        'No terminal original, este tipo de jogo usava o teclado diretamente. Aqui, a função [lerInput] faz o mesmo: o programa pára e espera que escrevas algo no terminal abaixo do painel.',
+        'A palavra [await] antes de [lerInput] significa "espera pela resposta". Sem ela, o programa continuaria sem esperar. Com ela, o ciclo [while] repete e espera em cada volta.',
       ],
       instructions: [
-        'O número secreto já está na variável segredo (entre 1 e 50).',
-        'Dentro do while, usa await lerInput("...") para pedir um palpite.',
-        'Converte o texto para número com Number().',
+        'O número secreto já está na variável [segredo] (entre 1 e 50).',
+        'Dentro do [while], usa [await lerInput("...")] para pedir um palpite.',
+        'Converte o texto para número com [Number()].',
         'Se o palpite for menor, escreve "Muito baixo!". Se for maior, escreve "Muito alto!".',
-        'Se acertar, escreve uma mensagem de vitória e muda acertou para true.',
+        'Se acertar, escreve uma mensagem de vitória e muda [acertou] para true.',
       ],
       observation: 'Usa o terminal abaixo do painel visual para interagir com o programa. O jogo termina quando acertares.',
-      hint: 'Dentro do while, pede um número, compara com o segredo usando if / else if / else, e atualiza acertou quando o palpite estiver certo.',
+      hint: 'Dentro do [while], pede um número, compara com o [segredo] usando [if] / [else if] / [else], e atualiza [acertou] quando o palpite estiver certo.',
       starter: 'const segredo: number = numeroSecreto(1, 50);\nlet acertou: boolean = false;\nlet tentativas: number = 0;\n\nescrever("Pensei num número entre 1 e 50. Tenta adivinhar!");\n\nwhile (!acertou) {\n  const texto = await lerInput("Qual é o teu palpite?");\n  const palpite: number = Number(texto);\n  tentativas = tentativas + 1;\n\n  // compara o palpite com o segredo aqui\n  // usa escrever() para dar dicas\n}\n\nescrever("Precisaste de " + tentativas + " tentativas.");',
       solution: 'const segredo: number = numeroSecreto(1, 50);\nlet acertou: boolean = false;\nlet tentativas: number = 0;\n\nescrever("Pensei num número entre 1 e 50. Tenta adivinhar!");\n\nwhile (!acertou) {\n  const texto = await lerInput("Qual é o teu palpite?");\n  const palpite: number = Number(texto);\n  tentativas = tentativas + 1;\n\n  if (palpite < segredo) {\n    escrever("Muito baixo! Tenta um número maior.");\n  } else if (palpite > segredo) {\n    escrever("Muito alto! Tenta um número menor.");\n  } else {\n    escrever("Acertaste! O número era " + segredo + "!");\n    acertou = true;\n  }\n}\n\nescrever("Precisaste de " + tentativas + " tentativas.");',
       html: `
         <main class="stage">
           <section class="panel dark">
-            <h1>🎯 Adivinhar o número</h1>
+            <h2>🎯 Adivinhar o número</h2>
             <p id="status">A pensar num número…</p>
             <div class="big-value" id="attempts">0</div>
             <p>tentativas</p>
@@ -80,23 +80,23 @@ window.exerciseTopics.push({
       terminal: true,
       explanation: [
         'Até agora, os números estavam escritos diretamente no código. Mas um programa de verdade recebe dados de quem o usa.',
-        'A função lerInput devolve sempre texto. Para fazer contas, precisamos de converter esse texto num número com Number().',
-        'Este padrão — pedir, converter, calcular — é muito comum em qualquer linguagem de programação.',
+        'A função lerInput devolve sempre texto. Para fazer contas, precisamos de converter esse texto num número com [Number()].',
+        'Este padrão (pedir, converter, calcular) é muito comum em qualquer linguagem de programação.',
       ],
       instructions: [
-        'Pede dois números ao utilizador com await lerInput.',
-        'Converte os textos para números com Number().',
-        'Calcula a soma e mostra com mostrarResultado.',
-        'Usa escrever() para mostrar uma mensagem com o resultado.',
+        'Pede dois números ao utilizador com [await lerInput()].',
+        'Converte os textos para números com [Number()].',
+        'Calcula a soma e mostra com [mostrarResultado()].',
+        'Usa [escrever()] para mostrar uma mensagem com o resultado.',
       ],
       observation: 'Escreve os números no terminal abaixo do painel. O resultado aparece no painel visual e no terminal.',
-      hint: 'lerInput devolve texto. Usa Number() para converter antes de somar.',
+      hint: '[lerInput] devolve texto. Usa [Number()] para converter antes de somar.',
       starter: 'const textoA = await lerInput("Escreve o primeiro número:");\nconst textoB = await lerInput("Escreve o segundo número:");\n\nconst a: number = Number(textoA);\nconst b: number = Number(textoB);\n\n// calcula e mostra o resultado',
       solution: 'const textoA = await lerInput("Escreve o primeiro número:");\nconst textoB = await lerInput("Escreve o segundo número:");\n\nconst a: number = Number(textoA);\nconst b: number = Number(textoB);\n\nconst soma: number = a + b;\nescrever("A soma de " + a + " + " + b + " = " + soma);\nmostrarResultado(soma);',
       html: `
         <main class="stage">
           <section class="panel">
-            <h1>Calculadora</h1>
+            <h2>Calculadora</h2>
             <p>Resultado:</p>
             <div class="big-value" id="result">?</div>
           </section>
@@ -127,18 +127,18 @@ window.exerciseTopics.push({
         'Este exercício mostra como combinar input do utilizador com uma função que transforma dados.',
       ],
       instructions: [
-        'Pede uma mensagem ao utilizador com await lerInput.',
-        'Chama cifrar(mensagem) para obter o texto cifrado.',
-        'Mostra o resultado com escrever() e mostrarCifra().',
+        'Pede uma mensagem ao utilizador com [await lerInput].',
+        'Chama [cifrar(mensagem)] para obter o texto cifrado.',
+        'Mostra o resultado com [escrever()] e [mostrarCifra()].',
       ],
       observation: 'Escreve qualquer texto no terminal. O painel mostra a versão cifrada.',
-      hint: 'Guarda o resultado de lerInput numa variável. Passa essa variável para cifrar.',
+      hint: 'Guarda o resultado de [lerInput] numa variável. Passa essa variável para [cifrar].',
       starter: 'function cifrar(texto: string): string {\n  let resultado: string = "";\n  for (const letra of texto) {\n    resultado += String.fromCharCode(letra.charCodeAt(0) + 13);\n  }\n  return resultado;\n}\n\n// pede a mensagem e mostra a cifra',
       solution: 'function cifrar(texto: string): string {\n  let resultado: string = "";\n  for (const letra of texto) {\n    resultado += String.fromCharCode(letra.charCodeAt(0) + 13);\n  }\n  return resultado;\n}\n\nconst mensagem = await lerInput("Escreve a tua mensagem secreta:");\nconst cifrada: string = cifrar(mensagem);\nescrever("Cifrada: " + cifrada);\nmostrarCifra(cifrada);',
       html: `
         <main class="stage">
           <section class="panel dark">
-            <h1>🔐 Cifra de César</h1>
+            <h2>🔐 Cifra de César</h2>
             <p>Mensagem original:</p>
             <p id="original" style="font-size:18px;font-weight:700;color:#60a5fa;">…</p>
             <p>Mensagem cifrada:</p>
@@ -182,16 +182,16 @@ window.exerciseTopics.push({
         'Quando o utilizador submeter o input, guarda-o numa variável e mostra um cartão personalizado usando esse input.',
         'Experimenta utilizar a função [escrever("")] para mostrar mensagens no terminal',
       ],
-      observation: 'O cartão deve mostrar o nome e uma frase descritiva. O importante é perceber que a função recebe valores que preparaste antes.' +
-        'Podes experimentar criar mais variáveis e concatená-las para criar mensagens mais complexas. Experimenta fazer const fraseCompleta = nome + " " + detalhe; e depois mostrar essa frase completa no cartão.',
-      hint: 'Usa [await lerInput()] para guardar o nome e um detalhe em variáveis, e passa essas variáveis para criarCartao().',
+      observation:
+        'Podes experimentar criar mais variáveis e concatená-las para criar mensagens mais complexas. Experimenta fazer [const fraseCompleta = nome + " " + detalhe;] e depois mostrar essa frase completa no cartão.',
+      hint: 'Usa [await lerInput()] para guardar o nome e um detalhe em variáveis, e passa essas variáveis para [criarCartao()].',
       starter: '//utilize a função [escrever("")] para mostrar mensagens no terminal;\nconst nome: string = await lerInput("Como te chamas?");\nconst detalhe: string = ""; //escreve aqui como pedir os detalhes\n\ncriarCartao(nome, detalhe);\n\nmudarCorCartao("#ffffff");\nmudarTamanhoNome(48);',
       solution: 'escrever("Olá!");\nconst nome: string = await lerInput("Como te chamas?");\nconst detalhe: string = await lerInput("Escreve um detalhe sobre ti:");\n\ncriarCartao(nome, detalhe);\n\nmudarCorCartao("#ffffff");\nmudarTamanhoNome(48);',
       html: `
         <main class="stage">
           <section class="panel">
             <p>Cartão</p>
-            <h1 id="name">Nome</h1>
+            <h2 id="name">Nome</h2>
             <p id="detail">Detalhe</p>
           </section>
         </main>

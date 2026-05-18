@@ -140,13 +140,11 @@ body {
 
 .exercise-item {
   width: 100%;
-  min-height: 70px;
+  min-height: 54px;
   padding: 10px 12px;
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr);
-  grid-template-areas:
-    "number title"
-    "number meta";
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas: "number title meta";
   column-gap: 10px;
   align-items: center;
   border: 1px solid #d7dfeb;
@@ -170,6 +168,10 @@ body {
   border-color: #2ca66f;
 }
 
+.exercise-item.failed {
+  border-color: #b42318;
+}
+
 .exercise-item span {
   grid-area: number;
   width: 34px;
@@ -188,6 +190,11 @@ body {
   color: #157347;
 }
 
+.exercise-item.failed span {
+  background: #fee2e2;
+  color: #b42318;
+}
+
 .exercise-item strong {
   grid-area: title;
   min-width: 0;
@@ -197,9 +204,16 @@ body {
 
 .exercise-item small {
   grid-area: meta;
-  margin-top: 4px;
-  color: #66758a;
-  font-weight: 700;
+  font-weight: 800;
+  font-size: 16px;
+}
+
+.exercise-item.done small {
+  color: #157347;
+}
+
+.exercise-item.failed small {
+  color: #b42318;
 }
 
 .lesson {
@@ -223,6 +237,35 @@ body {
   gap: 16px;
 }
 
+.briefing-actions {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.briefing-toggle {
+  width: 32px;
+  height: 32px;
+  min-height: 0;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 8px;
+  background: #e8eef7;
+  color: #42526b;
+  font-size: 18px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.briefing-toggle:hover {
+  background: #d1dae7;
+}
+
+.briefing.minimized #briefingContent {
+  display: none;
+}
+
 .eyebrow {
   margin: 0 0 6px;
   color: #0077b6;
@@ -244,6 +287,29 @@ body {
 .briefing ul {
   margin-bottom: 0;
   padding-left: 20px;
+}
+
+.briefing code {
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  background: #101827;
+  border: 1px solid #1f2937;
+  padding: 2.5px 6.5px;
+  border-radius: 5px;
+  color: #e7edf7;
+  font-size: 13.5px;
+  font-weight: 600;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes roll {
+  0% { transform: rotate(0deg) scale(1); }
+  50% { transform: rotate(180deg) scale(1.2); }
+  100% { transform: rotate(360deg) scale(1); }
+}
+
+.rolling {
+  animation: roll 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-block;
 }
 
 .status-badge {
@@ -294,6 +360,7 @@ body {
 
 .editor-shell,
 .preview-shell {
+  max-height: 780px;
   min-height: 0;
   display: flex;
   flex-direction: column;
@@ -328,18 +395,79 @@ textarea {
   font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
 
-#editor {
+.code-editor {
   flex: 1;
   min-height: 420px;
+  position: relative;
+  overflow: hidden;
+  background: #101827;
+}
+
+.editor-highlight,
+#editor {
+  position: absolute;
+  inset: 0;
   width: 100%;
   padding: 16px;
+  margin: 0;
   border: 0;
-  resize: none;
-  outline: none;
-  background: #101827;
-  color: #e7edf7;
   font-size: 15px;
   line-height: 1.55;
+  tab-size: 2;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.editor-highlight {
+  overflow: hidden;
+  pointer-events: none;
+  color: #e7edf7;
+}
+
+#editor {
+  height: 100%;
+  max-height: 750px;
+  resize: none;
+  outline: none;
+  background: transparent;
+  color: transparent;
+  caret-color: #f8fafc;
+}
+
+#editor::selection {
+  background: rgba(96, 165, 250, 0.32);
+}
+
+.syntax-keyword {
+  color: #7dd3fc;
+  font-weight: 700;
+}
+
+.syntax-type {
+  color: #c4b5fd;
+}
+
+.syntax-string {
+  color: #fbbf24;
+}
+
+.syntax-number {
+  color: #86efac;
+}
+
+.syntax-comment {
+  color: #94a3b8;
+  font-style: italic;
+}
+
+.syntax-function {
+  color: #67e8f9;
+}
+
+.syntax-operator {
+  color: #f0abfc;
 }
 
 .visual-tools {
@@ -347,8 +475,8 @@ textarea {
   display: grid;
   gap: 10px;
   border-top: 1px solid #233047;
-  background: #162033;
-  color: #e7edf7;
+  background: #f8fafc;
+  color: #162033;
 }
 
 .visual-tools[hidden] {
@@ -366,12 +494,6 @@ textarea {
   font-weight: 800;
 }
 
-.visual-tools-note {
-  color: #9fb0c7;
-  font-size: 12px;
-  font-weight: 700;
-}
-
 .visual-control-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
@@ -385,7 +507,7 @@ textarea {
 }
 
 .visual-control label {
-  color: #cbd5e1;
+  color: #162033;
   font-size: 12px;
   font-weight: 800;
 }
@@ -394,10 +516,10 @@ textarea {
 .visual-control select {
   width: 100%;
   min-height: 34px;
-  border: 1px solid #334155;
-  border-radius: 6px;
-  background: #0f1729;
-  color: #f8fafc;
+  border: 2px solid #e5e5e5;
+  border-radius: 2px;
+  background: #d1dae7;
+  color: #e5e5e5;
   font: inherit;
 }
 
@@ -545,8 +667,15 @@ button:hover {
 }
 
 @keyframes consolePulse {
-  0%, 100% { opacity: 0.4; }
-  50% { opacity: 1; }
+
+  0%,
+  100% {
+    opacity: 0.4;
+  }
+
+  50% {
+    opacity: 1;
+  }
 }
 
 .console-output {
@@ -575,8 +704,15 @@ button:hover {
 }
 
 @keyframes consoleFadeIn {
-  from { opacity: 0; transform: translateY(4px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .console-input-row {
@@ -680,8 +816,13 @@ button:hover {
 }
 
 @keyframes modalFadeIn {
-  from { opacity: 0; }
-  to   { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
 }
 
 .modal-box {
@@ -694,8 +835,15 @@ button:hover {
 }
 
 @keyframes modalSlideUp {
-  from { opacity: 0; transform: translateY(24px) scale(0.97); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 .modal-header {
@@ -720,13 +868,13 @@ button:hover {
   display: grid;
   place-items: center;
   border-radius: 999px;
-  background: rgba(255,255,255,0.18);
+  background: rgba(255, 255, 255, 0.18);
   font-size: 18px;
   line-height: 1;
 }
 
 .modal-close:hover {
-  background: rgba(255,255,255,0.32);
+  background: rgba(255, 255, 255, 0.32);
 }
 
 .modal-body {
@@ -850,13 +998,14 @@ button:hover {
     grid-template-rows: minmax(360px, 0.9fr) minmax(420px, 1fr);
   }
 
-  #editor,
+  .code-editor,
   #preview {
     min-height: 320px;
   }
 }
 
 @media (max-width: 760px) {
+
   .topbar,
   .workspace,
   .lesson {

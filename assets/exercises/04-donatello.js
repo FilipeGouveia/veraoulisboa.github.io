@@ -151,11 +151,11 @@ window.exerciseTopics.push({
         'A tartaruga move-se no ecrã para que possas ver a sequência. Se a figura não fechar, há provavelmente um erro no ângulo ou no número de repetições.',
       ],
       instructions: [
-        'Usa um ciclo for para repetir 4 vezes.',
+        'Usa um ciclo [for] para repetir 4 vezes.',
         'Em cada repetição, anda 120 pixeis.',
         'Depois roda 90 graus.',
-        'Se quiseres, muda a posição inicial com donatello.position(x, y).',
-        'Experimenta donatello.speed("lento"), "normal" ou "rapido".',
+        'Se quiseres, muda a posição inicial com [donatello.position(x, y)].',
+        'Experimenta [donatello.speed("lento"), "normal" ou "rapido"].',
         'Altera a cor e a grossura da linha nos controlos visuais.',
       ],
       observation: 'A figura deve formar quatro lados iguais. A animação mostra a ordem das instruções.',
@@ -165,7 +165,7 @@ window.exerciseTopics.push({
       html: `
         <main class="stage">
           <section class="panel">
-            <h1>Donatello</h1>
+            <h2>Donatello</h2>
             <canvas id="canvas" width="520" height="360"></canvas>
           </section>
         </main>
@@ -207,7 +207,7 @@ window.exerciseTopics.push({
         'Isto mostra uma ideia importante: muitas formas complexas podem ser construídas com instruções simples repetidas muitas vezes.',
       ],
       instructions: [
-        'Usa um ciclo for com 360 repetições.',
+        'Usa um ciclo [for] com 360 repetições.',
         'Em cada volta, anda 1 pixel.',
         'Em cada volta, roda 1 grau.',
         'Experimenta a cor e a grossura da linha para comparar estilos.',
@@ -219,7 +219,7 @@ window.exerciseTopics.push({
       html: `
         <main class="stage">
           <section class="panel">
-            <h1>Circunferência</h1>
+            <h2>Circunferência</h2>
             <canvas id="canvas" width="520" height="360"></canvas>
           </section>
         </main>
@@ -257,13 +257,13 @@ window.exerciseTopics.push({
       points: 30,
       explanation: [
         'O número 8 pode ser pensado como duas voltas. Para a primeira volta, a tartaruga roda numa direção. Para a segunda, roda na direção contrária.',
-        'Este exercício mostra que mudar apenas uma instrução pode mudar muito o desenho final. right e left são parecidos, mas têm sentidos opostos.',
+        'Este exercício mostra que mudar apenas uma instrução pode mudar muito o desenho final. [right] e [left] são parecidos, mas têm sentidos opostos.',
         'Também reforça a ideia de decompor um problema: em vez de “desenha um 8”, pensamos “desenha uma volta, depois desenha outra volta”.',
       ],
       instructions: [
-        'Usa pelo menos um ciclo for.',
-        'Faz uma parte com donatello.right.',
-        'Faz outra parte com donatello.left.',
+        'Usa pelo menos um ciclo [for].',
+        'Faz uma parte com [donatello.right].',
+        'Faz outra parte com [donatello.left].',
         'Usa os controlos para mudar a linha sem perder a lógica do desenho.',
       ],
       observation: 'Deves ver duas voltas ligadas. A figura pode variar, mas tem de usar os dois sentidos de rotação.',
@@ -273,7 +273,7 @@ window.exerciseTopics.push({
       html: `
         <main class="stage">
           <section class="panel">
-            <h1>Oito</h1>
+            <h2>Oito</h2>
             <canvas id="canvas" width="520" height="360"></canvas>
           </section>
         </main>
@@ -312,13 +312,13 @@ window.exerciseTopics.push({
       points: 35,
       explanation: [
         'Agora o desafio é fazer o 8 com um único ciclo. Para isso, o ciclo continua a repetir, mas lá dentro existe uma decisão.',
-        'Durante a primeira metade das repetições, a tartaruga roda para um lado. Durante a segunda metade, roda para o outro. Essa escolha é feita com if e else.',
+        'Durante a primeira metade das repetições, a tartaruga roda para um lado. Durante a segunda metade, roda para o outro. Essa escolha é feita com [if] e [else].',
         'Esta é uma ideia muito comum em programação: repetir muitas vezes, mas mudar o comportamento dependendo do momento ou do valor atual.',
       ],
       instructions: [
-        'Usa apenas um ciclo for.',
-        'Dentro do ciclo, usa if.',
-        'Na primeira parte usa right; na segunda parte usa left.',
+        'Usa apenas um ciclo [for].',
+        'Dentro do ciclo, usa [if].',
+        'Na primeira parte usa [right]; na segunda parte usa [left].',
         'Ajusta a cor e a grossura para veres que desenho e estilo são instruções diferentes.',
       ],
       observation: 'A validação procura um ciclo, uma decisão e muitos movimentos.',
@@ -328,7 +328,7 @@ window.exerciseTopics.push({
       html: `
         <main class="stage">
           <section class="panel">
-            <h1>Oito com decisão</h1>
+            <h2>Oito com decisão</h2>
             <canvas id="canvas" width="520" height="360"></canvas>
           </section>
         </main>

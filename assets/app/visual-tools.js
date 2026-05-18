@@ -41,8 +41,7 @@ window.VisualTools = (() => {
     tools.hidden = false;
     tools.innerHTML = `
       <div class="visual-tools-header">
-        <span class="visual-tools-title">Exploração visual</span>
-        <span class="visual-tools-note">muda o código automaticamente</span>
+        <span class="visual-tools-title">Configurações Visuais</span>
       </div>
       <div class="visual-control-grid">
         ${controls.map((control, index) => renderControl(control, index, code)).join('')}

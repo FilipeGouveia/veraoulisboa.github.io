@@ -36,7 +36,11 @@ window.TerminalPanel = (() => {
     line.className = 'console-line ' + type;
     line.textContent = text;
     output.appendChild(line);
-    output.scrollTop = output.scrollHeight;
+
+    // Defer scrolling to ensure DOM has updated
+    requestAnimationFrame(() => {
+      output.scrollTop = output.scrollHeight;
+    });
   }
 
   function showInput() {

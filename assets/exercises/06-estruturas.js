@@ -14,8 +14,8 @@ window.exerciseTopics.push({
         'Neste exercício vais criar nós com posições no ecrã e depois criar ligações entre eles. O objetivo é perceber que a estrutura do problema pode ser desenhada.',
       ],
       instructions: [
-        'Cria pelo menos 4 nós com adicionarNo.',
-        'Cria pelo menos 3 ligações com ligar.',
+        'Cria pelo menos 4 nós com [adicionarNo].',
+        'Cria pelo menos 3 ligações com [ligar].',
         'Observa como as arestas unem os nós.',
         'Arrasta um nó e repara como os outros se ajustam com a física do grafo.',
         'Muda a cor e o tamanho dos nós para veres a representação gráfica mudar no código.',
@@ -27,7 +27,7 @@ window.exerciseTopics.push({
       html: `
         <main class="stage">
           <section class="panel">
-            <h1>Grafo</h1>
+            <h2>Grafo</h2>
             <div class="graph-area" id="graph"></div>
           </section>
         </main>
@@ -202,8 +202,8 @@ window.exerciseTopics.push({
         'Repara que uma lista aqui não é só um conjunto de coisas. A ordem importa. Trocar a ordem pode significar outro caminho.',
       ],
       instructions: [
-        'Chama criarMapa() para desenhar o grafo inicial.',
-        'Usa marcarCaminho com a lista ["A", "C", "D"].',
+        'Chama [criarMapa] para desenhar o grafo inicial.',
+        'Usa [marcarCaminho] com a lista ["A", "C", "D"].',
         'Arrasta os nós para veres o caminho acompanhar a física do grafo.',
         'Ajusta a cor dos nós e o tamanho do destaque para comparar dados e visualização.',
       ],
@@ -214,7 +214,7 @@ window.exerciseTopics.push({
       html: `
         <main class="stage">
           <section class="panel">
-            <h1>Caminho</h1>
+            <h2>Caminho</h2>
             <div class="graph-area" id="graph"></div>
           </section>
         </main>
@@ -394,9 +394,9 @@ window.exerciseTopics.push({
         'A física do grafo ajuda a ver esta ideia: os nós ligados aproximam-se, os nós pesados puxam mais, e a rede encontra uma forma equilibrada.',
       ],
       instructions: [
-        'Cria pelo menos 4 nós com adicionarNo(nome, peso, x, y).',
+        'Cria pelo menos 4 nós com [adicionarNo(nome, peso, x, y)].',
         'Usa pesos diferentes, por exemplo 1, 3, 5 e 8.',
-        'Cria pelo menos 3 ligações com ligar.',
+        'Cria pelo menos 3 ligações com [ligar].',
         'Arrasta os nós para sentires como os pesos mudam o movimento da rede.',
       ],
       observation: 'Nós com peso maior aparecem maiores e puxam os outros com mais força.',
@@ -406,7 +406,7 @@ window.exerciseTopics.push({
       html: `
         <main class="stage">
           <section class="panel">
-            <h1>Rede com pesos</h1>
+            <h2>Rede com pesos</h2>
             <div class="graph-area" id="graph"></div>
           </section>
         </main>
@@ -570,25 +570,25 @@ window.exerciseTopics.push({
         'Neste exercício vais escrever a lista, escolher o alvo e mostrar os dois caminhos. Assim consegues ver a rota tomada pela lista e pela árvore para a mesma opção.',
       ],
       instructions: [
-        'Cria uma lista valores do tipo number[] com pelo menos 5 números diferentes.',
-        'Chama mostrarLista(valores).',
-        'Chama criarArvore(valores) para construir a árvore a partir da tua lista.',
-        'Cria uma variável alvo com um número que exista na lista.',
-        'Escreve a função procurarNaLista(lista, alvo).',
-        'Dentro dessa função, usa um ciclo for e chama visitarLista(i, valor) para mostrar cada passo.',
-        'Quando encontrares o alvo, pára a procura.',
-        'Chama procurarNaArvore(alvo).',
+        'Cria uma lista [valores] do tipo [number[]] com pelo menos 5 números diferentes.',
+        'Chama [mostrarLista(valores)].',
+        'Chama [criarArvore(valores)] para construir a árvore a partir da tua lista.',
+        'Cria uma variável [alvo] com um número que exista na lista.',
+        'Escreve a função [procurarNaLista(lista, alvo)].',
+        'Dentro dessa função, usa um ciclo for e chama [visitarLista(i, valor)] para mostrar cada passo.',
+        'Quando encontrares o [alvo], pára a procura.',
+        'Chama [procurarNaArvore(alvo)].',
         'Arrasta os nós da árvore para veres as ligações reagirem com física simples.',
         'Experimenta o tamanho dos nós da árvore para veres a visualização sem alterar o algoritmo.',
       ],
       observation: 'A lista destaca os valores visitados por ordem. A árvore destaca o caminho que segue com decisões de menor ou maior.',
-      hint: 'Dentro de procurarNaLista, percorre a lista com for. Em cada volta, guarda lista[i] numa variável valor, chama visitarLista(i, valor), e usa if para parar quando valor === alvo.',
+      hint: 'Dentro de [procurarNaLista], percorre a lista com [for]. Em cada volta, guarda [lista[i]] numa variável [valor], chama [visitarLista(i, valor)], e usa [if] para parar quando [valor] === [alvo].',
       starter: 'const valores: number[] = [];\nconst alvo: number = 0;\n\nfunction procurarNaLista(lista: number[], alvo: number): void {\n  iniciarProcuraLista(alvo);\n\n  // percorre a lista aqui\n  // chama visitarLista(i, valor) em cada passo\n\n  concluirProcuraLista();\n}\n\n// mostra a lista e cria a árvore\n\n// procura o alvo nas duas estruturas\n\nmudarTamanhoNos(54);',
       solution: 'const valores: number[] = [8, 3, 10, 1, 6, 14, 4];\nconst alvo: number = 6;\n\nfunction procurarNaLista(lista: number[], alvo: number): void {\n  iniciarProcuraLista(alvo);\n\n  for (let i = 0; i < lista.length; i++) {\n    const valor: number = lista[i];\n    visitarLista(i, valor);\n\n    if (valor === alvo) {\n      break;\n    }\n  }\n\n  concluirProcuraLista();\n}\n\nmostrarLista(valores);\ncriarArvore(valores);\nprocurarNaLista(valores, alvo);\nprocurarNaArvore(alvo);\n\nmudarTamanhoNos(54);',
       html: `
         <main class="stage">
           <section class="panel">
-            <h1>Lista vs árvore</h1>
+            <h2>Lista vs árvore</h2>
             <p>A lista está organizada assim:</p>
             <ul class="structured-list" id="value-list"></ul>
             <p id="list-result">Lista: ainda não procurou.</p>

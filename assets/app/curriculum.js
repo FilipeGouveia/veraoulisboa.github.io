@@ -8,7 +8,7 @@ window.Curriculum = (() => {
     {
       id: 'numeros',
       title: 'Números, Contas e Input',
-      exercises: ['numeros-precedencia', 'numeros-variavel', 'numeros-divisao', 'numeros-divisao-zero', 'calculadora-interativa'],
+      exercises: ['numeros-precedencia', 'numeros-variavel', 'numeros-divisao', 'numeros-com-if', 'numeros-divisao-zero', 'calculadora-interativa'],
     },
     {
       id: 'ciclos',
