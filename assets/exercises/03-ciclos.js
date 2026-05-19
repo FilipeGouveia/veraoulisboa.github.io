@@ -99,7 +99,7 @@ window.exerciseTopics.push({
         'Mostra esse valor com [mostrarDado].',
         'Muda a cor e o tamanho do dado para perceberes como o estilo também pode vir do código.',
       ],
-      observation: 'Se executares várias vezes, o número pode mudar. Isso é esperado.',
+      observation: 'Se executares várias vezes, o número pode mudar. Isso é esperado. Chame a função [adicionarDado(...) que recebe um número e veja o que acontece.]',
       hint: 'Usa [numeroAleatorio] com mínimo 1 e máximo 6. Guarda o resultado numa variável antes de o mostrar.',
       starter: '// cria a variável dado aqui\n// depois mostra o valor\n\nmudarCorDado("#0077b6");\nmudarTamanhoDado(78);',
       solution: 'const dado: number = numeroAleatorio(1, 6);\nmostrarDado(dado);\nmudarCorDado("#0077b6");\nmudarTamanhoDado(78);',
@@ -138,7 +138,7 @@ window.exerciseTopics.push({
             dieElem.textContent = face;
             void dieElem.offsetWidth;
             dieElem.classList.add('rolling');
-          }, 2000);
+          }, 1000);
 
           window.exerciseState.die = dieValue;
           window.exerciseState.dice = [dieValue];
@@ -172,7 +172,7 @@ window.exerciseTopics.push({
             dieElem.textContent = face;
             void dieElem.offsetWidth;
             dieElem.classList.add('rolling');
-          }, 2000);
+          }, 1000);
 
           if (!window.exerciseState.dice) window.exerciseState.dice = [];
           window.exerciseState.dice.push(dieValue);
