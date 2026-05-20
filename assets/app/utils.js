@@ -65,10 +65,17 @@ window.AppUtils = {
 
   stripTypeScript(code) {
     return code
+      // 1. Remove object type annotations like ": { x: number; y: number }" before "=", ";", or ","
+      .replace(/:\s*\{\s*[\s\S]*?\}\s*(=|;|,)/g, '$1')
+      // 2. Remove standard array types like ": string[]"
       .replace(/:\s*\w+(?:\[\])+/g, '')
+      // 3. Remove function return type annotations like "): Point" or "): void"
+      .replace(/\)\s*:\s*\w+\b/g, ')')
+      // 4. Remove primitive type annotations like ": string", ": number"
       .replace(/:\s*(string|number|boolean|unknown|any|void)\b/g, '')
-      .replace(/\)\s*:\s*(void|string|number|boolean|unknown|any)\s*{/g, ') {')
+      // 5. Remove interface declarations
       .replace(/\binterface\s+\w+\s*{[\s\S]*?}\s*/g, '')
+      // 6. Remove type alias declarations
       .replace(/\btype\s+\w+\s*=\s*[^;]+;/g, '');
   },
 };

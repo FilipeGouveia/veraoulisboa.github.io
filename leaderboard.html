@@ -1,13 +1,19 @@
 <!DOCTYPE html>
 <html lang="pt">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Leaderboard — Verão ULisboa</title>
-  <meta name="description" content="Leaderboard do laboratório de programação Verão ULisboa. Vê as pontuações da turma.">
+  <meta name="description"
+    content="Leaderboard do laboratório de programação Verão ULisboa. Vê as pontuações da turma.">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap">
   <style>
-    *, *::before, *::after { box-sizing: border-box; }
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
@@ -30,15 +36,26 @@
       gap: 20px;
     }
 
-    header img { width: 130px; max-width: 28vw; }
+    header img {
+      width: 130px;
+      max-width: 28vw;
+    }
 
-    .header-text h1 { margin: 0 0 4px; font-size: clamp(18px, 3vw, 26px); }
-    .header-text p  { margin: 0; color: rgba(255,255,255,0.75); font-size: 14px; }
+    .header-text h1 {
+      margin: 0 0 4px;
+      font-size: clamp(18px, 3vw, 26px);
+    }
+
+    .header-text p {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.75);
+      font-size: 14px;
+    }
 
     .back-link {
       padding: 10px 18px;
       border-radius: 10px;
-      background: rgba(255,255,255,0.14);
+      background: rgba(255, 255, 255, 0.14);
       color: white;
       font-weight: 700;
       font-size: 14px;
@@ -46,7 +63,10 @@
       transition: background 0.15s;
       white-space: nowrap;
     }
-    .back-link:hover { background: rgba(255,255,255,0.25); }
+
+    .back-link:hover {
+      background: rgba(255, 255, 255, 0.25);
+    }
 
     /* ── Main content ── */
     main {
@@ -70,7 +90,7 @@
       padding: 20px 16px;
       border-radius: 14px;
       background: white;
-      box-shadow: 0 2px 12px rgba(0,43,69,0.08);
+      box-shadow: 0 2px 12px rgba(0, 43, 69, 0.08);
       text-align: center;
       display: grid;
       gap: 6px;
@@ -106,7 +126,7 @@
     .lb-card {
       background: white;
       border-radius: 16px;
-      box-shadow: 0 2px 16px rgba(0,43,69,0.09);
+      box-shadow: 0 2px 16px rgba(0, 43, 69, 0.09);
       overflow: hidden;
     }
 
@@ -117,7 +137,7 @@
 
     .lb-table thead tr {
       background: #002b45;
-      color: rgba(255,255,255,0.8);
+      color: rgba(255, 255, 255, 0.8);
     }
 
     .lb-table th {
@@ -130,15 +150,22 @@
     }
 
     .lb-table th:last-child,
-    .lb-table td:last-child { text-align: right; }
+    .lb-table td:last-child {
+      text-align: right;
+    }
 
     .lb-table tbody tr {
       border-bottom: 1px solid #e8f0f8;
       transition: background 0.12s;
     }
 
-    .lb-table tbody tr:last-child { border-bottom: none; }
-    .lb-table tbody tr:hover { background: #f5f9ff; }
+    .lb-table tbody tr:last-child {
+      border-bottom: none;
+    }
+
+    .lb-table tbody tr:hover {
+      background: #f5f9ff;
+    }
 
     .lb-table td {
       padding: 14px 16px;
@@ -186,13 +213,29 @@
     }
 
     /* Highlight top 3 */
-    .lb-table tbody tr:nth-child(1) { background: #fffbeb; }
-    .lb-table tbody tr:nth-child(2) { background: #f8fafc; }
-    .lb-table tbody tr:nth-child(3) { background: #fef7f0; }
+    .lb-table tbody tr:nth-child(1) {
+      background: #fffbeb;
+    }
 
-    .lb-table tbody tr:nth-child(1):hover { background: #fef3c7; }
-    .lb-table tbody tr:nth-child(2):hover { background: #f0f5fb; }
-    .lb-table tbody tr:nth-child(3):hover { background: #fde8d5; }
+    .lb-table tbody tr:nth-child(2) {
+      background: #f8fafc;
+    }
+
+    .lb-table tbody tr:nth-child(3) {
+      background: #fef7f0;
+    }
+
+    .lb-table tbody tr:nth-child(1):hover {
+      background: #fef3c7;
+    }
+
+    .lb-table tbody tr:nth-child(2):hover {
+      background: #f0f5fb;
+    }
+
+    .lb-table tbody tr:nth-child(3):hover {
+      background: #fde8d5;
+    }
 
     .empty-state {
       padding: 48px 24px;
@@ -200,14 +243,21 @@
       color: #66758a;
     }
 
-    .empty-state p { margin: 0 0 8px; font-size: 16px; font-weight: 600; }
-    .empty-state small { font-size: 14px; }
+    .empty-state p {
+      margin: 0 0 8px;
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .empty-state small {
+      font-size: 14px;
+    }
 
     /* ── Submit form ── */
     .submit-card {
       background: white;
       border-radius: 16px;
-      box-shadow: 0 2px 16px rgba(0,43,69,0.09);
+      box-shadow: 0 2px 16px rgba(0, 43, 69, 0.09);
       overflow: hidden;
     }
 
@@ -217,8 +267,16 @@
       color: white;
     }
 
-    .submit-card-header h2 { margin: 0; font-size: 18px; }
-    .submit-card-header p  { margin: 6px 0 0; font-size: 14px; color: rgba(255,255,255,0.8); }
+    .submit-card-header h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .submit-card-header p {
+      margin: 6px 0 0;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.8);
+    }
 
     .submit-form {
       padding: 24px;
@@ -257,7 +315,7 @@
 
     .fg input:focus {
       border-color: #0077b6;
-      box-shadow: 0 0 0 3px rgba(0,119,182,0.15);
+      box-shadow: 0 0 0 3px rgba(0, 119, 182, 0.15);
     }
 
     .fg input[readonly] {
@@ -286,7 +344,10 @@
       justify-self: start;
     }
 
-    .submit-btn:hover { background: linear-gradient(135deg, #0090d9, #0077b6); transform: translateY(-1px); }
+    .submit-btn:hover {
+      background: linear-gradient(135deg, #0090d9, #0077b6);
+      transform: translateY(-1px);
+    }
 
     #formFeedback {
       min-height: 1.4em;
@@ -300,265 +361,342 @@
       padding: 12px 20px;
       text-align: center;
       background: #002b45;
-      color: rgba(255,255,255,0.7);
+      color: rgba(255, 255, 255, 0.7);
       font-size: 13px;
     }
 
-    footer a { color: #60a5fa; }
+    footer a {
+      color: #60a5fa;
+    }
 
     @media (max-width: 640px) {
-      header { grid-template-columns: 1fr auto; }
-      header img { display: none; }
-      .form-row { grid-template-columns: 1fr; }
+      header {
+        grid-template-columns: 1fr auto;
+      }
+
+      header img {
+        display: none;
+      }
+
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+
       .lb-table th:nth-child(4),
-      .lb-table td:nth-child(4) { display: none; }
+      .lb-table td:nth-child(4) {
+        display: none;
+      }
     }
   </style>
 </head>
+
 <body>
 
-<header>
-  <img src="https://ciencias.ulisboa.pt/sites/default/files/Ciencias_Logo_Azul-02.png" alt="Logo FCUL">
-  <div class="header-text">
-    <h1>🏆 Leaderboard</h1>
-    <p>Verão ULisboa — Laboratório de Programação</p>
-  </div>
-  <a href="index.html" class="back-link">← Voltar aos exercícios</a>
-</header>
+  <header>
+    <img src="logo.svg" alt="Website Logo">
+    <div class="header-text">
+      <h1>🏆 Leaderboard</h1>
+      <p>Verão ULisboa — Laboratório de Programação</p>
+    </div>
+    <a href="index.html" class="back-link">← Voltar aos exercícios</a>
+  </header>
 
-<main>
-  <!-- Summary stats -->
-  <div class="hero-stats" id="heroStats">
-    <div class="stat-card">
-      <span class="stat-card-value" id="statParticipants">0</span>
-      <span class="stat-card-label">Participantes</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-card-value" id="statTopScore">—</span>
-      <span class="stat-card-label">Melhor Pontuação</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-card-value" id="statAvgScore">—</span>
-      <span class="stat-card-label">Média de Pontos</span>
-    </div>
-    <div class="stat-card">
-      <span class="stat-card-value" id="statTopCompleted">—</span>
-      <span class="stat-card-label">Mais Exercícios</span>
-    </div>
-  </div>
-
-  <!-- Ranking table -->
-  <div>
-    <p class="section-title">📊 Classificação</p>
-    <div class="lb-card" id="lbCard">
-      <div class="empty-state" id="emptyState">
-        <p>Ainda não há pontuações.</p>
-        <small>Sê o primeiro a submeter a tua pontuação!</small>
+  <main>
+    <!-- Summary stats -->
+    <div class="hero-stats" id="heroStats">
+      <div class="stat-card">
+        <span class="stat-card-value" id="statParticipants">0</span>
+        <span class="stat-card-label">Participantes</span>
       </div>
-      <table class="lb-table" id="lbTable" hidden>
-        <thead>
-          <tr>
-            <th>#</th>
-            <th>Nome</th>
-            <th>Exercícios</th>
-            <th>Tempo</th>
-            <th>Pontuação</th>
-          </tr>
-        </thead>
-        <tbody id="lbBody"></tbody>
-      </table>
+      <div class="stat-card">
+        <span class="stat-card-value" id="statTopScore">—</span>
+        <span class="stat-card-label">Melhor Pontuação</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card-value" id="statAvgScore">—</span>
+        <span class="stat-card-label">Média de Pontos</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-card-value" id="statTopCompleted">—</span>
+        <span class="stat-card-label">Mais Exercícios</span>
+      </div>
     </div>
-  </div>
 
-  <!-- Submit form -->
-  <div class="submit-card">
-    <div class="submit-card-header">
-      <h2>Submeter Pontuação</h2>
-      <p>A tua pontuação é carregada automaticamente do browser.</p>
-    </div>
-    <form class="submit-form" id="submitForm" onsubmit="handleFormSubmit(event)">
-      <div class="form-row">
-        <div class="fg">
-          <label for="sbName">Nome</label>
-          <input id="sbName" type="text" placeholder="O teu nome" required autocomplete="name">
-        </div>
-        <div class="fg">
-          <label for="sbEmail">E-mail</label>
-          <input id="sbEmail" type="email" placeholder="o-teu-email@exemplo.com" required autocomplete="email">
+    <!-- Ranking table -->
+    <div>
+      <div class="section-header"
+        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;">
+        <p class="section-title" style="margin: 0;">📊 Classificação</p>
+        <div class="filter-group" style="display: flex; align-items: center; gap: 8px;">
+          <label for="groupFilter" style="font-size: 13px; font-weight: 800; color: #002b45;">Turma / Grupo:</label>
+          <select id="groupFilter" onchange="filterLeaderboard()"
+            style="padding: 6px 12px; border: 1.5px solid #d1dae7; border-radius: 8px; font-family: inherit; font-size: 14px; outline: none; background: white; cursor: pointer;">
+            <option value="all">Todas as turmas</option>
+          </select>
         </div>
       </div>
-      <div class="form-row">
-        <div class="fg">
-          <label for="sbScore">Pontuação</label>
-          <input id="sbScore" type="text" readonly>
+      <div class="lb-card" id="lbCard">
+        <div class="empty-state" id="emptyState">
+          <p>Ainda não há pontuações.</p>
+          <small>Sê o primeiro a submeter a tua pontuação!</small>
         </div>
-        <div class="fg">
-          <label for="sbCompleted">Exercícios concluídos</label>
-          <input id="sbCompleted" type="text" readonly>
-        </div>
+        <table class="lb-table" id="lbTable" hidden>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Nome</th>
+              <th>Turma</th>
+              <th>Exercícios</th>
+              <th>Tempo</th>
+              <th>Pontuação</th>
+            </tr>
+          </thead>
+          <tbody id="lbBody"></tbody>
+        </table>
       </div>
-      <p class="submit-note">Apenas a tua melhor pontuação é guardada. Dados armazenados localmente neste browser.</p>
-      <p id="formFeedback"></p>
-      <button type="submit" class="submit-btn">Guardar no leaderboard</button>
-    </form>
-  </div>
-</main>
+    </div>
 
-<footer>
-  &copy; 2026 Verão ULisboa @ FCUL &mdash;
-  <a href="index.html">Laboratório de Programação</a> &mdash;
-  wdojunior at ciencias.ulisboa.pt
-</footer>
+    <!-- Submit form -->
+    <div class="submit-card">
+      <div class="submit-card-header">
+        <h2>Submeter Pontuação</h2>
+        <p>A tua pontuação é carregada automaticamente do browser.</p>
+      </div>
+      <form class="submit-form" id="submitForm" onsubmit="handleFormSubmit(event)">
+        <div class="form-row">
+          <div class="fg">
+            <label for="sbName">Nome</label>
+            <input id="sbName" type="text" placeholder="O teu nome" required autocomplete="name">
+          </div>
+          <div class="fg">
+            <label for="sbEmail">E-mail</label>
+            <input id="sbEmail" type="email" placeholder="o-teu-email@exemplo.com" required autocomplete="email">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="fg">
+            <label for="sbGroup">Turma / Grupo (Opcional)</label>
+            <input id="sbGroup" type="text" placeholder="Ex: Turma A, Grupo 3">
+          </div>
+          <div class="fg">
+            <label for="sbScore">Pontuação</label>
+            <input id="sbScore" type="text" readonly>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="fg">
+            <label for="sbCompleted">Exercícios concluídos</label>
+            <input id="sbCompleted" type="text" readonly>
+          </div>
+        </div>
+        <p class="submit-note">Apenas a tua melhor pontuação é guardada. Dados armazenados localmente neste browser.</p>
+        <p id="formFeedback"></p>
+        <button type="submit" class="submit-btn">Guardar no leaderboard</button>
+      </form>
+    </div>
+  </main>
 
-<!-- Firebase SDK -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-<script src="assets/app/firebase-db.js"></script>
+  <footer>
+    &copy; 2026 Verão ULisboa @ FCUL &mdash;
+    <a href="index.html">Laboratório de Programação</a> &mdash;
+    wdojunior at ciencias.ulisboa.pt
+  </footer>
 
-<script>
-  const APP_KEY = 'veraoProgramacaoLab:v4';
-  const MEDALS = ['🥇', '🥈', '🥉'];
-  let currentEntries = [];
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+  <script src="assets/app/firebase-db.js"></script>
 
-  function loadAppState() {
-    try { return JSON.parse(localStorage.getItem(APP_KEY)) || {}; }
-    catch { return {}; }
-  }
+  <script>
+    const APP_KEY = 'veraoProgramacaoLab:v5';
+    const MEDALS = ['🥇', '🥈', '🥉'];
+    let currentEntries = [];
+    let selectedGroup = 'all';
 
-  function formatTime(seconds) {
-    const m = String(Math.floor((seconds || 0) / 60)).padStart(2, '0');
-    const s = String((seconds || 0) % 60).padStart(2, '0');
-    return `${m}:${s}`;
-  }
-
-  function escHtml(str) {
-    return String(str || '')
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;');
-  }
-
-  function renderLeaderboard(entries) {
-    const table  = document.getElementById('lbTable');
-    const body   = document.getElementById('lbBody');
-    const empty  = document.getElementById('emptyState');
-
-    // Stats
-    document.getElementById('statParticipants').textContent = entries.length;
-    if (entries.length) {
-      document.getElementById('statTopScore').textContent = entries[0].score;
-      const avg = Math.round(entries.reduce((s, e) => s + e.score, 0) / entries.length);
-      document.getElementById('statAvgScore').textContent = avg;
-      const maxDone = Math.max(...entries.map(e => e.completed || 0));
-      document.getElementById('statTopCompleted').textContent = maxDone;
+    async function hashEmail(emailStr) {
+      const msgBuffer = new TextEncoder().encode(emailStr.toLowerCase().trim());
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
     }
 
-    if (!entries.length) {
-      empty.hidden = false;
-      table.hidden = true;
-      return;
+    function loadAppState() {
+      try { return JSON.parse(localStorage.getItem(APP_KEY)) || {}; }
+      catch { return {}; }
     }
 
-    empty.hidden = true;
-    table.hidden = false;
-    body.innerHTML = entries.map((e, i) => {
-      const medal = MEDALS[i] || (i + 1);
-      let dateStr = '';
-      if (e.submittedAt) {
-        // Handle Firebase Timestamp
-        const dateObj = e.submittedAt.toDate ? e.submittedAt.toDate() : new Date(e.submittedAt);
-        dateStr = dateObj.toLocaleDateString('pt-PT', { day: '2-digit', month: 'short' });
+    function formatTime(seconds) {
+      const m = String(Math.floor((seconds || 0) / 60)).padStart(2, '0');
+      const s = String((seconds || 0) % 60).padStart(2, '0');
+      return `${m}:${s}`;
+    }
+
+    function escHtml(str) {
+      return String(str || '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    function filterLeaderboard() {
+      selectedGroup = document.getElementById('groupFilter').value;
+      renderLeaderboard(currentEntries);
+    }
+
+    function renderLeaderboard(entries) {
+      const table = document.getElementById('lbTable');
+      const body = document.getElementById('lbBody');
+      const empty = document.getElementById('emptyState');
+      const groupFilter = document.getElementById('groupFilter');
+
+      // Populate unique groups dynamically
+      const uniqueGroups = ['all', ...new Set(entries.map(e => e.group).filter(Boolean).map(g => g.trim()))];
+      const prevVal = groupFilter.value || 'all';
+      groupFilter.innerHTML = uniqueGroups.map(g =>
+        `<option value="${escHtml(g)}" ${g === prevVal ? 'selected' : ''}>${g === 'all' ? 'Todas as turmas' : escHtml(g)}</option>`
+      ).join('');
+
+      // If selected group is no longer available in new entries list, reset to 'all'
+      if (!uniqueGroups.includes(selectedGroup)) {
+        selectedGroup = 'all';
+        groupFilter.value = 'all';
       }
-      const email = e.email ? e.email.replace(/(.{2}).*(@.*)/, '$1…$2') : '';
-      return `<tr>
+
+      const filteredEntries = selectedGroup === 'all'
+        ? entries
+        : entries.filter(e => e.group && e.group.trim() === selectedGroup);
+
+      // Stats
+      document.getElementById('statParticipants').textContent = filteredEntries.length;
+      if (filteredEntries.length) {
+        document.getElementById('statTopScore').textContent = filteredEntries[0].score;
+        const avg = Math.round(filteredEntries.reduce((s, e) => s + e.score, 0) / filteredEntries.length);
+        document.getElementById('statAvgScore').textContent = avg;
+        const maxDone = Math.max(...filteredEntries.map(e => e.completed || 0));
+        document.getElementById('statTopCompleted').textContent = maxDone;
+      }
+
+      if (!filteredEntries.length) {
+        empty.hidden = false;
+        table.hidden = true;
+        return;
+      }
+
+      empty.hidden = true;
+      table.hidden = false;
+      body.innerHTML = filteredEntries.map((e, i) => {
+        const medal = MEDALS[i] || (i + 1);
+        let dateStr = '';
+        if (e.submittedAt) {
+          // Handle Firebase Timestamp
+          const dateObj = e.submittedAt.toDate ? e.submittedAt.toDate() : new Date(e.submittedAt);
+          dateStr = dateObj.toLocaleDateString('pt-PT', { day: '2-digit', month: 'short' });
+        }
+        const email = e.email ? e.email.replace(/(.{2}).*(@.*)/, '$1…$2') : '';
+        return `<tr>
         <td class="rank-cell">${medal}</td>
         <td class="name-cell">
           <strong>${escHtml(e.name)}</strong>
           <small>${escHtml(email)}${dateStr ? ' · ' + dateStr : ''}</small>
         </td>
+        <td class="group-cell" style="font-weight:600; color:#42526b;">${escHtml(e.group || '—')}</td>
         <td class="completed-cell">${e.completed || 0}/${e.total || '?'}</td>
         <td class="time-cell">${formatTime(e.timeSpent)}</td>
         <td class="score-cell">${e.score}</td>
       </tr>`;
-    }).join('');
-  }
-
-  function prefillForm() {
-    const app = loadAppState();
-    const score     = app.score ?? 0;
-    const completed = app.completed ? Object.keys(app.completed).length : 0;
-    document.getElementById('sbScore').value     = score + ' pontos';
-    document.getElementById('sbCompleted').value = completed + ' exercícios';
-  }
-
-  async function handleFormSubmit(event) {
-    event.preventDefault();
-    const name  = document.getElementById('sbName').value.trim();
-    const email = document.getElementById('sbEmail').value.trim();
-    if (!name || !email) return;
-
-    const btn = document.querySelector('.submit-btn');
-    btn.disabled = true;
-    btn.textContent = 'A guardar na nuvem...';
-
-    const app = loadAppState();
-    const entry = {
-      name,
-      email,
-      score: app.score ?? 0,
-      completed: app.completed ? Object.keys(app.completed).length : 0,
-      total: exercises?.length || 32, // placeholder if exercises array not loaded
-      timeSpent: app.timeSpent ?? 0,
-      submittedAt: firebase.firestore.FieldValue.serverTimestamp(),
-    };
-
-    try {
-      const docId = email.toLowerCase();
-      const docRef = db.collection("leaderboard").doc(docId);
-      const docSnap = await docRef.get();
-
-      if (docSnap.exists) {
-        if (entry.score >= docSnap.data().score) {
-          await docRef.update(entry);
-          document.getElementById('formFeedback').textContent = '✓ Pontuação atualizada!';
-        } else {
-          document.getElementById('formFeedback').textContent = 
-            '⚠ A tua pontuação anterior era maior (' + docSnap.data().score + ' pts). Mantida.';
-        }
-      } else {
-        await docRef.set(entry);
-        document.getElementById('formFeedback').textContent = '✓ Pontuação guardada!';
-      }
-      
-      document.getElementById('sbName').value = '';
-      document.getElementById('sbEmail').value = '';
-    } catch (err) {
-      console.error(err);
-      document.getElementById('formFeedback').style.color = '#b42318';
-      document.getElementById('formFeedback').textContent = 'Erro ao guardar: ' + err.message;
-    } finally {
-      btn.disabled = false;
-      btn.textContent = 'Guardar no leaderboard';
+      }).join('');
     }
-  }
 
-  // Init real-time listener
-  db.collection("leaderboard").orderBy("score", "desc")
-    .onSnapshot((snapshot) => {
-      const entries = [];
-      snapshot.forEach(doc => {
-        entries.push(doc.data());
+    function prefillForm() {
+      const app = loadAppState();
+      const score = app.score ?? 0;
+      const completed = app.completed ? Object.keys(app.completed).length : 0;
+      document.getElementById('sbScore').value = score + ' pontos';
+      document.getElementById('sbCompleted').value = completed + ' exercícios';
+    }
+
+    async function handleFormSubmit(event) {
+      event.preventDefault();
+      const name = document.getElementById('sbName').value.trim();
+      const email = document.getElementById('sbEmail').value.trim();
+      const group = document.getElementById('sbGroup')?.value.trim() || '';
+      if (!name || !email) return;
+
+      const btn = document.querySelector('.submit-btn');
+      btn.disabled = true;
+      btn.textContent = 'A guardar na nuvem...';
+
+      // Securely hash the email for the document ID (prevents duplication without exposing the email)
+      let docId;
+      try {
+        docId = await hashEmail(email);
+      } catch (e) {
+        docId = btoa(email.toLowerCase().trim()).replace(/[^a-zA-Z0-9]/g, '');
+      }
+
+      // Mask the email so the plain-text email is NEVER stored in the database
+      const maskedEmail = email.replace(/(.{2}).*(@.*)/, '$1…$2');
+
+      const app = loadAppState();
+      const entry = {
+        name,
+        email: maskedEmail, // Store masked email to ensure absolute privacy
+        group,             // Optional class/group code
+        score: app.score ?? 0,
+        completed: app.completed ? Object.keys(app.completed).length : 0,
+        total: exercises?.length || 32, // placeholder if exercises array not loaded
+        timeSpent: app.timeSpent ?? 0,
+        submittedAt: firebase.firestore.FieldValue.serverTimestamp(),
+      };
+
+      try {
+        const docRef = db.collection("leaderboard").doc(docId);
+        const docSnap = await docRef.get();
+
+        if (docSnap.exists) {
+          if (entry.score >= docSnap.data().score) {
+            await docRef.update(entry);
+            document.getElementById('formFeedback').textContent = '✓ Pontuação atualizada!';
+          } else {
+            document.getElementById('formFeedback').textContent =
+              '⚠ A tua pontuação anterior era maior (' + docSnap.data().score + ' pts). Mantida.';
+          }
+        } else {
+          await docRef.set(entry);
+          document.getElementById('formFeedback').textContent = '✓ Pontuação guardada!';
+        }
+
+        document.getElementById('sbName').value = '';
+        document.getElementById('sbEmail').value = '';
+        if (document.getElementById('sbGroup')) document.getElementById('sbGroup').value = '';
+      } catch (err) {
+        console.error(err);
+        document.getElementById('formFeedback').style.color = '#b42318';
+        document.getElementById('formFeedback').textContent = 'Erro ao guardar: ' + err.message;
+      } finally {
+        btn.disabled = false;
+        btn.textContent = 'Guardar no leaderboard';
+      }
+    }
+
+    // Init real-time listener
+    db.collection("leaderboard").orderBy("score", "desc")
+      .onSnapshot((snapshot) => {
+        const entries = [];
+        snapshot.forEach(doc => {
+          entries.push(doc.data());
+        });
+        currentEntries = entries;
+        renderLeaderboard(entries);
+      }, (error) => {
+        console.error("Erro ao ler leaderboard: ", error);
+        document.getElementById('emptyState').innerHTML =
+          '<p style="color:#b42318">Erro ao carregar a classificação. Verificou o firebase-db.js?</p>';
       });
-      currentEntries = entries;
-      renderLeaderboard(entries);
-    }, (error) => {
-      console.error("Erro ao ler leaderboard: ", error);
-      document.getElementById('emptyState').innerHTML = 
-        '<p style="color:#b42318">Erro ao carregar a classificação. Verificou o firebase-db.js?</p>';
-    });
 
-  prefillForm();
-</script>
+    prefillForm();
+  </script>
 </body>
+
 </html>

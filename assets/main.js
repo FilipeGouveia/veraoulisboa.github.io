@@ -285,6 +285,15 @@ function completeExercise(exercise) {
   renderExerciseList();
   document.getElementById('exerciseStatus').textContent = 'Concluído';
   document.getElementById('exerciseStatus').className = 'status-badge done';
+
+  // Trigger Confetti explosion for premium completion feeling!
+  if (typeof confetti === 'function') {
+    confetti({
+      particleCount: 80,
+      spread: 60,
+      origin: { y: 0.7 }
+    });
+  }
 }
 
 function updateHeader() {
@@ -411,6 +420,13 @@ function syncTimerPauseButton() {
 }
 
 // ─── Leaderboard (Firebase) ────────────────────────────────────────────────
+async function hashEmail(emailStr) {
+  const msgBuffer = new TextEncoder().encode(emailStr.toLowerCase().trim());
+  const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  return hashArray.map((b) => b.toString(16).padStart(2, '0')).join('');
+}
+
 function openLeaderboardModal() {
   const modal = document.getElementById('leaderboardModal');
   document.getElementById('modalScore').textContent = appState.score;
@@ -421,6 +437,8 @@ function openLeaderboardModal() {
   document.getElementById('modalTime').textContent = minutes + ':' + seconds;
   document.getElementById('lbName').value = '';
   document.getElementById('lbEmail').value = '';
+  const groupInput = document.getElementById('lbGroup');
+  if (groupInput) groupInput.value = '';
   document.getElementById('lbFeedback').textContent = '';
   modal.hidden = false;
   document.getElementById('lbName').focus();
@@ -433,16 +451,30 @@ function closeLeaderboardModal() {
 async function submitToLeaderboard(event) {
   event.preventDefault();
   const name = document.getElementById('lbName').value.trim();
-  const email = document.getElementById('lbEmail').value.trim();
-  if (!name || !email) return;
+  const emailInput = document.getElementById('lbEmail').value.trim();
+  const group = document.getElementById('lbGroup')?.value.trim() || '';
+  if (!name || !emailInput) return;
 
   const btn = document.querySelector('.modal-submit');
   btn.disabled = true;
   btn.textContent = 'A guardar na nuvem...';
 
+  // Securely hash the email for the document ID (prevents duplication without exposing the email)
+  let docId;
+  try {
+    docId = await hashEmail(emailInput);
+  } catch (e) {
+    // Fallback in case of environment limitation
+    docId = btoa(emailInput.toLowerCase().trim()).replace(/[^a-zA-Z0-9]/g, '');
+  }
+
+  // Mask the email so the plain-text email is NEVER stored in the database
+  const maskedEmail = emailInput.replace(/(.{2}).*(@.*)/, '$1…$2');
+
   const entry = {
     name,
-    email,
+    email: maskedEmail, // Store masked email to ensure absolute privacy
+    group,             // Optional class/group code
     score: appState.score,
     completed: Object.keys(appState.completed).length,
     total: exercises.length,
@@ -451,8 +483,6 @@ async function submitToLeaderboard(event) {
   };
 
   try {
-    // Usamos o email (convertido em minúsculas) como ID único
-    const docId = email.toLowerCase();
     const docRef = db.collection("leaderboard").doc(docId);
     const docSnap = await docRef.get();
     

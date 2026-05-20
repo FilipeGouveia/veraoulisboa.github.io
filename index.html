@@ -145,6 +145,10 @@
             <label for="lbEmail">E-mail</label>
             <input id="lbEmail" type="email" placeholder="o-teu-email@exemplo.com" required autocomplete="email">
           </div>
+          <div class="form-group">
+            <label for="lbGroup">Turma / Grupo (Opcional)</label>
+            <input id="lbGroup" type="text" placeholder="Ex: Turma A, Grupo 3" autocomplete="off">
+          </div>
           <p id="lbFeedback" class="lb-feedback"></p>
           <div class="modal-actions">
             <button type="submit" class="modal-submit">Submeter pontuação</button>
@@ -155,7 +159,8 @@
     </div>
   </div>
 
-  <!-- Firebase SDK (Compat version to keep scripts simple) -->
+  <!-- Confetti and Firebase SDK (Compat version to keep scripts simple) -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
   <script src="assets/app/firebase-db.js"></script>
