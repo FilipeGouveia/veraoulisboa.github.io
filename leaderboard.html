@@ -128,6 +128,7 @@
       border-radius: 16px;
       box-shadow: 0 2px 16px rgba(0, 43, 69, 0.09);
       overflow: hidden;
+      overflow-x: auto;
     }
 
     .lb-table {
@@ -502,13 +503,23 @@
     wdojunior at ciencias.ulisboa.pt
   </footer>
 
-  <!-- Firebase SDK -->
+  <!-- Firebase SDK and Exercises & Curriculum definitions -->
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
   <script src="assets/app/firebase-db.js"></script>
+  <script src="assets/exercises/01-fundamentos.js"></script>
+  <script src="assets/exercises/02-numeros.js"></script>
+  <script src="assets/exercises/03-ciclos.js"></script>
+  <script src="assets/exercises/04-donatello.js"></script>
+  <script src="assets/exercises/05-cifras-matematica.js"></script>
+  <script src="assets/exercises/06-estruturas.js"></script>
+  <script src="assets/exercises/07-interativo.js"></script>
+  <script src="assets/exercises/08-desafios.js"></script>
+  <script src="assets/app/curriculum.js"></script>
 
   <script>
     const APP_KEY = 'veraoProgramacaoLab:v5';
+    const { exercises } = Curriculum.build();
     const MEDALS = ['🥇', '🥈', '🥉'];
     let currentEntries = [];
     let selectedGroup = 'all';

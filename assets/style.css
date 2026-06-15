@@ -1066,3 +1066,13 @@ button:hover {
     max-width: 190px;
   }
 }
+
+.topic-toggle small.topic-completed {
+  color: #2ca66f;
+  font-weight: 800;
+}
+
+.completed-check {
+  color: #2ca66f;
+  margin-left: 4px;
+}

@@ -1,5 +1,6 @@
 window.PreviewBuilder = (() => {
   const baseCss = `
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
     * { box-sizing: border-box; }
     body { margin: 0; min-height: 100vh; font-family: Inter, Arial, sans-serif; background: #eef2f7; color: #1f2937; }
     .stage { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
@@ -41,6 +42,21 @@ window.PreviewBuilder = (() => {
   const baseApi = `
     window.exerciseState = {};
     window.exerciseFinished = false;
+    window.onerror = function(message, source, lineno, colno, error) {
+      let msg = message;
+      const offset = window.exerciseState.lineOffset;
+      if (lineno && offset) {
+        const relativeLine = lineno - offset + 1;
+        if (relativeLine > 0 && relativeLine < 1000) {
+          msg += " (linha " + relativeLine + ")";
+        }
+      }
+      parent.postMessage({ type: 'student-code-error', message: msg, state: window.exerciseState }, '*');
+      return true;
+    };
+    window.onunhandledrejection = function(event) {
+      parent.postMessage({ type: 'student-code-error', message: event.reason?.message || event.reason || 'Unhandled promise rejection', state: window.exerciseState }, '*');
+    };
     function setText(id, value) {
       const element = document.getElementById(id);
       if (element) element.textContent = String(value);
@@ -54,9 +70,27 @@ window.PreviewBuilder = (() => {
       }
       send();
     }
-    function reportError(error) {
+    function reportError(error, offset) {
       window.exerciseFinished = true;
-      parent.postMessage({ type: 'student-code-error', message: error.message, state: window.exerciseState }, '*');
+      let message = error.message || String(error);
+      let lineNum = null;
+      if (error && error.stack) {
+        const lines = error.stack.split('\\n');
+        for (const line of lines) {
+          const match = line.match(/:(\\d+):(\\d+)/);
+          if (match) {
+            lineNum = Number(match[1]);
+            break;
+          }
+        }
+      }
+      if (lineNum && offset) {
+        const relativeLine = lineNum - offset + 1;
+        if (relativeLine > 0 && relativeLine < 1000) {
+          message += " (linha " + relativeLine + ")";
+        }
+      }
+      parent.postMessage({ type: 'student-code-error', message: message, state: window.exerciseState }, '*');
     }
     function escrever() {
       var parts = [];
@@ -94,31 +128,38 @@ window.PreviewBuilder = (() => {
       }, 3000);
     `;
 
-    return `<!DOCTYPE html>
+    const placeholder = 'window.exerciseState.lineOffset = 0;';
+    const tempPrefixHtml = `<!DOCTYPE html>
 <html lang="pt">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
-  <style>${baseCss}</style>
+  <style>\${baseCss}</style>
 </head>
 <body>
-  ${exercise.html}
-  <script>${baseApi}<\/script>
-  <script>${getExerciseApi(exercise)}<\/script>
+  \${exercise.html}
+  <script>\${baseApi}<\/script>
+  <script>\${getExerciseApi(exercise)}<\/script>
+  <script>\${placeholder}<\/script>
   <script>
     (async () => {
       try {
-        ${timeoutGuard}
-        ${runnableCode}
+        \${timeoutGuard}
+`;
+
+    const lineOffset = tempPrefixHtml.split('\n').length;
+    const prefixHtml = tempPrefixHtml.replace(placeholder, \`window.exerciseState.lineOffset = \${lineOffset};\`);
+
+    return \`\${prefixHtml}\${runnableCode}
         reportOk();
       } catch (error) {
-        reportError(error);
+        reportError(error, \${lineOffset});
       }
     })();
   <\/script>
 </body>
-</html>`;
+</html>\`;
   }
 
   return {
@@ -128,3 +169,4 @@ window.PreviewBuilder = (() => {
     getExerciseApi,
   };
 })();
+

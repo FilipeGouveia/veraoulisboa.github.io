@@ -187,7 +187,7 @@ window.exerciseTopics.push({
       observation:
         'Podes experimentar criar mais variáveis e concatená-las para criar mensagens mais complexas. Experimenta fazer [const fraseCompleta = nome + " " + detalhe;] e depois mostrar essa frase completa no cartão.',
       hint: 'Usa [await lerInput()] para guardar o nome e um detalhe em variáveis, e passa essas variáveis para [criarCartao()].',
-      starter: '//utilize a função [escrever("")] para mostrar mensagens no terminal;\n \\utilize a função await lerInput para obter o nome e um detalhe em variáveis;\nconst detalhe: string = ""; //escreve aqui como pedir os detalhes\n\ncriarCartao(nome, detalhe);\n\nmudarCorCartao("#ffffff");\nmudarTamanhoNome(48);',
+      starter: '// utilize a função escrever("") para mostrar mensagens no terminal;\n// utilize a função await lerInput para obter o nome e um detalhe em variáveis;\nconst nome: string = "";\nconst detalhe: string = "";\n\ncriarCartao(nome, detalhe);\n\nmudarCorCartao("#ffffff");\nmudarTamanhoNome(48);',
       solution: 'escrever("Olá!");\nconst nome: string = await lerInput("Como te chamas?");\nconst detalhe: string = await lerInput("Escreve um detalhe sobre ti:");\n\ncriarCartao(nome, detalhe);\n\nmudarCorCartao("#ffffff");\nmudarTamanhoNome(48);',
       html: `
         <main class="stage">

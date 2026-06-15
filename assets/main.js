@@ -141,12 +141,16 @@ function renderExerciseList() {
       return expanded ? renderExerciseButton(topic.id, exercise, counter) : '';
     }).join('');
 
+    const isTopicCompleted = completedInTopic === topic.exercises.length;
+    const completedClass = isTopicCompleted ? 'topic-completed' : '';
+    const checkmark = isTopicCompleted ? ' <span class="completed-check">✓</span>' : '';
+
     return `
       <section class="topic-group ${expanded ? 'open' : ''}">
         <button type="button" class="topic-toggle" onclick="selectTopic('${topic.id}')">
           <span>
-            <strong>${AppUtils.escapeHtml(topic.title)}</strong>
-            <small>${completedInTopic}/${topic.exercises.length} concluídos</small>
+            <strong>${AppUtils.escapeHtml(topic.title)}${checkmark}</strong>
+            <small class="${completedClass}">${completedInTopic}/${topic.exercises.length} concluídos</small>
           </span>
           <span>${expanded ? '−' : '+'}</span>
         </button>
@@ -610,11 +614,18 @@ function handleEditorIndent(event) {
   saveCurrentCode();
 }
 
+let lastSavedTimeSpent = appState.timeSpent;
+
 function startTimer() {
   setInterval(() => {
     if (!shouldCountTimer()) return;
     appState.timeSpent += 1;
-    saveState();
+    
+    // Save to localStorage every 5 seconds to reduce disk writes
+    if (appState.timeSpent - lastSavedTimeSpent >= 5) {
+      saveState();
+      lastSavedTimeSpent = appState.timeSpent;
+    }
     updateHeader();
   }, 1000);
 }
@@ -641,6 +652,10 @@ function initApp() {
   });
 
   window.addEventListener('message', handlePreviewMessage);
+  window.addEventListener('beforeunload', () => {
+    saveState();
+  });
+
   syncTimerPauseButton();
   renderActiveExercise();
   startTimer();
