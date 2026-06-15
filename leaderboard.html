@@ -656,7 +656,7 @@
         group,             // Optional class/group code
         score: app.score ?? 0,
         completed: app.completed ? Object.keys(app.completed).length : 0,
-        total: exercises?.length || 32, // placeholder if exercises array not loaded
+        total: typeof window !== 'undefined' && window.Curriculum ? window.Curriculum.build().exercises.length : 34, // placeholder if curriculum not loaded
         timeSpent: app.timeSpent ?? 0,
         submittedAt: firebase.firestore.FieldValue.serverTimestamp(),
       };

@@ -135,31 +135,31 @@ window.PreviewBuilder = (() => {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
-  <style>\${baseCss}</style>
+  <style>${baseCss}</style>
 </head>
 <body>
-  \${exercise.html}
-  <script>\${baseApi}<\/script>
-  <script>\${getExerciseApi(exercise)}<\/script>
-  <script>\${placeholder}<\/script>
+  ${exercise.html}
+  <script>${baseApi}<\/script>
+  <script>${getExerciseApi(exercise)}<\/script>
+  <script>${placeholder}<\/script>
   <script>
     (async () => {
       try {
-        \${timeoutGuard}
+        ${timeoutGuard}
 `;
 
     const lineOffset = tempPrefixHtml.split('\n').length;
-    const prefixHtml = tempPrefixHtml.replace(placeholder, \`window.exerciseState.lineOffset = \${lineOffset};\`);
+    const prefixHtml = tempPrefixHtml.replace(placeholder, `window.exerciseState.lineOffset = ${lineOffset};`);
 
-    return \`\${prefixHtml}\${runnableCode}
+    return `${prefixHtml}${runnableCode}
         reportOk();
       } catch (error) {
-        reportError(error, \${lineOffset});
+        reportError(error, ${lineOffset});
       }
     })();
   <\/script>
 </body>
-</html>\`;
+</html>`;
   }
 
   return {

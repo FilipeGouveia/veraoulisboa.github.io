@@ -378,10 +378,13 @@ function openInCodePen() {
   form.remove();
 }
 
+let isRestarting = false;
+
 function restartTutorial() {
   if (!window.confirm('Recomeçar tudo? Perdes o progresso e a pontuação guardados neste browser.')) {
     return;
   }
+  isRestarting = true;
   localStorage.removeItem(STORAGE_KEY);
   location.reload();
 }
@@ -653,7 +656,7 @@ function initApp() {
 
   window.addEventListener('message', handlePreviewMessage);
   window.addEventListener('beforeunload', () => {
-    saveState();
+    if (!isRestarting) saveState();
   });
 
   syncTimerPauseButton();

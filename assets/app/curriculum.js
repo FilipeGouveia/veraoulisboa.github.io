@@ -21,7 +21,7 @@ window.Curriculum = (() => {
     {
       id: 'donatello',
       title: 'Donatello e Movimento',
-      exercises: ['donatello', 'donatello-circulo', 'donatello-oito', 'donatello-oito-if'],
+      exercises: ['donatello', 'donatello-circulo', 'donatello-oito', 'donatello-oito-if', 'donatello-roomba'],
     },
     {
       id: 'cifras',

@@ -99,6 +99,16 @@ window.exerciseChecksById = {
     { test: (_c, s) => (s.moves || []).filter((m) => m.type === 'forward' && m.value > 0).length >= 250, message: 'O desenho precisa de movimentos suficientes.' },
     { test: (_c, s) => (s.moves || []).some((m) => m.type === 'right' && m.value > 0) && (s.moves || []).some((m) => m.type === 'left' && m.value > 0), message: 'Usa right numa metade e left na outra.' },
   ],
+  'donatello-roomba': [
+    { test: (c) => /getX\s*\(\s*\)/.test(c) && /getY\s*\(\s*\)/.test(c), message: 'Usa donatello.getX() e donatello.getY() para ler a posição atual.' },
+    { test: (c) => /numeroAleatorio/.test(c) || /Math\.random/.test(c), message: 'Usa numeroAleatorio(-5, 5) para girar ao calhas.' },
+    { test: (c) => /\bif\s*\(/.test(c), message: 'Usa if para verificar se o Donatello sai do quadrado.' },
+    { test: (_c, s) => !(s.visited || []).some(p => Math.abs(p.x) > 115 || Math.abs(p.y) > 115), message: 'O Donatello saiu dos limites do quadrado! Deteta as paredes e inverte o movimento.' },
+    { test: (_c, s) => {
+      const v = s.visited || [];
+      return v.some(p => p.x < -80) && v.some(p => p.x > 80) && v.some(p => p.y > 80) && v.some(p => p.y < -80);
+    }, message: 'O Donatello deve explorar o espaço e bater em todas as paredes (deve atingir as coordenadas perto de -100 e 100).' },
+  ],
   cesar: [
     { test: (_c, s) => s.cipher === 'SPbY', message: 'A mensagem encriptada deve ser SPbY.' },
   ],

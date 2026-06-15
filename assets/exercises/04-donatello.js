@@ -14,28 +14,42 @@ function donatelloApi() {
     ctx.strokeStyle = drawingColor;
     ctx.lineCap = 'round';
     window.exerciseState.moves = [];
+    window.exerciseState.visited = [];
+
+    let logicalX = 0;
+    let logicalY = 0;
+    let logicalAngle = 0;
 
     const donatello = {
       forward(distance) {
         const value = Number(distance);
         queuedMoves.push({ type: 'forward', value });
         window.exerciseState.moves.push({ type: 'forward', value });
+
+        const rad = logicalAngle * Math.PI / 180;
+        logicalX += Math.cos(rad) * value;
+        logicalY += Math.sin(rad) * value;
+        window.exerciseState.visited.push({ x: logicalX, y: logicalY });
       },
       right(angle) {
         const value = Number(angle);
         queuedMoves.push({ type: 'right', value });
         window.exerciseState.moves.push({ type: 'right', value });
+        logicalAngle += value;
       },
       left(angle) {
         const value = Number(angle);
         queuedMoves.push({ type: 'left', value });
         window.exerciseState.moves.push({ type: 'left', value });
+        logicalAngle -= value;
       },
       position(x, y) {
         const nextX = Number(x);
         const nextY = Number(y);
         queuedMoves.push({ type: 'position', x: nextX, y: nextY });
         window.exerciseState.start = { x: nextX, y: nextY };
+        logicalX = (nextX - 260) / 1.5;
+        logicalY = (180 - nextY) / 1.5;
       },
       speed(mode) {
         const value = String(mode).toLowerCase();
@@ -51,6 +65,15 @@ function donatelloApi() {
       width(tamanho) {
         drawingWidth = Number(tamanho);
         window.exerciseState.drawingWidth = drawingWidth;
+      },
+      getX() {
+        return logicalX;
+      },
+      getY() {
+        return logicalY;
+      },
+      getAngle() {
+        return logicalAngle;
       }
     };
 
@@ -69,6 +92,16 @@ function donatelloApi() {
       ctx.closePath();
       ctx.fill();
       ctx.stroke();
+      ctx.restore();
+    }
+
+    function drawRoombaSquare() {
+      if (!window.exerciseState.isRoomba) return;
+      ctx.save();
+      ctx.strokeStyle = '#94a3b8';
+      ctx.lineWidth = 2;
+      ctx.setLineDash([4, 4]);
+      ctx.strokeRect(110, 30, 300, 300);
       ctx.restore();
     }
 
@@ -94,12 +127,14 @@ function donatelloApi() {
 
     function renderScene(tempSegment) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawRoombaSquare();
       drawPath(tempSegment);
       drawTurtle();
     }
 
     window.playAnimation = async function playAnimation() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawRoombaSquare();
       drawnSegments.length = 0;
       turtleDraw = { x: 190, y: 120, angle: 0 };
       await new Promise((resolve) => setTimeout(resolve, 160));
@@ -115,11 +150,14 @@ function donatelloApi() {
         if (move.type === 'forward') {
           const start = { ...turtleDraw };
           const radians = turtleDraw.angle * Math.PI / 180;
+          const factor = window.exerciseState.isRoomba ? 1.5 : 1;
           const end = {
-            x: turtleDraw.x + Math.cos(radians) * move.value,
-            y: turtleDraw.y + Math.sin(radians) * move.value,
+            x: turtleDraw.x + Math.cos(radians) * move.value * factor,
+            y: turtleDraw.y + Math.sin(radians) * move.value * factor,
           };
-          const frames = Math.max(8, Math.min(40, Math.ceil(Math.abs(move.value) / 5)));
+          const frames = window.exerciseState.isRoomba
+            ? Math.max(1, Math.ceil(Math.abs(move.value * factor) / 5))
+            : Math.max(8, Math.min(40, Math.ceil(Math.abs(move.value) / 5)));
           for (let frame = 1; frame <= frames; frame++) {
             const t = frame / frames;
             turtleDraw.x = start.x + (end.x - start.x) * t;
@@ -360,6 +398,61 @@ window.exerciseTopics.push({
           moves.filter((move) => move.type === 'forward' && move.value > 0).length >= 250 &&
           moves.some((move) => move.type === 'right' && move.value > 0) &&
           moves.some((move) => move.type === 'left' && move.value > 0);
+      },
+    },
+    {
+      id: 'donatello-roomba',
+      title: 'Donatello quer ser um Roomba',
+      points: 30,
+      explanation: [
+        'Neste exercício, vamos programar o Donatello para se comportar como um aspirador Roomba!',
+        'O algoritmo mais simples neste caso consiste em andar para a frente até encontrar uma parede. Se encontrar uma parede, volta atrás e escolhe outra direção.',
+        'As paredes do quadrado delimitador estão nas posições [X = -100], [X = 100], [Y = -100] e [Y = 100]. Podes usar as funções [donatello.getX()] e [donatello.getY()] para ler a posição atual.',
+      ],
+      instructions: [
+        'Gira o Donatello aleatoramente em cada passo com [donatello.right(numeroAleatorio(-5, 5))].',
+        'Verifica se a sua posição [posX] ou [posY] sai dos limites do quadrado (entre -100 e 100).',
+        'Se sair, anda 10 pixeis para trás ([donatello.forward(-10)]) e roda 180 graus ([donatello.right(180)]) para voltar para dentro.',
+      ],
+      observation: 'O Donatello deve andar de forma aleatória e manter-se sempre dentro do quadrado tracejado no ecrã.',
+      hint: 'Dentro do ciclo, move-te com [donatello.forward(1)] em cada passo. Lê as posições com [donatello.getX()] e [donatello.getY()], e se saírem dos limites do quadrado, recua com [donatello.forward(-10)] e roda [donatello.right(180)].',
+      starter: 'quadrado(donatello);\ndonatello.right(numeroAleatorio(0, 360));\n\nfor (let i = 0; i < 600; i++) {\n  donatello.forward(1);\n\n  // 1. Obtém as coordenadas posX e posY do Donatello\n  const posX: number = donatello.getX();\n  const posY: number = donatello.getY();\n\n  // 2. Roda aleatoriamente entre -5 e 5 graus\n  donatello.right(numeroAleatorio(-5, 5));\n\n  // 3. Testa se posX ou posY saem do quadrado [-100, 100]\n  // Se sim, anda para trás (forward(-10)) e inverte a direção (right(180))\n}',
+      solution: 'quadrado(donatello);\ndonatello.right(numeroAleatorio(0, 360));\n\nfor (let i = 0; i < 600; i++) {\n  donatello.forward(1);\n\n  const posX: number = donatello.getX();\n  const posY: number = donatello.getY();\n\n  donatello.right(numeroAleatorio(-5, 5));\n\n  if (posX < -100 || posX > 100 || posY < -100 || posY > 100) {\n    donatello.forward(-10);\n    donatello.right(180);\n  }\n}',
+      html: `
+        <main class="stage">
+          <section class="panel">
+            <h2>Donatello quer ser um Roomba</h2>
+            <canvas id="canvas" width="520" height="360"></canvas>
+          </section>
+        </main>
+      `,
+      api: () => donatelloApi() + `
+        function quadrado(t) {
+          window.exerciseState.isRoomba = true;
+          t.position(260, 180);
+          t.speed("rapido");
+        }
+        function numeroAleatorio(min, max) {
+          const low = Math.ceil(Number(min));
+          const high = Math.floor(Number(max));
+          return Math.floor(Math.random() * (high - low + 1)) + low;
+        }
+      `,
+      validate: (code, state) => {
+        const moves = state.moves || [];
+        const visited = state.visited || [];
+        if (moves.length < 300) return false;
+        if (!/getX/.test(code) || !/getY/.test(code)) return false;
+
+        const escaped = visited.some(p => Math.abs(p.x) > 115 || Math.abs(p.y) > 115);
+        if (escaped) return false;
+
+        const reachedLeft = visited.some(p => p.x < -80);
+        const reachedRight = visited.some(p => p.x > 80);
+        const reachedTop = visited.some(p => p.y > 80);
+        const reachedBottom = visited.some(p => p.y < -80);
+
+        return reachedLeft && reachedRight && reachedTop && reachedBottom;
       },
     },
   ],
