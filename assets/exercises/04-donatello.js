@@ -245,9 +245,9 @@ window.exerciseTopics.push({
         'Isto mostra uma ideia importante: muitas formas complexas podem ser construídas com instruções simples repetidas muitas vezes.',
       ],
       instructions: [
-        'Usa um ciclo [for] com 360 repetições.',
-        'Em cada volta, anda 1 pixel.',
-        'Em cada volta, roda 1 grau.',
+        'Usa um ciclo [for] com 36 repetições.',
+        'Em cada volta, anda 10 pixel.',
+        'Em cada volta, roda 10 grau.',
         'Experimenta a cor e a grossura da linha para comparar estilos.',
       ],
       observation: 'A circunferência pode não ficar matematicamente perfeita, mas deve parecer uma volta fechada.',
@@ -285,8 +285,8 @@ window.exerciseTopics.push({
       validate: (code, state) => {
         const moves = state.moves || [];
         return /\bfor\s*\(/.test(code) &&
-          moves.filter((move) => move.type === 'forward' && move.value === 1).length >= 300 &&
-          moves.filter((move) => ['right', 'left'].includes(move.type) && Math.abs(move.value) === 1).length >= 300;
+          moves.filter((move) => move.type === 'forward' && move.value === 10).length >= 30 &&
+          moves.filter((move) => ['right', 'left'].includes(move.type) && Math.abs(move.value) === 10).length >= 30;
       },
     },
     {
@@ -338,10 +338,25 @@ window.exerciseTopics.push({
       ],
       validate: (code, state) => {
         const moves = state.moves || [];
-        return /\bfor\s*\(/.test(code) &&
-          moves.some((move) => move.type === 'right' && move.value > 0) &&
-          moves.some((move) => move.type === 'left' && move.value > 0) &&
-          moves.filter((move) => move.type === 'forward' && move.value > 0).length >= 250;
+
+        const hasFor = /\bfor\s*\(/.test(code);
+        const hasRight = moves.some((move) => move.type === 'right' && move.value > 0);
+        const hasLeft = moves.some((move) => move.type === 'left' && move.value > 0);
+
+        // Soma total de rotações à direita e à esquerda
+        const totalRight = moves
+          .filter((move) => move.type === 'right')
+          .reduce((sum, move) => sum + move.value, 0);
+        const totalLeft = moves
+          .filter((move) => move.type === 'left')
+          .reduce((sum, move) => sum + move.value, 0);
+
+        // Cada volta precisa de ~360 graus, um 8 tem duas voltas
+        // Tolerância de 10% para imprecisões
+        const rightComplete = totalRight >= 324 && totalRight <= 396;
+        const leftComplete = totalLeft >= 324 && totalLeft <= 396;
+
+        return hasFor && hasRight && hasLeft && rightComplete && leftComplete;
       },
     },
     {
@@ -416,8 +431,8 @@ window.exerciseTopics.push({
       ],
       observation: 'O Donatello deve andar de forma aleatória e manter-se sempre dentro do quadrado tracejado no ecrã.',
       hint: 'Dentro do ciclo, move-te com [donatello.forward(1)] em cada passo. Lê as posições com [donatello.getX()] e [donatello.getY()], e se saírem dos limites do quadrado, recua com [donatello.forward(-10)] e roda [donatello.right(180)].',
-      starter: 'quadrado(donatello);\ndonatello.right(numeroAleatorio(0, 360));\n\nfor (let i = 0; i < 600; i++) {\n  donatello.forward(1);\n\n  // 1. Obtém as coordenadas posX e posY do Donatello\n  const posX: number = donatello.getX();\n  const posY: number = donatello.getY();\n\n  // 2. Roda aleatoriamente entre -5 e 5 graus\n  donatello.right(numeroAleatorio(-5, 5));\n\n  // 3. Testa se posX ou posY saem do quadrado [-100, 100]\n  // Se sim, anda para trás (forward(-10)) e inverte a direção (right(180))\n}',
-      solution: 'quadrado(donatello);\ndonatello.right(numeroAleatorio(0, 360));\n\nfor (let i = 0; i < 600; i++) {\n  donatello.forward(1);\n\n  const posX: number = donatello.getX();\n  const posY: number = donatello.getY();\n\n  donatello.right(numeroAleatorio(-5, 5));\n\n  if (posX < -100 || posX > 100 || posY < -100 || posY > 100) {\n    donatello.forward(-10);\n    donatello.right(180);\n  }\n}',
+      starter: 'quadrado(donatello);\ndonatello.right(numeroAleatorio(0, 360));\n\nfor (let i = 0; i < 1200; i++) {\n  donatello.forward(1);\n\n  // 1. Obtém as coordenadas posX e posY do Donatello\n  const posX: number = donatello.getX();\n  const posY: number = donatello.getY();\n\n  // 2. Roda aleatoriamente entre -5 e 5 graus\n  donatello.right(numeroAleatorio(-5, 5));\n\n  // 3. Testa se posX ou posY saem do quadrado [-100, 100]\n  // Se sim, anda para trás (forward(-10)) e inverte a direção (right(180))\n}',
+      solution: 'quadrado(donatello);\ndonatello.right(numeroAleatorio(0, 360));\n\nfor (let i = 0; i < 1200; i++) {\n  donatello.forward(1);\n\n  const posX: number = donatello.getX();\n  const posY: number = donatello.getY();\n\n  donatello.right(numeroAleatorio(-5, 5));\n\n  if (posX < -100 || posX > 100 || posY < -100 || posY > 100) {\n    donatello.forward(-10);\n    donatello.right(180);\n  }\n}',
       html: `
         <main class="stage">
           <section class="panel">

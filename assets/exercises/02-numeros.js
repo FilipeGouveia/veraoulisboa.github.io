@@ -139,7 +139,20 @@ window.exerciseTopics = window.exerciseTopics || [];
           window.exerciseState.result = message;
         }
       `,
-        validate: (code, state) => /\bif\s*\(/.test(code) && /numero\s*>\s*5/.test(code) && /10/.test(state.result || ''),
+        validate: (code, state) => {
+          // 1. O código ainda tem a estrutura if com numero > 5
+          const hasIfStructure = /\bif\s*\(/.test(code) && /numero\s*>\s*5/.test(code);
+
+          // 2. O aluno definiu numero com um valor maior que 5
+          const numeroMatch = code.match(/const\s+numero\s*(?::\s*number\s*)?=\s*(-?\d+)/);
+          const numeroValue = numeroMatch ? parseInt(numeroMatch[1], 10) : null;
+          const numeroIsAbove5 = numeroValue !== null && numeroValue > 5;
+
+          // 3. O resultado foi mostrado no ecrã
+          const resultShown = /O resultado é/.test(state.result || '');
+
+          return hasIfStructure && numeroIsAbove5 && resultShown;
+        },
       },
       {
         id: 'numeros-divisao-zero',
