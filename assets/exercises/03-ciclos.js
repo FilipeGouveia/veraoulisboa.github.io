@@ -388,7 +388,7 @@ window.exerciseTopics.push({
         'Depois chama [concluir()].',
       ],
       observation: 'Escreve respostas diferentes de "sim" no terminal. O programa só termina quando escreveres exatamente "sim".',
-      hint: 'A variável [resposta] começa vazia. Dentro do [while], atualiza [resposta] com [await lerInput(...)]. Fora do ciclo, [conclui].',
+      hint: 'A variável [resposta] começa vazia. Dentro do [while], atualiza [resposta] com [await lerInput(...)]. Fora do ciclo, [conclui]. O contrário de == é !==.',
       starter: 'let resposta: string = "";\n\n// escreve o while aqui\n\n// quando terminar, chama concluir',
       solution: 'let resposta: string = "";\n\nwhile (resposta !== "sim") {\n  resposta = await lerInput("Estás pronto? Escreve sim para continuar.");\n}\n\nconcluir();',
       html: `
