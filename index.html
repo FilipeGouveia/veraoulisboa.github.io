@@ -26,6 +26,7 @@
           aria-label="Pausar cronómetro" title="Pausar cronómetro">⏸</button>
       </div>
       <button type="button" class="lb-open-btn" onclick="openLeaderboardModal()">🏆 Leaderboard</button>
+      <button type="button" class="lb-open-btn" onclick="openEndSessionModal()">🎉 Terminar sessão</button>
     </div>
   </header>
 
@@ -72,7 +73,8 @@
               aria-describedby="feedback"></textarea>
           </div>
           <div class="actions">
-            <button type="button" onclick="runStudentCode()" title="Executar (Ctrl+Enter ou Cmd+Enter)">Executar</button>
+            <button type="button" id="runExerciseBtn" onclick="runStudentCode()" title="Executar (Ctrl+Enter ou Cmd+Enter)">Executar</button>
+            <button type="button" class="secondary-button" id="cancelExerciseBtn" onclick="cancelStudentCode()" disabled>Cancelar</button>
             <button type="button" class="secondary-button" id="resetExerciseBtn" onclick="resetCurrentExercise()">Repor
               exercício</button>
             <button type="button" class="secondary-button" id="solutionBtn" onclick="showSolution()">Mostrar
@@ -155,6 +157,70 @@
             <a href="leaderboard.html" target="_blank" class="modal-link-btn">Ver leaderboard</a>
           </div>
         </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- End Session Modal -->
+  <div id="endSessionModal" class="modal-overlay" hidden role="dialog" aria-modal="true" aria-labelledby="endSessionTitle">
+    <div class="modal-box">
+      <div class="modal-header">
+        <h2 id="endSessionTitle">🎉 Sessão terminada!</h2>
+        <button type="button" class="modal-close" onclick="closeEndSessionModal()" aria-label="Fechar">×</button>
+      </div>
+      <div class="modal-body diploma-body">
+        <div class="diploma-card">
+          <div class="diploma-header">
+            <span>Diploma de Conclusão</span>
+            <strong>Verão ULisboa</strong>
+            <small>Laboratórios de Programação</small>
+          </div>
+          <div class="diploma-content">
+            <p class="diploma-award">Certificamos que <span id="diplomaRecipient">Aluno</span> concluiu com sucesso uma sessão de programação.</p>
+            <p class="diploma-subtitle">Laboratórios de Programação - Verão ULisboa</p>
+            <div class="diploma-grid">
+              <div class="diploma-field">
+                <span class="field-label">Pontuação</span>
+                <strong id="endSessionScore">0</strong>
+              </div>
+              <div class="diploma-field">
+                <span class="field-label">Exercícios</span>
+                <strong id="endSessionCompleted">0</strong>
+              </div>
+              <div class="diploma-field">
+                <span class="field-label">Tempo</span>
+                <strong id="endSessionTime">00:00</strong>
+              </div>
+            </div>
+            <div class="diploma-summary">
+              <p><strong>O que aprendeu:</strong></p>
+              <ul id="diplomaTopics" class="diploma-list"></ul>
+              <p><strong>O que foi feito:</strong></p>
+              <p id="diplomaDone" class="diploma-paragraph"></p>
+              <p class="diploma-date">Emitido em: <span id="diplomaDate"></span></p>
+            </div>
+            <div class="diploma-seal">Verão ULisboa</div>
+          </div>
+        </div>
+        <div class="name-input-row">
+          <label for="endSessionName">Nome para o diploma</label>
+          <input id="endSessionName" type="text" placeholder="Escreve o teu nome" autocomplete="name">
+        </div>
+        <p class="modal-intro" id="endSessionMessage">Parabéns pelo esforço! Mostra este certificado aos teus colegas e inspira-os a aprender com o Verão ULisboa.</p>
+        <div class="share-actions">
+          <p>Partilha o teu progresso e o certificado nas redes:</p>
+          <div class="share-buttons">
+            <button type="button" class="modal-link-btn" onclick="shareSession('twitter')">Twitter</button>
+            <button type="button" class="modal-link-btn" onclick="shareSession('whatsapp')">WhatsApp</button>
+            <button type="button" class="modal-link-btn" onclick="copySessionLink()">Copiar mensagem</button>
+          </div>
+        </div>
+        <p class="share-note">Este certificado celebra a tua jornada no Verão ULisboa. Partilha para ajudar mais colegas a descobrir o laboratório.</p>
+        <div class="modal-actions">
+          <button type="button" class="modal-submit" onclick="confirmEndSession()">Confirmar término</button>
+          <button type="button" class="modal-link-btn" onclick="closeEndSessionModal()">Continuar sessão</button>
+        </div>
+      </div>
       </div>
     </div>
   </div>

@@ -190,14 +190,15 @@ window.exerciseTopics.push({
       ],
       instructions: [
         'Usa um ciclo [for] para repetir 4 vezes.',
-        'Em cada repetição, anda 120 pixeis.',
-        'Depois roda 90 graus.',
+        'Em cada repetição, anda 120 pixeis com [donatello.forward(120)].',
+        'Depois vira 90 graus com [donatello.right(90)].',
+        'Se quiseres andar para trás, usa [donatello.forward(-120)].',
         'Se quiseres, muda a posição inicial com [donatello.position(x, y)].',
         'Experimenta [donatello.speed("lento"), "normal" ou "rapido"].',
         'Altera a cor e a grossura da linha nos controlos visuais.',
       ],
       observation: 'A figura deve formar quatro lados iguais. A animação mostra a ordem das instruções.',
-      hint: 'Para um quadrado, repete quatro vezes: anda um lado, depois vira um canto de 90 graus.',
+      hint: 'Para um quadrado, repete quatro vezes: anda 120 pixeis com [donatello.forward(120)] e vira 90 graus com [donatello.right(90)]. Se precisares de recuar, usa [donatello.forward(-120)].',
       starter: 'donatello.speed("normal");\ndonatello.position(190, 120);\ndonatello.color("#2f5d78");\ndonatello.width(4);\n\n// cria o ciclo do quadrado aqui',
       solution: 'donatello.speed("rapido");\ndonatello.position(190, 120);\ndonatello.color("#2f5d78");\ndonatello.width(4);\n\nfor (let i = 0; i < 4; i++) {\n  donatello.forward(120);\n  donatello.right(90);\n}',
       html: `

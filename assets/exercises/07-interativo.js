@@ -195,6 +195,7 @@ window.exerciseTopics.push({
       explanation: [
         'Até agora, o programa tem mostrado coisas no ecrã, mas não tem recebido nenhuma informação de volta. E se quisermos que o programa saiba o nosso nome para nos cumprimentar? Ou que peça a nossa cor favorita para mudar a cor do painel?',
         'Para isso, precisamos de dar ao programa a capacidade de receber input. No terminal que aparece na parte inferior, podemos pedir ao utilizador para escrever algo. O programa pode então usar essa informação para fazer coisas diferentes.',
+        'A palavra [await] faz com que o programa espere até o utilizador escrever a resposta. Sem [await], o programa continuaria antes de receber a resposta do terminal.',
       ],
       instructions: [
         'Usa [await lerInput()] para pedir ao utilizador que escreva algo.',

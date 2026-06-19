@@ -8,6 +8,7 @@ let activeExerciseId = getValidExerciseId(appState.activeExerciseId);
 let activeTopicId = getTopicIdForExercise(activeExerciseId);
 let lastRunState = {};
 let currentRunCanScore = false;
+let currentRunIsActive = false;
 let editorFocused = false;
 let tabVisible = document.visibilityState === 'visible';
 let timerPaused = Boolean(appState.timerPaused);
@@ -274,8 +275,56 @@ function runStudentCode(showConsole = true) {
   saveState();
 
   currentRunCanScore = showConsole;
+  currentRunIsActive = showConsole;
+  syncRunControls();
+
   document.getElementById('preview').srcdoc = PreviewBuilder.buildDocument(exercise, code);
   if (showConsole) setFeedback('A executar...', 'neutral');
+}
+
+function cancelStudentCode() {
+  currentRunIsActive = false;
+  currentRunCanScore = false;
+  syncRunControls();
+  TerminalPanel.clear();
+  document.getElementById('preview').srcdoc = '<!DOCTYPE html><html><head></head><body></body></html>';
+  setFeedback('Execução cancelada.', 'neutral');
+}
+
+function syncRunControls() {
+  const cancelButton = document.getElementById('cancelExerciseBtn');
+  const runButton = document.getElementById('runExerciseBtn');
+  if (cancelButton) cancelButton.disabled = !currentRunIsActive;
+  if (runButton) runButton.disabled = currentRunIsActive;
+}
+
+function initApp() {
+  document.getElementById('solutionBtn').hidden = !ENABLE_SOLUTIONS;
+  document.body.classList.toggle('lab-mode-facilitator', ENABLE_SOLUTIONS);
+  document.body.classList.toggle('lab-mode-student', !ENABLE_SOLUTIONS);
+
+  const editor = getEditor();
+  editor.addEventListener('input', handleEditorInput);
+  editor.addEventListener('scroll', syncEditorHighlightScroll);
+  editor.addEventListener('keydown', handleEditorKeydown);
+  editor.addEventListener('focus', () => { editorFocused = true; });
+  editor.addEventListener('blur', () => { editorFocused = false; });
+
+  document.addEventListener('visibilitychange', () => {
+    tabVisible = document.visibilityState === 'visible';
+  });
+
+  document.getElementById('consoleForm').addEventListener('submit', (event) => {
+    event.preventDefault();
+    TerminalPanel.submitInput();
+  });
+
+  window.addEventListener('message', handlePreviewMessage);
+  window.addEventListener('beforeunload', () => {
+    if (!isRestarting) saveState();
+  });
+
+  syncRunControls();
 }
 
 function completeExercise(exercise) {
@@ -455,6 +504,168 @@ function closeLeaderboardModal() {
   document.getElementById('leaderboardModal').hidden = true;
 }
 
+function openEndSessionModal() {
+  const modal = document.getElementById('endSessionModal');
+  const score = appState.score;
+  const completedCount = Object.keys(appState.completed).length;
+  const total = exercises.length;
+  const minutes = String(Math.floor(appState.timeSpent / 60)).padStart(2, '0');
+  const seconds = String(appState.timeSpent % 60).padStart(2, '0');
+  const time = `${minutes}:${seconds}`;
+
+  document.getElementById('endSessionScore').textContent = score;
+  document.getElementById('endSessionCompleted').textContent = `${completedCount}/${total}`;
+  document.getElementById('endSessionTime').textContent = time;
+  document.getElementById('endSessionMessage').textContent = getEndSessionMessage(score, completedCount, total);
+
+  const diplomaTopics = getDiplomaTopics();
+  document.getElementById('diplomaTopics').innerHTML = diplomaTopics
+    .map((topic) => `<li>${AppUtils.escapeHtml(topic)}</li>`)
+    .join('');
+  document.getElementById('diplomaDone').textContent = getDiplomaDoneText(completedCount);
+  document.getElementById('diplomaRecipient').textContent = appState.userName || 'Aluno';
+  document.getElementById('diplomaDate').textContent = new Date().toLocaleDateString('pt-PT', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+
+  document.getElementById('endSessionName').value = appState.userName || '';
+  modal.hidden = false;
+}
+
+function closeEndSessionModal() {
+  document.getElementById('endSessionModal').hidden = true;
+}
+
+function confirmEndSession() {
+  const name = document.getElementById('endSessionName').value.trim();
+  if (!name) {
+    alert('Por favor, escreve o teu nome para receber o diploma.');
+    document.getElementById('endSessionName').focus();
+    return;
+  }
+
+  const score = appState.score;
+  const completedCount = Object.keys(appState.completed).length;
+  const total = exercises.length;
+  const minutes = String(Math.floor(appState.timeSpent / 60)).padStart(2, '0');
+  const seconds = String(appState.timeSpent % 60).padStart(2, '0');
+  const time = `${minutes}:${seconds}`;
+  const topics = getDiplomaTopics();
+  const summary = getDiplomaDoneText(completedCount);
+
+  appState.userName = name;
+  appState.sessionEnded = true;
+  appState.sessionSummary = {
+    name,
+    score,
+    completed: completedCount,
+    total,
+    time,
+    endedAt: new Date().toISOString(),
+    topics,
+    summary,
+  };
+
+  clearAllProgress();
+  setFeedback('Sessão terminada! O progresso foi limpo e o diploma foi guardado.', 'success');
+  closeEndSessionModal();
+}
+
+function clearAllProgress() {
+  localStorage.removeItem(STORAGE_KEY);
+  appState = {
+    activeTopicId: topics[0]?.id,
+    activeExerciseId: exercises[0]?.id,
+    score: 0,
+    completed: {},
+    codes: {},
+    timeSpent: 0,
+    timerPaused: false,
+    userName: appState.userName || '',
+  };
+  saveState();
+  activeExerciseId = appState.activeExerciseId;
+  activeTopicId = appState.activeTopicId;
+  renderExerciseList();
+  renderActiveExercise();
+}
+
+function getDiplomaTopics() {
+  const learned = topics.filter((topic) =>
+    topic.exercises.some((exercise) => appState.completed[exercise.id])
+  ).map((topic) => topic.title);
+
+  if (!learned.length) {
+    return ['Fundamentos de programação', 'Lógica condicional', 'Estruturas de repetição'];
+  }
+
+  return learned.slice(0, 4);
+}
+
+function getDiplomaDoneText(completedCount) {
+  if (!completedCount) {
+    return 'Iniciou a sessão e explorou os primeiros conceitos de programação no Verão ULisboa.';
+  }
+  if (completedCount === exercises.length) {
+    return 'Concluiu todos os exercícios disponíveis nesta sessão, fortalecendo a compreensão de programação em TypeScript.';
+  }
+  return `Concluiu ${completedCount} exercícios desta sessão, praticando resolução de problemas e conceitos essenciais de programação.`;
+}
+
+function getEndSessionMessage(score, completedCount, total) {
+  const ratio = total ? completedCount / total : 0;
+  if (completedCount === total) {
+    return 'Fantástico! Concluíste todos os exercícios. Partilha o teu sucesso com os teus amigos!';
+  }
+  if (score >= 200 || ratio >= 0.75) {
+    return 'Muito bom! Já fizeste um grande progresso. Compartilha para inspirar outros.';
+  }
+  if (score >= 100 || ratio >= 0.5) {
+    return 'Ótimo trabalho! Continua a praticar e partilha o que aprendeste.';
+  }
+  return 'Bom início! Continua a aprender e mostra aos teus amigos o teu progresso.';
+}
+
+function shareSession(network) {
+  const score = appState.score;
+  const completed = Object.keys(appState.completed).length;
+  const total = exercises.length;
+  const minutes = String(Math.floor(appState.timeSpent / 60)).padStart(2, '0');
+  const seconds = String(appState.timeSpent % 60).padStart(2, '0');
+  const time = `${minutes}:${seconds}`;
+  const text = `Acabei uma sessão de programação: ${score} pontos, ${completed}/${total} exercícios concluídos em ${time}! #VerãoULisboa #Programação`;
+  const url = encodeURIComponent(window.location.href);
+  const encodedText = encodeURIComponent(text + ' ' + window.location.href);
+
+  if (network === 'twitter') {
+    window.open(`https://twitter.com/intent/tweet?text=${encodedText}`, '_blank');
+    return;
+  }
+
+  if (network === 'whatsapp') {
+    window.open(`https://wa.me/?text=${encodedText}`, '_blank');
+    return;
+  }
+}
+
+function copySessionLink() {
+  const score = appState.score;
+  const completed = Object.keys(appState.completed).length;
+  const total = exercises.length;
+  const minutes = String(Math.floor(appState.timeSpent / 60)).padStart(2, '0');
+  const seconds = String(appState.timeSpent % 60).padStart(2, '0');
+  const time = `${minutes}:${seconds}`;
+  const text = `Acabei uma sessão de programação: ${score} pontos, ${completed}/${total} exercícios concluídos em ${time}! ${window.location.href}`;
+
+  navigator.clipboard.writeText(text).then(() => {
+    alert('Link e mensagem copiados para a área de transferência!');
+  }).catch(() => {
+    alert('Não foi possível copiar automaticamente. Seleciona e copia manualmente.');
+  });
+}
+
 async function submitToLeaderboard(event) {
   event.preventDefault();
   const name = document.getElementById('lbName').value.trim();
@@ -551,8 +762,13 @@ function handleStudentCodeResult(data) {
 
   if (!currentRunCanScore) {
     setFeedback('Pronto para executar.', 'neutral');
+    currentRunIsActive = false;
+    syncRunControls();
     return;
   }
+
+  currentRunIsActive = false;
+  syncRunControls();
 
   if (data.type === 'student-code-error') {
     setFeedback(`Erro: ${data.message}`, 'wrong');
@@ -661,6 +877,7 @@ function initApp() {
 
   syncTimerPauseButton();
   renderActiveExercise();
+  syncRunControls();
   startTimer();
 }
 

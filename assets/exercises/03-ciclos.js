@@ -2,7 +2,7 @@ window.exerciseTopics = window.exerciseTopics || [];
 
 window.exerciseTopics.push({
   id: 'ciclos',
-  title: 'Listas, Aleatoriedade e Ciclos',
+  title: 'Decisões, Ciclos e Jogos',
   exercises: [
     {
       id: 'listas',
@@ -20,7 +20,7 @@ window.exerciseTopics.push({
         'Muda a cor e o tamanho das etiquetas para veres essas escolhas no código.',
       ],
       observation: 'Cada elemento da lista deve aparecer como uma etiqueta no painel.',
-      hint: 'Cria a lista primeiro. Depois usa um ciclo [for...of] para passar por cada fruta e chama [adicionarFruta] dentro do ciclo.',
+      hint: 'Cria a lista primeiro. Depois usa um ciclo [`for...of`] para passar por cada fruta e chama [adicionarFruta] dentro do ciclo. As frutas devem ser strings, e o `of` no `for...of` significa “para cada elemento da lista”.',
       starter: 'const frutas: string[] = [];\n\n// cria o ciclo aqui\n\nmudarCorEtiquetas("#e8eef7");\nmudarTamanhoEtiquetas(16);',
       solution: 'const frutas: string[] = ["maçã", "banana", "kiwi"];\n\nfor (const fruta of frutas) {\n  adicionarFruta(fruta);\n}\n\nmudarCorEtiquetas("#e8eef7");\nmudarTamanhoEtiquetas(16);',
       html: `
@@ -225,7 +225,7 @@ window.exerciseTopics.push({
       instructions: [
         'Cria uma variável [podeAvancar] do tipo boolean.',
         'Usa [if] e [else].',
-        'Liga verde quando [podeAvancar] for [true]; caso contrário liga vermelho.',
+        'Liga verde com `ligarSemaforo("verde")` quando [podeAvancar] for [true]; caso contrário liga vermelho com `ligarSemaforo("vermelho")`.',
         'Ajusta o tamanho das luzes e observa a chamada de função que aparece no código.',
       ],
       observation: 'Muda [true] para [false] e executa outra vez para veres o outro ramo do [if].',
@@ -388,7 +388,7 @@ window.exerciseTopics.push({
         'Depois chama [concluir()].',
       ],
       observation: 'Escreve respostas diferentes de "sim" no terminal. O programa só termina quando escreveres exatamente "sim".',
-      hint: 'A variável [resposta] começa vazia. Dentro do [while], atualiza [resposta] com [await lerInput(...)]. Fora do ciclo, [conclui].',
+      hint: 'A variável [resposta] começa vazia. Dentro do [while], atualiza [resposta] com [await lerInput(...)]. Fora do ciclo, [conclui]. O contrário de == é !==.',
       starter: 'let resposta: string = "";\n\n// escreve o while aqui\n\n// quando terminar, chama concluir',
       solution: 'let resposta: string = "";\n\nwhile (resposta !== "sim") {\n  resposta = await lerInput("Estás pronto? Escreve sim para continuar.");\n}\n\nconcluir();',
       html: `
