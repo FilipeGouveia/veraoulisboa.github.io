@@ -46,16 +46,16 @@ window.exerciseTopics.push({
           window.exerciseState.secret = secret;
           window.exerciseState.guessed = false;
           window.exerciseState.attempts = 0;
+          window.exerciseState.lastGuess = null;
           return secret;
         }
         const _origEscrever = escrever;
         const _origLerInput = lerInput;
         escrever = function() {
           _origEscrever.apply(null, arguments);
-          var text = Array.prototype.slice.call(arguments).join(' ');
-          if (/acertas/i.test(text)) {
+          if (window.exerciseState.lastGuess === window.exerciseState.secret) {
             window.exerciseState.guessed = true;
-            setText('status', 'Acertaste!');
+            setText('status', '🎉 Acertaste!');
           }
         };
         lerInput = async function(msg) {
@@ -63,16 +63,33 @@ window.exerciseTopics.push({
           var num = Number(val);
           if (!isNaN(num) && val.trim() !== '') {
             window.exerciseState.attempts++;
+            window.exerciseState.lastGuess = num;
             setText('attempts', window.exerciseState.attempts);
           }
           return val;
         };
       `,
-      validate: (code, state) =>
-        /while\s*\(/.test(code) &&
-        /lerInput/.test(code) &&
-        /if\s*\(/.test(code) &&
-        state.guessed === true,
+      validate: (code, state) => {
+        // 1. Tem ciclo while
+        const hasWhile = /\bwhile\s*\(/.test(code);
+
+        // 2. Usa lerInput dentro do código
+        const hasLerInput = /\blerInput\s*\(/.test(code);
+
+        // 3. Tem estrutura if/else if/else para comparar
+        const hasIfElse = /\bif\s*\(/.test(code) && /\belse\b/.test(code);
+
+        // 4. Compara o palpite com o segredo (< e >)
+        const hasComparisons = /palpite\s*[<>]\s*segredo|segredo\s*[<>]\s*palpite/.test(code);
+
+        // 5. Muda acertou para true algures
+        const setsAcertou = /acertou\s*=\s*true/.test(code);
+
+        // 6. O jogo foi realmente concluído com sucesso
+        const gameWon = state.guessed === true;
+
+        return hasWhile && hasLerInput && hasIfElse && hasComparisons && setsAcertou && gameWon;
+      },
     },
     {
       id: 'calculadora-interativa',
@@ -186,7 +203,7 @@ window.exerciseTopics.push({
       ],
       observation:
         'Podes experimentar criar mais variáveis e concatená-las para criar mensagens mais complexas. Experimenta fazer [const fraseCompleta = nome + " " + detalhe;] e depois mostrar essa frase completa no cartão.',
-      hint: 'Usa [await lerInput()] para guardar o nome e um detalhe em variáveis, e passa essas variáveis para [criarCartao()].',
+      hint: 'Usa [await lerInput()] substituindo [""] para guardar o nome e um detalhe em variáveis, e passa essas variáveis para [criarCartao()].',
       starter: '// utilize a função escrever("") para mostrar mensagens no terminal;\n// utilize a função await lerInput para obter o nome e um detalhe em variáveis;\nconst nome: string = "";\nconst detalhe: string = "";\n\ncriarCartao(nome, detalhe);\n\nmudarCorCartao("#ffffff");\nmudarTamanhoNome(48);',
       solution: 'escrever("Olá!");\nconst nome: string = await lerInput("Como te chamas?");\nconst detalhe: string = await lerInput("Escreve um detalhe sobre ti:");\n\ncriarCartao(nome, detalhe);\n\nmudarCorCartao("#ffffff");\nmudarTamanhoNome(48);',
       html: `

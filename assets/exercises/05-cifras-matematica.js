@@ -11,7 +11,7 @@ window.exerciseTopics.push({
       explanation: [
         'Uma cifra é uma forma de esconder uma mensagem. A ideia da cifra de César é trocar cada letra por outra letra mais à frente no alfabeto.',
         'No computador, cada letra tem um código numérico. Podemos ler esse código com [charCodeAt] e criar uma nova letra com [String.fromCharCode].',
-        'Aqui usamos um deslocamento de 13. A letra F passa a S, C passa a P, U passa a H e L passa a Y. Por isso FCUL fica SPbY.',
+        'Aqui usamos um deslocamento de 13. A letra F passa a S, C passa a P, U passa a b e L passa a Y. Por isso FCUL fica SPbY.',
       ],
       instructions: [
         'Completa a função [cifrar].',
