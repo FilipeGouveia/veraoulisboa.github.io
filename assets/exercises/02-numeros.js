@@ -68,6 +68,7 @@ window.exerciseTopics = window.exerciseTopics || [];
       },
       {
         id: 'numeros-variavel',
+        animation: '<div class="cax"><div class="big">d = 12 × 7</div><div class="big accent cax-step">= 84</div></div>',
         advanced: [
           'Guardar um valor numa variável antes de o usar permite reaproveitá-lo e dar-lhe um nome com significado. O computador calcula primeiro o lado direito do [=] e só depois guarda o resultado na variável à esquerda.',
         ],
@@ -100,6 +101,7 @@ window.exerciseTopics = window.exerciseTopics || [];
       },
       {
         id: 'numeros-divisao',
+        animation: '<div class="cax"><div class="big">28820172 ÷ 1231</div><div class="big accent cax-step">= 23412</div></div>',
         advanced: [
           'O operador [/] devolve sempre um número com casas decimais quando a divisão não é exata — não existe divisão inteira automática. Para o resto usarias [%], e para arredondar [Math.floor] ou [Math.round].',
         ],
@@ -131,6 +133,7 @@ window.exerciseTopics = window.exerciseTopics || [];
       },
       {
         id: 'numeros-com-if',
+        animation: '<div class="cax"><div class="big">numero = 7</div><div class="cax-step">7 &gt; 5 → <span class="ok">verdadeiro</span></div><div class="big accent cax-step d1">mostra 7</div></div>',
         advanced: [
           'Uma condição dentro de um [if] é avaliada como verdadeira ou falsa (um booleano). [numero > 5] não guarda nada: é apenas uma pergunta cujo resultado decide se o bloco entre chavetas corre ou não.',
         ],
@@ -188,6 +191,7 @@ window.exerciseTopics = window.exerciseTopics || [];
       },
       {
         id: 'numeros-divisao-zero',
+        animation: '<div class="cax"><div class="big">divisor = 0</div><div class="cax-step">divisor === 0 → <span class="ok">verdadeiro</span></div><div class="big bad cax-step d1">«Não posso dividir por zero»</div></div>',
         advanced: [
           'Em JavaScript, dividir por zero não dá erro: dá [Infinity] (ou [NaN] em 0/0). Por isso testar o divisor antes com um [if] é a forma de evitar resultados sem sentido — a linguagem não te protege sozinha.',
         ],
@@ -235,6 +239,7 @@ window.exerciseTopics = window.exerciseTopics || [];
       },
       {
         id: 'palavra-passe',
+        animation: '<div class="cax"><div class="big">"segredo".<span class="cax-pulse">length</span> = 7</div><div class="cax-step">7 &gt;= 6 → <span class="ok">forte 💪</span></div></div>',
         title: 'Palavra-passe forte',
         points: 15,
         interactive: true,
