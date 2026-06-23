@@ -49,6 +49,8 @@
 
 ### Bug Triage
 
+_All nine resolved 2026-06-23 (✔️ in Task Status (QA) below)._
+
 - 🔴 `intro`: passes automatically (starter already has 8+ char message) — add interactivity check to `validate`
 - 🔴 `strings`: explanation promises TS will catch type errors but transpiler strips types silently — update text or add type-checking
 - 🔴 `semaforo-amarelo`: can pass without using the `estado` variable — add `/estado/.test(code)` to validate
@@ -63,12 +65,12 @@
 
 | Task name [feature]/[bug] | To implement | Implementing | Ready | Responsible |
 |---------------------------|--------------|--------------|-------|--------------| 
-| intro: validate requires interactivity, not just starter message [bug] | ⬜ | | | |
-| strings: fix/remove promise that TS enforces types at runtime [bug] | ⬜ | | | |
-| semaforo-amarelo: validate must use estado variable [bug] | ⬜ | | | |
-| numeros-variavel: verify multiplication expression in validate [bug] | ⬜ | | | |
-| cesar: require charCodeAt in validate to prevent hardcoding [bug] | ⬜ | | | |
-| arvore-procura: relax treeSteps <= listSteps condition [bug] | ⬜ | | | |
-| donatello-roomba: increase steps or lower wall threshold [bug] | ⬜ | | | |
-| pi: cap darts or batch async to avoid UI freeze [feature] | ⬜ | | | |
-| grafo-caminho: note that path order matters in instructions [feature] | ⬜ | | | |
+| intro: validate requires interactivity, not just starter message [bug] | | | ✔️ | Claude |
+| strings: fix/remove promise that TS enforces types at runtime [bug] | | | ✔️ | Claude |
+| semaforo-amarelo: validate must use estado variable [bug] | | | ✔️ | Claude |
+| numeros-variavel: verify multiplication expression in validate [bug] | | | ✔️ | Claude |
+| cesar: require charCodeAt in validate to prevent hardcoding [bug] | | | ✔️ | Claude |
+| arvore-procura: relax treeSteps <= listSteps condition [bug] | | | ✔️ | Claude |
+| donatello-roomba: increase steps or lower wall threshold [bug] | | | ✔️ | Claude |
+| pi: cap darts or batch async to avoid UI freeze [feature] | | | ✔️ | Claude |
+| grafo-caminho: note that path order matters in instructions [feature] | | | ✔️ | Claude |
