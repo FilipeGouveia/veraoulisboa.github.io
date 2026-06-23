@@ -16,7 +16,7 @@
 - Add visual editing elements (e.g., letter color in the 1st chapter, font size in the 2nd, letter color in the 3rd, etc.). (still open)
 - ~~Exercises 19, 20 and 21: Make execution faster.~~ ✔️ Done — lower frame floor + inter-move delay on the donatello loop exercises.
 - ~~Exercise 13 onwards: There is no need to add `const podeAvancar: boolean = true;` as it is already predefined in the code.~~ ✔️ Done (`booleanos` instruction reworded).
-- New: optional "Avançado" collapsible section per exercise for deeper detail. ✔️ Done (added to 8 exercises so far; more can be filled in incrementally).
+- New: optional "Avançado" collapsible section per exercise for deeper detail. ✔️ Done (now on all 35 exercises).
 
 ## Task Status
 
