@@ -56,7 +56,7 @@ window.exerciseTopics.push({
           template: (value) => `mudarCorCifra("${value}");`,
         },
       ],
-      validate: (code, state) => state.cipher === 'SPbY',
+      validate: (code, state) => state.cipher === 'SPbY' && /charCodeAt/.test(code) && /fromCharCode/.test(code),
     },
     {
       id: 'cesar-desencriptar',
