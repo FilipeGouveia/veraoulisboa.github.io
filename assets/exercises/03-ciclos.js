@@ -6,6 +6,9 @@ window.exerciseTopics.push({
   exercises: [
     {
       id: 'listas',
+      advanced: [
+        'Uma lista (array) guarda os elementos por ordem e cada um tem um índice que começa em 0. O [for...of] percorre os valores diretamente; existe também o [for] clássico com um contador para quando precisas do índice.',
+      ],
       title: 'Galeria de frutas',
       points: 15,
       explanation: [
@@ -219,6 +222,9 @@ window.exerciseTopics.push({
     },
     {
       id: 'booleanos',
+      advanced: [
+        'Um booleano só tem dois valores: [true] ou [false]. Condições como [idade >= 18] produzem um booleano, e o [if] usa-o para escolher o caminho. O [else] cobre todos os casos em que a condição foi [false].',
+      ],
       title: 'Semáforo lógico',
       points: 15,
       explanation: [
@@ -279,6 +285,9 @@ window.exerciseTopics.push({
     },
     {
       id: 'par-impar',
+      advanced: [
+        'O operador [%] (resto) dá o que sobra de uma divisão inteira. Como qualquer número par tem resto 0 ao dividir por 2, [numero % 2 === 0] é a forma habitual de testar paridade — e a mesma ideia serve para contar de N em N.',
+      ],
       title: 'Par ou ímpar',
       points: 15,
       explanation: [
@@ -316,6 +325,9 @@ window.exerciseTopics.push({
     },
     {
       id: 'semaforo-amarelo',
+      advanced: [
+        'Com [if] / [else if] / [else], as condições são testadas por ordem e só corre o primeiro ramo verdadeiro. Por isso a ordem importa: se duas condições pudessem ser verdadeiras, ganha a que aparece primeiro.',
+      ],
       title: 'Semáforo com amarelo',
       points: 20,
       explanation: [
@@ -377,6 +389,9 @@ window.exerciseTopics.push({
     },
     {
       id: 'while',
+      advanced: [
+        'Um [while] repete enquanto a condição for verdadeira: pode nunca correr (se já for falsa à entrada) ou correr para sempre (se nunca se tornar falsa). Garantir que algo dentro do ciclo muda a condição evita ciclos infinitos.',
+      ],
       title: 'Perguntar até acertar',
       points: 25,
       terminal: true,

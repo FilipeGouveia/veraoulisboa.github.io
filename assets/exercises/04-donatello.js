@@ -177,6 +177,9 @@ function donatelloApi() {
 
 window.exerciseTopics.push({
   id: 'donatello',
+  advanced: [
+    'A tartaruga é um exemplo de programação por instruções relativas: andas e viras a partir da posição e direção atuais, sem dares coordenadas absolutas. Repetir [forward] e [right] num [for] é a base para desenhar qualquer polígono regular.',
+  ],
   title: 'Donatello e Movimento',
   exercises: [
     {
@@ -296,6 +299,9 @@ window.exerciseTopics.push({
     },
     {
       id: 'donatello-oito',
+      advanced: [
+        'Virar para a direita e depois para a esquerda inverte o sentido da curvatura, e é isso que liga as duas voltas do 8. Pensar num desenho como uma sequência de curvas com sentidos diferentes ajuda a decompor problemas maiores.',
+      ],
       title: 'Desenha um 8',
       points: 30,
       explanation: [
@@ -366,6 +372,9 @@ window.exerciseTopics.push({
     },
     {
       id: 'donatello-oito-if',
+      advanced: [
+        'Usar [if] dentro do ciclo deixa o mesmo bloco de código comportar-se de forma diferente conforme o valor de [i]. Variar o comportamento ao longo da repetição é uma ideia que aparece em animações, jogos e simulações.',
+      ],
       title: 'O 8 com um único ciclo',
       points: 35,
       explanation: [
@@ -422,6 +431,9 @@ window.exerciseTopics.push({
     },
     {
       id: 'donatello-roomba',
+      advanced: [
+        'Este é um exemplo simples de um algoritmo reativo: o robô não planeia o caminho todo, apenas reage ao ambiente (bate na parede, recua e vira). Ler a posição com [getX]/[getY] e decidir com um [if] é a base de muitos comportamentos autónomos.',
+      ],
       title: 'Donatello quer ser um Roomba',
       points: 30,
       explanation: [

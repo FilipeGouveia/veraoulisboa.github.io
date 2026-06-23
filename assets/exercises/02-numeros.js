@@ -49,6 +49,9 @@ window.exerciseTopics = window.exerciseTopics || [];
       },
       {
         id: 'numeros-variavel',
+        advanced: [
+          'Guardar um valor numa variável antes de o usar permite reaproveitá-lo e dar-lhe um nome com significado. O computador calcula primeiro o lado direito do [=] e só depois guarda o resultado na variável à esquerda.',
+        ],
         title: 'Guardar primeiro, mostrar depois',
         points: 10,
         explanation: [
@@ -78,6 +81,9 @@ window.exerciseTopics = window.exerciseTopics || [];
       },
       {
         id: 'numeros-divisao',
+        advanced: [
+          'O operador [/] devolve sempre um número com casas decimais quando a divisão não é exata — não existe divisão inteira automática. Para o resto usarias [%], e para arredondar [Math.floor] ou [Math.round].',
+        ],
         title: 'Uma divisão grande',
         points: 10,
         explanation: [
@@ -106,6 +112,9 @@ window.exerciseTopics = window.exerciseTopics || [];
       },
       {
         id: 'numeros-com-if',
+        advanced: [
+          'Uma condição dentro de um [if] é avaliada como verdadeira ou falsa (um booleano). [numero > 5] não guarda nada: é apenas uma pergunta cujo resultado decide se o bloco entre chavetas corre ou não.',
+        ],
         title: 'Usando Condicionais',
         points: 10,
         explanation: [
@@ -160,6 +169,9 @@ window.exerciseTopics = window.exerciseTopics || [];
       },
       {
         id: 'numeros-divisao-zero',
+        advanced: [
+          'Em JavaScript, dividir por zero não dá erro: dá [Infinity] (ou [NaN] em 0/0). Por isso testar o divisor antes com um [if] é a forma de evitar resultados sem sentido — a linguagem não te protege sozinha.',
+        ],
         title: 'Dividir por zero',
         points: 15,
         explanation: [

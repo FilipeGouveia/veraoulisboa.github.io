@@ -6,6 +6,9 @@ window.exerciseTopics.push({
   exercises: [
     {
       id: 'intro',
+      advanced: [
+        'Tudo o que vês neste painel é construído com HTML (a estrutura), CSS (o aspeto) e JavaScript/TypeScript (o comportamento). Neste laboratório só escreves o código; o HTML e o CSS já estão preparados por baixo.',
+      ],
       title: 'Bem-vindo ao laboratório de programação!',
       points: 5,
       explanation: [
