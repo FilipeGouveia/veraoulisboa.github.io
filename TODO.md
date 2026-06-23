@@ -4,8 +4,8 @@
 
 - Runtime has bugs.
 - ~~Exercise 8: The non-completion message expects the value 10, but should accept 6 or more.~~ ✔️ Done (`numeros-com-if`).
-- Exercise 17: The code example has a validation error. ⚠️ Numbering is stale after the curriculum re-order; current #17 is `adivinhar-numero`, whose solution validates cleanly — symptom needs clarification.
-- Exercise 22: In the hint, explain that a string is a list of characters and suggest using `.length` to validate the word length. ⚠️ No current exercise validates a word's length; intended exercise needs clarification.
+- ~~Exercise 17: The code example has a validation error.~~ ✔️ Done — the `aleatorio` (dice) feedback check tested `s.rolls`, which the runtime never sets; now reads `s.die` / `s.dice`.
+- ~~Exercise 22: In the hint, explain that a string is a list of characters and suggest using `.length` to validate the word length.~~ ✔️ Done — added a new `palavra-passe` exercise (strings as character lists + `.length` validation).
 - Found during review: `cesar-desencriptar` explanation said "SPHY"; should be "SPbY". ✔️ Done.
 
 ## Feature Triage
@@ -34,3 +34,5 @@
 | Exercise 8: feedback accepts 6 or more, not only 10 [bug] | | | ✔️ | Claude |
 | cesar-desencriptar: correct SPbY ciphertext in explanation [bug] | | | ✔️ | Claude |
 | Desafios (arquiteto, mvp-futebol): strip starter code, add tip ladder [feature] | | | ✔️ | Claude |
+| aleatorio: dice feedback reads s.die/s.dice, not s.rolls [bug] | | | ✔️ | Claude |
+| palavra-passe: new exercise on strings and .length [feature] | | | ✔️ | Claude |
