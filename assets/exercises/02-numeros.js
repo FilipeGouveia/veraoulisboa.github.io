@@ -26,6 +26,25 @@ window.exerciseTopics = window.exerciseTopics || [];
           'A ordem das operações chama-se precedência. Multiplicação, divisão e resto ([*], [/], [%]) têm precedência maior do que a soma e a subtração ([+], [-]), por isso são feitas primeiro. Os parênteses servem para forçar outra ordem.',
           'Quando duas operações têm a mesma precedência, são avaliadas da esquerda para a direita (associatividade à esquerda). Por exemplo, [10 - 3 - 2] é [(10 - 3) - 2], que dá 5, e não [10 - (3 - 2)].',
         ],
+        animation: `
+          <div class="ap">
+            <style>
+              .ap{font-family:Inter,system-ui,sans-serif;color:#1f2937}
+              .ap .lbl{font-size:12px;font-weight:800;text-transform:uppercase;color:#64748b;letter-spacing:.04em}
+              .ap .eq{font-size:23px;font-weight:800;margin:4px 0 14px;line-height:1.5}
+              .ap .mul{background:#fde68a;border-radius:5px;padding:0 5px;animation:apPulse 3.6s infinite}
+              @keyframes apPulse{0%,22%{background:#fde68a}42%,100%{background:#fef9c3}}
+              .ap .res{color:#0077b6}
+              .ap .s2{display:inline-block;opacity:0;animation:apShow 3.6s infinite}
+              @keyframes apShow{0%,28%{opacity:0;transform:translateY(4px)}44%,100%{opacity:1;transform:none}}
+              .ap .par{background:#bbf7d0;border-radius:5px;padding:0 5px}
+            </style>
+            <div class="lbl">Sem parênteses — a multiplicação vem primeiro</div>
+            <div class="eq">5 + <span class="mul">3 × 4</span> <span class="s2">= 5 + 12 = <span class="res">17</span></span></div>
+            <div class="lbl">Com parênteses — o objetivo</div>
+            <div class="eq"><span class="par">(5 + 3)</span> × 4 = 8 × 4 = <span class="res">32</span></div>
+          </div>
+        `,
         instructions: [
           'Sem mudar os valores de a, b e c, faz com que a soma de a + b aconteça antes da multiplicação.',
           'Usa parênteses.',

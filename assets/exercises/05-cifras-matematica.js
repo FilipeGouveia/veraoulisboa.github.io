@@ -17,6 +17,27 @@ window.exerciseTopics.push({
         'Cada caractere tem um número associado na tabela de caracteres (Unicode). [letra.charCodeAt(0)] dá-te esse número, e [String.fromCharCode(n)] faz o caminho inverso. Somar 13 ao código é o que "avança" a letra.',
         'Repara que esta cifra simples não trata do fim do alfabeto: somar 13 a algumas letras dá símbolos em vez de letras (é por isso que o U vira "b" minúsculo). As cifras a sério usam o resto da divisão ([%]) para "dar a volta" e ficar sempre dentro das letras.',
       ],
+      animation: `
+        <div class="ac">
+          <style>
+            .ac{font-family:Inter,system-ui,sans-serif;text-align:center}
+            .ac .row{display:flex;justify-content:center;gap:14px}
+            .ac .from{font-size:26px;font-weight:800;color:#1f2937}
+            .ac .arrow{font-size:12px;color:#94a3b8;margin:2px 0}
+            .ac .to{font-size:26px;font-weight:800;color:#0077b6;opacity:0;animation:acTo 3.2s infinite}
+            .ac .p2 .to{animation-delay:.25s}.ac .p3 .to{animation-delay:.5s}.ac .p4 .to{animation-delay:.75s}
+            @keyframes acTo{0%,12%{opacity:0;transform:translateY(-6px)}32%,92%{opacity:1;transform:none}100%{opacity:1}}
+            .ac .note{margin-top:10px;font-size:13px;color:#64748b;font-weight:700}
+          </style>
+          <div class="row">
+            <div class="p1"><div class="from">F</div><div class="arrow">+13</div><div class="to">S</div></div>
+            <div class="p2"><div class="from">C</div><div class="arrow">+13</div><div class="to">P</div></div>
+            <div class="p3"><div class="from">U</div><div class="arrow">+13</div><div class="to">b</div></div>
+            <div class="p4"><div class="from">L</div><div class="arrow">+13</div><div class="to">Y</div></div>
+          </div>
+          <div class="note">FCUL → SPbY — cada letra avança 13 posições</div>
+        </div>
+      `,
       instructions: [
         'Completa a função [cifrar].',
         'Percorre todas as letras do texto.',

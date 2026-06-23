@@ -220,8 +220,12 @@ function renderBriefing(exercise, completed) {
          ${exercise.advanced.map((paragraph) => `<p>${AppUtils.formatText(paragraph)}</p>`).join('')}
        </div>`
     : '';
+  const animationBlock = exercise.animation
+    ? `<div class="concept-anim">${exercise.animation}</div>`
+    : '';
   document.getElementById('exerciseBody').innerHTML = `
     ${(exercise.explanation || []).map((paragraph) => `<p>${AppUtils.formatText(paragraph)}</p>`).join('')}
+    ${animationBlock}
     ${advancedBlock}
     <p class="briefing-tag tag-objetivos">Objetivos</p>
     <ul>${exercise.instructions.map((instruction) => `<li>${AppUtils.formatText(instruction)}</li>`).join('')}</ul>
