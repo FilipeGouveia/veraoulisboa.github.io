@@ -210,6 +210,7 @@ window.exerciseTopics.push({
       instructions: [
         'Chama [criarMapa] para desenhar o grafo inicial.',
         'Usa [marcarCaminho] com a lista ["A", "C", "D"].',
+        'A ordem dos nós importa: o caminho deve ir do início ([A]) até ao fim ([D]) — ["A", "D", "C"] seria um caminho diferente.',
         'Arrasta os nós para veres o caminho acompanhar a física do grafo.',
         'Ajusta a cor dos nós e o tamanho do destaque para comparar dados e visualização.',
       ],
