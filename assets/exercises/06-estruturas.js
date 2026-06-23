@@ -6,6 +6,9 @@ window.exerciseTopics.push({
   exercises: [
     {
       id: 'grafo-criar',
+      advanced: [
+        'Um grafo é uma das estruturas mais usadas em informática: redes sociais, mapas, dependências entre tarefas. Aqui guardamos nós e arestas em listas; a física do desenho é só uma forma de os ver — a estrutura são as ligações.',
+      ],
       title: 'Ligar pontos',
       points: 20,
       explanation: [
@@ -194,6 +197,9 @@ window.exerciseTopics.push({
     },
     {
       id: 'grafo-caminho',
+      advanced: [
+        'Um caminho é uma lista ordenada de nós, e a ordem distingue um caminho de outro. Encontrar caminhos é o problema que algoritmos como a procura em largura (BFS) ou o Dijkstra resolvem em grafos maiores.',
+      ],
       title: 'Mostrar um caminho',
       points: 20,
       explanation: [
@@ -386,6 +392,9 @@ window.exerciseTopics.push({
     },
     {
       id: 'rede-pesos',
+      advanced: [
+        'Dar um peso a cada nó é uma forma de modelar importância. Em grafos a sério, os pesos costumam estar nas arestas (distâncias, custos) e são a base para encontrar o caminho mais curto ou a ligação mais barata.',
+      ],
       title: 'Rede com pesos',
       points: 30,
       explanation: [
@@ -561,6 +570,9 @@ window.exerciseTopics.push({
     },
     {
       id: 'arvore-procura',
+      advanced: [
+        'Numa árvore binária de procura, cada decisão (esquerda ou direita) elimina metade dos valores restantes, por isso a procura cresce com o logaritmo do tamanho — muito mais rápido do que percorrer uma lista do início ao fim quando há muitos dados.',
+      ],
       title: 'Procura numa lista e numa árvore',
       points: 40,
       explanation: [

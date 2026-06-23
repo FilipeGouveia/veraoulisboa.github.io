@@ -60,6 +60,9 @@ window.exerciseTopics.push({
     },
     {
       id: 'cesar-desencriptar',
+      advanced: [
+        'Cifrar e decifrar são operações inversas: o que somámos, subtraímos. Muitas transformações em programação têm inversa (somar/subtrair, avançar/recuar), e reconhecer isso ajuda a desfazer ou verificar um cálculo.',
+      ],
       title: 'Desencriptar a mensagem',
       points: 20,
       explanation: [
@@ -96,6 +99,9 @@ window.exerciseTopics.push({
     },
     {
       id: 'formula',
+      advanced: [
+        'Partir uma fórmula grande em variáveis intermédias (primeiro [delta], depois cada raiz) torna o código mais legível e fácil de corrigir. [Math.sqrt] de um número negativo dá [NaN] — é assim que saberias que a equação não tem raízes reais.',
+      ],
       title: 'Raízes da equação',
       points: 25,
       explanation: [
@@ -153,6 +159,9 @@ window.exerciseTopics.push({
     },
     {
       id: 'pi-coordenadas',
+      advanced: [
+        '[Math.random()] devolve um número no intervalo [0, 1). Multiplicar por uma largura e somar uma origem permite espalhar pontos por qualquer região — a base de simulações que usam aleatoriedade para estimar áreas e probabilidades.',
+      ],
       title: 'Dardos com x e y',
       points: 15,
       explanation: [
