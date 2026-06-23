@@ -220,12 +220,8 @@ function renderBriefing(exercise, completed) {
          ${exercise.advanced.map((paragraph) => `<p>${AppUtils.formatText(paragraph)}</p>`).join('')}
        </div>`
     : '';
-  const animationBlock = exercise.animation
-    ? `<div class="concept-anim">${exercise.animation}</div>`
-    : '';
   document.getElementById('exerciseBody').innerHTML = `
     ${(exercise.explanation || []).map((paragraph) => `<p>${AppUtils.formatText(paragraph)}</p>`).join('')}
-    ${animationBlock}
     ${advancedBlock}
     <p class="briefing-tag tag-objetivos">Objetivos</p>
     <ul>${exercise.instructions.map((instruction) => `<li>${AppUtils.formatText(instruction)}</li>`).join('')}</ul>
@@ -238,6 +234,10 @@ function renderBriefing(exercise, completed) {
     ? `<ul>${hint.map((item) => `<li>${AppUtils.formatText(item)}</li>`).join('')}</ul>`
     : AppUtils.formatText(hint);
   document.getElementById('hintBox').hidden = true;
+
+  const animationPanel = document.getElementById('animationPanel');
+  document.getElementById('animationBody').innerHTML = exercise.animation || '';
+  if (animationPanel) animationPanel.hidden = !exercise.animation;
 }
 
 function selectTopic(topicId) {
