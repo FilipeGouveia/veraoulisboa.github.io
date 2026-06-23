@@ -12,7 +12,7 @@
 
 ## Feature Triage
 
-- Add explanatory animations instead of running text, for greater student engagement. (large — still open)
+- Add explanatory animations instead of running text, for greater student engagement. (started — infra + 3 exercises done; more diagrams can be added per exercise)
 - Create an interactive tutorial for the student. (large — still open)
 - Add visual editing elements (e.g., letter color in the 1st chapter, font size in the 2nd, letter color in the 3rd, etc.). (still open)
 - ~~Exercises 19, 20 and 21: Make execution faster.~~ ✔️ Done — lower frame floor + inter-move delay on the donatello loop exercises.
@@ -44,7 +44,7 @@
 | booleanos: don't tell students to create predefined podeAvancar [feature] | | | ✔️ | Claude |
 | donatello-circulo: solution now satisfies its own validate [bug] | | | ✔️ | Claude |
 | Briefing section tags (Objetivos/Observar) + dicas moved into DICAS [feature] | | | ✔️ | Claude |
-| Per-concept animated diagrams in the briefing [feature] | | ⏳ | | Claude |
+| Per-concept animated diagrams: infra + 3 exercises (precedencia, cesar, listas) [feature] | | | ✔️ | Claude |
 
 ## QA Findings (2026-06-23)
 
