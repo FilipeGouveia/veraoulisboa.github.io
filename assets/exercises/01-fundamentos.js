@@ -76,6 +76,10 @@ window.exerciseTopics.push({
         'Uma função é como um comando com nome. Quando escreves [mostrarMensagem("Olá, FCUL!")], estás a pedir ao programa para pegar no texto entre aspas e colocá-lo no painel de resultado.',
         'Repara que o texto fica entre aspas. Em TypeScript, texto chama-se [string]. Sempre que quiseres escrever uma palavra, uma frase ou uma mensagem para aparecer no ecrã, vais quase sempre usar uma [string].',
       ],
+      advanced: [
+        'Quando escreves [mostrarMensagem("Olá")], acontecem dois passos: o computador encontra a função com o nome [mostrarMensagem] e depois executa as instruções que estão guardadas lá dentro. O texto entre parênteses chama-se argumento — é a informação que entregas à função para ela trabalhar.',
+        'Uma [string] é guardada como uma sequência ordenada de caracteres, e cada caractere tem um código numérico associado. É essa ideia que mais tarde te vai permitir transformar letras em números (e o contrário) nos exercícios das cifras.',
+      ],
       instructions: [
         'Chama a função [mostrarMensagem] com uma frase tua.',
         'A mensagem tem de ter pelo menos 8 caracteres (letras, números ou caracteres especiais).',
@@ -139,9 +143,11 @@ window.exerciseTopics.push({
         'Uma variável é um nome que damos a um valor. Podes imaginar uma variável como uma caixa com uma etiqueta. A etiqueta é o nome da variável; lá dentro fica guardado o valor.',
         'Neste exercício vais guardar o teu nome numa variável. Depois vais passar essa variável a uma função. Isto é importante porque, em programas maiores, raramente escrevemos tudo diretamente. Guardamos valores, damos-lhes nomes e reutilizamo-los.',
         'Podemos definir as variáveis de várias formas. Em TypeScript, uma forma comum é escrever [const nome: string = "Ana";]. O nome da variável é [nome], o valor que lhe estamos a dar é ["Ana"] e o tipo desse valor é [string].',
-        'O facto de termos [const] no início significa que esta variável não pode ser reatribuída. Ou seja, depois de escrevermos [const nome: string = "Ana";], não podemos escrever [nome = "Carlos";] mais tarde. O valor da variável [nome] vai ser sempre "Ana".',
-        'Se quiseres uma variável que possa mudar, podes usar [let] em vez de [const]. Por exemplo, [let idade: number = 30;] define uma variável chamada [idade] que guarda um número e que pode ser atualizada mais tarde.',
         'A linha de código [const nome: string = "";] é uma pista do TypeScript. Ela diz: esta variável, chamada nome, deve guardar texto. Se mais tarde tentares guardar um número no mesmo sítio, o TypeScript consegue avisar-te.',
+      ],
+      advanced: [
+        'O [const] no início significa que a variável não pode ser reatribuída: depois de [const nome: string = "Ana";], não podes escrever [nome = "Carlos";] mais tarde — o valor de [nome] será sempre "Ana".',
+        'Se quiseres uma variável que possa mudar, usa [let] em vez de [const]. Por exemplo, [let idade: number = 30;] cria uma variável que guarda um número e que pode ser atualizada depois. Na prática preferimos [const] e só usamos [let] quando precisamos mesmo de mudar o valor.',
       ],
       instructions: [
         'Cria uma variável nome com tipo string.',

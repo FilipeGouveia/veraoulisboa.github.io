@@ -93,6 +93,10 @@ window.exerciseTopics.push({
         'Neste exercício, a função [numeroAleatorio(1, 6)] devolve um número entre 1 e 6, como se estivesses a lançar um dado.',
         'Guarda esse valor numa variável e depois mostra-o. Assim separas o momento de gerar o número do momento de o apresentar.',
       ],
+      advanced: [
+        '[Math.random()] (que [numeroAleatorio] usa por baixo) não devolve números verdadeiramente aleatórios: são números pseudo-aleatórios, calculados por uma fórmula que parte de um valor inicial. Parecem aleatórios, mas são deterministas.',
+        'Para transformar um número entre 0 e 1 num inteiro entre [min] e [max], multiplicamos pelo tamanho do intervalo, arredondamos para baixo com [Math.floor] e somamos o mínimo. É exatamente o que [numeroAleatorio] faz.',
+      ],
       instructions: [
         'Usa [numeroAleatorio(1, 6)] para gerar o valor do dado.',
         'Guarda esse valor numa variável do tipo number.',
@@ -223,7 +227,7 @@ window.exerciseTopics.push({
         'Neste exercício, a variável [podeAvancar] controla o semáforo. Se for verdadeira, ligamos o verde. Se for falsa, ligamos o vermelho.',
       ],
       instructions: [
-        'Cria uma variável [podeAvancar] do tipo boolean.',
+        'A variável [podeAvancar] (do tipo boolean) já está criada no editor — só precisas de mudar o seu valor entre [true] e [false].',
         'Usa [if] e [else].',
         'Liga verde com `ligarSemaforo("verde")` quando [podeAvancar] for [true]; caso contrário liga vermelho com `ligarSemaforo("vermelho")`.',
         'Ajusta o tamanho das luzes e observa a chamada de função que aparece no código.',
