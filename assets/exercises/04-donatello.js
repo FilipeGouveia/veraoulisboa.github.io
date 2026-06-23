@@ -157,7 +157,7 @@ function donatelloApi() {
           };
           const frames = window.exerciseState.isRoomba
             ? Math.max(1, Math.ceil(Math.abs(move.value * factor) / 5))
-            : Math.max(8, Math.min(40, Math.ceil(Math.abs(move.value) / 5)));
+            : Math.max(2, Math.min(40, Math.ceil(Math.abs(move.value) / 5)));
           for (let frame = 1; frame <= frames; frame++) {
             const t = frame / frames;
             turtleDraw.x = start.x + (end.x - start.x) * t;
@@ -169,7 +169,7 @@ function donatelloApi() {
           turtleDraw = { ...end, angle: turtleDraw.angle };
           renderScene();
         }
-        await new Promise((resolve) => setTimeout(resolve, animationDelay * 4));
+        await new Promise((resolve) => setTimeout(resolve, animationDelay));
       }
     };
   `;
@@ -244,6 +244,10 @@ window.exerciseTopics.push({
         'Uma circunferência parece uma curva suave, mas o computador pode aproximá-la com muitos passos pequenos.',
         'Se a tartaruga andar 1 pixel e rodar 1 grau, e repetir isso 360 vezes, no fim terá dado uma volta completa: 360 graus.',
         'Isto mostra uma ideia importante: muitas formas complexas podem ser construídas com instruções simples repetidas muitas vezes.',
+      ],
+      advanced: [
+        'Na verdade não desenhas uma circunferência perfeita, mas um polígono com muitos lados. Como os ângulos exteriores de qualquer polígono fechado somam sempre 360 graus, dar 36 passos a virar 10 graus (ou 360 passos a virar 1 grau) leva-te de volta ao ponto de partida.',
+        'Quanto mais pequenos forem os passos, mais o polígono se parece com uma curva suave. Aproximar algo curvo com muitos pedaços retos é precisamente como os computadores desenham círculos e curvas no ecrã.',
       ],
       instructions: [
         'Usa um ciclo [for] com 36 repetições.',

@@ -13,6 +13,10 @@ window.exerciseTopics.push({
         'No computador, cada letra tem um código numérico. Podemos ler esse código com [charCodeAt] e criar uma nova letra com [String.fromCharCode].',
         'Aqui usamos um deslocamento de 13. A letra F passa a S, C passa a P, U passa a b e L passa a Y. Por isso FCUL fica SPbY.',
       ],
+      advanced: [
+        'Cada caractere tem um número associado na tabela de caracteres (Unicode). [letra.charCodeAt(0)] dá-te esse número, e [String.fromCharCode(n)] faz o caminho inverso. Somar 13 ao código é o que "avança" a letra.',
+        'Repara que esta cifra simples não trata do fim do alfabeto: somar 13 a algumas letras dá símbolos em vez de letras (é por isso que o U vira "b" minúsculo). As cifras a sério usam o resto da divisão ([%]) para "dar a volta" e ficar sempre dentro das letras.',
+      ],
       instructions: [
         'Completa a função [cifrar].',
         'Percorre todas as letras do texto.',
@@ -251,6 +255,10 @@ window.exerciseTopics.push({
         'Uma forma divertida de aproximar pi é lançar muitos pontos aleatórios para um quadrado e contar quantos ficam dentro de um quarto de círculo.',
         'O quadrado tem área 1. O quarto de círculo ocupa uma parte dessa área. A razão entre pontos dentro do círculo e pontos totais aproxima a razão entre as áreas.',
         'Na pergunta anterior criaste um ponto com x e y. Agora vais repetir essa ideia muitas vezes: cada ponto é um dardo. Quando multiplicamos a razão de pontos dentro por 4, obtemos uma aproximação de pi.',
+      ],
+      advanced: [
+        'Porquê multiplicar por 4? O quarto de círculo tem área [pi/4] e o quadrado tem área 1. A fração de dardos que cai dentro do quarto de círculo aproxima [pi/4], por isso multiplicamos por 4 para chegar a [pi].',
+        'Este método chama-se simulação de Monte Carlo. Quanto mais dardos lançares, mais perto de [pi] tende a ficar a estimativa — é a lei dos grandes números em ação. Com poucos dardos, o valor oscila bastante.',
       ],
       instructions: [
         'Cria total com pelo menos 1000 dardos.',

@@ -382,6 +382,37 @@ body {
   background: #334155;
 }
 
+.advanced-toggle {
+  margin: 4px 0 2px;
+  background: #7c3aed;
+}
+
+.advanced-toggle:hover {
+  background: #6d28d9;
+}
+
+.advanced-box {
+  margin: 12px 0 6px;
+  padding: 12px 14px;
+  border-left: 4px solid #7c3aed;
+  border-radius: 0 8px 8px 0;
+  background: #f3effe;
+  color: #3b3357;
+  line-height: 1.5;
+}
+
+.advanced-box[hidden] {
+  display: none;
+}
+
+.advanced-box p:first-child {
+  margin-top: 0;
+}
+
+.advanced-box p:last-child {
+  margin-bottom: 0;
+}
+
 .lab {
   min-height: 0;
   display: grid;

@@ -22,6 +22,10 @@ window.exerciseTopics = window.exerciseTopics || [];
           'Quando queremos controlar a ordem, usamos parênteses. Os parênteses dizem ao computador: faz esta parte primeiro. Por isso a + b * c não é o mesmo que (a + b) * c.',
           'Esta ideia parece pequena, mas evita muitos erros em programas que calculam pontuações, preços, médias, áreas ou velocidades.',
         ],
+        advanced: [
+          'A ordem das operações chama-se precedência. Multiplicação, divisão e resto ([*], [/], [%]) têm precedência maior do que a soma e a subtração ([+], [-]), por isso são feitas primeiro. Os parênteses servem para forçar outra ordem.',
+          'Quando duas operações têm a mesma precedência, são avaliadas da esquerda para a direita (associatividade à esquerda). Por exemplo, [10 - 3 - 2] é [(10 - 3) - 2], que dá 5, e não [10 - (3 - 2)].',
+        ],
         instructions: [
           'Sem mudar os valores de a, b e c, faz com que a soma de a + b aconteça antes da multiplicação.',
           'Usa parênteses.',
@@ -208,6 +212,10 @@ window.exerciseTopics = window.exerciseTopics || [];
           'Uma string (texto) é, na prática, uma lista de caracteres. A palavra "ola" tem três caracteres: o, l e a.',
           'Quando queremos saber quantos caracteres tem uma palavra, usamos [.length]. Por exemplo, o valor de ["ola".length] é 3.',
           'Neste exercício vais pedir uma palavra-passe ao utilizador e usar [.length] para validar o seu comprimento: consideramos uma palavra-passe forte quando tem pelo menos 6 caracteres.',
+        ],
+        advanced: [
+          'Por baixo, uma [string] é uma sequência de unidades de código (em JavaScript/TypeScript, UTF-16). O [.length] conta essas unidades, que para letras normais coincidem com o número de caracteres que vês.',
+          'Há exceções curiosas: alguns emojis e certas letras acentuadas combinadas podem contar como mais do que uma unidade. Para palavras-passe normais isto não acontece, mas fica a saber que [.length] nem sempre é igual ao número de símbolos que uma pessoa vê no ecrã.',
         ],
         instructions: [
           'Pede uma palavra-passe ao utilizador com [await lerInput("...")].',

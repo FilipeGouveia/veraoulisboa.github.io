@@ -20,6 +20,7 @@ The canonical order lives in `assets/app/curriculum.js`. Interactive variants in
 | Field | Type | Description |
 |-------|------|-------------|
 | `explanation` | `string[]` | Briefing paragraphs |
+| `advanced` | `string[]` | Optional deeper "Avançado" paragraphs, shown collapsed behind a toggle button for curious students |
 | `observation` | `string` | What to look for in the preview |
 | `hint` | `string` | Shown in the hint box |
 | `html` | `string` | Preview panel markup |
