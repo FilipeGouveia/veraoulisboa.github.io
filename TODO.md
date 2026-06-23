@@ -42,3 +42,33 @@
 | Exercises 19-21: faster donatello loop execution [feature] | | | ✔️ | Claude |
 | booleanos: don't tell students to create predefined podeAvancar [feature] | | | ✔️ | Claude |
 | donatello-circulo: solution now satisfies its own validate [bug] | | | ✔️ | Claude |
+
+## QA Findings (2026-06-23)
+
+> Full report in `report.md`. Priority: 🔴 high · 🟡 medium · 🟢 low.
+
+### Bug Triage
+
+- 🔴 `intro`: passes automatically (starter already has 8+ char message) — add interactivity check to `validate`
+- 🔴 `strings`: explanation promises TS will catch type errors but transpiler strips types silently — update text or add type-checking
+- 🔴 `semaforo-amarelo`: can pass without using the `estado` variable — add `/estado/.test(code)` to validate
+- 🟡 `numeros-variavel`: hardcoding `84` bypasses the multiplication — verify `/12\s*\*\s*7/.test(code)` in validate
+- 🟡 `cesar`: hardcoding `"SPbY"` skips the algorithm — add `/charCodeAt/.test(code)` to validate
+- 🟡 `arvore-procura`: `treeSteps <= listSteps` is a false-negative for degenerate (sorted) lists — remove or relax this condition
+- 🟡 `donatello-roomba`: valid code may rarely fail if random walk misses a wall in 1200 steps — increase step count or lower wall-reach threshold
+- 🟢 `pi` (dardos): 5000 iterations can freeze slow machines — cap total or batch async
+- 🟢 `grafo-caminho`: instructions don't mention that path order matters — add a note
+
+### Task Status (QA)
+
+| Task name [feature]/[bug] | To implement | Implementing | Ready | Responsible |
+|---------------------------|--------------|--------------|-------|--------------| 
+| intro: validate requires interactivity, not just starter message [bug] | ⬜ | | | |
+| strings: fix/remove promise that TS enforces types at runtime [bug] | ⬜ | | | |
+| semaforo-amarelo: validate must use estado variable [bug] | ⬜ | | | |
+| numeros-variavel: verify multiplication expression in validate [bug] | ⬜ | | | |
+| cesar: require charCodeAt in validate to prevent hardcoding [bug] | ⬜ | | | |
+| arvore-procura: relax treeSteps <= listSteps condition [bug] | ⬜ | | | |
+| donatello-roomba: increase steps or lower wall threshold [bug] | ⬜ | | | |
+| pi: cap darts or batch async to avoid UI freeze [feature] | ⬜ | | | |
+| grafo-caminho: note that path order matters in instructions [feature] | ⬜ | | | |
