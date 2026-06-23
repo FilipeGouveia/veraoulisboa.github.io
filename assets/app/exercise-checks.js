@@ -1,6 +1,7 @@
 window.exerciseChecksById = {
   intro: [
     { test: (_c, s) => s.message?.length >= 8, message: 'Chama mostrarMensagem com uma frase com pelo menos 8 caracteres.' },
+    { test: (_c, s) => s.panelColor !== '#3b93ff' || s.messageSize !== 44, message: 'Muda a cor do painel ou o tamanho da mensagem nas Configurações Visuais.' },
   ],
   ola: [
     { test: (_c, s) => s.message?.length >= 8, message: 'Chama mostrarMensagem com uma mensagem tua (8+ caracteres).' },
@@ -23,6 +24,7 @@ window.exerciseChecksById = {
   'numeros-variavel': [
     { test: (c) => /\bd\s*:\s*number/.test(c), message: 'Cria a variável d com tipo number.' },
     { test: (c) => /mostrarResultado\s*\(\s*d\s*\)/.test(c), message: 'Mostra o resultado com mostrarResultado(d).' },
+    { test: (c) => /(12\s*\*\s*7|7\s*\*\s*12)/.test(c), message: 'Calcula 12 * 7 em vez de escrever o resultado diretamente.' },
     { test: (_c, s) => s.result === 84, message: 'O resultado deve ser 84.' },
   ],
   'numeros-divisao': [
@@ -69,6 +71,7 @@ window.exerciseChecksById = {
   ],
   'semaforo-amarelo': [
     { test: (c) => /else\s+if/.test(c), message: 'Usa else if para tratar o caso do amarelo.' },
+    { test: (c) => /estado\s*===/.test(c), message: 'Decide com base na variável estado (ex.: estado === "atenção").' },
     { test: (_c, s) => s.color === 'amarelo', message: 'Com o valor dado, o semáforo deve ficar amarelo.' },
   ],
   while: [
@@ -112,10 +115,11 @@ window.exerciseChecksById = {
     { test: (_c, s) => !(s.visited || []).some(p => Math.abs(p.x) > 115 || Math.abs(p.y) > 115), message: 'O Donatello saiu dos limites do quadrado! Deteta as paredes e inverte o movimento.' },
     { test: (_c, s) => {
       const v = s.visited || [];
-      return v.some(p => p.x < -80) && v.some(p => p.x > 80) && v.some(p => p.y > 80) && v.some(p => p.y < -80);
+      return v.some(p => p.x < -60) && v.some(p => p.x > 60) && v.some(p => p.y > 60) && v.some(p => p.y < -60);
     }, message: 'O Donatello deve explorar o espaço e bater em todas as paredes (deve atingir as coordenadas perto de -100 e 100).' },
   ],
   cesar: [
+    { test: (c) => /charCodeAt/.test(c) && /fromCharCode/.test(c), message: 'Transforma cada letra com charCodeAt e String.fromCharCode (não escrevas o resultado à mão).' },
     { test: (_c, s) => s.cipher === 'SPbY', message: 'A mensagem encriptada deve ser SPbY.' },
   ],
   'cesar-desencriptar': [
