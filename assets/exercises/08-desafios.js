@@ -7,6 +7,9 @@ window.exerciseTopics.push({
     // ─── Challenge 1: O Desafio do Arquiteto ───────────────────────────────
     {
       id: 'arquiteto',
+      advanced: [
+        'Comparar todos os pares com dois ciclos [for] aninhados faz cerca de n²/2 comparações, que cresce depressa com muitos pontos. Pôr [j] a começar em [i+1] evita repetir pares e comparar um ponto consigo próprio. [Math.hypot] é o teorema de Pitágoras aplicado às diferenças de coordenadas.',
+      ],
       title: 'O Desafio do Arquiteto',
       points: 50,
       interactive: true,
@@ -136,6 +139,9 @@ window.exerciseTopics.push({
     // ─── Challenge 2: Melhor Jogador de Futebol ────────────────────────────
     {
       id: 'mvp-futebol',
+      advanced: [
+        'Encontrar o máximo percorrendo a lista uma vez e guardando o melhor até agora é um padrão fundamental (varrimento linear). Começar [melhorPontos] em [-Infinity] garante que o primeiro jogador é sempre aceite, mesmo com pontuações negativas.',
+      ],
       title: 'Melhor Jogador de Futebol',
       points: 45,
       interactive: true,

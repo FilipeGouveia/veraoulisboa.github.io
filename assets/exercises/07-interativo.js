@@ -8,6 +8,9 @@ window.exerciseTopics.push({
   exercises: [
     {
       id: 'adivinhar-numero',
+      advanced: [
+        'A palavra [await] suspende o programa até a resposta chegar, sem bloquear o resto da página. É por isso que um [while] com [await lerInput] consegue esperar por ti em cada volta — algo essencial em programas interativos e em pedidos pela internet.',
+      ],
       title: 'Adivinhar o número',
       points: 35,
       interactive: true,
@@ -93,6 +96,9 @@ window.exerciseTopics.push({
     },
     {
       id: 'calculadora-interativa',
+      advanced: [
+        '[lerInput] devolve sempre uma [string], mesmo quando escreves um número. Somar duas strings junta-as ("2" + "3" dá "23"), por isso converter com [Number()] antes de calcular é obrigatório e uma fonte comum de bugs.',
+      ],
       title: 'Calculadora com input',
       points: 20,
       interactive: true,
@@ -136,6 +142,9 @@ window.exerciseTopics.push({
     },
     {
       id: 'cifra-interativa',
+      advanced: [
+        'Separar a função que transforma os dados ([cifrar]) da parte que pede e mostra é um bom hábito: a mesma função serve para qualquer texto e podes testá-la isoladamente. Reutilizar funções é a base de programas maiores.',
+      ],
       title: 'Cifra a tua mensagem',
       points: 25,
       interactive: true,
@@ -188,6 +197,9 @@ window.exerciseTopics.push({
     },
     {
       id: 'falar',
+      advanced: [
+        'O [await] faz o programa esperar pela resposta antes de continuar. Sem ele, [lerInput] devolveria uma promessa (um valor que ainda não chegou) e o resto do código correria cedo demais — um erro muito comum com input e pedidos à internet.',
+      ],
       title: 'Falar com o programa',
       points: 15,
       interactive: true,
