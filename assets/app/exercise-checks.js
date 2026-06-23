@@ -49,7 +49,7 @@ window.exerciseChecksById = {
   ],
   aleatorio: [
     { test: (c) => /numeroAleatorio\s*\(\s*1\s*,\s*6\s*\)/.test(c), message: 'Chama numeroAleatorio(1, 6) para simular o dado.' },
-    { test: (_c, s) => (s.rolls || []).length >= 1, message: 'Executa o programa para lançar o dado pelo menos uma vez.' },
+    { test: (_c, s) => (typeof s.die === 'number' && s.die >= 1 && s.die <= 6) || (Array.isArray(s.dice) && s.dice.length >= 1), message: 'Executa o programa para lançar o dado pelo menos uma vez.' },
   ],
   booleanos: [
     { test: (c) => /:\s*boolean/.test(c), message: 'Usa uma variável boolean (ex.: const verde: boolean = ...).' },
