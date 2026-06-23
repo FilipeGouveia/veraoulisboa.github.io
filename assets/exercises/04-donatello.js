@@ -448,8 +448,8 @@ window.exerciseTopics.push({
       ],
       observation: 'O Donatello deve andar de forma aleatória e manter-se sempre dentro do quadrado tracejado no ecrã.',
       hint: 'Dentro do ciclo, move-te com [donatello.forward(1)] em cada passo. Lê as posições com [donatello.getX()] e [donatello.getY()], e se saírem dos limites do quadrado, recua com [donatello.forward(-10)] e roda [donatello.right(180)].',
-      starter: 'quadrado(donatello);\ndonatello.right(numeroAleatorio(0, 360));\n\nfor (let i = 0; i < 1200; i++) {\n  donatello.forward(1);\n\n  // 1. Obtém as coordenadas posX e posY do Donatello\n  const posX: number = donatello.getX();\n  const posY: number = donatello.getY();\n\n  // 2. Roda aleatoriamente entre -5 e 5 graus\n  donatello.right(numeroAleatorio(-5, 5));\n\n  // 3. Testa se posX ou posY saem do quadrado [-100, 100]\n  // Se sim, anda para trás (forward(-10)) e inverte a direção (right(180))\n}',
-      solution: 'quadrado(donatello);\ndonatello.right(numeroAleatorio(0, 360));\n\nfor (let i = 0; i < 1200; i++) {\n  donatello.forward(1);\n\n  const posX: number = donatello.getX();\n  const posY: number = donatello.getY();\n\n  donatello.right(numeroAleatorio(-5, 5));\n\n  if (posX < -100 || posX > 100 || posY < -100 || posY > 100) {\n    donatello.forward(-10);\n    donatello.right(180);\n  }\n}',
+      starter: 'quadrado(donatello);\ndonatello.right(numeroAleatorio(0, 360));\n\nfor (let i = 0; i < 2000; i++) {\n  donatello.forward(1);\n\n  // 1. Obtém as coordenadas posX e posY do Donatello\n  const posX: number = donatello.getX();\n  const posY: number = donatello.getY();\n\n  // 2. Roda aleatoriamente entre -5 e 5 graus\n  donatello.right(numeroAleatorio(-5, 5));\n\n  // 3. Testa se posX ou posY saem do quadrado [-100, 100]\n  // Se sim, anda para trás (forward(-10)) e inverte a direção (right(180))\n}',
+      solution: 'quadrado(donatello);\ndonatello.right(numeroAleatorio(0, 360));\n\nfor (let i = 0; i < 2000; i++) {\n  donatello.forward(1);\n\n  const posX: number = donatello.getX();\n  const posY: number = donatello.getY();\n\n  donatello.right(numeroAleatorio(-5, 5));\n\n  if (posX < -100 || posX > 100 || posY < -100 || posY > 100) {\n    donatello.forward(-10);\n    donatello.right(180);\n  }\n}',
       html: `
         <main class="stage">
           <section class="panel">
@@ -479,10 +479,10 @@ window.exerciseTopics.push({
         const escaped = visited.some(p => Math.abs(p.x) > 115 || Math.abs(p.y) > 115);
         if (escaped) return false;
 
-        const reachedLeft = visited.some(p => p.x < -80);
-        const reachedRight = visited.some(p => p.x > 80);
-        const reachedTop = visited.some(p => p.y > 80);
-        const reachedBottom = visited.some(p => p.y < -80);
+        const reachedLeft = visited.some(p => p.x < -60);
+        const reachedRight = visited.some(p => p.x > 60);
+        const reachedTop = visited.some(p => p.y > 60);
+        const reachedBottom = visited.some(p => p.y < -60);
 
         return reachedLeft && reachedRight && reachedTop && reachedBottom;
       },

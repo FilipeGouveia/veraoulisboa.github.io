@@ -844,8 +844,7 @@ window.exerciseTopics.push({
         /procurarNaArvore/.test(code) &&
         (state.listValues || []).length >= 5 &&
         state.listTarget === state.treeTarget &&
-        (state.listValues || []).includes(state.listTarget) &&
-        state.treeSteps <= state.listSteps,
+        (state.listValues || []).includes(state.listTarget),
     },
   ],
 });

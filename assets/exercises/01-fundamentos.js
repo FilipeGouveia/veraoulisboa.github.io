@@ -25,7 +25,7 @@ window.exerciseTopics.push({
       observation: 'Veja se consegue colocar a caixa vermelha e o texto grande ao mesmo tempo!',
       hint: 'Não há dicas 🤖',
       starter: 'mostrarMensagem("Mude as coisas no menu ao lado para perceber o que acontece!");\nmudarCorPainel("#3b93ff");\nmudarTamanhoMensagem(44);',
-      solution: 'mostrarMensagem("Mude as coisas no menu ao lado para perceber o que acontece!");\nmudarCorPainel("#3b93ff");\nmudarTamanhoMensagem(44);',
+      solution: 'mostrarMensagem("Consegui mudar a cor e o tamanho!");\nmudarCorPainel("#e23d3d");\nmudarTamanhoMensagem(60);',
       html: `
        <main class="stage">
           <section class="panel dark">
@@ -68,7 +68,8 @@ window.exerciseTopics.push({
           template: (value) => `mudarTamanhoMensagem(${value});`,
         },
       ],
-      validate: (code, state) => state.message && state.message.length >= 8,
+      validate: (code, state) => state.message && state.message.length >= 8 &&
+        (state.panelColor !== '#3b93ff' || state.messageSize !== 44),
     },
     {
       id: 'ola',
@@ -146,7 +147,7 @@ window.exerciseTopics.push({
         'Uma variável é um nome que damos a um valor. Podes imaginar uma variável como uma caixa com uma etiqueta. A etiqueta é o nome da variável; lá dentro fica guardado o valor.',
         'Neste exercício vais guardar o teu nome numa variável. Depois vais passar essa variável a uma função. Isto é importante porque, em programas maiores, raramente escrevemos tudo diretamente. Guardamos valores, damos-lhes nomes e reutilizamo-los.',
         'Podemos definir as variáveis de várias formas. Em TypeScript, uma forma comum é escrever [const nome: string = "Ana";]. O nome da variável é [nome], o valor que lhe estamos a dar é ["Ana"] e o tipo desse valor é [string].',
-        'A linha de código [const nome: string = "";] é uma pista do TypeScript. Ela diz: esta variável, chamada nome, deve guardar texto. Se mais tarde tentares guardar um número no mesmo sítio, o TypeScript consegue avisar-te.',
+        'A linha de código [const nome: string = "";] é uma pista do TypeScript: diz que a variável nome deve guardar texto. Aqui no laboratório o tipo serve sobretudo como documentação — num editor com TypeScript, tentar guardar um número onde se espera texto seria assinalado como erro.',
       ],
       advanced: [
         'O [const] no início significa que a variável não pode ser reatribuída: depois de [const nome: string = "Ana";], não podes escrever [nome = "Carlos";] mais tarde — o valor de [nome] será sempre "Ana".',
