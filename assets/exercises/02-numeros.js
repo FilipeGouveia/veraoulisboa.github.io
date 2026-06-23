@@ -77,7 +77,7 @@ window.exerciseTopics = window.exerciseTopics || [];
         </main>
       `,
         api: resultApi,
-        validate: (code, state) => /\bd\s*:\s*number/.test(code) && /mostrarResultado\s*\(\s*d\s*\)/.test(code) && state.result === 84,
+        validate: (code, state) => /\bd\s*:\s*number/.test(code) && /mostrarResultado\s*\(\s*d\s*\)/.test(code) && /(12\s*\*\s*7|7\s*\*\s*12)/.test(code) && state.result === 84,
       },
       {
         id: 'numeros-divisao',

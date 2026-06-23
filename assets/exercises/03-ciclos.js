@@ -385,7 +385,7 @@ window.exerciseTopics.push({
           template: (value) => `mudarTamanhoLuzes(${value});`,
         },
       ],
-      validate: (code, state) => /else\s+if/.test(code) && state.color === 'amarelo',
+      validate: (code, state) => /else\s+if/.test(code) && /estado\s*===/.test(code) && state.color === 'amarelo',
     },
     {
       id: 'while',
