@@ -382,6 +382,21 @@ body {
   background: #334155;
 }
 
+.concept-anim {
+  margin: 14px 0;
+  padding: 16px;
+  border-radius: 10px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  overflow: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .concept-anim * {
+    animation: none !important;
+  }
+}
+
 .briefing-tag {
   display: inline-block;
   margin: 16px 0 8px;

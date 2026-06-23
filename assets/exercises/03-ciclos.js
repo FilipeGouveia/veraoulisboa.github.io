@@ -16,6 +16,21 @@ window.exerciseTopics.push({
         'Um ciclo for serve para repetir uma ação. Quando escrevemos [for (const fruta of frutas)], estamos a dizer: para cada fruta que existir na lista, faz o bloco de código entre chavetas.',
         'Esta combinação, lista + ciclo, é uma das ferramentas mais importantes da programação. Permite fazer a mesma coisa a muitos valores sem copiar e colar linhas de código.',
       ],
+      animation: `
+        <div class="al">
+          <style>
+            .al{font-family:Inter,system-ui,sans-serif;text-align:center}
+            .al .item{display:inline-block;margin:4px;padding:8px 12px;border-radius:8px;background:#e8eef7;font-weight:800;opacity:0;animation:alPop 4s infinite}
+            .al .i2{animation-delay:.7s}.al .i3{animation-delay:1.4s}
+            @keyframes alPop{0%,3%{opacity:0;transform:scale(.6)}13%,92%{opacity:1;transform:scale(1)}100%{opacity:1}}
+            .al .lbl{font-size:13px;color:#64748b;font-weight:700;margin-top:10px}
+          </style>
+          <div>
+            <span class="item i1">🍎 maçã</span><span class="item i2">🍌 banana</span><span class="item i3">🥝 kiwi</span>
+          </div>
+          <div class="lbl">for (const fruta of frutas) → uma etiqueta de cada vez</div>
+        </div>
+      `,
       instructions: [
         'Cria uma lista com pelo menos 3 frutas.',
         'Usa um ciclo [for].',
