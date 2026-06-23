@@ -420,6 +420,29 @@ body {
   }
 }
 
+/* Reusable concept-animation helpers (used inside #animationBody) */
+.cax { font-family: Inter, system-ui, sans-serif; text-align: center; color: #1f2937; width: 100%; line-height: 1.55; }
+.cax .big { font-size: 23px; font-weight: 800; margin: 5px 0; }
+.cax .lbl { font-size: 12px; font-weight: 700; color: #64748b; text-transform: uppercase; letter-spacing: .04em; }
+.cax .accent { color: #0077b6; }
+.cax .ok { color: #16a34a; }
+.cax .warn { color: #d97706; }
+.cax .bad { color: #ef4444; }
+.cax-step { opacity: 0; animation: caxIn 4s infinite; }
+.cax-step.d1 { animation-delay: .5s; }
+.cax-step.d2 { animation-delay: 1s; }
+@keyframes caxIn { 0%,8%{opacity:0;transform:translateY(6px)} 24%,92%{opacity:1;transform:none} 100%{opacity:1} }
+.cax-pulse { border-radius: 5px; padding: 0 5px; animation: caxPulse 3.2s infinite; }
+@keyframes caxPulse { 0%,25%{background:#fde68a} 50%,100%{background:transparent} }
+.cax-pop { display: inline-block; opacity: 0; animation: caxPop 4s infinite; }
+.cax-pop.d1 { animation-delay: .6s; }
+.cax-pop.d2 { animation-delay: 1.2s; }
+@keyframes caxPop { 0%,4%{opacity:0;transform:scale(.6)} 16%,92%{opacity:1;transform:scale(1)} 100%{opacity:1} }
+.cax-a { animation: caxAB 5s infinite; }
+.cax-b { animation: caxBA 5s infinite; }
+@keyframes caxAB { 0%,42%{opacity:1} 50%,92%{opacity:.15} 100%{opacity:1} }
+@keyframes caxBA { 0%,42%{opacity:.15} 50%,92%{opacity:1} 100%{opacity:.15} }
+
 .briefing-tag {
   display: block;
   width: fit-content;

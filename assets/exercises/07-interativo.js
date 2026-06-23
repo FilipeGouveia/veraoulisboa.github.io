@@ -8,6 +8,7 @@ window.exerciseTopics.push({
   exercises: [
     {
       id: 'adivinhar-numero',
+      animation: '<div class="cax"><div class="lbl">segredo = 23</div><div class="big"><span class="cax-pop">30 alto</span> <span class="cax-pop d1">20 baixo</span> <span class="cax-pop d2 ok">23 ✓</span></div></div>',
       advanced: [
         'A palavra [await] suspende o programa até a resposta chegar, sem bloquear o resto da página. É por isso que um [while] com [await lerInput] consegue esperar por ti em cada volta — algo essencial em programas interativos e em pedidos pela internet.',
       ],
@@ -96,6 +97,7 @@ window.exerciseTopics.push({
     },
     {
       id: 'calculadora-interativa',
+      animation: '<div class="cax"><div class="lbl">lerInput devolve texto</div><div class="big">"2" + "3" = <span class="bad">"23"</span></div><div class="big ok cax-step">Number("2") + Number("3") = 5</div></div>',
       advanced: [
         '[lerInput] devolve sempre uma [string], mesmo quando escreves um número. Somar duas strings junta-as ("2" + "3" dá "23"), por isso converter com [Number()] antes de calcular é obrigatório e uma fonte comum de bugs.',
       ],
@@ -197,6 +199,7 @@ window.exerciseTopics.push({
     },
     {
       id: 'falar',
+      animation: '<div class="cax"><div class="lbl">lerInput("Como te chamas?")</div><div class="big">🪪 <span class="accent cax-step">Ana</span></div></div>',
       advanced: [
         'O [await] faz o programa esperar pela resposta antes de continuar. Sem ele, [lerInput] devolveria uma promessa (um valor que ainda não chegou) e o resto do código correria cedo demais — um erro muito comum com input e pedidos à internet.',
       ],

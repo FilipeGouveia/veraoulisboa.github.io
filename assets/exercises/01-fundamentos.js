@@ -73,6 +73,7 @@ window.exerciseTopics.push({
     },
     {
       id: 'ola',
+      animation: '<div class="cax"><div class="lbl">mostrarMensagem("...")</div><div class="big accent cax-step">Olá, FCUL!</div></div>',
       title: 'Olá, mundo visual',
       points: 10,
       explanation: [
@@ -141,6 +142,7 @@ window.exerciseTopics.push({
     },
     {
       id: 'strings',
+      animation: '<div class="cax"><div class="lbl">const nome: string = "Ana"</div><div class="big">🏷️ nome → <span class="cax-pulse accent">"Ana"</span></div><div class="lbl">uma caixa com etiqueta guarda o valor</div></div>',
       title: 'Variáveis',
       points: 10,
       explanation: [

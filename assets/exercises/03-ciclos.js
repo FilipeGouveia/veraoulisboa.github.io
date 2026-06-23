@@ -104,6 +104,7 @@ window.exerciseTopics.push({
     },
     {
       id: 'aleatorio',
+      animation: '<div class="cax"><div class="lbl">numeroAleatorio(1, 6)</div><div class="big"><span class="cax-pop">🎲</span> <span class="accent cax-step d1">4</span></div><div class="lbl">um valor ao calhas entre 1 e 6</div></div>',
       title: 'Lançar o dado',
       points: 10,
       explanation: [
@@ -237,6 +238,7 @@ window.exerciseTopics.push({
     },
     {
       id: 'booleanos',
+      animation: '<div class="cax"><div class="lbl">podeAvancar</div><div class="big cax-a">true → 🟢 verde</div><div class="big cax-b">false → 🔴 vermelho</div></div>',
       advanced: [
         'Um booleano só tem dois valores: [true] ou [false]. Condições como [idade >= 18] produzem um booleano, e o [if] usa-o para escolher o caminho. O [else] cobre todos os casos em que a condição foi [false].',
       ],
@@ -300,6 +302,7 @@ window.exerciseTopics.push({
     },
     {
       id: 'par-impar',
+      animation: '<div class="cax"><div class="big cax-a">6 % 2 = 0 → <span class="ok">PAR</span></div><div class="big cax-b">7 % 2 = 1 → <span class="warn">ÍMPAR</span></div></div>',
       advanced: [
         'O operador [%] (resto) dá o que sobra de uma divisão inteira. Como qualquer número par tem resto 0 ao dividir por 2, [numero % 2 === 0] é a forma habitual de testar paridade — e a mesma ideia serve para contar de N em N.',
       ],
@@ -340,6 +343,7 @@ window.exerciseTopics.push({
     },
     {
       id: 'semaforo-amarelo',
+      animation: '<div class="cax"><div class="lbl">estado = "atenção"</div><div class="big">🔴 <span class="cax-pulse">🟡</span> 🟢</div><div class="lbl">if / else if / else escolhe a luz</div></div>',
       advanced: [
         'Com [if] / [else if] / [else], as condições são testadas por ordem e só corre o primeiro ramo verdadeiro. Por isso a ordem importa: se duas condições pudessem ser verdadeiras, ganha a que aparece primeiro.',
       ],
@@ -404,6 +408,7 @@ window.exerciseTopics.push({
     },
     {
       id: 'while',
+      animation: '<div class="cax"><div class="lbl">while (resposta !== "sim")</div><div class="big"><span class="cax-pop">não</span> <span class="cax-pop d1">não</span> <span class="cax-pop d2 ok">sim ✓</span></div></div>',
       advanced: [
         'Um [while] repete enquanto a condição for verdadeira: pode nunca correr (se já for falsa à entrada) ou correr para sempre (se nunca se tornar falsa). Garantir que algo dentro do ciclo muda a condição evita ciclos infinitos.',
       ],

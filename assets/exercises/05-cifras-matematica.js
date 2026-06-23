@@ -81,6 +81,7 @@ window.exerciseTopics.push({
     },
     {
       id: 'cesar-desencriptar',
+      animation: '<div class="cax"><div class="big">S P b Y</div><div class="lbl">−13 ↓</div><div class="big accent cax-step">F C U L</div></div>',
       advanced: [
         'Cifrar e decifrar são operações inversas: o que somámos, subtraímos. Muitas transformações em programação têm inversa (somar/subtrair, avançar/recuar), e reconhecer isso ajuda a desfazer ou verificar um cálculo.',
       ],
@@ -120,6 +121,7 @@ window.exerciseTopics.push({
     },
     {
       id: 'formula',
+      animation: '<div class="cax"><div>Δ = b² − 4ac = <span class="cax-pulse">1</span></div><div class="cax-step">√1 = 1</div><div class="big accent cax-step d1">x = 2 e x = 3</div></div>',
       advanced: [
         'Partir uma fórmula grande em variáveis intermédias (primeiro [delta], depois cada raiz) torna o código mais legível e fácil de corrigir. [Math.sqrt] de um número negativo dá [NaN] — é assim que saberias que a equação não tem raízes reais.',
       ],
