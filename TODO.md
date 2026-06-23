@@ -8,11 +8,10 @@
 - ~~Exercise 22: In the hint, explain that a string is a list of characters and suggest using `.length` to validate the word length.~~ ✔️ Done — added a new `palavra-passe` exercise (strings as character lists + `.length` validation).
 - Found during review: `cesar-desencriptar` explanation said "SPHY"; should be "SPbY". ✔️ Done.
 - Found during testing: `donatello-circulo` reference solution (1px/1°×360) never passed its own validate (which required value 10); realigned instructions + validate to the 1px/1° approach. ✔️ Done.
-- Objetivos layer its sitting next to the 
+- Objetivos layer its sitting next to the "Mostrar Avançado". It should be below it and only visible if the user press on it.
 
 ## Feature Triage
 
-- Add explanatory animations instead of running text, for greater student engagement. (started — infra + 3 exercises done; more diagrams can be added per exercise)
 - Create an interactive tutorial for the student. (large — still open)
 - Add visual editing elements (e.g., letter color in the 1st chapter, font size in the 2nd, letter color in the 3rd, etc.). (still open)
 - ~~Exercises 19, 20 and 21: Make execution faster.~~ ✔️ Done — lower frame floor + inter-move delay on the donatello loop exercises.
@@ -43,8 +42,6 @@
 | Exercises 19-21: faster donatello loop execution [feature] | | | ✔️ | Claude |
 | booleanos: don't tell students to create predefined podeAvancar [feature] | | | ✔️ | Claude |
 | donatello-circulo: solution now satisfies its own validate [bug] | | | ✔️ | Claude |
-| Briefing section tags (Objetivos/Observar) + dicas moved into DICAS [feature] | | | ✔️ | Claude |
-| Per-concept animated diagrams: infra + 3 exercises (precedencia, cesar, listas) [feature] | | | ✔️ | Claude |
 
 ## QA Findings (2026-06-23)
 
@@ -77,3 +74,17 @@ _All nine resolved 2026-06-23 (✔️ in Task Status (QA) below)._
 | donatello-roomba: increase steps or lower wall threshold [bug] | | | ✔️ | Claude |
 | pi: cap darts or batch async to avoid UI freeze [feature] | | | ✔️ | Claude |
 | grafo-caminho: note that path order matters in instructions [feature] | | | ✔️ | Claude |
+
+## QA Round 2 — Verification + New Findings (2026-06-23, session 2)
+
+> All 9 fixes from Round 1 verified ✅. Full details in `report.md`.
+
+### Bug Triage
+
+- 🔴 `main.js`: `initApp` defined **twice** (lines 316 and 877) — first definition is dead code; second silently wins. Risk of future developer editing the wrong copy. Remove lines 316–343.
+
+### Task Status (QA Round 2)
+
+| Task name [feature]/[bug] | To implement | Implementing | Ready | Responsible |
+|---------------------------|--------------|--------------|-------|-------------|
+| main.js: remove duplicate initApp function (lines 316-343) [bug] | ⬜ | | | |
