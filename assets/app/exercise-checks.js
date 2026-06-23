@@ -43,6 +43,12 @@ window.exerciseChecksById = {
     { test: (c) => /Number\s*\(/.test(c), message: 'Converte o texto para número com Number(...).' },
     { test: (_c, s) => typeof s.result === 'number' && !Number.isNaN(s.result), message: 'Mostra um resultado numérico válido no painel.' },
   ],
+  'palavra-passe': [
+    { test: (c) => /lerInput/.test(c), message: 'Usa await lerInput para pedir a palavra-passe.' },
+    { test: (c) => /\.length/.test(c), message: 'Usa .length para contar os caracteres da palavra (ex.: palavra.length).' },
+    { test: (c) => /\bif\s*\(/.test(c), message: 'Usa if para decidir se a palavra-passe é forte ou fraca.' },
+    { test: (_c, s) => !!s.strength, message: 'Mostra o resultado com mostrarForca("forte") ou mostrarForca("fraca").' },
+  ],
   listas: [
     { test: (c) => /\bfor\s*\(/.test(c), message: 'Usa um ciclo for para percorrer a lista.' },
     { test: (_c, s) => (s.fruits || []).length >= 3, message: 'Adiciona pelo menos 3 frutas à lista.' },

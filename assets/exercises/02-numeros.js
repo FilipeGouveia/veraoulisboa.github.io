@@ -198,6 +198,64 @@ window.exerciseTopics = window.exerciseTopics || [];
       `,
         validate: (code, state) => /\bif\s*\(/.test(code) && /divisor\s*={2,3}\s*0/.test(code) && /zero/i.test(state.result || ''),
       },
+      {
+        id: 'palavra-passe',
+        title: 'Palavra-passe forte',
+        points: 15,
+        interactive: true,
+        terminal: true,
+        explanation: [
+          'Uma string (texto) é, na prática, uma lista de caracteres. A palavra "ola" tem três caracteres: o, l e a.',
+          'Quando queremos saber quantos caracteres tem uma palavra, usamos [.length]. Por exemplo, o valor de ["ola".length] é 3.',
+          'Neste exercício vais pedir uma palavra-passe ao utilizador e usar [.length] para validar o seu comprimento: consideramos uma palavra-passe forte quando tem pelo menos 6 caracteres.',
+        ],
+        instructions: [
+          'Pede uma palavra-passe ao utilizador com [await lerInput("...")].',
+          'Descobre o número de caracteres com [palavra.length].',
+          'Usa [if] e [else]: se tiver pelo menos 6 caracteres, chama [mostrarForca("forte")]; caso contrário chama [mostrarForca("fraca")].',
+        ],
+        observation: 'Experimenta palavras curtas e longas no terminal para veres o resultado mudar entre forte e fraca.',
+        hint: 'Uma string é uma lista de caracteres. Usa [.length] para saber quantas letras tem a palavra e validar o comprimento. Por exemplo, [palavra.length >= 6] é verdadeiro quando a palavra tem 6 ou mais caracteres.',
+        starter: 'const palavra: string = await lerInput("Escolhe uma palavra-passe:");\n\n// descobre o comprimento com palavra.length\n\n// se tiver pelo menos 6 caracteres, mostra "forte"; caso contrário "fraca"',
+        solution: 'const palavra: string = await lerInput("Escolhe uma palavra-passe:");\n\nconst comprimento: number = palavra.length;\n\nif (comprimento >= 6) {\n  mostrarForca("forte");\n} else {\n  mostrarForca("fraca");\n}',
+        html: `
+        <main class="stage">
+          <section class="panel dark">
+            <h2>🔒 Palavra-passe</h2>
+            <p>Comprimento: <span id="length">—</span> caracteres</p>
+            <div class="big-value" id="strength">?</div>
+          </section>
+        </main>
+      `,
+        api: `
+        function mostrarForca(forca) {
+          const value = String(forca).toLowerCase();
+          const el = document.getElementById('strength');
+          if (el) {
+            el.textContent = value === 'forte' ? '💪 Forte' : '⚠️ Fraca';
+            el.style.color = value === 'forte' ? '#4ade80' : '#f87171';
+          }
+          window.exerciseState.strength = value;
+        }
+        const _origLerInputPwd = lerInput;
+        lerInput = async function(msg) {
+          var val = await _origLerInputPwd(msg);
+          setText('length', String(val).length);
+          window.exerciseState.word = String(val);
+          window.exerciseState.wordLength = String(val).length;
+          return val;
+        };
+      `,
+        validate: (code, state) => {
+          const hasLerInput = /lerInput/.test(code);
+          const usesLength = /\.length/.test(code);
+          const hasIf = /\bif\s*\(/.test(code);
+          if (!hasLerInput || !usesLength || !hasIf) return false;
+          if (typeof state.wordLength !== 'number' || !state.strength) return false;
+          const expected = state.wordLength >= 6 ? 'forte' : 'fraca';
+          return state.strength === expected;
+        },
+      },
     ],
   });
 })();
