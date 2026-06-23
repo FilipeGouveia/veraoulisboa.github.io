@@ -250,9 +250,9 @@ window.exerciseTopics.push({
         'Quanto mais pequenos forem os passos, mais o polígono se parece com uma curva suave. Aproximar algo curvo com muitos pedaços retos é precisamente como os computadores desenham círculos e curvas no ecrã.',
       ],
       instructions: [
-        'Usa um ciclo [for] com 36 repetições.',
-        'Em cada volta, anda 10 pixel.',
-        'Em cada volta, roda 10 grau.',
+        'Usa um ciclo [for] com 360 repetições.',
+        'Em cada volta, anda 1 pixel.',
+        'Em cada volta, roda 1 grau.',
         'Experimenta a cor e a grossura da linha para comparar estilos.',
       ],
       observation: 'A circunferência pode não ficar matematicamente perfeita, mas deve parecer uma volta fechada.',
@@ -290,8 +290,8 @@ window.exerciseTopics.push({
       validate: (code, state) => {
         const moves = state.moves || [];
         return /\bfor\s*\(/.test(code) &&
-          moves.filter((move) => move.type === 'forward' && move.value === 10).length >= 30 &&
-          moves.filter((move) => ['right', 'left'].includes(move.type) && Math.abs(move.value) === 10).length >= 30;
+          moves.filter((move) => move.type === 'forward' && move.value === 1).length >= 300 &&
+          moves.filter((move) => ['right', 'left'].includes(move.type) && Math.abs(move.value) === 1).length >= 300;
       },
     },
     {
