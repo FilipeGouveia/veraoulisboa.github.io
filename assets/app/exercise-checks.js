@@ -31,7 +31,7 @@ window.exerciseChecksById = {
   'numeros-com-if': [
     { test: (c) => /\bif\s*\(/.test(c), message: 'Usa if para decidir o que mostrar.' },
     { test: (c) => /numero\s*>\s*5/.test(c), message: 'Compara a variável numero com 5 (numero > 5).' },
-    { test: (_c, s) => /10/.test(String(s.result || '')), message: 'Com o valor dado, o resultado deve ser 10.' },
+    { test: (_c, s) => { const m = String(s.result || '').match(/-?\d+/); return m !== null && Number(m[0]) > 5; }, message: 'Escolhe um número maior do que 5 (6 ou mais) para o resultado aparecer no ecrã.' },
   ],
   'numeros-divisao-zero': [
     { test: (c) => /\bif\s*\(/.test(c), message: 'Usa if para testar o divisor antes de dividir.' },
