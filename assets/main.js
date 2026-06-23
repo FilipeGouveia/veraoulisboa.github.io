@@ -214,8 +214,15 @@ function renderBriefing(exercise, completed) {
   document.getElementById('exerciseTitle').textContent = exercise.title;
   document.getElementById('exerciseStatus').textContent = completed ? 'Concluído' : `${exercise.points} pontos`;
   document.getElementById('exerciseStatus').className = `status-badge ${completed ? 'done' : ''}`;
+  const advancedBlock = (exercise.advanced && exercise.advanced.length)
+    ? `<button type="button" class="advanced-toggle" onclick="toggleAdvanced()">Mostrar avançado</button>
+       <div class="advanced-box" id="advancedBox" hidden>
+         ${exercise.advanced.map((paragraph) => `<p>${AppUtils.formatText(paragraph)}</p>`).join('')}
+       </div>`
+    : '';
   document.getElementById('exerciseBody').innerHTML = `
     ${(exercise.explanation || []).map((paragraph) => `<p>${AppUtils.formatText(paragraph)}</p>`).join('')}
+    ${advancedBlock}
     <p><strong>Objetivo:</strong></p>
     <ul>${exercise.instructions.map((instruction) => `<li>${AppUtils.formatText(instruction)}</li>`).join('')}</ul>
     <p><strong>O que deves observar:</strong> ${AppUtils.formatText(exercise.observation || 'Executa o programa e compara o resultado visual com o objetivo.')}</p>
@@ -379,6 +386,16 @@ function toggleHint() {
 
   const button = document.querySelector('.hint-toggle');
   if (button) button.textContent = isHidden ? 'Esconder dica' : 'Mostrar dica';
+}
+
+function toggleAdvanced() {
+  const box = document.getElementById('advancedBox');
+  if (!box) return;
+  const isHidden = box.hidden;
+  box.hidden = !isHidden;
+
+  const button = document.querySelector('.advanced-toggle');
+  if (button) button.textContent = isHidden ? 'Esconder avançado' : 'Mostrar avançado';
 }
 
 function toggleBriefing() {
