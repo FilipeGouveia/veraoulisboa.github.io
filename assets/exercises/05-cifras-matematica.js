@@ -282,7 +282,7 @@ window.exerciseTopics.push({
       observation: 'Deves ver muitos pontos no quadrado. O valor não será sempre igual, mas deve ficar perto de 3.14.',
       hint: 'Este exercício é a pergunta 20 dentro de um ciclo. Para cada dardo, cria x e y, desenha o ponto, testa se está dentro, e só no fim calcula pi.',
       starter: 'const total: number = 0;\nlet dentro: number = 0;\n\n// cria um ciclo para lançar os dardos\n\nconst pi: number = 0;\nmostrarPi(pi);\nmudarCorBarra("#0077b6");',
-      solution: 'const total: number = 5000;\nlet dentro: number = 0;\n\nfor (let i = 0; i < total; i++) {\n  const x: number = Math.random();\n  const y: number = Math.random();\n  criarPonto(x, y);\n\n  if (pontoDentro(x, y)) {\n    dentro = dentro + 1;\n  }\n}\n\nconst pi: number = 4 * dentro / total;\nmostrarPi(pi);\nmudarCorBarra("#0077b6");',
+      solution: 'const total: number = 2000;\nlet dentro: number = 0;\n\nfor (let i = 0; i < total; i++) {\n  const x: number = Math.random();\n  const y: number = Math.random();\n  criarPonto(x, y);\n\n  if (pontoDentro(x, y)) {\n    dentro = dentro + 1;\n  }\n}\n\nconst pi: number = 4 * dentro / total;\nmostrarPi(pi);\nmudarCorBarra("#0077b6");',
       html: `
         <main class="stage">
           <section class="panel">
