@@ -61,7 +61,7 @@ window.exerciseTopics.push({
       explanation: [
         'Desencriptar é desfazer a cifra. Se para esconder a mensagem avançámos 13 posições, para recuperar a mensagem original temos de recuar 13 posições.',
         'Isto mostra uma ideia importante: algumas operações têm inversa. Somar pode ser desfeito com subtrair. Avançar na tabela de caracteres pode ser desfeito recuando.',
-        'A mensagem SPHY foi obtida a partir de FCUL. O teu objetivo é voltar a FCUL.',
+        'A mensagem SPbY foi obtida a partir de FCUL. O teu objetivo é voltar a FCUL.',
       ],
       instructions: [
         'Completa a função [decifrar].',
