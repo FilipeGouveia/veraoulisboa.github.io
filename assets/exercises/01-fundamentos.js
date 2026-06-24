@@ -24,8 +24,8 @@ window.exerciseTopics.push({
       ],
       observation: 'Veja se consegue colocar a caixa vermelha e o texto grande ao mesmo tempo!',
       hint: 'Não há dicas 🤖',
-      starter: 'mostrarMensagem("Mude as coisas no menu ao lado para perceber o que acontece!");\nmudarCorPainel("#3b93ff");\nmudarTamanhoMensagem(44);',
-      solution: 'mostrarMensagem("Consegui mudar a cor e o tamanho!");\nmudarCorPainel("#e23d3d");\nmudarTamanhoMensagem(60);',
+      starter: 'mostrar("Mude as coisas no menu ao lado para perceber o que acontece!");\nmudarCorPainel("#3b93ff");\nmudarTamanhoMensagem(44);',
+      solution: 'mostrar("Consegui mudar a cor e o tamanho!");\nmudarCorPainel("#e23d3d");\nmudarTamanhoMensagem(60);',
       html: `
        <main class="stage">
           <section class="panel dark">
@@ -34,7 +34,7 @@ window.exerciseTopics.push({
         </main>
       `,
       api: `
-        function mostrarMensagem(texto) {
+        function mostrar(texto) {
           const message = String(texto);
           setText('message', message);
           window.exerciseState.message = message;
@@ -73,28 +73,28 @@ window.exerciseTopics.push({
     },
     {
       id: 'ola',
-      animation: '<div class="cax"><div class="lbl">anatomia de uma instrução</div><div class="big"><span class="cax-pulse">mostrarMensagem</span>(<span class="accent">"Olá!"</span>)<span class="warn">;</span></div><div class="cax-step lbl">função &middot; texto entre "aspas" &middot; ponto e vírgula no fim</div></div>',
+      animation: '<div class="anat"><style>.anat{font-family:Inter,system-ui,sans-serif;text-align:center}.anat .loc{font-size:26px;font-weight:800;margin-bottom:10px}.anat .tok{padding:1px 5px;border-radius:5px}.anat .fn{animation:anFn 6s infinite}.anat .arg{animation:anArg 6s infinite}.anat .semi{animation:anSemi 6s infinite}@keyframes anFn{0%,27%{background:#fde68a}33%,100%{background:transparent}}@keyframes anArg{0%,33%{background:transparent}39%,60%{background:#bbf7d0}66%,100%{background:transparent}}@keyframes anSemi{0%,66%{background:transparent}72%,93%{background:#fecaca}100%{background:transparent}}.anat .labels{position:relative;height:1.7em;font-size:14px;font-weight:700}.anat .labels span{position:absolute;left:0;right:0;text-align:center;opacity:0}.anat .lf{color:#b45309;animation:anLf 6s infinite}.anat .la{color:#15803d;animation:anLa 6s infinite}.anat .ls{color:#b91c1c;animation:anLs 6s infinite}@keyframes anLf{0%,27%{opacity:1}33%,100%{opacity:0}}@keyframes anLa{0%,33%{opacity:0}39%,60%{opacity:1}66%,100%{opacity:0}}@keyframes anLs{0%,66%{opacity:0}72%,93%{opacity:1}100%{opacity:0}}</style><div class="loc"><span class="tok fn">mostrar</span>(<span class="tok arg">"Olá!"</span>)<span class="tok semi">;</span></div><div class="labels"><span class="lf">↑ mostrar = a função (a ação)</span><span class="la">↑ "Olá!" = o argumento (a informação)</span><span class="ls">↑ ; = fim da instrução</span></div></div>',
       title: 'Olá, mundo visual',
       points: 10,
       explanation: [
-        'Um programa é uma lista de instruções. O computador lê essas instruções pela ordem em que aparecem e tenta executá-las uma a uma. Nesta primeira atividade, a instrução principal é chamar uma função.',
-        'Uma função é como um comando com nome. Quando escreves [mostrarMensagem("Olá, FCUL!")], estás a pedir ao programa para pegar no texto entre aspas e colocá-lo no painel de resultado.',
-        'Repara que o texto fica entre aspas. Em TypeScript, texto chama-se [string]. Sempre que quiseres escrever uma palavra, uma frase ou uma mensagem para aparecer no ecrã, vais quase sempre usar uma [string].',
+        'Um programa é uma lista de instruções. O computador lê-as pela ordem em que aparecem e executa-as uma a uma. Nesta atividade, a instrução principal é chamar uma função.',
+        'Uma função é um comando com nome que executa uma tarefa. Quando escreves [mostrar("Olá, FCUL!")], chamas a função [mostrar]. A informação que pões entre parênteses chama-se argumento — aqui o argumento é o texto ["Olá, FCUL!"]. (Quando falamos do espaço que a função reserva para receber esse valor, chamamos-lhe parâmetro; o valor concreto que lá colocas é o argumento.)',
+        'Neste laboratório usamos dois nomes especiais (aliases) para apresentar coisas: [escrever(...)] envia texto para o terminal — é o equivalente ao [print] que existe na maioria das linguagens de programação. [mostrar(...)] coloca o resultado no painel visual; é um pouco mais "mágico", porque o que aparece depende dos elementos gráficos de cada exercício.',
+        'Repara que o texto fica entre aspas: em TypeScript, texto chama-se [string]. E no fim da linha há um [;] (ponto e vírgula), que marca o fim de uma instrução.',
       ],
       advanced: [
-        'Quando escreves [mostrarMensagem("Olá")], acontecem dois passos: o computador encontra a função com o nome [mostrarMensagem] e depois executa as instruções que estão guardadas lá dentro. O texto entre parênteses chama-se argumento — é a informação que entregas à função para ela trabalhar.',
         'Uma [string] é guardada como uma sequência ordenada de caracteres, e cada caractere tem um código numérico associado. É essa ideia que mais tarde te vai permitir transformar letras em números (e o contrário) nos exercícios das cifras.',
       ],
       instructions: [
-        'Chama a função [mostrarMensagem] com uma frase tua.',
+        'Chama a função [mostrar] com uma frase tua.',
         'A mensagem tem de ter pelo menos 8 caracteres (letras, números ou caracteres especiais).',
         'Carrega em Executar e confirma que o painel muda.',
         'Usa a exploração visual para mudar a cor do painel e o tamanho da mensagem.',
       ],
       observation: 'Se mudares apenas o texto dentro das aspas e executares outra vez, o resultado também muda.',
-      hint: 'Texto fica entre aspas. Escreve uma frase tua dentro da função [mostrarMensagem].',
-      starter: 'mostrarMensagem("");\nmudarCorPainel("#102033");\nmudarTamanhoMensagem(44);',
-      solution: 'mostrarMensagem("Olá, FCUL!");\nmudarCorPainel("#102033");\nmudarTamanhoMensagem(44);',
+      hint: 'Texto fica entre aspas. Escreve uma frase tua dentro da função [mostrar].',
+      starter: 'mostrar("");\nmudarCorPainel("#102033");\nmudarTamanhoMensagem(44);',
+      solution: 'mostrar("Olá, FCUL!");\nmudarCorPainel("#102033");\nmudarTamanhoMensagem(44);',
       html: `
         <main class="stage">
           <section class="panel dark">
@@ -104,7 +104,7 @@ window.exerciseTopics.push({
         </main>
       `,
       api: `
-        function mostrarMensagem(texto) {
+        function mostrar(texto) {
           const message = String(texto);
           setText('message', message);
           window.exerciseState.message = message;
@@ -231,12 +231,12 @@ window.exerciseTopics.push({
         'Cria uma variável [total] com [let] e o valor inicial [0].',
         'Soma [5] a [total] (ex.: [total = total + 5;]).',
         'Soma mais [3] a [total].',
-        'Mostra o resultado com [mostrarValor(total)].',
+        'Mostra o resultado com [mostrar(total)].',
       ],
       observation: 'O painel deve mostrar 8 (0 + 5 + 3).',
       hint: 'Com [let] podes reatribuir: [total = total + 5;]. Repete para somar mais 3.',
-      starter: '// cria a variável total com let\n\n// soma 5 e depois soma 3\n\n// mostra total com mostrarValor',
-      solution: 'let total: number = 0;\ntotal = total + 5;\ntotal = total + 3;\nmostrarValor(total);',
+      starter: '// cria a variável total com let\n\n// soma 5 e depois soma 3\n\n// mostra total com mostrar',
+      solution: 'let total: number = 0;\ntotal = total + 5;\ntotal = total + 3;\nmostrar(total);',
       html: `
         <main class="stage">
           <section class="panel">
@@ -246,7 +246,7 @@ window.exerciseTopics.push({
         </main>
       `,
       api: `
-        function mostrarValor(valor) {
+        function mostrar(valor) {
           const v = Number(valor);
           setText('value', Number.isFinite(v) ? v : 'Erro');
           window.exerciseState.value = v;
