@@ -241,12 +241,14 @@ window.exerciseTopics.push({
       animation: '<div class="cax"><div class="lbl">podeAvancar</div><div class="big cax-a">true → 🟢 verde</div><div class="big cax-b">false → 🔴 vermelho</div></div>',
       advanced: [
         'Um booleano só tem dois valores: [true] ou [false]. Condições como [idade >= 18] produzem um booleano, e o [if] usa-o para escolher o caminho. O [else] cobre todos os casos em que a condição foi [false].',
+        'Cuidado com os sinais de igual: [===] compara o valor E o tipo (é o que deves usar); [==] compara só o valor e converte os tipos primeiro, o que pode surpreender — por exemplo, [0 == "0"] dá [true], mas [0 === "0"] dá [false]. Na dúvida, usa sempre [===]. E lembra-te: um único [=] serve para atribuir um valor, não para comparar.',
       ],
       title: 'Semáforo lógico',
       points: 15,
       explanation: [
         'Um booleano é um valor que só pode ser verdadeiro ou falso. Pode parecer pouco, mas é uma ideia muito poderosa: portas abertas ou fechadas, jogo terminado ou não, resposta correta ou errada.',
         'Com booleanos usamos decisões. A palavra [if] significa “se”. Se a condição for verdadeira, executa um bloco; caso contrário, podemos usar [else] para executar outro.',
+        'Muitos booleanos nascem de comparações entre números: [5 > 3] é [true] e [2 < 1] é [false]. Os operadores de comparação são [>] (maior), [<] (menor), [>=] (maior ou igual), [<=] (menor ou igual), [===] (igual) e [!==] (diferente).',
         'Neste exercício, a variável [podeAvancar] controla o semáforo. Se for verdadeira, ligamos o verde. Se for falsa, ligamos o vermelho.',
       ],
       instructions: [
