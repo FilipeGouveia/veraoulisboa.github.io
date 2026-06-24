@@ -214,26 +214,25 @@ function renderBriefing(exercise, completed) {
   document.getElementById('exerciseTitle').textContent = exercise.title;
   document.getElementById('exerciseStatus').textContent = completed ? 'Concluído' : `${exercise.points} pontos`;
   document.getElementById('exerciseStatus').className = `status-badge ${completed ? 'done' : ''}`;
-  const advancedBlock = (exercise.advanced && exercise.advanced.length)
-    ? `<button type="button" class="advanced-toggle" onclick="toggleAdvanced()">Mostrar avançado</button>
-       <div class="advanced-box" id="advancedBox" hidden>
-         ${exercise.advanced.map((paragraph) => `<p>${AppUtils.formatText(paragraph)}</p>`).join('')}
-       </div>`
+  const section = (label, inner) =>
+    `<button type="button" class="section-toggle" onclick="toggleSection(this)"><span class="chev">▸</span> ${label}</button>`
+    + `<div class="section-box" hidden>${inner}</div>`;
+  const advancedInner = (exercise.advanced && exercise.advanced.length)
+    ? exercise.advanced.map((paragraph) => `<p>${AppUtils.formatText(paragraph)}</p>`).join('')
     : '';
+  const instructionsInner = `<ul>${exercise.instructions.map((instruction) => `<li>${AppUtils.formatText(instruction)}</li>`).join('')}</ul>`;
+  const observationInner = `<p>${AppUtils.formatText(exercise.observation || 'Executa o programa e compara o resultado visual com o objetivo.')}</p>`;
+  const hint = exercise.hint;
+  const hintInner = Array.isArray(hint)
+    ? `<ul>${hint.map((item) => `<li>${AppUtils.formatText(item)}</li>`).join('')}</ul>`
+    : AppUtils.formatText(hint || '');
   document.getElementById('exerciseBody').innerHTML = `
     ${(exercise.explanation || []).map((paragraph) => `<p>${AppUtils.formatText(paragraph)}</p>`).join('')}
-    ${advancedBlock}
-    <p class="briefing-tag tag-objetivos">Objetivos</p>
-    <ul>${exercise.instructions.map((instruction) => `<li>${AppUtils.formatText(instruction)}</li>`).join('')}</ul>
-    <p class="briefing-tag tag-observar">O que deves observar</p>
-    <p>${AppUtils.formatText(exercise.observation || 'Executa o programa e compara o resultado visual com o objetivo.')}</p>
-    <button type="button" class="hint-toggle" onclick="toggleHint()">Mostrar dica</button>
+    ${advancedInner ? section('Avançado', advancedInner) : ''}
+    ${section('Objetivos', instructionsInner)}
+    ${section('O que deves observar', observationInner)}
+    ${hintInner ? section('Dica', hintInner) : ''}
   `;
-  const hint = exercise.hint;
-  document.getElementById('hintBox').innerHTML = Array.isArray(hint)
-    ? `<ul>${hint.map((item) => `<li>${AppUtils.formatText(item)}</li>`).join('')}</ul>`
-    : AppUtils.formatText(hint);
-  document.getElementById('hintBox').hidden = true;
 
   const animationPanel = document.getElementById('animationPanel');
   document.getElementById('animationBody').innerHTML = exercise.animation || '';
@@ -387,23 +386,14 @@ function showSolution() {
   setFeedback('Resposta colocada no editor para teste.', 'neutral');
 }
 
-function toggleHint() {
-  const hintBox = document.getElementById('hintBox');
-  const isHidden = hintBox.hidden;
-  hintBox.hidden = !isHidden;
-
-  const button = document.querySelector('.hint-toggle');
-  if (button) button.textContent = isHidden ? 'Esconder dica' : 'Mostrar dica';
-}
-
-function toggleAdvanced() {
-  const box = document.getElementById('advancedBox');
+function toggleSection(button) {
+  const box = button.nextElementSibling;
   if (!box) return;
-  const isHidden = box.hidden;
-  box.hidden = !isHidden;
-
-  const button = document.querySelector('.advanced-toggle');
-  if (button) button.textContent = isHidden ? 'Esconder avançado' : 'Mostrar avançado';
+  const willShow = box.hidden;
+  box.hidden = !willShow;
+  button.classList.toggle('open', willShow);
+  const chevron = button.querySelector('.chev');
+  if (chevron) chevron.textContent = willShow ? '▾' : '▸';
 }
 
 function toggleBriefing() {
