@@ -592,7 +592,9 @@ window.exerciseTopics.push({
       instructions: [
         'Corrige o operador de cada comparação para que o resultado seja [true].',
         'Não mudes os números — só os operadores ([>], [<], [>=], [<=], [===], [!==]).',
-        'No fim, todas as linhas do painel devem ficar com ✅.',
+        'Tente resolver sem repetir os operadores.',
+        'No fim, todas as linhas do painel devem ficar com ✅.'
+
       ],
       observation: 'O painel mostra cada comparação com ✅ (verdadeira) ou ❌ (ainda falsa).',
       hint: 'Pensa em cada linha: 8 é maior do que 5, logo [8 > 5]. 7 é igual a 7, logo [7 === 7]. 4 é diferente de 9, logo [4 !== 9].',
