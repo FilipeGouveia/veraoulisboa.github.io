@@ -214,11 +214,11 @@ function renderBriefing(exercise, completed) {
   document.getElementById('exerciseTitle').textContent = exercise.title;
   document.getElementById('exerciseStatus').textContent = completed ? 'Concluído' : `${exercise.points} pontos`;
   document.getElementById('exerciseStatus').className = `status-badge ${completed ? 'done' : ''}`;
-  const section = (label, inner) =>
-    `<button type="button" class="section-toggle" onclick="toggleSection(this)"><span class="chev">▸</span> ${label}</button>`
-    + `<div class="section-box" hidden>${inner}</div>`;
-  const advancedInner = (exercise.advanced && exercise.advanced.length)
-    ? exercise.advanced.map((paragraph) => `<p>${AppUtils.formatText(paragraph)}</p>`).join('')
+  const section = (label, inner, open) =>
+    `<button type="button" class="section-toggle${open ? ' open' : ''}" onclick="toggleSection(this)"><span class="chev">${open ? '▾' : '▸'}</span> ${label}</button>`
+    + `<div class="section-box"${open ? '' : ' hidden'}>${inner}</div>`;
+  const paragraphs = (value) => (value && value.length)
+    ? value.map((paragraph) => `<p>${AppUtils.formatText(paragraph)}</p>`).join('')
     : '';
   const instructionsInner = `<ul>${exercise.instructions.map((instruction) => `<li>${AppUtils.formatText(instruction)}</li>`).join('')}</ul>`;
   const observationInner = `<p>${AppUtils.formatText(exercise.observation || 'Executa o programa e compara o resultado visual com o objetivo.')}</p>`;
@@ -226,12 +226,15 @@ function renderBriefing(exercise, completed) {
   const hintInner = Array.isArray(hint)
     ? `<ul>${hint.map((item) => `<li>${AppUtils.formatText(item)}</li>`).join('')}</ul>`
     : AppUtils.formatText(hint || '');
+  const advancedInner = paragraphs(exercise.advanced);
+  const curiosityInner = paragraphs(exercise.curiosity);
   document.getElementById('exerciseBody').innerHTML = `
     ${(exercise.explanation || []).map((paragraph) => `<p>${AppUtils.formatText(paragraph)}</p>`).join('')}
-    ${advancedInner ? section('Avançado', advancedInner) : ''}
-    ${section('Objetivos', instructionsInner)}
-    ${section('O que deves observar', observationInner)}
-    ${hintInner ? section('Dica', hintInner) : ''}
+    ${section('Objetivos', instructionsInner, true)}
+    ${section('O que deves observar', observationInner, false)}
+    ${hintInner ? section('Dica', hintInner, false) : ''}
+    ${advancedInner ? section('Avançado', advancedInner, false) : ''}
+    ${curiosityInner ? section('Curiosidade!', curiosityInner, false) : ''}
   `;
 
   const animationPanel = document.getElementById('animationPanel');

@@ -177,13 +177,18 @@ function donatelloApi() {
 
 window.exerciseTopics.push({
   id: 'donatello',
-  advanced: [
-    'A tartaruga é um exemplo de programação por instruções relativas: andas e viras a partir da posição e direção atuais, sem dares coordenadas absolutas. Repetir [forward] e [right] num [for] é a base para desenhar qualquer polígono regular.',
-  ],
   title: 'Donatello e Movimento',
   exercises: [
     {
       id: 'donatello',
+      advanced: [
+        'A tartaruga é um exemplo de programação por instruções relativas: andas e viras a partir da posição e direção atuais, sem dares coordenadas absolutas. Repetir [forward] e [right] num [for] é a base para desenhar qualquer polígono regular.',
+      ],
+      curiosity: [
+        'O Donatello (Donato di Niccolò di Betto Bardi, c. 1386–1466) foi um dos maiores escultores do Renascimento italiano, em Florença — famoso pelo seu David em bronze.',
+        'Porque é que a «tartaruga» que desenha tem o nome dele? É uma piscadela de olho: as Tartarugas Ninja (que são tartarugas!) chamam-se Leonardo, Donatello, Michelangelo e Rafael — todos nomes de artistas do Renascimento.',
+        'Desenhar com uma «tartaruga» que anda e vira nasceu da linguagem Logo, criada nos anos 1960 para ensinar programação a crianças.',
+      ],
       title: 'Desenha um quadrado',
       points: 20,
       explanation: [

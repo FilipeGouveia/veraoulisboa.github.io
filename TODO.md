@@ -12,6 +12,8 @@
 
 - Found during manual run (jsdom + Chrome): `strings` starter called `criarCartao(nome, detalhe)` with the variables commented out → ReferenceError on the first Executar; starter now declares them empty (like `ola`/`falar`). ✔️ Done.
 
+- Found during implementation: the donatello exercise Avancado was on the topic object (shared id) from the rollout script, so it never rendered; moved onto the exercise. ✔️ Done.
+
 ## Feature Triage
 
 - Create an interactive tutorial for the student. (large — still open)
@@ -122,13 +124,13 @@ _All nine resolved 2026-06-23 (✔️ in Task Status (QA) below)._
 | Task name [feature]/[bug] | To implement | Implementing | Ready | Responsible |
 |---------------------------|--------------|--------------|-------|-------------|
 | Hide timer during exercises, show only on leaderboard [feature] | ⬜ | | | |
-| Reorder briefing: Objetivo -> Observar -> Dica -> Avancado [feature] | ⬜ | | | |
-| Objetivo/Pergunta always visible by default (others collapsed) [feature] | ⬜ | | | |
+| Reorder briefing: Objetivo -> Observar -> Dica -> Avancado [feature] | | | ✔️ | Claude |
+| Objetivo/Pergunta always visible by default (others collapsed) [feature] | | | ✔️ | Claude |
 | Exercise 1: basic-syntax intro via animation [feature] | ⬜ | | | |
 | Unify result-printing function names (mostrarMensagem/escrever/...) [feature] | ⬜ | | | |
 | Reinforce const/let, if+operators, &&/||, arrays+indexing across exercises [feature] | ⬜ | | | |
 | for loops: teach both forms + how to break out [feature] | ⬜ | | | |
-| donatello: add curiosity about who Donatello was [feature] | ⬜ | | | |
+| donatello: add curiosity about who Donatello was [feature] | | | ✔️ | Claude |
 | cesar: explain charCodeAt better in the briefing [feature] | ⬜ | | | |
 | formula: include the quadratic formula in the briefing [feature] | ⬜ | | | |
 | arvore-procura: add an intermediate simple-tree exercise [feature] | ⬜ | | | |

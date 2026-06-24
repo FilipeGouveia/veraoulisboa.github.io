@@ -21,6 +21,7 @@ The canonical order lives in `assets/app/curriculum.js`. Interactive variants in
 |-------|------|-------------|
 | `explanation` | `string[]` | Briefing paragraphs |
 | `advanced` | `string[]` | Optional deeper "Avançado" paragraphs, shown collapsed behind a toggle button for curious students |
+| `curiosity` | `string[]` | Optional "Curiosidade!" paragraphs (fun facts / context), shown as a collapsed section |
 | `animation` | `string` | Optional self-contained HTML (with scoped `<style>` / CSS `@keyframes`) showing an animated diagram of the concept; rendered in a `.concept-anim` box after the explanation |
 | `observation` | `string` | What to look for in the preview |
 | `hint` | `string` \| `string[]` | Shown in the hint box; an array renders as a bulleted list (e.g. a "Dica" ladder) |
