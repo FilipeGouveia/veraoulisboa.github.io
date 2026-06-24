@@ -119,13 +119,13 @@ window.exerciseTopics.push({
       instructions: [
         'Usa [numeroAleatorio(1, 6)] para gerar o valor do dado.',
         'Guarda esse valor numa variável do tipo number.',
-        'Mostra esse valor com [mostrarDado].',
+        'Mostra esse valor com [mostrar].',
         'Muda a cor e o tamanho do dado para perceberes como o estilo também pode vir do código.',
       ],
       observation: 'Se executares várias vezes, o número pode mudar. Isso é esperado. Chame a função [adicionarDado(...)] que recebe um número e veja o que acontece.',
       hint: 'Usa [numeroAleatorio] com mínimo 1 e máximo 6. Guarda o resultado numa variável antes de o mostrar.',
       starter: '// cria a variável dado aqui\n// depois mostra o valor\n\nmudarCorDado("#0077b6");\nmudarTamanhoDado(78);',
-      solution: 'const dado: number = numeroAleatorio(1, 6);\nmostrarDado(dado);\nmudarCorDado("#0077b6");\nmudarTamanhoDado(78);',
+      solution: 'const dado: number = numeroAleatorio(1, 6);\nmostrar(dado);\nmudarCorDado("#0077b6");\nmudarTamanhoDado(78);',
       html: `
         <main class="stage">
           <section class="panel">
@@ -142,7 +142,7 @@ window.exerciseTopics.push({
           const high = Math.floor(Number(max));
           return Math.floor(Math.random() * (high - low + 1)) + low;
         }
-        function mostrarDado(valor) {
+        function mostrar(valor) {
           const container = document.getElementById('dice-container');
           container.innerHTML = '<div class="big-value" id="die" style="font-size: ' + (window.exerciseState.dieSize || 78) + 'px; line-height: 1; color: ' + (window.exerciseState.dieColor || '#1f2937') + '">?</div>';
           
@@ -317,13 +317,13 @@ window.exerciseTopics.push({
       instructions: [
         'Cria uma variável [numero] do tipo [number].',
         'Usa [if] e [else].',
-        'Se [numero % 2 === 0], chama [mostrarTipo("par")].',
-        'Caso contrário, chama [mostrarTipo("ímpar")].',
+        'Se [numero % 2 === 0], chama [mostrar("par")].',
+        'Caso contrário, chama [mostrar("ímpar")].',
       ],
       observation: 'Experimenta mudar o número para veres o painel alternar entre par e ímpar.',
       hint: 'O operador % dá o resto da divisão. Se o resto de dividir por 2 for zero, o número é par.',
       starter: 'const numero: number = 7;\n\n// escreve o if aqui',
-      solution: 'const numero: number = 7;\n\nif (numero % 2 === 0) {\n  mostrarTipo("par");\n} else {\n  mostrarTipo("ímpar");\n}',
+      solution: 'const numero: number = 7;\n\nif (numero % 2 === 0) {\n  mostrar("par");\n} else {\n  mostrar("ímpar");\n}',
       html: `
         <main class="stage">
           <section class="panel">
@@ -333,7 +333,7 @@ window.exerciseTopics.push({
         </main>
       `,
       api: `
-        function mostrarTipo(tipo) {
+        function mostrar(tipo) {
           const value = String(tipo).toLowerCase();
           setText('kind', value);
           window.exerciseState.kind = value;
@@ -472,12 +472,12 @@ window.exerciseTopics.push({
       animation: '<div class="cax"><div class="big"><span class="cax-pop">[0] 🔴</span> <span class="cax-pop d1">[1] 🟢</span> <span class="cax-pop d2">[2] 🔵</span></div><div class="lbl">o índice começa em 0</div></div>',
       instructions: [
         'Cria uma lista [cores] do tipo [string[]] com pelo menos 3 cores.',
-        'Mostra o elemento na posição 1 com [mostrarItem(cores[1])].',
+        'Mostra o elemento na posição 1 com [mostrar(cores[1])].',
       ],
       observation: 'Como os índices começam em 0, [cores[1]] é o segundo elemento da lista.',
       hint: 'O primeiro elemento é [cores[0]]; o segundo é [cores[1]].',
       starter: 'const cores: string[] = [];\n\n// mostra o elemento no índice 1',
-      solution: 'const cores: string[] = ["vermelho", "verde", "azul"];\n\nmostrarItem(cores[1]);',
+      solution: 'const cores: string[] = ["vermelho", "verde", "azul"];\n\nmostrar(cores[1]);',
       html: `
         <main class="stage">
           <section class="panel">
@@ -487,7 +487,7 @@ window.exerciseTopics.push({
         </main>
       `,
       api: `
-        function mostrarItem(valor) {
+        function mostrar(valor) {
           setText('item', String(valor));
           window.exerciseState.item = String(valor);
         }
@@ -511,12 +511,12 @@ window.exerciseTopics.push({
         'Usa um [for] clássico: [for (let i = 1; i <= 10; i++)].',
         'Soma cada [i] a uma variável [soma].',
         'Quando [soma] passar de 20, usa [break] para parar.',
-        'Mostra o valor final com [mostrarTotal(soma)].',
+        'Mostra o valor final com [mostrar(soma)].',
       ],
       observation: 'A soma 1+2+3+4+5+6 = 21 ultrapassa 20, por isso o ciclo pára aí.',
       hint: 'Dentro do for, faz [soma = soma + i;] e depois [if (soma > 20) break;].',
-      starter: 'let soma: number = 0;\n\n// cria o for de 1 a 10, soma cada i e usa break quando soma passar de 20\n\nmostrarTotal(soma);',
-      solution: 'let soma: number = 0;\n\nfor (let i = 1; i <= 10; i++) {\n  soma = soma + i;\n  if (soma > 20) {\n    break;\n  }\n}\n\nmostrarTotal(soma);',
+      starter: 'let soma: number = 0;\n\n// cria o for de 1 a 10, soma cada i e usa break quando soma passar de 20\n\nmostrar(soma);',
+      solution: 'let soma: number = 0;\n\nfor (let i = 1; i <= 10; i++) {\n  soma = soma + i;\n  if (soma > 20) {\n    break;\n  }\n}\n\nmostrar(soma);',
       html: `
         <main class="stage">
           <section class="panel">
@@ -526,7 +526,7 @@ window.exerciseTopics.push({
         </main>
       `,
       api: `
-        function mostrarTotal(valor) {
+        function mostrar(valor) {
           const v = Number(valor);
           setText('total', Number.isFinite(v) ? v : 'Erro');
           window.exerciseState.total = v;
@@ -550,12 +550,12 @@ window.exerciseTopics.push({
       instructions: [
         'Cria [const tensBilhete: boolean = true;] e [const alturaSuficiente: boolean = false;].',
         'Usa [&&] para saber se podes entrar e guarda em [const podeEntrar: boolean = ...].',
-        'Mostra o resultado com [mostrarResultado(podeEntrar)].',
+        'Mostra o resultado com [mostrar(podeEntrar)].',
       ],
       observation: 'Com [true && false] o resultado é [false] — falta uma das condições.',
       hint: 'O [&&] precisa das duas condições verdadeiras: [const podeEntrar: boolean = tensBilhete && alturaSuficiente;].',
       starter: 'const tensBilhete: boolean = true;\nconst alturaSuficiente: boolean = false;\n\n// combina as duas condições com && e mostra o resultado',
-      solution: 'const tensBilhete: boolean = true;\nconst alturaSuficiente: boolean = false;\n\nconst podeEntrar: boolean = tensBilhete && alturaSuficiente;\nmostrarResultado(podeEntrar);',
+      solution: 'const tensBilhete: boolean = true;\nconst alturaSuficiente: boolean = false;\n\nconst podeEntrar: boolean = tensBilhete && alturaSuficiente;\nmostrar(podeEntrar);',
       html: `
         <main class="stage">
           <section class="panel">
@@ -565,7 +565,7 @@ window.exerciseTopics.push({
         </main>
       `,
       api: `
-        function mostrarResultado(valor) {
+        function mostrar(valor) {
           const v = Boolean(valor);
           setText('result', v ? 'Sim ✅' : 'Não ❌');
           window.exerciseState.logic = v;

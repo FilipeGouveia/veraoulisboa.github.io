@@ -42,13 +42,13 @@ window.exerciseTopics.push({
         'Completa a função [cifrar].',
         'Percorre todas as letras do texto.',
         'Avança cada letra 13 posições.',
-        'Usa [mostrarCifra(cifrar("FCUL"))].',
+        'Usa [mostrar(cifrar("FCUL"))].',
         'Muda a cor da mensagem cifrada para separar conteúdo e apresentação.',
       ],
       observation: 'O painel deve mostrar SPbY.',
       hint: 'Dentro do ciclo, transforma cada letra num código numérico, soma 13, e volta a transformar esse número numa letra.',
-      starter: 'function cifrar(texto: string): string {\n  let resultado = "";\n\n  // percorre as letras aqui\n\n  return resultado;\n}\n\nmostrarCifra(cifrar("FCUL"));\nmudarCorCifra("#ffffff");',
-      solution: 'function cifrar(texto: string): string {\n  let resultado = "";\n\n  for (const letra of texto) {\n    resultado += String.fromCharCode(letra.charCodeAt(0) + 13);\n  }\n\n  return resultado;\n}\n\nmostrarCifra(cifrar("FCUL"));\nmudarCorCifra("#ffffff");',
+      starter: 'function cifrar(texto: string): string {\n  let resultado = "";\n\n  // percorre as letras aqui\n\n  return resultado;\n}\n\nmostrar(cifrar("FCUL"));\nmudarCorCifra("#ffffff");',
+      solution: 'function cifrar(texto: string): string {\n  let resultado = "";\n\n  for (const letra of texto) {\n    resultado += String.fromCharCode(letra.charCodeAt(0) + 13);\n  }\n\n  return resultado;\n}\n\nmostrar(cifrar("FCUL"));\nmudarCorCifra("#ffffff");',
       html: `
         <main class="stage">
           <section class="panel dark">
@@ -58,7 +58,7 @@ window.exerciseTopics.push({
         </main>
       `,
       api: `
-        function mostrarCifra(texto) {
+        function mostrar(texto) {
           const cipher = String(texto);
           setText('cipher', cipher);
           window.exerciseState.cipher = cipher;
@@ -96,12 +96,12 @@ window.exerciseTopics.push({
         'Completa a função [decifrar].',
         'Percorre todas as letras do texto.',
         'Recua cada letra 13 posições.',
-        'Mostra o resultado com mostrarTexto.',
+        'Mostra o resultado com mostrar.',
       ],
       observation: 'O painel deve voltar a mostrar FCUL.',
       hint: 'Pensa na operação inversa da cifra anterior: se avançar escondia a mensagem, recuar recupera a mensagem.',
-      starter: 'function decifrar(texto: string): string {\n  let resultado = "";\n\n  // percorre as letras aqui\n\n  return resultado;\n}\n\nmostrarTexto(decifrar("SPbY"));',
-      solution: 'function decifrar(texto: string): string {\n  let resultado = "";\n\n  for (const letra of texto) {\n    resultado += String.fromCharCode(letra.charCodeAt(0) - 13);\n  }\n\n  return resultado;\n}\n\nmostrarTexto(decifrar("SPbY"));',
+      starter: 'function decifrar(texto: string): string {\n  let resultado = "";\n\n  // percorre as letras aqui\n\n  return resultado;\n}\n\nmostrar(decifrar("SPbY"));',
+      solution: 'function decifrar(texto: string): string {\n  let resultado = "";\n\n  for (const letra of texto) {\n    resultado += String.fromCharCode(letra.charCodeAt(0) - 13);\n  }\n\n  return resultado;\n}\n\nmostrar(decifrar("SPbY"));',
       html: `
         <main class="stage">
           <section class="panel dark">
@@ -111,7 +111,7 @@ window.exerciseTopics.push({
         </main>
       `,
       api: `
-        function mostrarTexto(texto) {
+        function mostrar(texto) {
           const plain = String(texto);
           setText('plain', plain);
           window.exerciseState.plain = plain;
@@ -300,13 +300,13 @@ window.exerciseTopics.push({
         'Dentro do ciclo, chama [criarPonto(x, y)].',
         'Se [pontoDentro(x, y)] for [true], aumenta dentro.',
         'Calcula pi com 4 * dentro / total.',
-        'Mostra o valor com [mostrarPi(pi)].',
+        'Mostra o valor com [mostrar(pi)].',
         'Altera a cor da barra para veres um detalhe gráfico controlado por código.',
       ],
       observation: 'Deves ver muitos pontos no quadrado. O valor não será sempre igual, mas deve ficar perto de 3.14.',
       hint: 'Este exercício é a pergunta 20 dentro de um ciclo. Para cada dardo, cria x e y, desenha o ponto, testa se está dentro, e só no fim calcula pi.',
-      starter: 'const total: number = 0;\nlet dentro: number = 0;\n\n// cria um ciclo para lançar os dardos\n\nconst pi: number = 0;\nmostrarPi(pi);\nmudarCorBarra("#0077b6");',
-      solution: 'const total: number = 2000;\nlet dentro: number = 0;\n\nfor (let i = 0; i < total; i++) {\n  const x: number = Math.random();\n  const y: number = Math.random();\n  criarPonto(x, y);\n\n  if (pontoDentro(x, y)) {\n    dentro = dentro + 1;\n  }\n}\n\nconst pi: number = 4 * dentro / total;\nmostrarPi(pi);\nmudarCorBarra("#0077b6");',
+      starter: 'const total: number = 0;\nlet dentro: number = 0;\n\n// cria um ciclo para lançar os dardos\n\nconst pi: number = 0;\nmostrar(pi);\nmudarCorBarra("#0077b6");',
+      solution: 'const total: number = 2000;\nlet dentro: number = 0;\n\nfor (let i = 0; i < total; i++) {\n  const x: number = Math.random();\n  const y: number = Math.random();\n  criarPonto(x, y);\n\n  if (pontoDentro(x, y)) {\n    dentro = dentro + 1;\n  }\n}\n\nconst pi: number = 4 * dentro / total;\nmostrar(pi);\nmudarCorBarra("#0077b6");',
       html: `
         <main class="stage">
           <section class="panel">
@@ -347,7 +347,7 @@ window.exerciseTopics.push({
           window.exerciseState.total++;
           if (inside) window.exerciseState.inside++;
         }
-        function mostrarPi(valor) {
+        function mostrar(valor) {
           const pi = Number(valor);
           setText('pi', Number.isFinite(pi) ? pi.toFixed(4) : '?');
           document.getElementById('pi-meter').style.width = Math.min(100, Math.max(0, pi / Math.PI * 100)) + '%';
