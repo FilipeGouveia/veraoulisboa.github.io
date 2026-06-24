@@ -136,6 +136,7 @@ window.exerciseTopics = window.exerciseTopics || [];
         animation: '<div class="cax"><div class="big">numero = 7</div><div class="cax-step">7 &gt; 5 → <span class="ok">verdadeiro</span></div><div class="big accent cax-step d1">mostra 7</div></div>',
         advanced: [
           'Uma condição dentro de um [if] é avaliada como verdadeira ou falsa (um booleano). [numero > 5] não guarda nada: é apenas uma pergunta cujo resultado decide se o bloco entre chavetas corre ou não.',
+          'Operadores de comparação que podes usar numa condição: [>] (maior), [<] (menor), [>=] (maior ou igual), [<=] (menor ou igual), [===] (igual a) e [!==] (diferente de). Repara nos três sinais de igual: [===] compara valores; [=] (um só) serve para atribuir.',
         ],
         title: 'Usando Condicionais',
         points: 10,
