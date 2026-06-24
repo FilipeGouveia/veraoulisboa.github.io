@@ -2,7 +2,7 @@ window.exerciseTopics = window.exerciseTopics || [];
 
 (() => {
   const resultApi = `
-  function mostrarResultado(valor) {
+  function mostrar(valor) {
     const result = Number(valor);
     setText('result', Number.isFinite(result) ? result : 'Erro');
     window.exerciseState.result = result;
@@ -48,12 +48,12 @@ window.exerciseTopics = window.exerciseTopics || [];
         instructions: [
           'Sem mudar os valores de a, b e c, faz com que a soma de a + b aconteça antes da multiplicação.',
           'Usa parênteses.',
-          'Mostra o resultado final com [mostrarResultado(resultado)].',
+          'Mostra o resultado final com [mostrar(resultado)].',
         ],
         observation: 'O resultado correto é 32, porque primeiro fazemos 5 + 3 e depois multiplicamos por 4.',
         hint: 'Os parênteses obrigam o computador a fazer uma parte da conta primeiro.',
-        starter: 'const a: number = 5;\nconst b: number = 3;\nconst c: number = 4;\n\nconst resultado: number = a + b * c;\nmostrarResultado(resultado);',
-        solution: 'const a: number = 5;\nconst b: number = 3;\nconst c: number = 4;\n\nconst resultado: number = (a + b) * c;\nmostrarResultado(resultado);',
+        starter: 'const a: number = 5;\nconst b: number = 3;\nconst c: number = 4;\n\nconst resultado: number = a + b * c;\nmostrar(resultado);',
+        solution: 'const a: number = 5;\nconst b: number = 3;\nconst c: number = 4;\n\nconst resultado: number = (a + b) * c;\nmostrar(resultado);',
         html: `
         <main class="stage">
           <section class="panel">
@@ -82,12 +82,12 @@ window.exerciseTopics = window.exerciseTopics || [];
         instructions: [
           'Cria uma variável d do tipo number.',
           'Guarda nela o resultado de 12 * 7.',
-          'No fim, chama [mostrarResultado(d)].',
+          'No fim, chama [mostrar(d)].',
         ],
         observation: 'O painel deve mostrar 84. O nome d tem de ser usado na chamada final.',
-        hint: 'Cria uma variável numérica e usa essa variável na chamada mostrarResultado.',
+        hint: 'Cria uma variável numérica e usa essa variável na chamada mostrar.',
         starter: '// cria a variável d aqui\n\n// mostra d aqui',
-        solution: 'const d: number = 12 * 7;\nmostrarResultado(d);',
+        solution: 'const d: number = 12 * 7;\nmostrar(d);',
         html: `
         <main class="stage">
           <section class="panel">
@@ -97,7 +97,7 @@ window.exerciseTopics = window.exerciseTopics || [];
         </main>
       `,
         api: resultApi,
-        validate: (code, state) => /\bd\s*:\s*number/.test(code) && /mostrarResultado\s*\(\s*d\s*\)/.test(code) && /(12\s*\*\s*7|7\s*\*\s*12)/.test(code) && state.result === 84,
+        validate: (code, state) => /\bd\s*:\s*number/.test(code) && /mostrar\s*\(\s*d\s*\)/.test(code) && /(12\s*\*\s*7|7\s*\*\s*12)/.test(code) && state.result === 84,
       },
       {
         id: 'numeros-divisao',
@@ -114,12 +114,12 @@ window.exerciseTopics = window.exerciseTopics || [];
         ],
         instructions: [
           'Calcula 28820172 dividido por 1231.',
-          'Mostra o resultado com [mostrarResultado].',
+          'Mostra o resultado com [mostrar].',
         ],
         observation: 'O resultado esperado é 23412. A validação aceita esse valor com uma pequena margem.',
         hint: 'O operador / faz uma divisão. Podes passar uma conta diretamente para uma função.',
-        starter: 'mostrarResultado();',
-        solution: 'mostrarResultado(28820172 / 1231);',
+        starter: 'mostrar();',
+        solution: 'mostrar(28820172 / 1231);',
         html: `
         <main class="stage">
           <section class="panel">
@@ -153,8 +153,8 @@ window.exerciseTopics = window.exerciseTopics || [];
         ],
         observation: 'Caso o número seja menor do que 5, o programa não deve fazer nada. Se o número for exatamente igual a 5, irá resultar numa mensagem diferente.',
         hint: 'Deve somente alterar o valor da variavel. O restante do código deve funcionar sem alterações',
-        starter: 'const numero: number = -1;\n\nif (numero === 5){\n mostrarResultado(numero);\n}\n\nif (numero > 5) {\n  mostrarResultado(numero);\n}',
-        solution: 'const numero: number = 10;\n\nif (numero === 5){\n mostrarResultado(numero);\n}\n\nif (numero > 5) {\n  mostrarResultado(numero);\n}',
+        starter: 'const numero: number = -1;\n\nif (numero === 5){\n mostrar(numero);\n}\n\nif (numero > 5) {\n  mostrar(numero);\n}',
+        solution: 'const numero: number = 10;\n\nif (numero === 5){\n mostrar(numero);\n}\n\nif (numero > 5) {\n  mostrar(numero);\n}',
         html: `
         <main class="stage">
           <section class="panel">
@@ -164,12 +164,7 @@ window.exerciseTopics = window.exerciseTopics || [];
         </main>
       `,
         api: `
-        function mostrarResultado(texto) {
-          const message = "O resultado é " + String(texto);
-          setText('result', message);
-          window.exerciseState.result = message;
-        }
-        function mostrarErro(texto) {
+        function mostrar(texto) {
           const message = "O resultado é " + String(texto);
           setText('result', message);
           window.exerciseState.result = message;
@@ -202,19 +197,19 @@ window.exerciseTopics = window.exerciseTopics || [];
           'Nem todas as contas fazem sentido. Dividir por zero é uma situação especial: em matemática, essa operação não está definida.',
           'Programar também é prever problemas. Em vez de deixar a conta correr e dar um resultado estranho, podemos testar antes. Para isso usamos [if].',
           'Um [if] lê-se como “se isto for verdade, então faz aquilo”. Neste exercício, o programa deve perguntar: o divisor é zero? Se sim, mostra uma mensagem de erro.',
-          'Caso contrário [else{...}] faça o que seria esperado, i.e., divisão do dividendo pelo divisor, utilizando [mostrarResultado(...);]',
+          'Caso contrário [else{...}] faça o que seria esperado, i.e., divisão do dividendo pelo divisor, utilizando [mostrar(...);]',
         ],
         instructions: [
           'Cria uma variável divisor com o valor 0.',
           'Cria uma variável dividendo com o valor 5',
           'Usa if para verificar se o divisor é zero.',
-          'Se for zero, chama [mostrarErro("Não posso dividir por zero");].',
-          'Caso contrário [else{...}] faça o que seria esperado, i.e., divisão do dividendo pelo divisor, utilizando [mostrarResultado(...);]',
+          'Se for zero, chama [mostrar("Não posso dividir por zero");].',
+          'Caso contrário [else{...}] faça o que seria esperado, i.e., divisão do dividendo pelo divisor, utilizando [mostrar(...);]',
         ],
         observation: 'O resultado correto não é uma conta; é uma mensagem clara para a pessoa que usa o programa.',
         hint: 'Antes de dividir, usa uma decisão: se o divisor for zero, mostra uma mensagem de erro em vez de fazer a conta.',
         starter: '// crie a variável divisor aqui;\n\n// crie a variável dividendo aqui;\n\n// testa o divisor aqui',
-        solution: 'const divisor: number = 0;\nconst dividendo: number = 5;\n\nif (divisor === 0) {\n  mostrarErro("Não posso dividir por zero");\n} else {\n  mostrarResultado(dividendo / divisor);\n}',
+        solution: 'const divisor: number = 0;\nconst dividendo: number = 5;\n\nif (divisor === 0) {\n  mostrar("Não posso dividir por zero");\n} else {\n  mostrar(dividendo / divisor);\n}',
         html: `
         <main class="stage">
           <section class="panel">
@@ -225,12 +220,7 @@ window.exerciseTopics = window.exerciseTopics || [];
       `,
 
         api: `
-        function mostrarResultado(texto) {
-          const message = String(texto);
-          setText('result', message);
-          window.exerciseState.result = message;
-        }
-        function mostrarErro(texto) {
+        function mostrar(texto) {
           const message = String(texto);
           setText('result', message);
           window.exerciseState.result = message;
@@ -257,12 +247,12 @@ window.exerciseTopics = window.exerciseTopics || [];
         instructions: [
           'Pede uma palavra-passe ao utilizador com [await lerInput("...")].',
           'Descobre o número de caracteres com [palavra.length].',
-          'Usa [if] e [else]: se tiver pelo menos 6 caracteres, chama [mostrarForca("forte")]; caso contrário chama [mostrarForca("fraca")].',
+          'Usa [if] e [else]: se tiver pelo menos 6 caracteres, chama [mostrar("forte")]; caso contrário chama [mostrar("fraca")].',
         ],
         observation: 'Experimenta palavras curtas e longas no terminal para veres o resultado mudar entre forte e fraca.',
         hint: 'Uma string é uma lista de caracteres. Usa [.length] para saber quantas letras tem a palavra e validar o comprimento. Por exemplo, [palavra.length >= 6] é verdadeiro quando a palavra tem 6 ou mais caracteres.',
         starter: 'const palavra: string = await lerInput("Escolhe uma palavra-passe:");\n\n// descobre o comprimento com palavra.length\n\n// se tiver pelo menos 6 caracteres, mostra "forte"; caso contrário "fraca"',
-        solution: 'const palavra: string = await lerInput("Escolhe uma palavra-passe:");\n\nconst comprimento: number = palavra.length;\n\nif (comprimento >= 6) {\n  mostrarForca("forte");\n} else {\n  mostrarForca("fraca");\n}',
+        solution: 'const palavra: string = await lerInput("Escolhe uma palavra-passe:");\n\nconst comprimento: number = palavra.length;\n\nif (comprimento >= 6) {\n  mostrar("forte");\n} else {\n  mostrar("fraca");\n}',
         html: `
         <main class="stage">
           <section class="panel dark">
@@ -273,7 +263,7 @@ window.exerciseTopics = window.exerciseTopics || [];
         </main>
       `,
         api: `
-        function mostrarForca(forca) {
+        function mostrar(forca) {
           const value = String(forca).toLowerCase();
           const el = document.getElementById('strength');
           if (el) {

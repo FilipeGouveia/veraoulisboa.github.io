@@ -129,7 +129,8 @@ _All nine resolved 2026-06-23 (✔️ in Task Status (QA) below)._
 | Reorder briefing: Objetivo -> Observar -> Dica -> Avancado [feature] | | | ✔️ | Claude |
 | Objetivo/Pergunta always visible by default (others collapsed) [feature] | | | ✔️ | Claude |
 | Exercise 1: basic-syntax intro via animation [feature] | | | ✔️ | Claude |
-| Unify result-printing function names [feature] | ⬜ | | | Deferred: needs a decision (see note) |
+| Unify result-printing functions → mostrar (painel) / escrever (terminal) [feature] | | | ✔️ | Claude |
+| First exercise teaches function/argument/parameter + escrever≈print, with a token-by-token animation [feature] | | | ✔️ | Claude |
 | Reinforce const/let, if+operators, &&/||, arrays+indexing across exercises [feature] | | | ✔️ | Claude |
 | for loops: teach both forms + how to break out [feature] | | | ✔️ | Claude |
 | donatello: add curiosity about who Donatello was [feature] | | | ✔️ | Claude |

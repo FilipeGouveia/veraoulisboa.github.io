@@ -1,10 +1,10 @@
 window.exerciseChecksById = {
   intro: [
-    { test: (_c, s) => s.message?.length >= 8, message: 'Chama mostrarMensagem com uma frase com pelo menos 8 caracteres.' },
+    { test: (_c, s) => s.message?.length >= 8, message: 'Chama mostrar com uma frase com pelo menos 8 caracteres.' },
     { test: (_c, s) => s.panelColor !== '#3b93ff' || s.messageSize !== 44, message: 'Muda a cor do painel ou o tamanho da mensagem nas Configurações Visuais.' },
   ],
   ola: [
-    { test: (_c, s) => s.message?.length >= 8, message: 'Chama mostrarMensagem com uma mensagem tua (8+ caracteres).' },
+    { test: (_c, s) => s.message?.length >= 8, message: 'Chama mostrar com uma mensagem tua (8+ caracteres).' },
   ],
   strings: [
     { test: (c) => /:\s*string/.test(c), message: 'Declara variáveis com tipo string (ex.: const nome: string = "...").' },
@@ -23,7 +23,7 @@ window.exerciseChecksById = {
   ],
   'numeros-variavel': [
     { test: (c) => /\bd\s*:\s*number/.test(c), message: 'Cria a variável d com tipo number.' },
-    { test: (c) => /mostrarResultado\s*\(\s*d\s*\)/.test(c), message: 'Mostra o resultado com mostrarResultado(d).' },
+    { test: (c) => /mostrar\s*\(\s*d\s*\)/.test(c), message: 'Mostra o resultado com mostrar(d).' },
     { test: (c) => /(12\s*\*\s*7|7\s*\*\s*12)/.test(c), message: 'Calcula 12 * 7 em vez de escrever o resultado diretamente.' },
     { test: (_c, s) => s.result === 84, message: 'O resultado deve ser 84.' },
   ],
@@ -49,7 +49,7 @@ window.exerciseChecksById = {
     { test: (c) => /lerInput/.test(c), message: 'Usa await lerInput para pedir a palavra-passe.' },
     { test: (c) => /\.length/.test(c), message: 'Usa .length para contar os caracteres da palavra (ex.: palavra.length).' },
     { test: (c) => /\bif\s*\(/.test(c), message: 'Usa if para decidir se a palavra-passe é forte ou fraca.' },
-    { test: (_c, s) => !!s.strength, message: 'Mostra o resultado com mostrarForca("forte") ou mostrarForca("fraca").' },
+    { test: (_c, s) => !!s.strength, message: 'Mostra o resultado com mostrar("forte") ou mostrar("fraca").' },
   ],
   listas: [
     { test: (c) => /\bfor\s*\(/.test(c), message: 'Usa um ciclo for para percorrer a lista.' },
@@ -192,7 +192,7 @@ window.exerciseChecksById = {
   'arrays-indices': [
     { test: (c) => /:\s*string\s*\[\s*\]/.test(c), message: 'Declara a lista como string[] (ex.: const cores: string[] = [...]).' },
     { test: (c) => /\[\s*1\s*\]/.test(c), message: 'Acede ao elemento no índice 1 (cores[1]).' },
-    { test: (_c, s) => !!s.item && s.item !== 'undefined', message: 'Mostra um elemento válido da lista com mostrarItem.' },
+    { test: (_c, s) => !!s.item && s.item !== 'undefined', message: 'Mostra um elemento válido da lista com mostrar.' },
   ],
   'ciclos-for': [
     { test: (c) => /for\s*\(\s*let\s+\w+\s*=/.test(c), message: 'Usa um for clássico com contador: for (let i = 1; i <= 10; i++).' },
@@ -202,7 +202,7 @@ window.exerciseChecksById = {
   'operadores-logicos': [
     { test: (c) => /&&|\|\|/.test(c), message: 'Usa um operador lógico: && (E) ou || (OU).' },
     { test: (c) => /:\s*boolean/.test(c), message: 'Guarda o resultado numa variável boolean.' },
-    { test: (_c, s) => typeof s.logic === 'boolean', message: 'Mostra o resultado com mostrarResultado.' },
+    { test: (_c, s) => typeof s.logic === 'boolean', message: 'Mostra o resultado com mostrar.' },
   ],
   'arvore-intro': [
     { test: (c) => /number\s*\[\s*\]/.test(c), message: 'Declara a lista como number[] (ex.: const valores: number[] = [...]).' },

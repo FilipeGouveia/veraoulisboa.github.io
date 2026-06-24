@@ -214,8 +214,8 @@ function renderBriefing(exercise, completed) {
   document.getElementById('exerciseTitle').textContent = exercise.title;
   document.getElementById('exerciseStatus').textContent = completed ? 'Concluído' : `${exercise.points} pontos`;
   document.getElementById('exerciseStatus').className = `status-badge ${completed ? 'done' : ''}`;
-  const section = (label, inner, open) =>
-    `<button type="button" class="section-toggle${open ? ' open' : ''}" onclick="toggleSection(this)"><span class="chev">${open ? '▾' : '▸'}</span> ${label}</button>`
+  const section = (label, inner, open, buttonStyle = '') =>
+    `<button type="button" class="section-toggle${open ? ' open' : ''}"${buttonStyle ? ` style="${buttonStyle}"` : ''} onclick="toggleSection(this)"><span class="chev">${open ? '▾' : '▸'}</span> ${label}</button>`
     + `<div class="section-box"${open ? '' : ' hidden'}>${inner}</div>`;
   const paragraphs = (value) => (value && value.length)
     ? value.map((paragraph) => `<p>${AppUtils.formatText(paragraph)}</p>`).join('')
@@ -234,7 +234,7 @@ function renderBriefing(exercise, completed) {
     ${section('O que deves observar', observationInner, false)}
     ${hintInner ? section('Dica', hintInner, false) : ''}
     ${advancedInner ? section('Avançado', advancedInner, false) : ''}
-    ${curiosityInner ? section('Curiosidade!', curiosityInner, false) : ''}
+    ${curiosityInner ? section('Curiosidade!', curiosityInner, false, 'background:#2e7d32;color:#fff;border-color:#2e7d32;') : ''}
   `;
 
   const animationPanel = document.getElementById('animationPanel');

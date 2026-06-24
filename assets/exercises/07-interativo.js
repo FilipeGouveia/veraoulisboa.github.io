@@ -113,13 +113,13 @@ window.exerciseTopics.push({
       instructions: [
         'Pede dois números ao utilizador com [await lerInput()].',
         'Converte os textos para números com [Number()].',
-        'Calcula a soma e mostra com [mostrarResultado()].',
+        'Calcula a soma e mostra com [mostrar()].',
         'Usa [escrever()] para mostrar uma mensagem com o resultado.',
       ],
       observation: 'Escreve os números no terminal abaixo do painel. O resultado aparece no painel visual e no terminal.',
       hint: '[lerInput] devolve texto. Usa [Number()] para converter antes de somar.',
       starter: 'const textoA = await lerInput("Escreve o primeiro número:");\nconst textoB = await lerInput("Escreve o segundo número:");\n\nconst a: number = Number(textoA);\nconst b: number = Number(textoB);\n\n// calcula e mostra o resultado',
-      solution: 'const textoA = await lerInput("Escreve o primeiro número:");\nconst textoB = await lerInput("Escreve o segundo número:");\n\nconst a: number = Number(textoA);\nconst b: number = Number(textoB);\n\nconst soma: number = a + b;\nescrever("A soma de " + a + " + " + b + " = " + soma);\nmostrarResultado(soma);',
+      solution: 'const textoA = await lerInput("Escreve o primeiro número:");\nconst textoB = await lerInput("Escreve o segundo número:");\n\nconst a: number = Number(textoA);\nconst b: number = Number(textoB);\n\nconst soma: number = a + b;\nescrever("A soma de " + a + " + " + b + " = " + soma);\nmostrar(soma);',
       html: `
         <main class="stage">
           <section class="panel">
@@ -130,7 +130,7 @@ window.exerciseTopics.push({
         </main>
       `,
       api: `
-        function mostrarResultado(valor) {
+        function mostrar(valor) {
           const result = Number(valor);
           setText('result', Number.isFinite(result) ? result : 'Erro');
           window.exerciseState.result = result;
@@ -159,12 +159,12 @@ window.exerciseTopics.push({
       instructions: [
         'Pede uma mensagem ao utilizador com [await lerInput].',
         'Chama [cifrar(mensagem)] para obter o texto cifrado.',
-        'Mostra o resultado com [escrever()] e [mostrarCifra()].',
+        'Mostra o resultado com [escrever()] e [mostrar()].',
       ],
       observation: 'Escreve qualquer texto no terminal. O painel mostra a versão cifrada.',
       hint: 'Guarda o resultado de [lerInput] numa variável. Passa essa variável para [cifrar].',
       starter: 'function cifrar(texto: string): string {\n  let resultado: string = "";\n  for (const letra of texto) {\n    resultado += String.fromCharCode(letra.charCodeAt(0) + 13);\n  }\n  return resultado;\n}\n\n// pede a mensagem e mostra a cifra',
-      solution: 'function cifrar(texto: string): string {\n  let resultado: string = "";\n  for (const letra of texto) {\n    resultado += String.fromCharCode(letra.charCodeAt(0) + 13);\n  }\n  return resultado;\n}\n\nconst mensagem = await lerInput("Escreve a tua mensagem secreta:");\nconst cifrada: string = cifrar(mensagem);\nescrever("Cifrada: " + cifrada);\nmostrarCifra(cifrada);',
+      solution: 'function cifrar(texto: string): string {\n  let resultado: string = "";\n  for (const letra of texto) {\n    resultado += String.fromCharCode(letra.charCodeAt(0) + 13);\n  }\n  return resultado;\n}\n\nconst mensagem = await lerInput("Escreve a tua mensagem secreta:");\nconst cifrada: string = cifrar(mensagem);\nescrever("Cifrada: " + cifrada);\nmostrar(cifrada);',
       html: `
         <main class="stage">
           <section class="panel dark">
@@ -177,7 +177,7 @@ window.exerciseTopics.push({
         </main>
       `,
       api: `
-        function mostrarCifra(texto) {
+        function mostrar(texto) {
           const cipher = String(texto);
           setText('cipher', cipher);
           window.exerciseState.cipher = cipher;
