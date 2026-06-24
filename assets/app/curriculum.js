@@ -16,7 +16,7 @@ window.Curriculum = (() => {
     {
       id: 'ciclos',
       title: 'Decisões, Ciclos e Jogos',
-      exercises: ['arrays-indices', 'listas', 'ciclos-for', 'booleanos', 'operadores-logicos', 'semaforo-amarelo', 'par-impar', 'aleatorio', 'while', 'adivinhar-numero'],
+      exercises: ['operadores-logicos', 'booleanos', 'semaforo-amarelo', 'par-impar', 'aleatorio', 'while', 'arrays-indices', 'listas', 'ciclos-for', 'adivinhar-numero'],
     },
     {
       id: 'donatello',

@@ -230,7 +230,7 @@ function renderBriefing(exercise, completed) {
   const curiosityInner = paragraphs(exercise.curiosity);
   document.getElementById('exerciseBody').innerHTML = `
     ${(exercise.explanation || []).map((paragraph) => `<p>${AppUtils.formatText(paragraph)}</p>`).join('')}
-    ${section('Objetivos', instructionsInner, true)}
+    ${section('O que deves fazer', instructionsInner, true)}
     ${section('O que deves observar', observationInner, false)}
     ${hintInner ? section('Dica', hintInner, false) : ''}
     ${advancedInner ? section('Avançado', advancedInner, false) : ''}
