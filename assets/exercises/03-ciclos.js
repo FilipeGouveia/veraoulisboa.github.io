@@ -538,17 +538,18 @@ window.exerciseTopics.push({
     },
     {
       id: 'operadores-logicos',
-      title: 'E, OU (&& e ||)',
+      title: 'Operações Booleanas',
       points: 15,
       explanation: [
-        'Às vezes uma decisão depende de mais do que uma condição. Os operadores lógicos juntam condições booleanas.',
+        'Às vezes uma decisão depende de mais do que uma condição. Os operadores lógicos juntam ou invertem condições booleanas.',
         'O [&&] (E) é verdadeiro só quando as duas condições são verdadeiras. O [||] (OU) é verdadeiro quando pelo menos uma é verdadeira.',
-        'Exemplo: só podes entrar na montanha-russa se [tensBilhete && alturaSuficiente] — precisas das duas coisas ao mesmo tempo.',
+        'O [!] (NÃO) inverte um booleano: [!true] é [false] e [!false] é [true]. Por exemplo, se [estaChovendo] for [false], então [!estaChovendo] é [true] — ou seja, "não está a chover".',
+        'Exemplo do E: só podes entrar na montanha-russa se [tensBilhete && alturaSuficiente] — precisas das duas coisas ao mesmo tempo.',
       ],
       advanced: [
         'Existe ainda o [!] (NÃO), que inverte um booleano: [!true] é [false]. Os operadores também curto-circuitam: em [a && b], se [a] for falso, [b] nem chega a ser avaliado.',
       ],
-      animation: '<div class="cax"><div class="big cax-a">true && false = <span class="bad">false</span></div><div class="big cax-b">true || false = <span class="ok">true</span></div></div>',
+      animation: '<div class="cax"><div class="big cax-a">true && false = <span class="bad">false</span></div><div class="big cax-b">true || false = <span class="ok">true</span></div><div class="lbl">e o ! inverte: !true → <span class="bad">false</span> · !false → <span class="ok">true</span></div></div>',
       instructions: [
         'Cria [const tensBilhete: boolean = true;] e [const alturaSuficiente: boolean = false;].',
         'Usa [&&] para saber se podes entrar e guarda em [const podeEntrar: boolean = ...].',
@@ -574,6 +575,55 @@ window.exerciseTopics.push({
         }
       `,
       validate: (code, state) => /&&|\|\|/.test(code) && /:\s*boolean/.test(code) && typeof state.logic === 'boolean',
+    },
+    {
+      id: 'comparacoes',
+      title: 'Comparações verdadeiras',
+      points: 15,
+      explanation: [
+        'Cada linha do editor compara dois números e guarda o resultado (um booleano) numa variável. Mas os operadores estão errados — todas as comparações dão [false]!',
+        'O teu trabalho é corrigir o operador de cada linha para que TODAS as comparações fiquem verdadeiras ([true]).',
+        'Lembra-te dos operadores: [>] maior, [<] menor, [>=] maior ou igual, [<=] menor ou igual, [===] igual (valor e tipo) e [!==] diferente.',
+      ],
+      advanced: [
+        'Em algumas linhas há mais do que um operador certo. Por exemplo, para [6 ? 6] ser verdadeira podes usar [>=], [<=] ou [===] — todos dão [true]. Já [6 > 6] é [false], porque 6 não é maior do que ele próprio.',
+      ],
+      animation: '<div class="cax"><div class="big">8 <span class="cax-pulse ok">&gt;</span> 5 = <span class="ok">true</span></div><div class="big">7 <span class="cax-pulse ok">===</span> 7 = <span class="ok">true</span></div><div class="lbl">escolhe o operador certo para cada linha</div></div>',
+      instructions: [
+        'Corrige o operador de cada comparação para que o resultado seja [true].',
+        'Não mudes os números — só os operadores ([>], [<], [>=], [<=], [===], [!==]).',
+        'No fim, todas as linhas do painel devem ficar com ✅.',
+      ],
+      observation: 'O painel mostra cada comparação com ✅ (verdadeira) ou ❌ (ainda falsa).',
+      hint: 'Pensa em cada linha: 8 é maior do que 5, logo [8 > 5]. 7 é igual a 7, logo [7 === 7]. 4 é diferente de 9, logo [4 !== 9].',
+      starter: '// Corrige o operador de cada linha para que TODAS sejam verdadeiras (true).\nconst c1: boolean = 8 < 5;\nconst c2: boolean = 3 > 10;\nconst c3: boolean = 7 !== 7;\nconst c4: boolean = 4 === 9;\nconst c5: boolean = 6 > 6;\nconst c6: boolean = 2 < 2;\n\nverificar(c1, c2, c3, c4, c5, c6);',
+      solution: 'const c1: boolean = 8 > 5;\nconst c2: boolean = 3 < 10;\nconst c3: boolean = 7 === 7;\nconst c4: boolean = 4 !== 9;\nconst c5: boolean = 6 >= 6;\nconst c6: boolean = 2 <= 2;\n\nverificar(c1, c2, c3, c4, c5, c6);',
+      html: `
+        <main class="stage">
+          <section class="panel">
+            <h2>Comparações</h2>
+            <ul class="grid-list" id="checks" style="flex-direction:column;gap:6px;align-items:flex-start;"></ul>
+            <p id="status" style="margin-top:14px;font-size:18px;font-weight:800;min-height:1.3em;"></p>
+          </section>
+        </main>
+      `,
+      api: `
+        function verificar() {
+          const arr = Array.prototype.slice.call(arguments).map(Boolean);
+          window.exerciseState.count = arr.length;
+          window.exerciseState.allTrue = arr.length > 0 && arr.every(Boolean);
+          const checks = document.getElementById('checks');
+          checks.innerHTML = arr.map(function (r, i) {
+            return '<li style="background:' + (r ? '#d9fbe8' : '#fde8e8') + ';">' + (r ? '✅' : '❌') + ' Comparação ' + (i + 1) + (r ? ' — verdadeira' : ' — ainda falsa') + '</li>';
+          }).join('');
+          const status = document.getElementById('status');
+          if (status) {
+            status.textContent = window.exerciseState.allTrue ? '🎉 Todas verdadeiras!' : 'Ainda há comparações falsas.';
+            status.style.color = window.exerciseState.allTrue ? '#16a34a' : '#d97706';
+          }
+        }
+      `,
+      validate: (code, state) => state.allTrue === true && state.count >= 6 && /\b8\b/.test(code) && /\b10\b/.test(code) && /===|!==/.test(code),
     },
   ],
 });
