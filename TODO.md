@@ -10,6 +10,8 @@
 - Found during testing: `donatello-circulo` reference solution (1px/1°×360) never passed its own validate (which required value 10); realigned instructions + validate to the 1px/1° approach. ✔️ Done.
 - ~~Objetivos sitting next to "Mostrar Avançado"; should be below it and only visible when pressed.~~ ✔️ Done — all briefing sections (Objetivos, Observar, Dica, Avançado) are now consistent collapsible toggles, collapsed by default.
 
+- Found during manual run (jsdom + Chrome): `strings` starter called `criarCartao(nome, detalhe)` with the variables commented out → ReferenceError on the first Executar; starter now declares them empty (like `ola`/`falar`). ✔️ Done.
+
 ## Feature Triage
 
 - Create an interactive tutorial for the student. (large — still open)
