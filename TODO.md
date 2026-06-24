@@ -83,10 +83,10 @@ _All nine resolved 2026-06-23 (✔️ in Task Status (QA) below)._
 
 ### Bug Triage
 
-- 🔴 `main.js`: `initApp` defined **twice** (lines 316 and 877) — first definition is dead code; second silently wins. Risk of future developer editing the wrong copy. Remove lines 316–343.
+- ~~🔴 `main.js`: `initApp` defined **twice**; first definition is dead code, second silently wins.~~ ✔️ Done — removed the dead first definition; one `initApp` remains, referenced only by the DOMContentLoaded listener.
 
 ### Task Status (QA Round 2)
 
 | Task name [feature]/[bug] | To implement | Implementing | Ready | Responsible |
 |---------------------------|--------------|--------------|-------|-------------|
-| main.js: remove duplicate initApp function (lines 316-343) [bug] | ⬜ | | | |
+| main.js: remove duplicate initApp function [bug] | | | ✔️ | Claude |

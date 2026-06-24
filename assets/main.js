@@ -312,35 +312,6 @@ function syncRunControls() {
   if (runButton) runButton.disabled = currentRunIsActive;
 }
 
-function initApp() {
-  document.getElementById('solutionBtn').hidden = !ENABLE_SOLUTIONS;
-  document.body.classList.toggle('lab-mode-facilitator', ENABLE_SOLUTIONS);
-  document.body.classList.toggle('lab-mode-student', !ENABLE_SOLUTIONS);
-
-  const editor = getEditor();
-  editor.addEventListener('input', handleEditorInput);
-  editor.addEventListener('scroll', syncEditorHighlightScroll);
-  editor.addEventListener('keydown', handleEditorKeydown);
-  editor.addEventListener('focus', () => { editorFocused = true; });
-  editor.addEventListener('blur', () => { editorFocused = false; });
-
-  document.addEventListener('visibilitychange', () => {
-    tabVisible = document.visibilityState === 'visible';
-  });
-
-  document.getElementById('consoleForm').addEventListener('submit', (event) => {
-    event.preventDefault();
-    TerminalPanel.submitInput();
-  });
-
-  window.addEventListener('message', handlePreviewMessage);
-  window.addEventListener('beforeunload', () => {
-    if (!isRestarting) saveState();
-  });
-
-  syncRunControls();
-}
-
 function completeExercise(exercise) {
   if (appState.completed[exercise.id]) return;
 
