@@ -209,4 +209,9 @@ window.exerciseChecksById = {
     { test: (c) => /criarArvore/.test(c), message: 'Chama criarArvore(valores) para construir a árvore.' },
     { test: (_c, s) => (s.treeValues || []).length >= 5, message: 'A lista deve ter pelo menos 5 números.' },
   ],
+  'comparacoes': [
+    { test: (c) => /===|!==/.test(c), message: 'Usa === (igual) e !== (diferente) onde fizer sentido.' },
+    { test: (c) => /\b8\b/.test(c) && /\b10\b/.test(c), message: 'Mantém os números das comparações; só muda os operadores.' },
+    { test: (_c, s) => s.allTrue === true, message: 'Ainda há comparações falsas — corrige os operadores até todas ficarem verdadeiras.' },
+  ],
 };
