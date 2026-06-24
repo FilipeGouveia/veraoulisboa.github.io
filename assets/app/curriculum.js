@@ -6,7 +6,7 @@ window.Curriculum = (() => {
     {
       id: 'fundamentos',
       title: 'Primeiros Programas e Texto',
-      exercises: ['intro', 'ola', 'strings', 'falar'],
+      exercises: ['intro', 'ola', 'strings', 'const-let', 'falar'],
     },
     {
       id: 'numeros',
@@ -16,7 +16,7 @@ window.Curriculum = (() => {
     {
       id: 'ciclos',
       title: 'Decisões, Ciclos e Jogos',
-      exercises: ['listas', 'booleanos', 'semaforo-amarelo', 'par-impar', 'aleatorio', 'while', 'adivinhar-numero'],
+      exercises: ['arrays-indices', 'listas', 'ciclos-for', 'booleanos', 'operadores-logicos', 'semaforo-amarelo', 'par-impar', 'aleatorio', 'while', 'adivinhar-numero'],
     },
     {
       id: 'donatello',

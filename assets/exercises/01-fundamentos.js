@@ -214,5 +214,45 @@ window.exerciseTopics.push({
       ],
       validate: (code, state) => /:\s*string/.test(code) && state.name?.length >= 2 && state.detail?.length >= 5,
     },
+    {
+      id: 'const-let',
+      title: 'const e let',
+      points: 10,
+      explanation: [
+        'Já usaste o [const]. Uma variável [const] não pode ser reatribuída: depois de receber um valor, ele fica fixo.',
+        'Quando precisas de um valor que muda ao longo do programa, usas [let]. Uma variável [let] pode receber novos valores com [=].',
+        'Regra prática: usa [const] por defeito e só troca para [let] quando precisares mesmo de mudar o valor.',
+      ],
+      advanced: [
+        'Mudar o valor de uma variável [let] (ex.: [total = total + 5]) chama-se reatribuição. Tentar reatribuir uma [const] dá um erro: "Assignment to constant variable".',
+      ],
+      animation: '<div class="cax"><div class="lbl">let total</div><div class="big"><span class="cax-pop">0</span> <span class="cax-pop d1">5</span> <span class="cax-pop d2 accent">8</span></div><div class="lbl">com let, o valor pode mudar</div></div>',
+      instructions: [
+        'Cria uma variável [total] com [let] e o valor inicial [0].',
+        'Soma [5] a [total] (ex.: [total = total + 5;]).',
+        'Soma mais [3] a [total].',
+        'Mostra o resultado com [mostrarValor(total)].',
+      ],
+      observation: 'O painel deve mostrar 8 (0 + 5 + 3).',
+      hint: 'Com [let] podes reatribuir: [total = total + 5;]. Repete para somar mais 3.',
+      starter: '// cria a variável total com let\n\n// soma 5 e depois soma 3\n\n// mostra total com mostrarValor',
+      solution: 'let total: number = 0;\ntotal = total + 5;\ntotal = total + 3;\nmostrarValor(total);',
+      html: `
+        <main class="stage">
+          <section class="panel">
+            <h2>Total</h2>
+            <div class="big-value" id="value">?</div>
+          </section>
+        </main>
+      `,
+      api: `
+        function mostrarValor(valor) {
+          const v = Number(valor);
+          setText('value', Number.isFinite(v) ? v : 'Erro');
+          window.exerciseState.value = v;
+        }
+      `,
+      validate: (code, state) => /\blet\b/.test(code) && /total\s*=\s*total\s*\+/.test(code) && state.value === 8,
+    },
   ],
 });

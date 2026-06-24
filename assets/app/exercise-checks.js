@@ -184,4 +184,24 @@ window.exerciseChecksById = {
     { test: (_c, s) => (s.jogadores || []).length >= 2, message: 'Regista pelo menos 2 jogadores.' },
     { test: (_c, s) => s.vencedor && s.maxScore !== null, message: 'Anuncia o vencedor com anunciarVencedor.' },
   ],
+  'const-let': [
+    { test: (c) => /\blet\b/.test(c), message: 'Cria a variável total com let (não const), porque o valor vai mudar.' },
+    { test: (c) => /total\s*=\s*total\s*\+/.test(c), message: 'Reatribui total, por exemplo total = total + 5.' },
+    { test: (_c, s) => s.value === 8, message: 'O resultado deve ser 8 (0 + 5 + 3).' },
+  ],
+  'arrays-indices': [
+    { test: (c) => /:\s*string\s*\[\s*\]/.test(c), message: 'Declara a lista como string[] (ex.: const cores: string[] = [...]).' },
+    { test: (c) => /\[\s*1\s*\]/.test(c), message: 'Acede ao elemento no índice 1 (cores[1]).' },
+    { test: (_c, s) => !!s.item && s.item !== 'undefined', message: 'Mostra um elemento válido da lista com mostrarItem.' },
+  ],
+  'ciclos-for': [
+    { test: (c) => /for\s*\(\s*let\s+\w+\s*=/.test(c), message: 'Usa um for clássico com contador: for (let i = 1; i <= 10; i++).' },
+    { test: (c) => /\bbreak\b/.test(c), message: 'Usa break para parar o ciclo quando a soma passar de 20.' },
+    { test: (_c, s) => s.total === 21, message: 'A soma final deve ser 21 (1+2+3+4+5+6).' },
+  ],
+  'operadores-logicos': [
+    { test: (c) => /&&|\|\|/.test(c), message: 'Usa um operador lógico: && (E) ou || (OU).' },
+    { test: (c) => /:\s*boolean/.test(c), message: 'Guarda o resultado numa variável boolean.' },
+    { test: (_c, s) => typeof s.logic === 'boolean', message: 'Mostra o resultado com mostrarResultado.' },
+  ],
 };
