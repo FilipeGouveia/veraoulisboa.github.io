@@ -73,7 +73,7 @@ window.exerciseTopics.push({
     },
     {
       id: 'ola',
-      animation: '<div class="cax"><div class="lbl">mostrarMensagem("...")</div><div class="big accent cax-step">Olá, FCUL!</div></div>',
+      animation: '<div class="cax"><div class="lbl">anatomia de uma instrução</div><div class="big"><span class="cax-pulse">mostrarMensagem</span>(<span class="accent">"Olá!"</span>)<span class="warn">;</span></div><div class="cax-step lbl">função &middot; texto entre "aspas" &middot; ponto e vírgula no fim</div></div>',
       title: 'Olá, mundo visual',
       points: 10,
       explanation: [

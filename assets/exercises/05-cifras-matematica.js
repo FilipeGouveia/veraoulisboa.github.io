@@ -10,7 +10,7 @@ window.exerciseTopics.push({
       points: 25,
       explanation: [
         'Uma cifra é uma forma de esconder uma mensagem. A ideia da cifra de César é trocar cada letra por outra letra mais à frente no alfabeto.',
-        'No computador, cada letra tem um código numérico. Podemos ler esse código com [charCodeAt] e criar uma nova letra com [String.fromCharCode].',
+        'No computador, cada letra tem um código numérico (a tabela Unicode). [letra.charCodeAt(0)] dá o número da primeira letra de [letra] — por exemplo, "A" é 65 e "a" é 97. A operação inversa, [String.fromCharCode(numero)], transforma um número de volta numa letra.',
         'Aqui usamos um deslocamento de 13. A letra F passa a S, C passa a P, U passa a b e L passa a Y. Por isso FCUL fica SPbY.',
       ],
       advanced: [
@@ -129,7 +129,8 @@ window.exerciseTopics.push({
       points: 25,
       explanation: [
         'Algumas fórmulas parecem grandes, mas um programa pode dividi-las em passos pequenos. A fórmula resolvente encontra as soluções de uma equação do segundo grau.',
-        'Para x² - 5x + 6 = 0, temos a = 1, b = -5 e c = 6. Primeiro calculamos delta. Depois usamos [Math.sqrt(delta)] para obter a raiz quadrada.',
+        'A fórmula resolvente é x = (−b ± √Δ) / (2a), onde o discriminante é Δ = b² − 4ac. O símbolo ± significa que há duas soluções: uma com + e outra com −.',
+        'Para x² - 5x + 6 = 0, temos a = 1, b = -5 e c = 6. Primeiro calculamos delta (Δ). Depois usamos [Math.sqrt(delta)] para obter a raiz quadrada de Δ.',
         'O objetivo não é decorar a fórmula toda de uma vez. É perceber como transformar uma receita matemática numa sequência de variáveis.',
       ],
       instructions: [
