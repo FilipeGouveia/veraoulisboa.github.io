@@ -90,3 +90,46 @@ _All nine resolved 2026-06-23 (✔️ in Task Status (QA) below)._
 | Task name [feature]/[bug] | To implement | Implementing | Ready | Responsible |
 |---------------------------|--------------|--------------|-------|-------------|
 | main.js: remove duplicate initApp function [bug] | | | ✔️ | Claude |
+
+
+## Reviewer Feedback (2026-06-24)
+
+> Overarching goal: adapt the guide for students with very little programming experience — a slightly stronger tutorial component that helps them translate their reasoning into code.
+
+### Presentation / structure
+
+- Hide the timer while solving exercises; show it only on the leaderboard.
+- Reorder the briefing sections to: Objetivo/Pergunta -> O que deves observar (resultados esperados) -> Dica -> Avancado.
+- The Objetivo/Pergunta should always be visible by default (collapse only the rest), so students immediately see the challenge and its points. NOTE: partially reverses VUL-0016, which collapsed every section by default.
+
+### Content / concepts
+
+- Exercise 1: introduce the language's basic syntax (declaring variables, semicolons, etc.) — ideally via an animation (as previously discussed).
+- Unify the names of the result-printing functions (pick one of mostrarMensagem / escrever / ...).
+- Introduce or reinforce fundamentals across the exercises:
+  - const vs let, and when to use each;
+  - if and comparison operators (>, ===, !=, ...);
+  - logical operators (|| for OR, && for AND);
+  - array indexing (0-based) and how to declare arrays;
+  - for loops: teach BOTH forms the exercises require (only one is explained today) and how to break out of a loop.
+- donatello: add a curiosity about who Donatello was and why these methods carry his name.
+- cesar (cifras): one of the hardest — charCodeAt is not explained enough in the briefing.
+- formula (raizes da equacao): include the quadratic formula in the briefing.
+- arvore-procura (lista vs arvore): very challenging for this audience (no prior exposure to these structures) — add an intermediate exercise with a simple tree example.
+
+### Task Status (Reviewer Feedback)
+
+| Task name [feature]/[bug] | To implement | Implementing | Ready | Responsible |
+|---------------------------|--------------|--------------|-------|-------------|
+| Hide timer during exercises, show only on leaderboard [feature] | ⬜ | | | |
+| Reorder briefing: Objetivo -> Observar -> Dica -> Avancado [feature] | ⬜ | | | |
+| Objetivo/Pergunta always visible by default (others collapsed) [feature] | ⬜ | | | |
+| Exercise 1: basic-syntax intro via animation [feature] | ⬜ | | | |
+| Unify result-printing function names (mostrarMensagem/escrever/...) [feature] | ⬜ | | | |
+| Reinforce const/let, if+operators, &&/||, arrays+indexing across exercises [feature] | ⬜ | | | |
+| for loops: teach both forms + how to break out [feature] | ⬜ | | | |
+| donatello: add curiosity about who Donatello was [feature] | ⬜ | | | |
+| cesar: explain charCodeAt better in the briefing [feature] | ⬜ | | | |
+| formula: include the quadratic formula in the briefing [feature] | ⬜ | | | |
+| arvore-procura: add an intermediate simple-tree exercise [feature] | ⬜ | | | |
+
