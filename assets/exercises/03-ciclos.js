@@ -457,5 +457,121 @@ window.exerciseTopics.push({
       `,
       validate: (code, state) => /\bwhile\s*\(/.test(code) && /lerInput/.test(code) && state.done === true && state.questions >= 1,
     },
+    {
+      id: 'arrays-indices',
+      title: 'Listas e índices',
+      points: 10,
+      explanation: [
+        'Uma lista (ou array) guarda vários valores numa só variável, por ordem. Declaramos com [const cores: string[] = ["vermelho", "verde", "azul"];].',
+        'Cada valor tem uma posição, o índice. A contagem começa em 0: [cores[0]] é "vermelho", [cores[1]] é "verde" e [cores[2]] é "azul".',
+        'Aceder a um índice que não existe (por exemplo [cores[3]] aqui) dá [undefined].',
+      ],
+      advanced: [
+        'O número de elementos está em [cores.length]. Como os índices vão de 0 a [length - 1], o último elemento é [cores[cores.length - 1]].',
+      ],
+      animation: '<div class="cax"><div class="big"><span class="cax-pop">[0] 🔴</span> <span class="cax-pop d1">[1] 🟢</span> <span class="cax-pop d2">[2] 🔵</span></div><div class="lbl">o índice começa em 0</div></div>',
+      instructions: [
+        'Cria uma lista [cores] do tipo [string[]] com pelo menos 3 cores.',
+        'Mostra o elemento na posição 1 com [mostrarItem(cores[1])].',
+      ],
+      observation: 'Como os índices começam em 0, [cores[1]] é o segundo elemento da lista.',
+      hint: 'O primeiro elemento é [cores[0]]; o segundo é [cores[1]].',
+      starter: 'const cores: string[] = [];\n\n// mostra o elemento no índice 1',
+      solution: 'const cores: string[] = ["vermelho", "verde", "azul"];\n\nmostrarItem(cores[1]);',
+      html: `
+        <main class="stage">
+          <section class="panel">
+            <h2>Elemento escolhido</h2>
+            <div class="big-value" id="item">?</div>
+          </section>
+        </main>
+      `,
+      api: `
+        function mostrarItem(valor) {
+          setText('item', String(valor));
+          window.exerciseState.item = String(valor);
+        }
+      `,
+      validate: (code, state) => /:\s*string\s*\[\s*\]/.test(code) && /\[\s*1\s*\]/.test(code) && !!state.item && state.item !== 'undefined' && state.item.length >= 2,
+    },
+    {
+      id: 'ciclos-for',
+      title: 'O ciclo for e o break',
+      points: 20,
+      explanation: [
+        'Já usaste [for...of] para percorrer uma lista. Há outra forma muito comum: o [for] clássico com um contador, [for (let i = 0; i < 10; i++)]. O [i] começa em 0 e sobe de 1 em 1 enquanto a condição for verdadeira.',
+        'Esta forma é útil quando precisas do número da posição (o índice) ou de repetir um número exato de vezes.',
+        'Às vezes queremos parar o ciclo a meio. A palavra [break] interrompe o ciclo imediatamente.',
+      ],
+      advanced: [
+        'Existe também o [continue], que salta para a volta seguinte do ciclo sem o terminar. E podes contar de trás para a frente: [for (let i = 10; i > 0; i--)].',
+      ],
+      animation: '<div class="cax"><div class="lbl">for (let i = 1; i &lt;= 5; i++)</div><div class="big"><span class="cax-pop">1</span> <span class="cax-pop d1">2</span> <span class="cax-pop d2 bad">break!</span></div></div>',
+      instructions: [
+        'Usa um [for] clássico: [for (let i = 1; i <= 10; i++)].',
+        'Soma cada [i] a uma variável [soma].',
+        'Quando [soma] passar de 20, usa [break] para parar.',
+        'Mostra o valor final com [mostrarTotal(soma)].',
+      ],
+      observation: 'A soma 1+2+3+4+5+6 = 21 ultrapassa 20, por isso o ciclo pára aí.',
+      hint: 'Dentro do for, faz [soma = soma + i;] e depois [if (soma > 20) break;].',
+      starter: 'let soma: number = 0;\n\n// cria o for de 1 a 10, soma cada i e usa break quando soma passar de 20\n\nmostrarTotal(soma);',
+      solution: 'let soma: number = 0;\n\nfor (let i = 1; i <= 10; i++) {\n  soma = soma + i;\n  if (soma > 20) {\n    break;\n  }\n}\n\nmostrarTotal(soma);',
+      html: `
+        <main class="stage">
+          <section class="panel">
+            <h2>Soma</h2>
+            <div class="big-value" id="total">?</div>
+          </section>
+        </main>
+      `,
+      api: `
+        function mostrarTotal(valor) {
+          const v = Number(valor);
+          setText('total', Number.isFinite(v) ? v : 'Erro');
+          window.exerciseState.total = v;
+        }
+      `,
+      validate: (code, state) => /for\s*\(\s*let\s+\w+\s*=/.test(code) && /\bbreak\b/.test(code) && state.total === 21,
+    },
+    {
+      id: 'operadores-logicos',
+      title: 'E, OU (&& e ||)',
+      points: 15,
+      explanation: [
+        'Às vezes uma decisão depende de mais do que uma condição. Os operadores lógicos juntam condições booleanas.',
+        'O [&&] (E) é verdadeiro só quando as duas condições são verdadeiras. O [||] (OU) é verdadeiro quando pelo menos uma é verdadeira.',
+        'Exemplo: só podes entrar na montanha-russa se [tensBilhete && alturaSuficiente] — precisas das duas coisas ao mesmo tempo.',
+      ],
+      advanced: [
+        'Existe ainda o [!] (NÃO), que inverte um booleano: [!true] é [false]. Os operadores também curto-circuitam: em [a && b], se [a] for falso, [b] nem chega a ser avaliado.',
+      ],
+      animation: '<div class="cax"><div class="big cax-a">true && false = <span class="bad">false</span></div><div class="big cax-b">true || false = <span class="ok">true</span></div></div>',
+      instructions: [
+        'Cria [const tensBilhete: boolean = true;] e [const alturaSuficiente: boolean = false;].',
+        'Usa [&&] para saber se podes entrar e guarda em [const podeEntrar: boolean = ...].',
+        'Mostra o resultado com [mostrarResultado(podeEntrar)].',
+      ],
+      observation: 'Com [true && false] o resultado é [false] — falta uma das condições.',
+      hint: 'O [&&] precisa das duas condições verdadeiras: [const podeEntrar: boolean = tensBilhete && alturaSuficiente;].',
+      starter: 'const tensBilhete: boolean = true;\nconst alturaSuficiente: boolean = false;\n\n// combina as duas condições com && e mostra o resultado',
+      solution: 'const tensBilhete: boolean = true;\nconst alturaSuficiente: boolean = false;\n\nconst podeEntrar: boolean = tensBilhete && alturaSuficiente;\nmostrarResultado(podeEntrar);',
+      html: `
+        <main class="stage">
+          <section class="panel">
+            <h2>Pode entrar?</h2>
+            <div class="big-value" id="result">?</div>
+          </section>
+        </main>
+      `,
+      api: `
+        function mostrarResultado(valor) {
+          const v = Boolean(valor);
+          setText('result', v ? 'Sim ✅' : 'Não ❌');
+          window.exerciseState.logic = v;
+        }
+      `,
+      validate: (code, state) => /&&|\|\|/.test(code) && /:\s*boolean/.test(code) && typeof state.logic === 'boolean',
+    },
   ],
 });

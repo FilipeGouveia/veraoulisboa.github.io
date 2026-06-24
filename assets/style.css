@@ -47,8 +47,10 @@ body {
   text-align: right;
 }
 
+/* Timer runs in the background (appState.timeSpent) but stays hidden during
+   exercises; the elapsed time is shown only on the leaderboard / diploma. */
 .timer-wrap {
-  display: inline-flex;
+  display: none;
   align-items: center;
   justify-content: flex-end;
   gap: 6px;
