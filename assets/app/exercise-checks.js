@@ -204,4 +204,9 @@ window.exerciseChecksById = {
     { test: (c) => /:\s*boolean/.test(c), message: 'Guarda o resultado numa variável boolean.' },
     { test: (_c, s) => typeof s.logic === 'boolean', message: 'Mostra o resultado com mostrarResultado.' },
   ],
+  'arvore-intro': [
+    { test: (c) => /number\s*\[\s*\]/.test(c), message: 'Declara a lista como number[] (ex.: const valores: number[] = [...]).' },
+    { test: (c) => /criarArvore/.test(c), message: 'Chama criarArvore(valores) para construir a árvore.' },
+    { test: (_c, s) => (s.treeValues || []).length >= 5, message: 'A lista deve ter pelo menos 5 números.' },
+  ],
 };

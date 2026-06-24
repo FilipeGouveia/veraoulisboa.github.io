@@ -847,5 +847,94 @@ window.exerciseTopics.push({
         state.listTarget === state.treeTarget &&
         (state.listValues || []).includes(state.listTarget),
     },
+    {
+      id: 'arvore-intro',
+      title: 'A primeira árvore',
+      points: 20,
+      explanation: [
+        'Uma árvore binária é uma estrutura em que cada valor (um nó) pode ter até dois filhos: um à esquerda e outro à direita.',
+        'Numa árvore binária de procura, a regra é simples: valores menores do que um nó vão para a esquerda, valores maiores vão para a direita. O primeiro valor a entrar fica na raiz (o topo).',
+        'Com [8, 3, 10]: o 8 é a raiz; o 3 (menor) fica à esquerda; o 10 (maior) fica à direita.',
+      ],
+      advanced: [
+        'Esta organização torna a procura rápida: em cada nó decides "esquerda ou direita?" e eliminas logo metade dos valores. É a ideia que vais usar no exercício seguinte para comparar a árvore com uma lista.',
+      ],
+      animation: '<div class="cax"><div class="big">8</div><div class="big"><span class="accent">3</span> &nbsp; <span class="warn">10</span></div><div class="lbl">menor à esquerda &middot; maior à direita</div></div>',
+      instructions: [
+        'Cria uma lista [valores] do tipo [number[]] com pelo menos 5 números diferentes (ex.: [[8, 3, 10, 1, 6]]).',
+        'Chama [criarArvore(valores)] para construir e desenhar a árvore.',
+        'Observa onde cada número se coloca: menores à esquerda, maiores à direita.',
+      ],
+      observation: 'O primeiro número da lista fica na raiz; os seguintes descem para a esquerda ou direita conforme são menores ou maiores.',
+      hint: 'Declara a lista como [const valores: number[] = [8, 3, 10, 1, 6];] e depois chama [criarArvore(valores)].',
+      starter: 'const valores: number[] = [];\n\n// chama criarArvore com a tua lista',
+      solution: 'const valores: number[] = [8, 3, 10, 1, 6];\n\ncriarArvore(valores);',
+      html: `
+        <main class="stage">
+          <section class="panel">
+            <h2>Árvore binária de procura</h2>
+            <div class="tree-area" id="tree"></div>
+          </section>
+        </main>
+      `,
+      api: `
+        const tree = document.getElementById('tree');
+        const positions = {};
+        window.exerciseState.treeValues = [];
+        function insertNode(root, value) {
+          if (!root) return { value, left: null, right: null };
+          if (value < root.value) root.left = insertNode(root.left, value);
+          else if (value > root.value) root.right = insertNode(root.right, value);
+          return root;
+        }
+        function placeNodes(node, minX, maxX, depth) {
+          if (!node) return;
+          const x = (minX + maxX) / 2;
+          const y = 45 + depth * 72;
+          positions[node.value] = { x, y };
+          placeNodes(node.left, minX, x, depth + 1);
+          placeNodes(node.right, x, maxX, depth + 1);
+        }
+        function drawEdge(a, b) {
+          const s = positions[a], e = positions[b];
+          const dx = e.x - s.x, dy = e.y - s.y;
+          const edge = document.createElement('div');
+          edge.className = 'edge';
+          edge.style.left = s.x + 'px';
+          edge.style.top = s.y + 'px';
+          edge.style.width = Math.hypot(dx, dy) + 'px';
+          edge.style.transform = 'rotate(' + Math.atan2(dy, dx) + 'rad)';
+          tree.appendChild(edge);
+        }
+        function drawNode(value, isRoot) {
+          const p = positions[value];
+          const node = document.createElement('div');
+          node.className = isRoot ? 'node active' : 'node';
+          node.style.left = p.x + 'px';
+          node.style.top = p.y + 'px';
+          node.textContent = value;
+          tree.appendChild(node);
+        }
+        function collectEdges(node) {
+          if (!node) return;
+          if (node.left) { drawEdge(node.value, node.left.value); collectEdges(node.left); }
+          if (node.right) { drawEdge(node.value, node.right.value); collectEdges(node.right); }
+        }
+        function criarArvore(valores) {
+          const values = (valores || []).map(Number);
+          tree.innerHTML = '';
+          Object.keys(positions).forEach((k) => delete positions[k]);
+          let root = null;
+          values.forEach((v) => { root = insertNode(root, v); });
+          if (root) {
+            placeNodes(root, 30, 470, 0);
+            collectEdges(root);
+            Object.keys(positions).forEach((v) => drawNode(Number(v), Number(v) === root.value));
+          }
+          window.exerciseState.treeValues = values;
+        }
+      `,
+      validate: (code, state) => /number\s*\[\s*\]/.test(code) && /criarArvore/.test(code) && (state.treeValues || []).length >= 5,
+    },
   ],
 });

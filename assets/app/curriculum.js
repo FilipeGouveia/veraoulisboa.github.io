@@ -36,7 +36,7 @@ window.Curriculum = (() => {
     {
       id: 'estruturas',
       title: 'Grafos, Redes e Procura',
-      exercises: ['grafo-criar', 'grafo-caminho', 'rede-pesos', 'arvore-procura'],
+      exercises: ['grafo-criar', 'grafo-caminho', 'rede-pesos', 'arvore-intro', 'arvore-procura'],
     },
     {
       id: 'desafios',
