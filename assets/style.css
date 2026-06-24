@@ -359,27 +359,53 @@ body {
   color: #157347;
 }
 
-.hint-box {
-  margin-top: 14px;
-  padding: 12px 14px;
-  border-left: 4px solid #0077b6;
-  border-radius: 0 8px 8px 0;
-  background: #eaf6ff;
-  color: #304257;
+/* Consistent collapsible briefing sections (Objetivos, Observar, Dica, Avançado) */
+.section-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  margin: 8px 0 0;
+  padding: 9px 13px;
+  min-height: 0;
+  background: #eef2f8;
+  color: #1f3147;
+  font-size: 13px;
+  font-weight: 800;
+  text-align: left;
+}
+
+.section-toggle:hover,
+.section-toggle.open {
+  background: #e1e8f2;
+}
+
+.section-toggle .chev {
+  width: 12px;
+  color: #0077b6;
+  font-size: 12px;
+}
+
+.section-box {
+  padding: 8px 14px 6px;
   line-height: 1.5;
 }
 
-.hint-box[hidden] {
+.section-box[hidden] {
   display: none;
 }
 
-.hint-toggle {
-  margin-top: 12px;
-  background: #475569;
+.section-box ul {
+  margin: 0;
+  padding-left: 20px;
 }
 
-.hint-toggle:hover {
-  background: #334155;
+.section-box p {
+  margin: 0 0 6px;
+}
+
+.section-box p:last-child {
+  margin-bottom: 0;
 }
 
 .lab-right {
@@ -442,59 +468,6 @@ body {
 .cax-b { animation: caxBA 5s infinite; }
 @keyframes caxAB { 0%,42%{opacity:1} 50%,92%{opacity:.15} 100%{opacity:1} }
 @keyframes caxBA { 0%,42%{opacity:.15} 50%,92%{opacity:1} 100%{opacity:.15} }
-
-.briefing-tag {
-  display: block;
-  width: fit-content;
-  margin: 16px 0 8px;
-  padding: 4px 12px;
-  border-radius: 999px;
-  font-size: 12px;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-}
-
-.tag-objetivos {
-  background: #0077b6;
-  color: white;
-}
-
-.tag-observar {
-  background: #e8eef7;
-  color: #42526b;
-}
-
-.advanced-toggle {
-  margin: 4px 0 2px;
-  background: #7c3aed;
-}
-
-.advanced-toggle:hover {
-  background: #6d28d9;
-}
-
-.advanced-box {
-  margin: 12px 0 6px;
-  padding: 12px 14px;
-  border-left: 4px solid #7c3aed;
-  border-radius: 0 8px 8px 0;
-  background: #f3effe;
-  color: #3b3357;
-  line-height: 1.5;
-}
-
-.advanced-box[hidden] {
-  display: none;
-}
-
-.advanced-box p:first-child {
-  margin-top: 0;
-}
-
-.advanced-box p:last-child {
-  margin-bottom: 0;
-}
 
 .lab {
   min-height: 0;

@@ -8,7 +8,9 @@
 - ~~Exercise 22: In the hint, explain that a string is a list of characters and suggest using `.length` to validate the word length.~~ ✔️ Done — added a new `palavra-passe` exercise (strings as character lists + `.length` validation).
 - Found during review: `cesar-desencriptar` explanation said "SPHY"; should be "SPbY". ✔️ Done.
 - Found during testing: `donatello-circulo` reference solution (1px/1°×360) never passed its own validate (which required value 10); realigned instructions + validate to the 1px/1° approach. ✔️ Done.
-- Objetivos layer its sitting next to the "Mostrar Avançado". It should be below it and only visible if the user press on it.
+- ~~Objetivos sitting next to "Mostrar Avançado"; should be below it and only visible when pressed.~~ ✔️ Done — all briefing sections (Objetivos, Observar, Dica, Avançado) are now consistent collapsible toggles, collapsed by default.
+
+- Found during manual run (jsdom + Chrome): `strings` starter called `criarCartao(nome, detalhe)` with the variables commented out → ReferenceError on the first Executar; starter now declares them empty (like `ola`/`falar`). ✔️ Done.
 
 ## Feature Triage
 

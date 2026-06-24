@@ -163,7 +163,7 @@ window.exerciseTopics.push({
       ],
       observation: 'O cartão deve mostrar o nome e uma frase descritiva. O importante é perceber que a função recebe valores que preparaste antes.',
       hint: 'Observa os exemplos fornecidos para perceber como criar e usar variáveis.',
-      starter: '//cria a variável nome aqui\n//cria a variável detalhe aqui;\ncriarCartao(nome, detalhe);\n\nmudarCorCartao("#ffffff");\nmudarTamanhoNome(48);',
+      starter: 'const nome: string = "";\nconst detalhe: string = "";\ncriarCartao(nome, detalhe);\n\nmudarCorCartao("#ffffff");\nmudarTamanhoNome(48);',
       solution: 'const nome: string = "Ana";\nconst detalhe: string = "gosta de astronomia";\ncriarCartao(nome, detalhe);\n\nmudarCorCartao("#ffffff");\nmudarTamanhoNome(48);',
       html: `
         <main class="stage">
