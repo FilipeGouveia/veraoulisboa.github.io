@@ -96,6 +96,8 @@ _All nine resolved 2026-06-23 (✔️ in Task Status (QA) below)._
 
 ## Reviewer Feedback (2026-06-24)
 
+> Note on unifying function names: deferred. The per-exercise display helpers are context-descriptive (mostrarDado, mostrarCifra, mostrarTipo, ...) and `mostrarMensagem` (painel) vs `escrever` (terminal) do genuinely different things. A blanket rename touches every exercise (api/starter/solution/validate/checks) and risks breakage, so it needs a deliberate decision on which names to standardise.
+
 > Overarching goal: adapt the guide for students with very little programming experience — a slightly stronger tutorial component that helps them translate their reasoning into code.
 
 ### Presentation / structure
@@ -123,15 +125,15 @@ _All nine resolved 2026-06-23 (✔️ in Task Status (QA) below)._
 
 | Task name [feature]/[bug] | To implement | Implementing | Ready | Responsible |
 |---------------------------|--------------|--------------|-------|-------------|
-| Hide timer during exercises, show only on leaderboard [feature] | ⬜ | | | |
+| Hide timer during exercises, show only on leaderboard [feature] | | | ✔️ | Claude |
 | Reorder briefing: Objetivo -> Observar -> Dica -> Avancado [feature] | | | ✔️ | Claude |
 | Objetivo/Pergunta always visible by default (others collapsed) [feature] | | | ✔️ | Claude |
-| Exercise 1: basic-syntax intro via animation [feature] | ⬜ | | | |
-| Unify result-printing function names (mostrarMensagem/escrever/...) [feature] | ⬜ | | | |
-| Reinforce const/let, if+operators, &&/||, arrays+indexing across exercises [feature] | ⬜ | | | |
-| for loops: teach both forms + how to break out [feature] | ⬜ | | | |
+| Exercise 1: basic-syntax intro via animation [feature] | | | ✔️ | Claude |
+| Unify result-printing function names [feature] | ⬜ | | | Deferred: needs a decision (see note) |
+| Reinforce const/let, if+operators, &&/||, arrays+indexing across exercises [feature] | | | ✔️ | Claude |
+| for loops: teach both forms + how to break out [feature] | | | ✔️ | Claude |
 | donatello: add curiosity about who Donatello was [feature] | | | ✔️ | Claude |
-| cesar: explain charCodeAt better in the briefing [feature] | ⬜ | | | |
-| formula: include the quadratic formula in the briefing [feature] | ⬜ | | | |
-| arvore-procura: add an intermediate simple-tree exercise [feature] | ⬜ | | | |
+| cesar: explain charCodeAt better in the briefing [feature] | | | ✔️ | Claude |
+| formula: include the quadratic formula in the briefing [feature] | | | ✔️ | Claude |
+| arvore-procura: add an intermediate simple-tree exercise [feature] | | | ✔️ | Claude |
 
