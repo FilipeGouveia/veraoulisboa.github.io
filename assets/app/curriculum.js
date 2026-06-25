@@ -6,7 +6,7 @@ window.Curriculum = (() => {
     {
       id: 'fundamentos',
       title: 'Primeiros Programas e Texto',
-      exercises: ['intro', 'ola', 'strings', 'const-let', 'falar'],
+      exercises: ['intro', 'ola', 'anatomia-codigo', 'strings', 'const-let', 'falar'],
     },
     {
       id: 'numeros',
