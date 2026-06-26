@@ -676,7 +676,7 @@ async function submitToLeaderboard(event) {
   }
 
   // Mask the email so the plain-text email is NEVER stored in the database
-  const maskedEmail = emailInput.replace(/(.{2}).*(@.*)/, '$1…$2');
+  const maskedEmail = emailInput.replace(/(.{2}).*(@.*)/, '$1...$2');
 
   const entry = {
     name,

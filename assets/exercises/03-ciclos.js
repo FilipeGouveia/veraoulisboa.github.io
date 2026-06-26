@@ -38,7 +38,7 @@ window.exerciseTopics.push({
         'Muda a cor e o tamanho das etiquetas para veres essas escolhas no código.',
       ],
       observation: 'Cada elemento da lista deve aparecer como uma etiqueta no painel.',
-      hint: 'Cria a lista primeiro. Depois usa um ciclo [`for...of`] para passar por cada fruta e chama [adicionarFruta] dentro do ciclo. As frutas devem ser strings, e o `of` no `for...of` significa “para cada elemento da lista”.',
+      hint: 'Cria a lista primeiro. Depois usa um ciclo [`for...of`] para passar por cada fruta e chama [adicionarFruta] dentro do ciclo. As frutas devem ser strings, e o `of` no `for...of` significa "para cada elemento da lista".',
       starter: 'const frutas: string[] = [];\n\n// cria o ciclo aqui\n\nmudarCorEtiquetas("#e8eef7");\nmudarTamanhoEtiquetas(16);',
       solution: 'const frutas: string[] = ["maçã", "banana", "kiwi"];\n\nfor (const fruta of frutas) {\n  adicionarFruta(fruta);\n}\n\nmudarCorEtiquetas("#e8eef7");\nmudarTamanhoEtiquetas(16);',
       html: `
@@ -241,18 +241,18 @@ window.exerciseTopics.push({
       animation: '<div class="cax"><div class="lbl">podeAvancar</div><div class="big cax-a">true → 🟢 verde</div><div class="big cax-b">false → 🔴 vermelho</div></div>',
       advanced: [
         'Um booleano só tem dois valores: [true] ou [false]. Condições como [idade >= 18] produzem um booleano, e o [if] usa-o para escolher o caminho. O [else] cobre todos os casos em que a condição foi [false].',
-        'Cuidado com os sinais de igual: [===] compara o valor E o tipo (é o que deves usar); [==] compara só o valor e converte os tipos primeiro, o que pode surpreender — por exemplo, [0 == "0"] dá [true], mas [0 === "0"] dá [false]. Na dúvida, usa sempre [===]. E lembra-te: um único [=] serve para atribuir um valor, não para comparar.',
+        'Cuidado com os sinais de igual: [===] compara o valor E o tipo (é o que deves usar); [==] compara só o valor e converte os tipos primeiro, o que pode surpreender, por exemplo, [0 == "0"] dá [true], mas [0 === "0"] dá [false]. Na dúvida, usa sempre [===]. E lembra-te: um único [=] serve para atribuir um valor, não para comparar.',
       ],
       title: 'Semáforo lógico',
       points: 15,
       explanation: [
         'Um booleano é um valor que só pode ser verdadeiro ou falso. Pode parecer pouco, mas é uma ideia muito poderosa: portas abertas ou fechadas, jogo terminado ou não, resposta correta ou errada.',
-        'Com booleanos usamos decisões. A palavra [if] significa “se”. Se a condição for verdadeira, executa um bloco; caso contrário, podemos usar [else] para executar outro.',
+        'Com booleanos usamos decisões. A palavra [if] significa "se". Se a condição for verdadeira, executa um bloco; caso contrário, podemos usar [else] para executar outro.',
         'Muitos booleanos nascem de comparações entre números: [5 > 3] é [true] e [2 < 1] é [false]. Os operadores de comparação são [>] (maior), [<] (menor), [>=] (maior ou igual), [<=] (menor ou igual), [===] (igual) e [!==] (diferente).',
         'Neste exercício, a variável [podeAvancar] controla o semáforo. Se for verdadeira, ligamos o verde. Se for falsa, ligamos o vermelho.',
       ],
       instructions: [
-        'A variável [podeAvancar] (do tipo boolean) já está criada no editor — só precisas de mudar o seu valor entre [true] e [false].',
+        'A variável [podeAvancar] (do tipo boolean) já está criada no editor, só precisas de mudar o seu valor entre [true] e [false].',
         'Usa [if] e [else].',
         'Liga verde com `ligarSemaforo("verde")` quando [podeAvancar] for [true]; caso contrário liga vermelho com `ligarSemaforo("vermelho")`.',
         'Ajusta o tamanho das luzes e observa a chamada de função que aparece no código.',
@@ -306,7 +306,7 @@ window.exerciseTopics.push({
       id: 'par-impar',
       animation: '<div class="cax"><div class="big cax-a">6 % 2 = 0 → <span class="ok">PAR</span></div><div class="big cax-b">7 % 2 = 1 → <span class="warn">ÍMPAR</span></div></div>',
       advanced: [
-        'O operador [%] (resto) dá o que sobra de uma divisão inteira. Como qualquer número par tem resto 0 ao dividir por 2, [numero % 2 === 0] é a forma habitual de testar paridade — e a mesma ideia serve para contar de N em N.',
+        'O operador [%] (resto) dá o que sobra de uma divisão inteira. Como qualquer número par tem resto 0 ao dividir por 2, [numero % 2 === 0] é a forma habitual de testar paridade, e a mesma ideia serve para contar de N em N.',
       ],
       title: 'Par ou ímpar',
       points: 15,
@@ -353,7 +353,7 @@ window.exerciseTopics.push({
       points: 20,
       explanation: [
         'No exercício anterior havia duas decisões: avançar ou parar. Agora vamos ter três estados: verde, amarelo e vermelho.',
-        'Quando há mais de duas possibilidades, podemos usar [if], [else if] e [else]. O [else if] significa “se a primeira condição não aconteceu, testa esta outra”.',
+        'Quando há mais de duas possibilidades, podemos usar [if], [else if] e [else]. O [else if] significa "se a primeira condição não aconteceu, testa esta outra".',
         'Este padrão aparece muito em jogos e aplicações: por exemplo, vida alta, vida média ou vida baixa; nota boa, suficiente ou insuficiente; semáforo verde, amarelo ou vermelho.',
       ],
       instructions: [
@@ -419,7 +419,7 @@ window.exerciseTopics.push({
       terminal: true,
       explanation: [
         'Um ciclo [for] é ótimo quando sabemos quantas vezes queremos repetir. Mas há situações em que não sabemos. Queremos continuar até acontecer alguma coisa.',
-        'Para isso usamos [while]. Lê-se “enquanto”. Enquanto a condição for verdadeira, o bloco repete. Quando a condição deixa de ser verdadeira, o ciclo termina.',
+        'Para isso usamos [while]. Lê-se "enquanto". Enquanto a condição for verdadeira, o bloco repete. Quando a condição deixa de ser verdadeira, o ciclo termina.',
         'Neste exercício, o programa pergunta no terminal se a pessoa está pronta. Enquanto a resposta não for "sim", deve continuar a perguntar.',
       ],
       instructions: [
@@ -543,8 +543,8 @@ window.exerciseTopics.push({
       explanation: [
         'Às vezes uma decisão depende de mais do que uma condição. Os operadores lógicos juntam ou invertem condições booleanas.',
         'O [&&] (E) é verdadeiro só quando as duas condições são verdadeiras. O [||] (OU) é verdadeiro quando pelo menos uma é verdadeira.',
-        'O [!] (NÃO) inverte um booleano: [!true] é [false] e [!false] é [true]. Por exemplo, se [estaChovendo] for [false], então [!estaChovendo] é [true] — ou seja, "não está a chover".',
-        'Exemplo do E: só podes entrar na montanha-russa se [tensBilhete && alturaSuficiente] — precisas das duas coisas ao mesmo tempo.',
+        'O [!] (NÃO) inverte um booleano: [!true] é [false] e [!false] é [true]. Por exemplo, se [estaChovendo] for [false], então [!estaChovendo] é [true], ou seja, "não está a chover".',
+        'Exemplo do E: só podes entrar na montanha-russa se [tensBilhete && alturaSuficiente], precisas das duas coisas ao mesmo tempo.',
       ],
       advanced: [
         'Existe ainda o [!] (NÃO), que inverte um booleano: [!true] é [false]. Os operadores também curto-circuitam: em [a && b], se [a] for falso, [b] nem chega a ser avaliado.',
@@ -555,7 +555,7 @@ window.exerciseTopics.push({
         'Usa [&&] para saber se podes entrar e guarda em [const podeEntrar: boolean = ...].',
         'Mostra o resultado com [mostrar(podeEntrar)].',
       ],
-      observation: 'Com [true && false] o resultado é [false] — falta uma das condições.',
+      observation: 'Com [true && false] o resultado é [false], falta uma das condições.',
       hint: 'O [&&] precisa das duas condições verdadeiras: [const podeEntrar: boolean = tensBilhete && alturaSuficiente;].',
       starter: 'const tensBilhete: boolean = true;\nconst alturaSuficiente: boolean = false;\n\n// combina as duas condições com && e mostra o resultado',
       solution: 'const tensBilhete: boolean = true;\nconst alturaSuficiente: boolean = false;\n\nconst podeEntrar: boolean = tensBilhete && alturaSuficiente;\nmostrar(podeEntrar);',
@@ -581,17 +581,17 @@ window.exerciseTopics.push({
       title: 'Comparações verdadeiras',
       points: 15,
       explanation: [
-        'Cada linha do editor compara dois números e guarda o resultado (um booleano) numa variável. Mas os operadores estão errados — todas as comparações dão [false]!',
+        'Cada linha do editor compara dois números e guarda o resultado (um booleano) numa variável. Mas os operadores estão errados, todas as comparações dão [false]!',
         'O teu trabalho é corrigir o operador de cada linha para que TODAS as comparações fiquem verdadeiras ([true]).',
         'Lembra-te dos operadores: [>] maior, [<] menor, [>=] maior ou igual, [<=] menor ou igual, [===] igual (valor e tipo) e [!==] diferente.',
       ],
       advanced: [
-        'Em algumas linhas há mais do que um operador certo. Por exemplo, para [6 ? 6] ser verdadeira podes usar [>=], [<=] ou [===] — todos dão [true]. Já [6 > 6] é [false], porque 6 não é maior do que ele próprio.',
+        'Em algumas linhas há mais do que um operador certo. Por exemplo, para [6 ? 6] ser verdadeira podes usar [>=], [<=] ou [===], todos dão [true]. Já [6 > 6] é [false], porque 6 não é maior do que ele próprio.',
       ],
       animation: '<div class="cax"><div class="big">8 <span class="cax-pulse ok">&gt;</span> 5 = <span class="ok">true</span></div><div class="big">7 <span class="cax-pulse ok">===</span> 7 = <span class="ok">true</span></div><div class="lbl">escolhe o operador certo para cada linha</div></div>',
       instructions: [
         'Corrige o operador de cada comparação para que o resultado seja [true].',
-        'Não mudes os números — só os operadores ([>], [<], [>=], [<=], [===], [!==]).',
+        'Não mudes os números, só os operadores ([>], [<], [>=], [<=], [===], [!==]).',
         'Tente resolver sem repetir os operadores.',
         'No fim, todas as linhas do painel devem ficar com ✅.'
 
@@ -616,7 +616,7 @@ window.exerciseTopics.push({
           window.exerciseState.allTrue = arr.length > 0 && arr.every(Boolean);
           const checks = document.getElementById('checks');
           checks.innerHTML = arr.map(function (r, i) {
-            return '<li style="background:' + (r ? '#d9fbe8' : '#fde8e8') + ';">' + (r ? '✅' : '❌') + ' Comparação ' + (i + 1) + (r ? ' — verdadeira' : ' — ainda falsa') + '</li>';
+            return '<li style="background:' + (r ? '#d9fbe8' : '#fde8e8') + ';">' + (r ? '✅' : '❌') + ' Comparação ' + (i + 1) + (r ? ': verdadeira' : ': ainda falsa') + '</li>';
           }).join('');
           const status = document.getElementById('status');
           if (status) {

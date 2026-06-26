@@ -212,6 +212,9 @@ window.exerciseChecksById = {
   'comparacoes': [
     { test: (c) => /===|!==/.test(c), message: 'Usa === (igual) e !== (diferente) onde fizer sentido.' },
     { test: (c) => /\b8\b/.test(c) && /\b10\b/.test(c), message: 'Mantém os números das comparações; só muda os operadores.' },
-    { test: (_c, s) => s.allTrue === true, message: 'Ainda há comparações falsas — corrige os operadores até todas ficarem verdadeiras.' },
+    { test: (_c, s) => s.allTrue === true, message: 'Ainda há comparações falsas, corrige os operadores até todas ficarem verdadeiras.' },
+  ],
+  'anatomia-codigo': [
+    { test: () => true, message: 'Explora cada parte do código e avança quando quiseres.' },
   ],
 };

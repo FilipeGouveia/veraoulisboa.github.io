@@ -20,7 +20,7 @@ window.exerciseTopics.push({
         'A distância entre dois pontos usa a fórmula de Pitágoras: [Math.hypot(x2 - x1, y2 - y1)]. Para todos os pares usa dois ciclos [for] aninhados com [j > i] para não repetir pares.',
       ],
       instructions: [
-        'O editor começa quase vazio — este é um desafio. Se precisares de ajuda, abre as dicas.',
+        'O editor começa quase vazio, este é um desafio. Se precisares de ajuda, abre as dicas.',
         'Lê o número de pontos e, para cada um, as coordenadas (x, y) com [await lerInput].',
         'Desenha cada ponto no mapa com [adicionarPonto(x, y)].',
         'Calcula a distância entre todos os pares de pontos e descobre a menor e a maior.',
@@ -36,7 +36,7 @@ window.exerciseTopics.push({
         'Dica 6: guarda o mínimo (começa em [Infinity]) e o máximo (começa em [0]) e actualiza-os com [if].',
         'Dica 7: no fim, mostra os valores com [escrever()] e chama [mostrarDistancias(minDist, maxDist)].',
       ],
-      starter: '// Desafio do Arquiteto — começa do zero, seguindo as dicas do lado esquerdo.\n// Funções disponíveis: await lerInput("..."), adicionarPonto(x, y),\n// Math.hypot(dx, dy), escrever("..."), mostrarDistancias(min, max).\n\n// 1. Pede o número de pontos\n\n// 2. Lê cada ponto e mostra-o com adicionarPonto\n\n// 3. Percorre todos os pares e guarda a menor e a maior distância\n\n// 4. Mostra os resultados',
+      starter: '// Desafio do Arquiteto, começa do zero, seguindo as dicas do lado esquerdo.\n// Funções disponíveis: await lerInput("..."), adicionarPonto(x, y),\n// Math.hypot(dx, dy), escrever("..."), mostrarDistancias(min, max).\n\n// 1. Pede o número de pontos\n\n// 2. Lê cada ponto e mostra-o com adicionarPonto\n\n// 3. Percorre todos os pares e guarda a menor e a maior distância\n\n// 4. Mostra os resultados',
       solution: 'const n: number = Number(await lerInput("Número de pontos:"));\nconst pontos: number[][] = [];\n\nfor (let i = 0; i < n; i++) {\n  const x: number = Number(await lerInput("Ponto " + (i+1) + " - x:"));\n  const y: number = Number(await lerInput("Ponto " + (i+1) + " - y:"));\n  pontos.push([x, y]);\n  adicionarPonto(x, y);\n}\n\nlet minDist: number = Infinity;\nlet maxDist: number = 0;\n\nfor (let i = 0; i < pontos.length; i++) {\n  for (let j = i + 1; j < pontos.length; j++) {\n    const dist: number = Math.hypot(pontos[j][0] - pontos[i][0], pontos[j][1] - pontos[i][1]);\n    if (dist < minDist) minDist = dist;\n    if (dist > maxDist) maxDist = dist;\n  }\n}\n\nescrever("Maior distância: " + maxDist);\nescrever("Menor distância: " + minDist);\nmostrarDistancias(minDist, maxDist);',
       html: `
         <main class="stage">
@@ -44,8 +44,8 @@ window.exerciseTopics.push({
             <h2>🏙️ Mapa da Cidade</h2>
             <canvas id="canvas" width="520" height="240"></canvas>
             <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;font-weight:700;font-size:14px;">
-              <div>🔵 Menor: <span id="min-dist" style="color:#0077b6">—</span></div>
-              <div>🟠 Maior: <span id="max-dist" style="color:#d97706">—</span></div>
+              <div>🔵 Menor: <span id="min-dist" style="color:#0077b6">,</span></div>
+              <div>🟠 Maior: <span id="max-dist" style="color:#d97706">,</span></div>
             </div>
           </section>
         </main>
@@ -115,8 +115,8 @@ window.exerciseTopics.push({
           window.exerciseState.maxDist = maxVal;
           const minEl = document.getElementById('min-dist');
           const maxEl = document.getElementById('max-dist');
-          if (minEl) minEl.textContent = Number.isFinite(minVal) ? minVal.toFixed(6) : '—';
-          if (maxEl) maxEl.textContent = Number.isFinite(maxVal) ? maxVal.toFixed(6) : '—';
+          if (minEl) minEl.textContent = Number.isFinite(minVal) ? minVal.toFixed(6) : ',';
+          if (maxEl) maxEl.textContent = Number.isFinite(maxVal) ? maxVal.toFixed(6) : ',';
         }
       `,
       validate: (code, state) => {
@@ -157,7 +157,7 @@ window.exerciseTopics.push({
         'O programa pede os dados de n jogadores e no final anuncia quem tem o score mais alto.',
       ],
       instructions: [
-        'O editor começa quase vazio — este é um desafio. Se precisares de ajuda, abre as dicas.',
+        'O editor começa quase vazio, este é um desafio. Se precisares de ajuda, abre as dicas.',
         'Lê o número de jogadores e, para cada um, o nome, golos, assistências, desarmes e faltas.',
         'Calcula o score de cada jogador: golos × 5 + assistências × 3 + desarmes × 1 + faltas × (−2).',
         'Regista cada jogador com [adicionarJogador(...)] e descobre quem tem o score mais alto.',
@@ -173,7 +173,7 @@ window.exerciseTopics.push({
         'Dica 6: se [score > melhorPontos], actualiza [melhorPontos] e [melhorNome].',
         'Dica 7: no fim, mostra o resultado com [escrever()] e chama [anunciarVencedor(melhorNome, melhorPontos)].',
       ],
-      starter: '// Melhor Jogador de Futebol — constrói o programa a partir das dicas do lado esquerdo.\n// Funções disponíveis: await lerInput("..."), Number(...),\n// adicionarJogador(nome, golos, assistencias, desarmes, faltas, score),\n// escrever("..."), anunciarVencedor(nome, pontos).\n\n// 1. Pede o número de jogadores\n\n// 2. Para cada jogador, pede nome, golos, assistências, desarmes e faltas\n\n// 3. Calcula o score e regista o jogador com adicionarJogador\n\n// 4. Guarda o melhor e anuncia o vencedor',
+      starter: '// Melhor Jogador de Futebol, constrói o programa a partir das dicas do lado esquerdo.\n// Funções disponíveis: await lerInput("..."), Number(...),\n// adicionarJogador(nome, golos, assistencias, desarmes, faltas, score),\n// escrever("..."), anunciarVencedor(nome, pontos).\n\n// 1. Pede o número de jogadores\n\n// 2. Para cada jogador, pede nome, golos, assistências, desarmes e faltas\n\n// 3. Calcula o score e regista o jogador com adicionarJogador\n\n// 4. Guarda o melhor e anuncia o vencedor',
       solution: 'const n: number = Number(await lerInput("Número de jogadores:"));\n\nlet melhorNome: string = "";\nlet melhorPontos: number = -Infinity;\n\nfor (let i = 0; i < n; i++) {\n  const nome: string = await lerInput("Nome do jogador " + (i+1) + ":");\n  const golos: number = Number(await lerInput("Golos:"));\n  const assistencias: number = Number(await lerInput("Assistências:"));\n  const desarmes: number = Number(await lerInput("Desarmes:"));\n  const faltas: number = Number(await lerInput("Faltas:"));\n\n  const score: number = golos * 5 + assistencias * 3 + desarmes * 1 + faltas * (-2);\n\n  adicionarJogador(nome, golos, assistencias, desarmes, faltas, score);\n  escrever(nome + ": " + score + " pontos");\n\n  if (score > melhorPontos) {\n    melhorPontos = score;\n    melhorNome = nome;\n  }\n}\n\nescrever("Melhor jogador: " + melhorNome + " com " + melhorPontos + " pontos");\nanunciarVencedor(melhorNome, melhorPontos);',
       html: `
         <main class="stage">
@@ -217,7 +217,7 @@ window.exerciseTopics.push({
             }
           }
           const el = document.getElementById('vencedor');
-          if (el) el.textContent = '🏆 ' + n + ' — ' + sc + ' pontos!';
+          if (el) el.textContent = '🏆 ' + n + ', ' + sc + ' pontos!';
         }
       `,
       validate: (code, state) => {
