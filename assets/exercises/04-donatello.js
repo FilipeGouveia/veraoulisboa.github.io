@@ -185,8 +185,8 @@ window.exerciseTopics.push({
         'A tartaruga é um exemplo de programação por instruções relativas: andas e viras a partir da posição e direção atuais, sem dares coordenadas absolutas. Repetir [forward] e [right] num [for] é a base para desenhar qualquer polígono regular.',
       ],
       curiosity: [
-        'O Donatello (Donato di Niccolò di Betto Bardi, c. 1386–1466) foi um dos maiores escultores do Renascimento italiano, em Florença — famoso pelo seu David em bronze.',
-        'Porque é que a «tartaruga» que desenha tem o nome dele? É uma piscadela de olho: as Tartarugas Ninja (que são tartarugas!) chamam-se Leonardo, Donatello, Michelangelo e Rafael — todos nomes de artistas do Renascimento.',
+        'O Donatello (Donato di Niccolò di Betto Bardi, c. 1386–1466) foi um dos maiores escultores do Renascimento italiano, em Florença, famoso pelo seu David em bronze.',
+        'Porque é que a «tartaruga» que desenha tem o nome dele? É uma piscadela de olho: as Tartarugas Ninja (que são tartarugas!) chamam-se Leonardo, Donatello, Michelangelo e Rafael, todos nomes de artistas do Renascimento.',
         'Desenhar com uma «tartaruga» que anda e vira nasceu da linguagem Logo, criada nos anos 1960 para ensinar programação a crianças.',
       ],
       title: 'Desenha um quadrado',
@@ -312,7 +312,7 @@ window.exerciseTopics.push({
       explanation: [
         'O número 8 pode ser pensado como duas voltas. Para a primeira volta, a tartaruga roda numa direção. Para a segunda, roda na direção contrária.',
         'Este exercício mostra que mudar apenas uma instrução pode mudar muito o desenho final. [right] e [left] são parecidos, mas têm sentidos opostos.',
-        'Também reforça a ideia de decompor um problema: em vez de “desenha um 8”, pensamos “desenha uma volta, depois desenha outra volta”.',
+        'Também reforça a ideia de decompor um problema: em vez de "desenha um 8", pensamos "desenha uma volta, depois desenha outra volta".',
       ],
       instructions: [
         'Usa pelo menos um ciclo [for].',

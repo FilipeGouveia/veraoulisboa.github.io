@@ -39,9 +39,9 @@ window.exerciseTopics = window.exerciseTopics || [];
               @keyframes apShow{0%,28%{opacity:0;transform:translateY(4px)}44%,100%{opacity:1;transform:none}}
               .ap .par{background:#bbf7d0;border-radius:5px;padding:0 5px}
             </style>
-            <div class="lbl">Sem parênteses — a multiplicação vem primeiro</div>
+            <div class="lbl">Sem parênteses, a multiplicação vem primeiro</div>
             <div class="eq">5 + <span class="mul">3 × 4</span> <span class="s2">= 5 + 12 = <span class="res">17</span></span></div>
-            <div class="lbl">Com parênteses — o objetivo</div>
+            <div class="lbl">Com parênteses, o objetivo</div>
             <div class="eq"><span class="par">(5 + 3)</span> × 4 = 8 × 4 = <span class="res">32</span></div>
           </div>
         `,
@@ -103,7 +103,7 @@ window.exerciseTopics = window.exerciseTopics || [];
         id: 'numeros-divisao',
         animation: '<div class="cax"><div class="big">28820172 ÷ 1231</div><div class="big accent cax-step">= 23412</div></div>',
         advanced: [
-          'O operador [/] devolve sempre um número com casas decimais quando a divisão não é exata — não existe divisão inteira automática. Para o resto usarias [%], e para arredondar [Math.floor] ou [Math.round].',
+          'O operador [/] devolve sempre um número com casas decimais quando a divisão não é exata, não existe divisão inteira automática. Para o resto usarias [%], e para arredondar [Math.floor] ou [Math.round].',
         ],
         title: 'Uma divisão grande',
         points: 10,
@@ -189,14 +189,14 @@ window.exerciseTopics = window.exerciseTopics || [];
         id: 'numeros-divisao-zero',
         animation: '<div class="cax"><div class="big">divisor = 0</div><div class="cax-step">divisor === 0 → <span class="ok">verdadeiro</span></div><div class="big bad cax-step d1">«Não posso dividir por zero»</div></div>',
         advanced: [
-          'Em JavaScript, dividir por zero não dá erro: dá [Infinity] (ou [NaN] em 0/0). Por isso testar o divisor antes com um [if] é a forma de evitar resultados sem sentido — a linguagem não te protege sozinha.',
+          'Em JavaScript, dividir por zero não dá erro: dá [Infinity] (ou [NaN] em 0/0). Por isso testar o divisor antes com um [if] é a forma de evitar resultados sem sentido, a linguagem não te protege sozinha.',
         ],
         title: 'Dividir por zero',
         points: 15,
         explanation: [
           'Nem todas as contas fazem sentido. Dividir por zero é uma situação especial: em matemática, essa operação não está definida.',
           'Programar também é prever problemas. Em vez de deixar a conta correr e dar um resultado estranho, podemos testar antes. Para isso usamos [if].',
-          'Um [if] lê-se como “se isto for verdade, então faz aquilo”. Neste exercício, o programa deve perguntar: o divisor é zero? Se sim, mostra uma mensagem de erro.',
+          'Um [if] lê-se como "se isto for verdade, então faz aquilo". Neste exercício, o programa deve perguntar: o divisor é zero? Se sim, mostra uma mensagem de erro.',
           'Caso contrário [else{...}] faça o que seria esperado, i.e., divisão do dividendo pelo divisor, utilizando [mostrar(...);]',
         ],
         instructions: [
@@ -257,7 +257,7 @@ window.exerciseTopics = window.exerciseTopics || [];
         <main class="stage">
           <section class="panel dark">
             <h2>🔒 Palavra-passe</h2>
-            <p>Comprimento: <span id="length">—</span> caracteres</p>
+            <p>Comprimento: <span id="length">,</span> caracteres</p>
             <div class="big-value" id="strength">?</div>
           </section>
         </main>

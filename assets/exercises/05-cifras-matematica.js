@@ -10,7 +10,7 @@ window.exerciseTopics.push({
       points: 25,
       explanation: [
         'Uma cifra é uma forma de esconder uma mensagem. A ideia da cifra de César é trocar cada letra por outra letra mais à frente no alfabeto.',
-        'No computador, cada letra tem um código numérico (a tabela Unicode). [letra.charCodeAt(0)] dá o número da primeira letra de [letra] — por exemplo, "A" é 65 e "a" é 97. A operação inversa, [String.fromCharCode(numero)], transforma um número de volta numa letra.',
+        'No computador, cada letra tem um código numérico (a tabela Unicode). [letra.charCodeAt(0)] dá o número da primeira letra de [letra], por exemplo, "A" é 65 e "a" é 97. A operação inversa, [String.fromCharCode(numero)], transforma um número de volta numa letra.',
         'Aqui usamos um deslocamento de 13. A letra F passa a S, C passa a P, U passa a b e L passa a Y. Por isso FCUL fica SPbY.',
       ],
       advanced: [
@@ -35,7 +35,7 @@ window.exerciseTopics.push({
             <div class="p3"><div class="from">U</div><div class="arrow">+13</div><div class="to">b</div></div>
             <div class="p4"><div class="from">L</div><div class="arrow">+13</div><div class="to">Y</div></div>
           </div>
-          <div class="note">FCUL → SPbY — cada letra avança 13 posições</div>
+          <div class="note">FCUL → SPbY: cada letra avança 13 posições</div>
         </div>
       `,
       instructions: [
@@ -123,7 +123,7 @@ window.exerciseTopics.push({
       id: 'formula',
       animation: '<div class="cax"><div>Δ = b² − 4ac = <span class="cax-pulse">1</span></div><div class="cax-step">√1 = 1</div><div class="big accent cax-step d1">x = 2 e x = 3</div></div>',
       advanced: [
-        'Partir uma fórmula grande em variáveis intermédias (primeiro [delta], depois cada raiz) torna o código mais legível e fácil de corrigir. [Math.sqrt] de um número negativo dá [NaN] — é assim que saberias que a equação não tem raízes reais.',
+        'Partir uma fórmula grande em variáveis intermédias (primeiro [delta], depois cada raiz) torna o código mais legível e fácil de corrigir. [Math.sqrt] de um número negativo dá [NaN], é assim que saberias que a equação não tem raízes reais.',
       ],
       title: 'Raízes da equação',
       points: 25,
@@ -184,7 +184,7 @@ window.exerciseTopics.push({
     {
       id: 'pi-coordenadas',
       advanced: [
-        '[Math.random()] devolve um número no intervalo [0, 1). Multiplicar por uma largura e somar uma origem permite espalhar pontos por qualquer região — a base de simulações que usam aleatoriedade para estimar áreas e probabilidades.',
+        '[Math.random()] devolve um número no intervalo [0, 1). Multiplicar por uma largura e somar uma origem permite espalhar pontos por qualquer região, a base de simulações que usam aleatoriedade para estimar áreas e probabilidades.',
       ],
       title: 'Dardos com x e y',
       points: 15,
@@ -291,7 +291,7 @@ window.exerciseTopics.push({
       ],
       advanced: [
         'Porquê multiplicar por 4? O quarto de círculo tem área [pi/4] e o quadrado tem área 1. A fração de dardos que cai dentro do quarto de círculo aproxima [pi/4], por isso multiplicamos por 4 para chegar a [pi].',
-        'Este método chama-se simulação de Monte Carlo. Quanto mais dardos lançares, mais perto de [pi] tende a ficar a estimativa — é a lei dos grandes números em ação. Com poucos dardos, o valor oscila bastante.',
+        'Este método chama-se simulação de Monte Carlo. Quanto mais dardos lançares, mais perto de [pi] tende a ficar a estimativa, é a lei dos grandes números em ação. Com poucos dardos, o valor oscila bastante.',
       ],
       instructions: [
         'Cria total com pelo menos 1000 dardos.',
