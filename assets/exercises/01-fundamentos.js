@@ -20,11 +20,11 @@ window.exerciseTopics.push({
         'Preparados? Vamos programar! 👨‍💻👩‍💻'
       ],
       instructions: [
-        'Faça modificações ao campo de "Configurações Visuais" e veja o que acontece.'
+        'Faz modificações ao campo de "Configurações Visuais" e vê o que acontece.'
       ],
-      observation: 'Veja se consegue colocar a caixa vermelha e o texto grande ao mesmo tempo!',
+      observation: 'Vê se consegues colocar a caixa vermelha e o texto grande ao mesmo tempo!',
       hint: 'Não há dicas 🤖',
-      starter: 'mostrar("Mude as coisas no menu ao lado para perceber o que acontece!");\nmudarCorPainel("#3b93ff");\nmudarTamanhoMensagem(44);',
+      starter: 'mostrar("Muda as coisas no menu ao lado para perceber o que acontece!");\nmudarCorPainel("#3b93ff");\nmudarTamanhoMensagem(44);',
       solution: 'mostrar("Consegui mudar a cor e o tamanho!");\nmudarCorPainel("#e23d3d");\nmudarTamanhoMensagem(60);',
       html: `
        <main class="stage">
@@ -315,7 +315,7 @@ window.exerciseTopics.push({
       explanation: [
         'Já usaste o [const]. Uma variável [const] não pode ser reatribuída: depois de receber um valor, ele fica fixo.',
         'Quando precisas de um valor que muda ao longo do programa, usas [let]. Uma variável [let] pode receber novos valores com [=].',
-        'Regra prática: usa [const] por defeito e só troca para [let] quando precisares mesmo de mudar o valor.',
+        'Regra prática: usa [const] por defeito e só trocas para [let] quando precisares mesmo de mudar o valor.',
       ],
       advanced: [
         'Mudar o valor de uma variável [let] (ex.: [total = total + 5]) chama-se reatribuição. Tentar reatribuir uma [const] dá um erro: "Assignment to constant variable".',
