@@ -1,0 +1,22 @@
+{
+  "name": "veraoulisboa.github.io",
+  "version": "1.0.0",
+  "description": "Minimal in-browser TypeScript/JavaScript programming lab for high-school students (Verão ULisboa @ FCUL). The site itself is static (no build); npm is only for the local QA tooling.",
+  "private": true,
+  "scripts": {
+    "validate": "node scripts/validate-exercises.js",
+    "test": "node test-all-exercises.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wellington-oj/veraoulisboa.github.io.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wellington-oj/veraoulisboa.github.io/issues"
+  },
+  "homepage": "https://github.com/wellington-oj/veraoulisboa.github.io#readme",
+  "devDependencies": {
+    "puppeteer": "^25.2.1"
+  }
+}
