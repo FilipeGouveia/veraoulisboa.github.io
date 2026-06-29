@@ -523,12 +523,34 @@ textarea {
   background: #101827;
 }
 
+.line-numbers {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40px;
+  padding: 16px 8px 16px 0;
+  text-align: right;
+  font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  font-size: 15px;
+  line-height: 1.55;
+  color: #4b5563;
+  user-select: none;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+.line-numbers span {
+  display: block;
+}
+
 .editor-highlight,
 #editor {
   position: absolute;
   inset: 0;
   width: 100%;
-  padding: 16px;
+  padding: 16px 16px 16px 48px;
   margin: 0;
   border: 0;
   font-size: 15px;

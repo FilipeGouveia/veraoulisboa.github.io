@@ -114,6 +114,17 @@ function updateEditorHighlight() {
   highlight.innerHTML = highlightTypeScript(editor.value);
   highlight.scrollTop = editor.scrollTop;
   highlight.scrollLeft = editor.scrollLeft;
+
+  const lineCount = editor.value.split('\n').length;
+  const lineNumbers = document.getElementById('lineNumbers');
+  if (lineNumbers) {
+    let html = '';
+    for (let i = 1; i <= lineCount; i++) {
+      html += '<span>' + i + '</span>';
+    }
+    lineNumbers.innerHTML = html;
+    lineNumbers.scrollTop = editor.scrollTop;
+  }
 }
 
 function syncEditorHighlightScroll() {
@@ -123,6 +134,11 @@ function syncEditorHighlightScroll() {
 
   highlight.scrollTop = editor.scrollTop;
   highlight.scrollLeft = editor.scrollLeft;
+
+  const lineNumbers = document.getElementById('lineNumbers');
+  if (lineNumbers) {
+    lineNumbers.scrollTop = editor.scrollTop;
+  }
 }
 
 function handleEditorInput() {
