@@ -50,7 +50,7 @@ window.TerminalPanel = (() => {
     const input = document.getElementById('consoleInput');
     const status = document.getElementById('consoleStatus');
     form.hidden = false;
-    status.textContent = 'À espera de input…';
+    status.textContent = 'À espera de input...';
     input.value = '';
     input.focus();
   }

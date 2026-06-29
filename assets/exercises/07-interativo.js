@@ -10,7 +10,7 @@ window.exerciseTopics.push({
       id: 'adivinhar-numero',
       animation: '<div class="cax"><div class="lbl">segredo = 23</div><div class="big"><span class="cax-pop">30 alto</span> <span class="cax-pop d1">20 baixo</span> <span class="cax-pop d2 ok">23 ✓</span></div></div>',
       advanced: [
-        'A palavra [await] suspende o programa até a resposta chegar, sem bloquear o resto da página. É por isso que um [while] com [await lerInput] consegue esperar por ti em cada volta — algo essencial em programas interativos e em pedidos pela internet.',
+        'A palavra [await] suspende o programa até a resposta chegar, sem bloquear o resto da página. É por isso que um [while] com [await lerInput] consegue esperar por ti em cada volta, algo essencial em programas interativos e em pedidos pela internet.',
       ],
       title: 'Adivinhar o número',
       points: 35,
@@ -36,7 +36,7 @@ window.exerciseTopics.push({
         <main class="stage">
           <section class="panel dark">
             <h2>🎯 Adivinhar o número</h2>
-            <p id="status">A pensar num número…</p>
+            <p id="status">A pensar num número...</p>
             <div class="big-value" id="attempts">0</div>
             <p>tentativas</p>
           </section>
@@ -107,7 +107,7 @@ window.exerciseTopics.push({
       terminal: true,
       explanation: [
         'Até agora, os números estavam escritos diretamente no código. Mas um programa de verdade recebe dados de quem o usa.',
-        'A função lerInput devolve sempre texto. Para fazer contas, precisamos de converter esse texto num número com [Number()].',
+        'A função [lerInput] devolve sempre texto. Para fazer contas, precisamos de converter esse texto num número com [Number()].',
         'Este padrão (pedir, converter, calcular) é muito comum em qualquer linguagem de programação.',
       ],
       instructions: [
@@ -153,7 +153,7 @@ window.exerciseTopics.push({
       terminal: true,
       explanation: [
         'No exercício da cifra de César, o texto a cifrar estava fixo no código. Agora vais pedir ao utilizador que escreva a sua própria mensagem.',
-        'A função cifrar percorre cada letra e avança-a 13 posições na tabela de caracteres. Desta vez, a função já está pronta — o desafio é ligar a interação ao código.',
+        'A função cifrar percorre cada letra e avança-a 13 posições na tabela de caracteres. Desta vez, a função já está pronta, o desafio é ligar a interação ao código.',
         'Este exercício mostra como combinar input do utilizador com uma função que transforma dados.',
       ],
       instructions: [
@@ -170,7 +170,7 @@ window.exerciseTopics.push({
           <section class="panel dark">
             <h2>🔐 Cifra de César</h2>
             <p>Mensagem original:</p>
-            <p id="original" style="font-size:18px;font-weight:700;color:#60a5fa;">…</p>
+            <p id="original" style="font-size:18px;font-weight:700;color:#60a5fa;">...</p>
             <p>Mensagem cifrada:</p>
             <div class="big-value" id="cipher" style="font-size:clamp(24px,6vw,42px);word-break:break-all;">?</div>
           </section>
@@ -201,7 +201,7 @@ window.exerciseTopics.push({
       id: 'falar',
       animation: '<div class="cax"><div class="lbl">lerInput("Como te chamas?")</div><div class="big">🪪 <span class="accent cax-step">Ana</span></div></div>',
       advanced: [
-        'O [await] faz o programa esperar pela resposta antes de continuar. Sem ele, [lerInput] devolveria uma promessa (um valor que ainda não chegou) e o resto do código correria cedo demais — um erro muito comum com input e pedidos à internet.',
+        'O [await] faz o programa esperar pela resposta antes de continuar. Sem ele, [lerInput] devolveria uma promessa (um valor que ainda não chegou) e o resto do código correria cedo demais, um erro muito comum com input e pedidos à internet.',
       ],
       title: 'Falar com o programa',
       points: 15,

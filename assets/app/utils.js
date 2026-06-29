@@ -11,9 +11,10 @@ window.AppUtils = {
   formatText(value) {
     if (!value) return '';
     let text = this.escapeHtml(value);
-    text = text.replace(/\[((?:[^\[\]]|\[\])+)\]/g, (match, p1) => `<code class="highlighted-code">${this.highlightInlineCode(p1)}</code>`);
-    text = text.replace(/`([^`]+)`/g, (match, p1) => `<code class="highlighted-code">${this.highlightInlineCode(p1)}</code>`);
-    return text;
+    let textChanged = text.replace(/`([^`]+)`/g, (match, p1) => `<code class="highlighted-code">${this.highlightInlineCode(p1)}</code>`);
+    if(text == textChanged)
+      textChanged = text.replace(/\[((?:[^\[\]]|\[\])+)\]/g, (match, p1) => `<code class="highlighted-code">${this.highlightInlineCode(p1)}</code>`);
+    return textChanged;
   },
 
   highlightInlineCode(code) {

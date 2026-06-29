@@ -39,9 +39,9 @@ window.exerciseTopics = window.exerciseTopics || [];
               @keyframes apShow{0%,28%{opacity:0;transform:translateY(4px)}44%,100%{opacity:1;transform:none}}
               .ap .par{background:#bbf7d0;border-radius:5px;padding:0 5px}
             </style>
-            <div class="lbl">Sem parênteses — a multiplicação vem primeiro</div>
+            <div class="lbl">Sem parênteses, a multiplicação vem primeiro</div>
             <div class="eq">5 + <span class="mul">3 × 4</span> <span class="s2">= 5 + 12 = <span class="res">17</span></span></div>
-            <div class="lbl">Com parênteses — o objetivo</div>
+            <div class="lbl">Com parênteses, o objetivo</div>
             <div class="eq"><span class="par">(5 + 3)</span> × 4 = 8 × 4 = <span class="res">32</span></div>
           </div>
         `,
@@ -103,7 +103,7 @@ window.exerciseTopics = window.exerciseTopics || [];
         id: 'numeros-divisao',
         animation: '<div class="cax"><div class="big">28820172 ÷ 1231</div><div class="big accent cax-step">= 23412</div></div>',
         advanced: [
-          'O operador [/] devolve sempre um número com casas decimais quando a divisão não é exata — não existe divisão inteira automática. Para o resto usarias [%], e para arredondar [Math.floor] ou [Math.round].',
+          'O operador [/] devolve sempre um número com casas decimais quando a divisão não é exata, não existe divisão inteira automática. Para o resto usarias [%], e para arredondar [Math.floor] ou [Math.round].',
         ],
         title: 'Uma divisão grande',
         points: 10,
@@ -148,11 +148,11 @@ window.exerciseTopics = window.exerciseTopics || [];
           'Nesta atividade, modifique o código para garantir que somente vai imprimir o número selecionado se ele for maior do que 5.'
         ],
         instructions: [
-          'Altere o valor da variável numero para verificar se o código funciona com valores diferentes.',
-          'Se numero for maior do que 5, mostre o número'
+          'Altera o valor da variável [numero] para verificar se o código funciona com valores diferentes.',
+          'Se numero for maior do que 5, mostra o número'
         ],
         observation: 'Caso o número seja menor do que 5, o programa não deve fazer nada. Se o número for exatamente igual a 5, irá resultar numa mensagem diferente.',
-        hint: 'Deve somente alterar o valor da variavel. O restante do código deve funcionar sem alterações',
+        hint: 'Deves somente alterar o valor da variável. O restante do código deve funcionar sem alterações',
         starter: 'const numero: number = -1;\n\nif (numero === 5){\n mostrar(numero);\n}\n\nif (numero > 5) {\n  mostrar(numero);\n}',
         solution: 'const numero: number = 10;\n\nif (numero === 5){\n mostrar(numero);\n}\n\nif (numero > 5) {\n  mostrar(numero);\n}',
         html: `
@@ -189,14 +189,14 @@ window.exerciseTopics = window.exerciseTopics || [];
         id: 'numeros-divisao-zero',
         animation: '<div class="cax"><div class="big">divisor = 0</div><div class="cax-step">divisor === 0 → <span class="ok">verdadeiro</span></div><div class="big bad cax-step d1">«Não posso dividir por zero»</div></div>',
         advanced: [
-          'Em JavaScript, dividir por zero não dá erro: dá [Infinity] (ou [NaN] em 0/0). Por isso testar o divisor antes com um [if] é a forma de evitar resultados sem sentido — a linguagem não te protege sozinha.',
+          'Em JavaScript, dividir por zero não dá erro: dá [Infinity] (ou [NaN] em 0/0). Por isso testar o divisor antes com um [if] é a forma de evitar resultados sem sentido, a linguagem não te protege sozinha.',
         ],
         title: 'Dividir por zero',
         points: 15,
         explanation: [
           'Nem todas as contas fazem sentido. Dividir por zero é uma situação especial: em matemática, essa operação não está definida.',
           'Programar também é prever problemas. Em vez de deixar a conta correr e dar um resultado estranho, podemos testar antes. Para isso usamos [if].',
-          'Um [if] lê-se como “se isto for verdade, então faz aquilo”. Neste exercício, o programa deve perguntar: o divisor é zero? Se sim, mostra uma mensagem de erro.',
+          'Um [if] lê-se como "se isto for verdade, então faz aquilo". Neste exercício, o programa deve perguntar: o divisor é zero? Se sim, mostra uma mensagem de erro.',
           'Caso contrário [else{...}] faça o que seria esperado, i.e., divisão do dividendo pelo divisor, utilizando [mostrar(...);]',
         ],
         instructions: [
@@ -204,11 +204,11 @@ window.exerciseTopics = window.exerciseTopics || [];
           'Cria uma variável dividendo com o valor 5',
           'Usa if para verificar se o divisor é zero.',
           'Se for zero, chama [mostrar("Não posso dividir por zero");].',
-          'Caso contrário [else{...}] faça o que seria esperado, i.e., divisão do dividendo pelo divisor, utilizando [mostrar(...);]',
+          'Caso contrário [else{...}] faz o que seria esperado, i.e., a divisão do dividendo pelo divisor, utilizando [mostrar(...);]',
         ],
         observation: 'O resultado correto não é uma conta; é uma mensagem clara para a pessoa que usa o programa.',
         hint: 'Antes de dividir, usa uma decisão: se o divisor for zero, mostra uma mensagem de erro em vez de fazer a conta.',
-        starter: '// crie a variável divisor aqui;\n\n// crie a variável dividendo aqui;\n\n// testa o divisor aqui',
+        starter: '// cria a variável divisor aqui;\n\n// cria a variável dividendo aqui;\n\n// testa o divisor aqui',
         solution: 'const divisor: number = 0;\nconst dividendo: number = 5;\n\nif (divisor === 0) {\n  mostrar("Não posso dividir por zero");\n} else {\n  mostrar(dividendo / divisor);\n}',
         html: `
         <main class="stage">
@@ -257,7 +257,7 @@ window.exerciseTopics = window.exerciseTopics || [];
         <main class="stage">
           <section class="panel dark">
             <h2>🔒 Palavra-passe</h2>
-            <p>Comprimento: <span id="length">—</span> caracteres</p>
+            <p>Comprimento: <span id="length">,</span> caracteres</p>
             <div class="big-value" id="strength">?</div>
           </section>
         </main>
