@@ -478,7 +478,7 @@ window.exerciseTopics.push({
       validate: (code, state) => {
         const moves = state.moves || [];
         const visited = state.visited || [];
-        if (moves.length < 300) return false;
+        if (moves.length < 150) return false;
         if (!/getX/.test(code) || !/getY/.test(code)) return false;
 
         const escaped = visited.some(p => Math.abs(p.x) > 115 || Math.abs(p.y) > 115);

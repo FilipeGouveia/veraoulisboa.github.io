@@ -142,7 +142,7 @@ window.exerciseTopics.push({
           const high = Math.floor(Number(max));
           return Math.floor(Math.random() * (high - low + 1)) + low;
         }
-        function mostrar(valor) {
+        function mostrar(valor = 1) {
           const container = document.getElementById('dice-container');
           container.innerHTML = '<div class="big-value" id="die" style="font-size: ' + (window.exerciseState.dieSize || 78) + 'px; line-height: 1; color: ' + (window.exerciseState.dieColor || '#1f2937') + '">?</div>';
           
@@ -167,7 +167,7 @@ window.exerciseTopics.push({
           window.exerciseState.dice = [dieValue];
         }
 
-        function adicionarDado(valor) {
+        function adicionarDado(valor = 1) {
           const container = document.getElementById('dice-container');
           if (!window.exerciseState.dice || window.exerciseState.dice.length === 0) {
             container.innerHTML = '';
