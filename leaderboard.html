@@ -719,11 +719,10 @@
       const app = loadAppState();
       const entry = {
         name,
-        email, // full email stored in Firebase; masked only when displayed
-        group,             // Optional class/group code
+        group,
         score: app.score ?? 0,
         completed: app.completed ? Object.keys(app.completed).length : 0,
-        total: typeof window !== 'undefined' && window.Curriculum ? window.Curriculum.build().exercises.length : 34, // placeholder if curriculum not loaded
+        total: typeof window !== 'undefined' && window.Curriculum ? window.Curriculum.build().exercises.length : 34,
         timeSpent: app.timeSpent ?? 0,
         submittedAt: firebase.firestore.FieldValue.serverTimestamp(),
       };
@@ -744,6 +743,10 @@
           await docRef.set(entry);
           document.getElementById('formFeedback').textContent = '✓ Pontuação guardada!';
         }
+
+        // Store full email in a write-only collection — never readable by clients,
+        // only accessible via the Firebase console (admin SDK bypasses security rules).
+        await db.collection("leaderboard_contacts").doc(docId).set({ name, email }, { merge: true });
 
         document.getElementById('sbName').value = '';
         document.getElementById('sbEmail').value = '';

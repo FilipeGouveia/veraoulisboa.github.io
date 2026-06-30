@@ -1,0 +1,18 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // Public leaderboard — readable and writable by anyone (no email stored here)
+    match /leaderboard/{docId} {
+      allow read: if true;
+      allow write: if true;
+    }
+
+    // Contact data — clients can write their own email but can NEVER read it.
+    // Only accessible via the Firebase console (admin SDK bypasses these rules).
+    match /leaderboard_contacts/{docId} {
+      allow read: if false;
+      allow write: if true;
+    }
+  }
+}
