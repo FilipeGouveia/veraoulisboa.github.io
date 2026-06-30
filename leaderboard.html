@@ -448,12 +448,21 @@
       <div class="section-header"
         style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 12px;">
         <p class="section-title" style="margin: 0;">📊 Classificação</p>
-        <div class="filter-group" style="display: flex; align-items: center; gap: 8px;">
-          <label for="groupFilter" style="font-size: 13px; font-weight: 800; color: #002b45;">Turma / Grupo:</label>
-          <select id="groupFilter" onchange="filterLeaderboard()"
-            style="padding: 6px 12px; border: 1.5px solid #d1dae7; border-radius: 8px; font-family: inherit; font-size: 14px; outline: none; background: white; cursor: pointer;">
-            <option value="all">Todas as turmas</option>
-          </select>
+        <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+          <div class="filter-group" style="display: flex; align-items: center; gap: 8px;">
+            <label for="groupFilter" style="font-size: 13px; font-weight: 800; color: #002b45;">Turma / Grupo:</label>
+            <select id="groupFilter" onchange="filterLeaderboard()"
+              style="padding: 6px 12px; border: 1.5px solid #d1dae7; border-radius: 8px; font-family: inherit; font-size: 14px; outline: none; background: white; cursor: pointer;">
+              <option value="all">Todas as turmas</option>
+            </select>
+          </div>
+          <div class="filter-group" style="display: flex; align-items: center; gap: 8px;">
+            <label for="dateFilter" style="font-size: 13px; font-weight: 800; color: #002b45;">Dia:</label>
+            <select id="dateFilter" onchange="filterLeaderboard()"
+              style="padding: 6px 12px; border: 1.5px solid #d1dae7; border-radius: 8px; font-family: inherit; font-size: 14px; outline: none; background: white; cursor: pointer;">
+              <option value="all">Todos os dias</option>
+            </select>
+          </div>
         </div>
       </div>
       <div class="lb-card" id="lbCard">
@@ -547,7 +556,20 @@
     const MEDALS = ['🥇', '🥈', '🥉'];
     let currentEntries = [];
     let selectedGroup = 'all';
+    let selectedDate = 'all';
     let currentUserHash = sessionStorage.getItem('lbUserHash') || null;
+
+    function entryDateKey(e) {
+      if (!e.submittedAt) return null;
+      const d = e.submittedAt.toDate ? e.submittedAt.toDate() : new Date(e.submittedAt);
+      return d.toISOString().slice(0, 10); // YYYY-MM-DD — stable sort/filter key
+    }
+    function formatDateKey(key) {
+      if (!key) return key;
+      const [, m, d] = key.split('-');
+      const months = ['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
+      return `${parseInt(d)} ${months[parseInt(m) - 1]}`;
+    }
 
     async function hashEmail(emailStr) {
       const msgBuffer = new TextEncoder().encode(emailStr.toLowerCase().trim());
@@ -577,6 +599,7 @@
 
     function filterLeaderboard() {
       selectedGroup = document.getElementById('groupFilter').value;
+      selectedDate = document.getElementById('dateFilter').value;
       renderLeaderboard(currentEntries);
     }
 
@@ -585,23 +608,27 @@
       const body = document.getElementById('lbBody');
       const empty = document.getElementById('emptyState');
       const groupFilter = document.getElementById('groupFilter');
+      const dateFilter = document.getElementById('dateFilter');
 
       // Populate unique groups dynamically
       const uniqueGroups = ['all', ...new Set(entries.map(e => e.group).filter(Boolean).map(g => g.trim()))];
-      const prevVal = groupFilter.value || 'all';
+      const prevGroup = groupFilter.value || 'all';
       groupFilter.innerHTML = uniqueGroups.map(g =>
-        `<option value="${escHtml(g)}" ${g === prevVal ? 'selected' : ''}>${g === 'all' ? 'Todas as turmas' : escHtml(g)}</option>`
+        `<option value="${escHtml(g)}" ${g === prevGroup ? 'selected' : ''}>${g === 'all' ? 'Todas as turmas' : escHtml(g)}</option>`
       ).join('');
+      if (!uniqueGroups.includes(selectedGroup)) { selectedGroup = 'all'; groupFilter.value = 'all'; }
 
-      // If selected group is no longer available in new entries list, reset to 'all'
-      if (!uniqueGroups.includes(selectedGroup)) {
-        selectedGroup = 'all';
-        groupFilter.value = 'all';
-      }
+      // Populate unique dates dynamically (sorted ascending)
+      const uniqueDates = ['all', ...[...new Set(entries.map(entryDateKey).filter(Boolean))].sort()];
+      const prevDate = dateFilter.value || 'all';
+      dateFilter.innerHTML = uniqueDates.map(k =>
+        `<option value="${escHtml(k)}" ${k === prevDate ? 'selected' : ''}>${k === 'all' ? 'Todos os dias' : formatDateKey(k)}</option>`
+      ).join('');
+      if (!uniqueDates.includes(selectedDate)) { selectedDate = 'all'; dateFilter.value = 'all'; }
 
-      const filteredEntries = selectedGroup === 'all'
-        ? entries
-        : entries.filter(e => e.group && e.group.trim() === selectedGroup);
+      const filteredEntries = entries
+        .filter(e => selectedGroup === 'all' || (e.group && e.group.trim() === selectedGroup))
+        .filter(e => selectedDate === 'all' || entryDateKey(e) === selectedDate);
 
       // Stats
       document.getElementById('statParticipants').textContent = filteredEntries.length;
