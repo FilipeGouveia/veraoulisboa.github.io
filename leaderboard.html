@@ -254,6 +254,26 @@
       font-size: 14px;
     }
 
+    /* ── Pinned "your position" row ── */
+    .pinned-divider td {
+      padding: 6px 16px;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #0077b6;
+      background: #e8f4fd;
+      border-top: 2px solid #0077b6;
+    }
+
+    .lb-table tfoot .pinned-row {
+      background: #dbeafe;
+    }
+
+    .lb-table tfoot .pinned-row:hover {
+      background: #bfdbfe;
+    }
+
     /* ── Submit form ── */
     .submit-card {
       background: white;
@@ -453,6 +473,10 @@
             </tr>
           </thead>
           <tbody id="lbBody"></tbody>
+          <tfoot id="lbFoot" hidden>
+            <tr class="pinned-divider"><td colspan="6">A tua posição</td></tr>
+            <tr id="pinnedRow" class="pinned-row"></tr>
+          </tfoot>
         </table>
       </div>
     </div>
@@ -523,6 +547,7 @@
     const MEDALS = ['🥇', '🥈', '🥉'];
     let currentEntries = [];
     let selectedGroup = 'all';
+    let currentUserHash = sessionStorage.getItem('lbUserHash') || null;
 
     async function hashEmail(emailStr) {
       const msgBuffer = new TextEncoder().encode(emailStr.toLowerCase().trim());
@@ -591,22 +616,19 @@
       if (!filteredEntries.length) {
         empty.hidden = false;
         table.hidden = true;
+        document.getElementById('lbFoot').hidden = true;
         return;
       }
 
-      empty.hidden = true;
-      table.hidden = false;
-      body.innerHTML = filteredEntries.map((e, i) => {
-        const medal = MEDALS[i] || (i + 1);
+      function buildRow(e, rank) {
+        const medal = MEDALS[rank - 1] || rank;
         let dateStr = '';
         if (e.submittedAt) {
-          // Handle Firebase Timestamp
           const dateObj = e.submittedAt.toDate ? e.submittedAt.toDate() : new Date(e.submittedAt);
           dateStr = dateObj.toLocaleDateString('pt-PT', { day: '2-digit', month: 'short' });
         }
         const email = e.email ? e.email.replace(/(.{2}).*(@.*)/, '$1…$2') : '';
-        return `<tr>
-        <td class="rank-cell">${medal}</td>
+        return `<td class="rank-cell">${medal}</td>
         <td class="name-cell">
           <strong>${escHtml(e.name)}</strong>
           <small>${escHtml(email)}${dateStr ? ' · ' + dateStr : ''}</small>
@@ -614,9 +636,27 @@
         <td class="group-cell" style="font-weight:600; color:#42526b;">${escHtml(e.group || '—')}</td>
         <td class="completed-cell">${e.completed || 0}/${e.total || '?'}</td>
         <td class="time-cell">${formatTime(e.timeSpent)}</td>
-        <td class="score-cell">${e.score}</td>
-      </tr>`;
-      }).join('');
+        <td class="score-cell">${e.score}</td>`;
+      }
+
+      empty.hidden = true;
+      table.hidden = false;
+      body.innerHTML = filteredEntries.slice(0, 15).map((e, i) => `<tr>${buildRow(e, i + 1)}</tr>`).join('');
+
+      // Pinned row — always show the current user regardless of top-15 cutoff
+      const foot = document.getElementById('lbFoot');
+      const pinnedRow = document.getElementById('pinnedRow');
+      if (currentUserHash) {
+        const myRank = filteredEntries.findIndex(e => e.id === currentUserHash) + 1;
+        if (myRank > 0) {
+          foot.hidden = false;
+          pinnedRow.innerHTML = buildRow(filteredEntries[myRank - 1], myRank);
+        } else {
+          foot.hidden = true;
+        }
+      } else {
+        foot.hidden = true;
+      }
     }
 
     function prefillForm() {
@@ -645,6 +685,9 @@
       } catch (e) {
         docId = btoa(email.toLowerCase().trim()).replace(/[^a-zA-Z0-9]/g, '');
       }
+
+      sessionStorage.setItem('lbUserHash', docId);
+      currentUserHash = docId;
 
       // Mask the email so the plain-text email is NEVER stored in the database
       const maskedEmail = email.replace(/(.{2}).*(@.*)/, '$1…$2');
@@ -696,7 +739,7 @@
       .onSnapshot((snapshot) => {
         const entries = [];
         snapshot.forEach(doc => {
-          entries.push(doc.data());
+          entries.push({ id: doc.id, ...doc.data() });
         });
         currentEntries = entries;
         renderLeaderboard(entries);
@@ -707,6 +750,18 @@
       });
 
     prefillForm();
+
+    // Identify the user as soon as they type their email
+    let emailDebounce;
+    document.getElementById('sbEmail').addEventListener('input', function () {
+      clearTimeout(emailDebounce);
+      const val = this.value.trim();
+      emailDebounce = setTimeout(async () => {
+        if (!val.includes('@') || !val.includes('.')) return;
+        currentUserHash = await hashEmail(val);
+        renderLeaderboard(currentEntries);
+      }, 400);
+    });
   </script>
 </body>
 
